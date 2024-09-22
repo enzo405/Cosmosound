@@ -5,9 +5,10 @@
   "name": "metalify",
   "version": "1.0.0",
   "description": "Métalify est une application web de streaming musical dédiée exclusivement au genre métal ",
-  "main": "index.js",
+  "main": "app.js",
   "devDependencies": {},
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
