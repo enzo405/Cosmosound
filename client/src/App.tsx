@@ -2,15 +2,20 @@ import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import axios from 'axios';
 
 function App() {
   const [count, setCount] = useState(0)
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('/api')
-      .then((res) => res.json())
-      .then((data) => setData(data));
+    axios.get('http://localhost:3000/api/getItems')
+      .then(res => {
+        setData(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
 
   return (

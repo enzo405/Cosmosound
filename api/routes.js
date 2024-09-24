@@ -1,8 +1,8 @@
-import express from 'express';
+const express = require('express');
 
 const router = express.Router();
 
-router.get('/api', (req, res) => {
+router.get('/getItems', (req, res) => async function name() {
     res.json(['banana', "strawberry", 'apple']);
 });
 
