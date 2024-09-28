@@ -1,24 +1,58 @@
-# Métalify
+# Projet **<insérer nom du projet>**
 
-## Description du projet
+## 1. **Description du projet**
 
-**Métalify** est une application web de streaming musical dédiée au genre **métal**. Inspirée par des plateformes comme Spotify, cette application permet aux utilisateurs d'écouter des morceaux de métal, de créer et gérer leurs propres playlists, et de découvrir de nouveaux artistes à travers une recherche avancée et des filtres multicritères. Le projet est conçu pour offrir aux amateurs de métal une expérience unique, centrée sur leur genre musical favori.
+Le projet **<insérer nom>** est une plateforme de streaming musical en ligne inspirée de services populaires tels que Spotify, Deezer ou YouTube Music. Cette application permet aux utilisateurs de découvrir de nouveaux artistes, d'écouter leurs morceaux préférés, de créer des playlists personnalisées et de gérer leur profil utilisateur. Le projet vise à offrir une expérience fluide et intuitive, tout en facilitant la découverte musicale.
 
-## Technologies utilisées
-- **Frontend** : React
-- **Backend** : Node.js avec Express
-- **Base de données** : PostgreSQL ou MongoDB
-- **API REST** : Pour la communication entre le frontend et le backend
-- **Stockage des fichiers audio** : Serveur de fichiers
-- **Authentification et gestion des permissions** : JWT
+Le projet a été réalisé dans le cadre d'une formation en Licence CDA (Conception et Développement d'Applications).
 
-## Gestion légale et protection des droits d'auteur
+## 2. **Fonctionnalités**
 
-**Métalify** respecte les droits d'auteur et s'assure que toutes les musiques présentes sur la plateforme sont diffusées légalement. Nous travaillons avec les artistes et labels pour garantir que le contenu est correctement licencié. Voici les principales mesures mises en place :
+### Utilisateurs
+- Inscription, connexion et déconnexion avec authentification sécurisée (JWT).
+- Gestion de profils personnalisés (pseudo, avatar).
+  
+### Musiques
+- Upload, modification et suppression des musiques (uniquement par leur créateur).
+- Les musiques générées par IA sont marquées par un label "IA".
+- Un utilisateur ayant uploadé au moins une musique devient *artiste*.
 
-- **Licences et droits d'auteur** : Les musiques disponibles sur la plateforme sont sous licence appropriée (licences de diffusion, mécanique, etc.).
-- **Gestion du contenu utilisateur** : Les utilisateurs sont responsables des musiques qu'ils uploadent et doivent s'assurer de détenir les droits sur ces morceaux. Un système de signalement et de retrait est en place pour traiter les violations des droits d'auteur.
-- **Attribution et métadonnées** : Chaque morceau est correctement attribué à son artiste avec des métadonnées complètes (titre, artiste, album, etc.).
-- **Conformité avec la DMCA** : Métalify respecte la législation sur le droit d'auteur, y compris la Digital Millennium Copyright Act (DMCA), et dispose d'un processus de retrait de contenu en cas de réclamation.
+### Playlists
+- Création, modification et suppression de playlists.
+- Toutes les playlists sont publiques et peuvent être écoutées par tous les utilisateurs.
+- Chaque playlist peut être associée à plusieurs genres musicaux.
 
-Ces mesures assurent que les droits des artistes et des utilisateurs sont protégés tout en offrant une expérience musicale légale et sécurisée.
+### Abonnements
+- Suivi des artistes pour obtenir des suggestions de titres personnalisées et un accès rapide à leurs contenus.
+
+### Recherche
+- Recherche multicritères par titre, artiste, playlist, genre et nombre d'abonnés.
+- Filtres avancés pour découvrir de nouvelles musiques.
+
+### Gestion des rôles et permissions
+- **Auteur** : peut créer, modifier et supprimer ses propres musiques et playlists.
+- **Utilisateur** : peut écouter des musiques et suivre des artistes.
+
+### Stockage et Streaming
+- Stockage des fichiers audio sur un serveur dédié.
+- Diffusion des musiques via un lecteur audio HTML5 intégré pour une écoute fluide.
+
+## 3. **Technologies utilisées**
+
+### Frontend
+- **React** : Bibliothèque JavaScript pour créer une interface utilisateur interactive et dynamique.
+
+### Backend
+- **Node.js** avec **Express** : Serveur backend pour gérer les requêtes API et la logique métier.
+
+### Base de données
+- **PostgreSQL** ou **MongoDB** : Pour le stockage des données (utilisateurs, musiques, playlists, etc.).
+
+### API REST
+- Communication entre le frontend et le backend via une API RESTful.
+
+### Stockage des fichiers audio
+- Les fichiers audio sont stockés sur un serveur de fichiers dédié.
+
+### Authentification et gestion des permissions
+- **JWT** (JSON Web Token) : Pour une authentification sécurisée et la gestion des permissions d'accès.
