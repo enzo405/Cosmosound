@@ -4,14 +4,14 @@
 
 Le projet **<insérer nom>** est une plateforme de streaming musical en ligne inspirée de services populaires tels que Spotify, Deezer ou YouTube Music. Cette application permet aux utilisateurs de découvrir de nouveaux artistes, d'écouter leurs morceaux préférés, de créer des playlists personnalisées et de gérer leur profil utilisateur. Le projet vise à offrir une expérience fluide et intuitive, tout en facilitant la découverte musicale.
 
-Le projet a été réalisé dans le cadre d'une formation en Licence CDA (Conception et Développement d'Applications).
+Le projet wa été réalisé dans le cadre d'une formation en Licence CDA (Conception et Développement d'Applications).
 
 ## 2. **Fonctionnalités**
 
 ### Utilisateurs
 - Inscription, connexion et déconnexion avec authentification sécurisée (JWT).
 - Gestion de profils personnalisés (pseudo, avatar).
-  
+
 ### Musiques
 - Upload, modification et suppression des musiques (uniquement par leur créateur).
 - Les musiques générées par IA sont marquées par un label "IA".

@@ -14,7 +14,7 @@ Développer une application web permettant aux utilisateurs d'écouter de la mus
 ### Objectifs spécifiques
 - Concevoir une interface utilisateur intuitive, permettant une navigation fluide entre les musiques, artistes et playlists.
 - Mettre en place un système de **gestion des utilisateurs** et de **profils personnalisés**.
-- Implémenter une **fonctionnalité de recherche multicritères** (par titre, artiste, album, genre, nombre d'abonnés).
+- Implémenter une **fonctionnalité de recherche multicritères** (par titre, artiste, playlist, genre, nombre d'abonnés).
 - Assurer une **gestion des rôles et permissions** pour protéger les musiques uploadées par les artistes.
 - Optimiser le stockage et la diffusion des fichiers audio afin de garantir une écoute fluide.
 - Permettre aux utilisateurs de suivre leurs artistes préférés.
