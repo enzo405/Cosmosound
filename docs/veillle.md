@@ -1,13 +1,15 @@
-# Veilles faites sur ces différentes platforme:
-- Deezer
-- Spotify
-- Youtube Music
-- Apple Music
-- Beatport
+# Plateformes utilisées:
+- https://www.deezer.com/fr/
+- https://music.youtube.com/
+- https://www.figma.com/design/DGQpD1XTs0hnCplqIHGPKd/MusicPich---Music-Landing-Page-(Community)?node-id=0-1&node-type=canvas&t=BVj6Gugggwg0896X-0
+- https://open.spotify.com/
+- https://www.beatport.com/
+- https://www.figma.com/design/FeeAwa7rJzfQOOqLSLuuLZ/Musica-(Community)?node-id=0-1&node-type=canvas&t=QVmKJ1aaP9eNdCzj-0
+- https://www.figma.com/design/XjOHkd4EUQC8Zuj0U4WVTq/Musics-dashboard-(Community)?node-id=0-1&node-type=canvas&t=YceSKkOMkfKJ1U4i-0
 
 
 # Remarques:
-- Navigation toujours sur la gauche sous forme de sidebar
+- Navigation toujours sur la gauche sous forme de sidebar (accueil, feed, compte)
 - Recherche toujours en haut
 - Couleur: assez sombre qui sont mixé avec des couleurs vives
 - Landing page: 
@@ -19,13 +21,3 @@
 
 # Resources:
 - https://lawsofux.com/
-
-
-# Plateformes:
-- https://www.deezer.com/fr/
-- https://music.youtube.com/
-- https://www.figma.com/design/DGQpD1XTs0hnCplqIHGPKd/MusicPich---Music-Landing-Page-(Community)?node-id=0-1&node-type=canvas&t=BVj6Gugggwg0896X-0
-- https://open.spotify.com/
-- https://www.beatport.com/
-- https://www.figma.com/design/FeeAwa7rJzfQOOqLSLuuLZ/Musica-(Community)?node-id=0-1&node-type=canvas&t=QVmKJ1aaP9eNdCzj-0
-- https://www.figma.com/design/XjOHkd4EUQC8Zuj0U4WVTq/Musics-dashboard-(Community)?node-id=0-1&node-type=canvas&t=YceSKkOMkfKJ1U4i-0    
