@@ -17,6 +17,7 @@
 - S'inspirer de la recherche de Spotify pour la page `/search`.
 - S'inspirer de la page d'accueil de YouTube Music pour la page `/feed`.
 - La recherche avancée comporte: "Nombre d'abonnés", "Genre de musique" 
+- Pour la liste de genres: https://www.musicgenreslist.com/
 
 ---
 
@@ -25,73 +26,101 @@ Tous les endpoints de l'API seront préfixés par `/api`.
 
 ### **Musics**
 
-| Verbe      | Endpoint                 | Description     | Détails                                                                          |
-| ---------- | ------------------------ | --------------- | -------------------------------------------------------------------------------- |
-| **GET**    | `/musics/:id`            | getMusicById    | Récupère les informations d'une musique par son ID.                              |
-| **GET**    | `/musics/genre/:idGenre` | getMusicByGenre | Récupère les musiques selon leur genre.                                          |
-| **POST**   | `/musics`                | createMusic     | Crée une nouvelle musique. Le payload doit inclure les informations nécessaires. |
-| **PUT**    | `/musics/:id`            | updateMusic     | Modifie une musique existante.                                                   |
-| **DELETE** | `/musics/:id`            | deleteMusic     | Supprime une musique (ainsi que dans les playlists associées).                   |
+| Verbe      | Endpoint                 | Description     | Détails                                                        | Response     |
+| ---------- | ------------------------ | --------------- | -------------------------------------------------------------- | ------------ |
+| **GET**    | `/musics/:id`            | getMusicById    | Récupère les informations d'une musique par son ID.            | Music        |
+| **GET**    | `/musics/:userId`        | getMusicByUser  | Récupère toutes les musiques d'un artiste.                     | Array<Music> |
+| **GET**    | `/musics/genre/:idGenre` | getMusicByGenre | Récupère les musiques selon leur genre.                        | Array<Music> |
+| **POST**   | `/musics`                | createMusic     | Crée une nouvelle musique.                                     | Music.Id     |
+| **PUT**    | `/musics/:id`            | updateMusic     | Modifie une musique existante.                                 | Music        |
+| **DELETE** | `/musics/:id`            | deleteMusic     | Supprime une musique (ainsi que dans les playlists associées). | *empty*      |
 
 ### **Playlists**
 
-| Verbe      | Endpoint                        | Description          | Détails                                                                           |
-| ---------- | ------------------------------- | -------------------- | --------------------------------------------------------------------------------- |
-| **GET**    | `/playlists/user/:userId`       | getPlaylistsByUserId | Récupère les playlists créées par un utilisateur.                                 |
-| **GET**    | `/playlists/:id`                | getPlaylistById      | Récupère les informations d'une playlist par son ID.                              |
-| **POST**   | `/playlists`                    | createPlaylist       | Crée une nouvelle playlist. Le payload doit inclure les informations nécessaires. |
-| **PUT**    | `/playlists/:id`                | updatePlaylist       | Met à jour les informations ou les musiques d'une playlist.                       |
-| **PUT**    | `/playlists/:id/music/:idMusic` | updatePlaylistMusic  | Ajoute ou supprime une musique dans la playlist.                                  |
-| **DELETE** | `/playlists/:id`                | deletePlaylist       | Supprime une playlist.                                                            |
+| Verbe      | Endpoint                        | Description          | Détails                                                     | Response        |
+| ---------- | ------------------------------- | -------------------- | ----------------------------------------------------------- | --------------- |
+| **GET**    | `/playlists/user/:userId`       | getPlaylistsByUserId | Récupère les playlists d'un utilisateur.                    | Array<Playlist> |
+| **GET**    | `/playlists/:id`                | getPlaylistById      | Récupère les informations d'une playlist par son ID.        | Playlist        |
+| **POST**   | `/playlists`                    | createPlaylist       | Crée une nouvelle playlist.                                 | Playlist.Id     |
+| **PUT**    | `/playlists/:id`                | updatePlaylist       | Met à jour les informations ou les musiques d'une playlist. | Playlist        |
+| **PUT**    | `/playlists/:id/music/:idMusic` | updatePlaylistMusic  | Ajoute ou supprime une musique dans la playlist.            | Playlist        |
+| **DELETE** | `/playlists/:id`                | deletePlaylist       | Supprime une playlist.                                      | *empty*         |
 
 ### **Users**
 
-| Verbe    | Endpoint               | Description      | Détails                                              |
-| -------- | ---------------------- | ---------------- | ---------------------------------------------------- |
-| **GET**  | `/users/:id`           | getUserById      | Récupère les informations d'un utilisateur.          |
-| **GET**  | `/users/:id/following` | getUserFollowing | Récupère les artistes que l'utilisateur suit.        |
-| **POST** | `/users/:id/follow`    | followUser       | Permet de suivre un artiste ou un autre utilisateur. |
-| **PUT**  | `/users/:id`           | updateUser       | Modifie les informations de profil de l'utilisateur. |
+| Verbe    | Endpoint               | Description            | Détails                                              | Response      |
+| -------- | ---------------------- | ---------------------- | ---------------------------------------------------- | ------------- |
+| **GET**  | `/users/:id`           | getUserById            | Récupère les informations d'un utilisateur.          | User          |
+| **GET**  | `/users/:id/following` | getUserFollowingArtist | Récupère les artistes que l'utilisateur suit.        | Array<Artist> |
+| **GET**  | `/users/:id/followers` | getUserFollowers       | Récupère le nombre d'abonnés que l'utilisateur a.    | number        |
+| **POST** | `/users/:id/follow`    | followUser             | Permet de suivre un artiste ou un autre utilisateur. | *empty*       |
+| **PUT**  | `/users/:id`           | updateUser             | Modifie les informations de profil de l'utilisateur. | User          |
 
 ### **Authentification**
 
-| Verbe    | Endpoint    | Description | Détails                                        |
-| -------- | ----------- | ----------- | ---------------------------------------------- |
-| **GET**  | `/logout`   | logout      | Déconnecte l'utilisateur en invalidant le JWT. |
-| **POST** | `/register` | register    | Crée un compte utilisateur.                    |
-| **POST** | `/login`    | login       | Connecte un utilisateur et renvoie un JWT.     |
+| Verbe    | Endpoint    | Description | Détails                                        | Response |
+| -------- | ----------- | ----------- | ---------------------------------------------- | -------- |
+| **GET**  | `/logout`   | logout      | Déconnecte l'utilisateur en invalidant le JWT. | *empty*  |
+| **POST** | `/register` | register    | Crée un compte utilisateur.                    | User.Id  |
+| **POST** | `/login`    | login       | Connecte un utilisateur et renvoie un JWT.     | *empty*  |
 
 ### **Recherche**
 
-| Verbe   | Endpoint  | Description | Détails                                                            |
-| ------- | --------- | ----------- | ------------------------------------------------------------------ |
-| **GET** | `/search` | search      | Effectue une recherche par titres, artistes, playlists, ou genres. |
+| Verbe   | Endpoint  | Description | Détails                                                            | Response                                   |
+| ------- | --------- | ----------- | ------------------------------------------------------------------ | ------------------------------------------ |
+| **GET** | `/search` | search      | Effectue une recherche par titres, artistes, playlists, ou genres. | Array<T> when T is Music, Playlist, Artist |
 
 ---
 
-## 3. **Gestion des erreurs :**
 
-Les erreurs API suivent une structure standardisée :
+## 3. API Models
 
-- **400 - Bad Request :** Requête invalide ou mal formée (ex : données manquantes ou incorrectes).
-- **401 - Unauthorized :** Utilisateur non authentifié (JWT manquant ou invalide).
-- **403 - Forbidden :** Accès refusé (l'utilisateur n'a pas les permissions nécessaires).
-- **404 - Not Found :** Ressource non trouvée (par ex., ID inexistant).
-- **500 - Internal Server Error :** Erreur serveur.
+### Music
+```json
+{
+    id,
+    title, // title of the music
+    date_creation, // Date in UTC of the creation of the music
+    duration, // duration time of the music
+    description, // description of the music
+    thumbnail, // url of the image
+    artist, // User that uploaded the Music
+    genres // list of musical genre of the music
+}
+```
 
----
+### Playlist
+```json
+{
+    id,
+    title, // title of the playlist
+    description, // description of the playtlist 
+    owner // User that created the playlist
+}
+```
 
-## 4. **Sécurité :**
+### User
+```json
+{
+    id,
+    name, // name of the user
+    email, // email of the user
+    date_creation, // Date in UTC of the creation of the account
+}
+```
 
-Tous les endpoints nécessitent une authentification via JWT, à l'exception des pages publiques telles que la landing page, la recherche, et l'inscription. Les tokens JWT sont stockés côté client et envoyés dans le header `Authorization` avec le préfixe `Bearer`.
+### Artist extends User
+```json
+{
+    social_media, // list of strings containing the socials's link
+    avatar, // contains the url of the avatar
+    genres // contains a list of genre that the Artist consider itself
+}
+```
 
----
-
-## 5. **Exemples de payloads :**
-
-
----
-
-## 6. **Pagination et limites :**
-
-Les résultats des recherches, ainsi que les listes de musiques et playlists, sont paginés. Par défaut, chaque requête renvoie un maximum de 20 éléments. Les paramètres `page` et `limit` peuvent être utilisés pour ajuster la pagination.
+### Genre
+```json
+{
+    name // unique name of the genre/subgenre
+}
+```
