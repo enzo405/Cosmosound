@@ -1,8 +1,8 @@
-# Note de Cadrage - Projet **<insérer nom>**
+# Note de Cadrage - Projet **Cosmosound**
 
 ## 1. **Contexte du Projet**
 
-Le projet **<insérer nom>** est une plateforme de streaming musical en ligne, inspirée par des services tels que Spotify, Deezer, ou YouTube Music. Cette application permet aux utilisateurs de découvrir de nouveaux artistes, d'écouter leurs morceaux préférés, de créer des playlists et de gérer leurs profils, le tout dans une interface ergonomique et facile à utiliser.
+Le projet **Cosmosound** est une plateforme de streaming musical en ligne, inspirée par des services tels que Spotify, Deezer, ou YouTube Music. Cette application permet aux utilisateurs de découvrir de nouveaux artistes, d'écouter leurs morceaux préférés, de créer des playlists et de gérer leurs profils, le tout dans une interface ergonomique et facile à utiliser.
 
 Ce projet s'inscrit dans le cadre d'une formation en Licence CDA (Conception et Développement d'Applications).
 

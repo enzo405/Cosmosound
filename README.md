@@ -1,8 +1,8 @@
-# Projet **<insérer nom du projet>**
+# Projet **Cosmosound**
 
 ## 1. **Description du projet**
 
-Le projet **<insérer nom>** est une plateforme de streaming musical en ligne inspirée de services populaires tels que Spotify, Deezer ou YouTube Music. Cette application permet aux utilisateurs de découvrir de nouveaux artistes, d'écouter leurs morceaux préférés, de créer des playlists personnalisées et de gérer leur profil utilisateur. Le projet vise à offrir une expérience fluide et intuitive, tout en facilitant la découverte musicale.
+Le projet **Cosmosound** est une plateforme de streaming musical en ligne inspirée de services populaires tels que Spotify, Deezer ou YouTube Music. Cette application permet aux utilisateurs de découvrir de nouveaux artistes, d'écouter leurs morceaux préférés, de créer des playlists personnalisées et de gérer leur profil utilisateur. Le projet vise à offrir une expérience fluide et intuitive, tout en facilitant la découverte musicale.
 
 Le projet wa été réalisé dans le cadre d'une formation en Licence CDA (Conception et Développement d'Applications).
 

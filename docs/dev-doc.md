@@ -1,4 +1,4 @@
-# Documentation Technique - Projet **<insérer nom du projet>**
+# Documentation Technique - Projet **Cosmosound**
 
 ## 1. **Pages prévues :**
 
