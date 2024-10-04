@@ -1,7 +1,11 @@
 import {type ReactElement } from "react";
 
 function ErrorPage(): ReactElement {
-    return <></>;
+    return (
+        <>
+            <h1>ERROR</h1>
+        </>
+    );
 }
 
 export default ErrorPage;

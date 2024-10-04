@@ -1,12 +1,11 @@
-import Footer from "./components/Template/Footer";
-import Header from "./components/Template/Header/Header";
+import { RouterProvider } from "react-router-dom";
+import authenticatedRouter from "./routes/authenticatedRouter";
 
 function App() {
 
   return (
     <>
-      <Header />
-      <Footer />
+      <RouterProvider router={authenticatedRouter} />
     </>
   )
 }
