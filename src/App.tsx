@@ -1,5 +1,5 @@
 import Footer from "./components/Template/Footer";
-import Header from "./components/Template/Header";
+import Header from "./components/Template/Header/Header";
 
 function App() {
 

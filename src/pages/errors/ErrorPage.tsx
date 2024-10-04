@@ -1,7 +1,7 @@
 import {type ReactElement } from "react";
 
-function HomePage(): ReactElement {
+function ErrorPage(): ReactElement {
     return <></>;
 }
 
-export default HomePage;
+export default ErrorPage;
