@@ -1,7 +1,7 @@
 import { type ReactElement } from "react";
 
 function FeedPage(): ReactElement {
-  return <></>;
+  return <div>FEED PAGE !!!</div>;
 }
 
 export default FeedPage;

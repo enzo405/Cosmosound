@@ -1,10 +1,12 @@
 import { type ReactElement } from "react";
+import TopSidebar from "./TopSidebar";
+import SidebarContent from "./SidebarContent";
 
 function Sidebar(): ReactElement {
   return (
-    <div className="bg-red-500 h-screen min-w-40 w-full flex flex-row justify-center items-center">
-      <img className="m-1 w-8 h-8" src="./src/assets/img/cosmosound.svg" alt="CosmoSound" />
-      CosmoSound
+    <div className="flex flex-col">
+      <TopSidebar />
+      <SidebarContent />
     </div>
   );
 }

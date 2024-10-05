@@ -1,7 +1,7 @@
 import { type ReactElement } from "react";
 
 function AccountPage(): ReactElement {
-  return <></>;
+  return <div>ACCOUNT PAGE !!!</div>;
 }
 
 export default AccountPage;
