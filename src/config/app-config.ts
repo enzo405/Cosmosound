@@ -8,17 +8,38 @@ type RoutesConfig = Record<
     path: string;
     getParameterPath: (...parameters: Array<string>) => string;
     title: string;
+    diplaySidebar: boolean;
   }
 >;
 
 const routesConfig: RoutesConfig = {
-  home: { path: "/", getParameterPath: (_) => "/", title: DEFAULT_PAGE_TITLE },
-  account: { path: "/account", getParameterPath: (_) => "/account", title: "Account" },
-  login: { path: "/login", getParameterPath: (_) => "/login", title: "Login" },
-  register: { path: "/register", getParameterPath: (_) => "/register", title: "Register" },
-  feed: { path: "/feed", getParameterPath: (_) => "/feed", title: "Feed" },
-  search: { path: "/search", getParameterPath: (_) => "/search", title: "Search" },
-  any: { path: "*", getParameterPath: (_) => "*", title: DEFAULT_PAGE_TITLE },
+  home: { path: "/", getParameterPath: (_) => "/", title: DEFAULT_PAGE_TITLE, diplaySidebar: true },
+  account: {
+    path: "/account",
+    getParameterPath: (_) => "/account",
+    title: "Account",
+    diplaySidebar: true,
+  },
+  login: {
+    path: "/login",
+    getParameterPath: (_) => "/login",
+    title: "Login",
+    diplaySidebar: false,
+  },
+  register: {
+    path: "/register",
+    getParameterPath: (_) => "/register",
+    title: "Register",
+    diplaySidebar: false,
+  },
+  feed: { path: "/feed", getParameterPath: (_) => "/feed", title: "Feed", diplaySidebar: true },
+  search: {
+    path: "/search",
+    getParameterPath: (_) => "/search",
+    title: "Search",
+    diplaySidebar: true,
+  },
+  any: { path: "*", getParameterPath: (_) => "*", title: DEFAULT_PAGE_TITLE, diplaySidebar: false },
 };
 
 const config = {
