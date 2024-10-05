@@ -8,9 +8,7 @@ function Header({ unAuthenticated = false }: Readonly<HeaderProps>): ReactElemen
       {unAuthenticated ? (
         <span>You are not authenticated</span>
       ) : (
-        <div className="h-screen bg-blue-500 flex items-center justify-center">
-          <h1 className="text-white text-4xl">Hello !</h1>
-        </div>
+        <div className="bg-red-400 w-screen h-10">HEADER</div>
       )}
     </>
   );
