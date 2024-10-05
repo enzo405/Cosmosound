@@ -1,7 +1,7 @@
-import {type ReactElement } from "react";
+import { type ReactElement } from "react";
 
 function ServerErrorPage(): ReactElement {
-    return <></>;
+  return <></>;
 }
 
 export default ServerErrorPage;

@@ -1,10 +1,7 @@
-import {type ReactElement} from "react";
+import { type ReactElement } from "react";
 
 function Footer(): ReactElement {
-    return (
-        <>
-        </>
-    );
+  return <></>;
 }
 
 export default Footer;

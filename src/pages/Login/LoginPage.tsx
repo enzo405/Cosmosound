@@ -1,7 +1,7 @@
-import {type ReactElement } from "react";
+import { type ReactElement } from "react";
 
 function LoginPage(): ReactElement {
-    return <></>;
+  return <></>;
 }
 
 export default LoginPage;

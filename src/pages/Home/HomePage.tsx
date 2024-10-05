@@ -1,11 +1,11 @@
-import {type ReactElement } from "react";
+import { type ReactElement } from "react";
 
 function HomePage(): ReactElement {
-    return (
-        <>
-            <h1>TEST</h1>
-        </>
-    );
+  return (
+    <>
+      <h1>TEST</h1>
+    </>
+  );
 }
 
 export default HomePage;
