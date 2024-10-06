@@ -1,0 +1,8 @@
+.env
+buildAndDeploy
+dist
+node_modules
+public
+.git
+
+vite.config.ts

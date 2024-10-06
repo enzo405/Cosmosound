@@ -1,46 +1,58 @@
-# Métalify
+# Projet **Cosmosound**
 
-## Description du projet
+## 1. **Description du projet**
 
-**Métalify** est une application web de streaming musical dédiée au genre **métal**. Inspirée par des plateformes comme Spotify, cette application permet aux utilisateurs d'écouter des morceaux de métal, de créer et gérer leurs propres playlists, et de découvrir de nouveaux artistes à travers une recherche avancée et des filtres multicritères. Le projet est conçu pour offrir aux amateurs de métal une expérience unique, centrée sur leur genre musical favori.
+Le projet **Cosmosound** est une plateforme de streaming musical en ligne inspirée de services populaires tels que Spotify, Deezer ou YouTube Music. Cette application permet aux utilisateurs de découvrir de nouveaux artistes, d'écouter leurs morceaux préférés, de créer des playlists personnalisées et de gérer leur profil utilisateur. Le projet vise à offrir une expérience fluide et intuitive, tout en facilitant la découverte musicale.
 
-## Fonctionnalités principales
+Le projet wa été réalisé dans le cadre d'une formation en Licence CDA (Conception et Développement d'Applications).
 
-### 1. **Playlists et Musiques**
-   - **Musiques** :
-     - Les musiques seront associées aux profils des propriétaires une fois créées.
-     - Un utilisateur ayant uploadé au moins une musique sera reconnu comme artiste.
-     - Le propriétaire de la musique peut modifier ses caractéristiques (photo, nom, collaborateur(s), et date de sortie).
-     - Un **lecteur audio intégré** permettra de lire les musiques directement dans l’application.
-   - **Playlists** :
-     - Les utilisateurs peuvent **créer**, **modifier**, **supprimer** et **voir** leurs playlists.
-     - Les musiques peuvent être ajoutées ou retirées des playlists.
-     - Chaque utilisateur aura une playlist qui contiendra ses titres préférés.
+## 2. **Fonctionnalités**
 
-### 2. **Gestion du profil utilisateur**
-   - Les utilisateurs peuvent **s’inscrire** et **se connecter**.
-   - Chaque utilisateur dispose d’un **profil** personnalisable (pseudo, avatar, etc.).
-   - Gestion sécurisée de **l’authentification** avec des **JWT** (JSON Web Tokens).
+### Utilisateurs
+- Inscription, connexion et déconnexion avec authentification sécurisée (JWT).
+- Gestion de profils personnalisés (pseudo, avatar).
 
-### 3. **Recherche multicritères et filtres**
-   - L’application offre une **recherche avancée** pour trouver des musiques et playlists par **titre**, **artiste**, ou **nom**.
-   - Des filtres permettent de découvrir des morceaux facilement.
+### Musiques
+- Upload, modification et suppression des musiques (uniquement par leur créateur).
+- Les musiques générées par IA sont marquées par un label "IA".
+- Un utilisateur ayant uploadé au moins une musique devient *artiste*.
 
-### 4. **Système de rôles et permissions**
-   - Un système de **rôles** gère les permissions :
-     - Les **utilisateurs** peuvent écouter et ajouter des musiques à leurs playlists.
-     - Les **propriétaires** peuvent modifier ou supprimer leurs propres musiques.
-     - Les **propriétaires de playlists** peuvent ajouter des collaborateurs pour les aider à gérer la playlist.
-     - L'application est **accessible uniquement aux utilisateurs inscrits**.
+### Playlists
+- Création, modification et suppression de playlists.
+- Toutes les playlists sont publiques et peuvent être écoutées par tous les utilisateurs.
+- Chaque playlist peut être associée à plusieurs genres musicaux.
 
-### 5. **Stockage et diffusion des fichiers audio**
-   - Les fichiers audio seront stockés sur un serveur de fichiers.
-   - La lecture audio sera assurée par un lecteur HTML5.
+### Abonnements
+- Suivi des artistes pour obtenir des suggestions de titres personnalisées et un accès rapide à leurs contenus.
 
-## Technologies utilisées
-- **Frontend** : React
-- **Backend** : Node.js avec Express
-- **Base de données** : PostgreSQL ou MongoDB
-- **API REST** : Pour la communication entre le frontend et le backend
-- **Stockage des fichiers audio** : Serveur de fichiers
-- **Authentification et gestion des permissions** : JWT
+### Recherche
+- Recherche multicritères par titre, artiste, playlist, genre et nombre d'abonnés.
+- Filtres avancés pour découvrir de nouvelles musiques.
+
+### Gestion des rôles et permissions
+- **Auteur** : peut créer, modifier et supprimer ses propres musiques et playlists.
+- **Utilisateur** : peut écouter des musiques et suivre des artistes.
+
+### Stockage et Streaming
+- Stockage des fichiers audio sur un serveur dédié.
+- Diffusion des musiques via un lecteur audio HTML5 intégré pour une écoute fluide.
+
+## 3. **Technologies utilisées**
+
+### Frontend
+- **React** : Bibliothèque JavaScript pour créer une interface utilisateur interactive et dynamique.
+
+### Backend
+- **Node.js** avec **Express** : Serveur backend pour gérer les requêtes API et la logique métier.
+
+### Base de données
+- **PostgreSQL** ou **MongoDB** : Pour le stockage des données (utilisateurs, musiques, playlists, etc.).
+
+### API REST
+- Communication entre le frontend et le backend via une API RESTful.
+
+### Stockage des fichiers audio
+- Les fichiers audio sont stockés sur un serveur de fichiers dédié.
+
+### Authentification et gestion des permissions
+- **JWT** (JSON Web Token) : Pour une authentification sécurisée et la gestion des permissions d'accès.
