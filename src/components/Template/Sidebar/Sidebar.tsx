@@ -4,7 +4,7 @@ import SidebarContent from "./SidebarContent";
 
 function Sidebar(): ReactElement {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col sidebar">
       <TopSidebar />
       <SidebarContent />
     </div>
