@@ -2,8 +2,8 @@ import { type ReactElement } from "react";
 
 function HomePage(): ReactElement {
   return (
-    <div className="bg-green-500">
-      <h1>TEST</h1>
+    <div className="bg-green-500 flex flex-col">
+      <span>Flygande bäckasiner söka hwila på mjuka tuvor</span>
     </div>
   );
 }

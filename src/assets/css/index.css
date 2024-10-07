@@ -24,3 +24,9 @@
   * your stylesheet by default.
   */
 @tailwind variants;
+
+
+@font-face {
+  font-family: 'BahnSchrift';
+  src: url('/src/assets/font/BAHNSCHRIFT.TTF') format('truetype'),
+}
