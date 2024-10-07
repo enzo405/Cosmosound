@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { FaHouse, FaUser, FaMusic, FaMagnifyingGlass } from "react-icons/fa6";
+import { FaHouse, FaMusic, FaMagnifyingGlass } from "react-icons/fa6";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const APPLICATION_NAME = "CosmoSound";
@@ -35,7 +35,6 @@ const routesConfig: RoutesConfig = {
 
 const routesSidebar: RoutesSidebar = {
   home: { path: "/", displayText: "Home", icon: FaHouse },
-  account: { path: "/account", displayText: "Account", icon: FaUser },
   feed: { path: "/feed", displayText: "Feed", icon: FaMusic },
   search: { path: "/search", displayText: "Search", icon: FaMagnifyingGlass },
 };

@@ -10,7 +10,7 @@ function Header({ unAuthenticated = false }: Readonly<HeaderProps>): ReactElemen
       {unAuthenticated ? (
         <span>You are not authenticated</span>
       ) : (
-        <div className="flex items-center h-24 mx-2">
+        <div className="flex items-center h-24 mx-4 gap-2">
           <HeaderSearchbar />
           <HeaderAvatar />
         </div>
