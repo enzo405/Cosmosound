@@ -1,16 +1,36 @@
 import Divider from "components/Divider";
 import { routesConfig } from "config/app-config";
-import { useState, type ReactElement } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import { FaUser } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import HeaderAvatarOptions from "./HeaderAvatarOptions";
+import { LuLogOut } from "react-icons/lu";
+import DarkModeSwitch from "./DarkModeSwitch";
 
 function HeaderAvatar(): ReactElement {
+  const [checked, setChecked] = useState(localStorage.theme === "dark");
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleProfileModal = () => {
     setProfileModalOpen(!profileModalOpen);
   };
+
+  useEffect(() => {
+    setProfileModalOpen(false);
+  }, [window.location.pathname]);
+
+  useEffect(() => {
+    if (checked) {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      localStorage.theme = "dark";
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      localStorage.theme = "light";
+    }
+  }, [checked]);
 
   return (
     <>
@@ -21,18 +41,28 @@ function HeaderAvatar(): ReactElement {
       />
       {profileModalOpen && (
         <div className="absolute top-0 right-0 z-10 transform-gpu translate-x-[-10px] translate-y-[80px]">
-          <div className="block py-1 text-m text-gray-900 border border-gray-300 rounded-lg bg-gray-50 w-44 h-48">
+          <div className="block py-1 text-m text-gray-900 border border-gray-300 rounded-lg bg-gray-50 w-52 h-64">
             {/* Profile Section */}
-            <div
-              onClick={() => navigate(routesConfig.account.path)}
-              className="flex flex-row gap-1 justify-start m-1 p-2 rounded-sm cursor-pointer hover:bg-slate-400">
+            <HeaderAvatarOptions onClick={() => navigate(routesConfig.account.path)}>
               <FaUser className="mt-1" />
               BELO Smile
-            </div>
-            <Divider className="" />
+            </HeaderAvatarOptions>
+            <Divider />
             {/* Settings Section */}
-            <Divider className="" />
+            <HeaderAvatarOptions isClickable={false}>
+              <span className="cursor-pointer w-full" onClick={() => setChecked(!checked)}>
+                Dark Mode
+              </span>
+              <DarkModeSwitch checked={checked} setChecked={setChecked} />
+            </HeaderAvatarOptions>
+            <HeaderAvatarOptions onClick={() => navigate(routesConfig.logout.path)}>
+              <LuLogOut className="mt-1" />
+              Logout
+            </HeaderAvatarOptions>
+            <Divider />
             {/* Footer Section */}
+            <HeaderAvatarOptions>About us</HeaderAvatarOptions>
+            <HeaderAvatarOptions>Legal</HeaderAvatarOptions>
           </div>
         </div>
       )}

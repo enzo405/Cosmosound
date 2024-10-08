@@ -1,0 +1,12 @@
+/* Theme Colors */
+
+
+/* Light theme colors */
+.light {
+    --test: green;
+}
+
+/* Dark theme colors */
+.dark {
+    --test: red;
+}

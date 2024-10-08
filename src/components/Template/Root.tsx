@@ -9,7 +9,9 @@ function Root(): ReactElement {
       <Sidebar />
       <div className="flex flex-col main">
         <Header />
-        <Outlet />
+        <div className="h-full p-1">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
