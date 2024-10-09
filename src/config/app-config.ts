@@ -20,6 +20,7 @@ type RoutesSidebar = Record<
     path: string;
     displayText: string;
     icon: IconType;
+    iconActiv: IconType;
   }
 >;
 
@@ -29,15 +30,21 @@ const routesConfig: RoutesConfig = {
   login: { path: "/login", getParameterPath: (_) => "/login", title: "Login" },
   logout: { path: "/logout", getParameterPath: (_) => "/logout", title: "Logout" },
   register: { path: "/register", getParameterPath: (_) => "/register", title: "Register" },
-  feed: { path: "/feed", getParameterPath: (_) => "/feed", title: "Feed" },
-  search: { path: "/search", getParameterPath: (_) => "/search", title: "Search" },
+  explore: { path: "/explore", getParameterPath: (_) => "/explore", title: "Explore" },
+  library: { path: "/library", getParameterPath: (_) => "/library", title: "Library" },
+  aboutUs: { path: "/about-us", getParameterPath: (_) => "/explore", title: "Explore" },
   any: { path: "*", getParameterPath: (_) => "*", title: DEFAULT_PAGE_TITLE },
 };
 
 const routesSidebar: RoutesSidebar = {
-  home: { path: "/", displayText: "Home", icon: FaHouse },
-  feed: { path: "/feed", displayText: "Feed", icon: FaMusic },
-  search: { path: "/search", displayText: "Search", icon: FaMagnifyingGlass },
+  home: { path: "/", displayText: "Home", icon: FaHouse, iconActiv: FaHouse },
+  library: { path: "/library", displayText: "library", icon: FaMusic, iconActiv: FaMusic },
+  explore: {
+    path: "/explore",
+    displayText: "Explore",
+    icon: FaMagnifyingGlass,
+    iconActiv: FaMagnifyingGlass,
+  },
 };
 
 const config = {

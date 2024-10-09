@@ -7,8 +7,8 @@ import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
 import AccountPage from "pages/Account/AccountPage";
 import LoginPage from "pages/Login/LoginPage";
 import RegisterPage from "pages/Register/RegisterPage";
-import FeedPage from "pages/Feed/FeedPage";
-import SearchPage from "pages/Search/SearchPage";
+import LibraryPage from "pages/Library/LibraryPage";
+import ExplorePage from "pages/Explore/ExplorePage";
 
 const authenticatedRouter = createBrowserRouter([
   {
@@ -32,12 +32,16 @@ const authenticatedRouter = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: routesConfig.feed.path,
-        element: <FeedPage />,
+        path: routesConfig.library.path,
+        element: <LibraryPage />,
       },
       {
-        path: routesConfig.search.path,
-        element: <SearchPage />,
+        path: routesConfig.explore.path,
+        element: <ExplorePage />,
+      },
+      {
+        path: routesConfig.aboutUs.path,
+        element: <HomePage />,
       },
       {
         path: routesConfig.any.path,

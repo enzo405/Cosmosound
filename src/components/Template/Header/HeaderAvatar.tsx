@@ -61,7 +61,9 @@ function HeaderAvatar(): ReactElement {
             </HeaderAvatarOptions>
             <Divider />
             {/* Footer Section */}
-            <HeaderAvatarOptions>About us</HeaderAvatarOptions>
+            <HeaderAvatarOptions onClick={() => navigate(routesConfig.aboutUs.path)}>
+              About us
+            </HeaderAvatarOptions>
             <HeaderAvatarOptions>Legal</HeaderAvatarOptions>
           </div>
         </div>
