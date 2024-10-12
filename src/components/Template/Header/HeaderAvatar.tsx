@@ -36,12 +36,12 @@ function HeaderAvatar(): ReactElement {
     <>
       <img
         onClick={handleProfileModal}
-        className="w-12 h-12 p-1 rounded-full ring-1 ring-gray-300 cursor-pointer"
+        className="w-[2.8rem] h-[2.8rem] p-1 rounded-full ring-1 ring-gray-300 cursor-pointer"
         src="/src/assets/img/default_avatar.png"
       />
       {profileModalOpen && (
         <div className="absolute top-0 right-0 z-10 transform-gpu translate-x-[-10px] translate-y-[80px]">
-          <div className="block py-1 text-m text-gray-900 border border-gray-300 rounded-lg bg-gray-50 w-52 h-64">
+          <div className="block py-1 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 w-44 xsm:w-52">
             {/* Profile Section */}
             <HeaderAvatarOptions onClick={() => navigate(routesConfig.account.path)}>
               <FaUser className="mt-1" />

@@ -2,7 +2,7 @@ import { type ReactElement } from "react";
 
 function HeaderSearchbar(): ReactElement {
   return (
-    <div className="w-5/12 mr-auto min-w-44">
+    <div className="w-2/3 mr-auto min-w-40">
       <label htmlFor="search" className="mb-2 text-sm font-medium text-gray-900 sr-only">
         Search
       </label>
@@ -26,7 +26,7 @@ function HeaderSearchbar(): ReactElement {
         <input
           type="search"
           id="search"
-          className="block w-full p-3 ps-10 text-m text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+          className="block w-full p-2 ps-9 xsm:p-3 xsm:ps-9 text-m text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Musics, Artists ..."
         />
       </div>
