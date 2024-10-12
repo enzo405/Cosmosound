@@ -10,7 +10,7 @@ function SidebarContent(): ReactElement {
   };
 
   return (
-    <div className="h-full mt-3 flex flex-col gap-1">
+    <div className="flex flex-col items-center gap-1 h-full mt-3 px-2 xsm:items-start">
       {Object.entries(routesSidebar).flatMap((objRoute, i) => {
         const Icon = objRoute[1].icon;
         const IconActiv = objRoute[1].iconActiv;
@@ -25,9 +25,14 @@ function SidebarContent(): ReactElement {
           <div
             key={i}
             onClick={() => navigate(objRoute[1].path)}
-            className={classes + " flex flex-row px-4 mx-2 cursor-pointer py-1 rounded-lg"}>
+            className={
+              classes +
+              " w-full flex flex-row px-2 cursor-pointer py-1 rounded-lg justify-center xsm:justify-normal"
+            }>
             {active ? <IconActiv className="h-8 flex" /> : <Icon className="h-8 flex" />}
-            <a className="ml-2 h-8 flex items-center text-lg">{objRoute[1].displayText}</a>
+            <a className="ml-2 h-8 items-center text-lg hidden xsm:flex">
+              {objRoute[1].displayText}
+            </a>
           </div>
         );
       })}

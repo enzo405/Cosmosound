@@ -12,7 +12,7 @@ function HeaderAvatarOptions({
   children,
   onClick = () => {},
 }: Readonly<HeaderAvatarOptionsProps>): ReactElement {
-  let classNames = "flex flex-row gap-1 justify-start m-1 p-2 rounded-sm";
+  let classNames = "flex flex-row gap-1 justify-start m-1 p-2 rounded-lg";
   if (isClickable) {
     classNames += " cursor-pointer hover:bg-slate-400 group";
   }

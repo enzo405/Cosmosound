@@ -5,11 +5,11 @@ import Sidebar from "./Sidebar/Sidebar";
 
 function Root(): ReactElement {
   return (
-    <div className="font-bs flex flex-row w-screen h-screen">
+    <div className="font-bs flex flex-row h-screen">
       <Sidebar />
-      <div className="flex flex-col main">
+      <div className="flex flex-col flex-grow">
         <Header />
-        <div className="h-full p-1">
+        <div className="h-full">
           <Outlet />
         </div>
       </div>

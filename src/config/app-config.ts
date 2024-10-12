@@ -38,7 +38,7 @@ const routesConfig: RoutesConfig = {
 
 const routesSidebar: RoutesSidebar = {
   home: { path: "/", displayText: "Home", icon: FaHouse, iconActiv: FaHouse },
-  library: { path: "/library", displayText: "library", icon: FaMusic, iconActiv: FaMusic },
+  library: { path: "/library", displayText: "Library", icon: FaMusic, iconActiv: FaMusic },
   explore: {
     path: "/explore",
     displayText: "Explore",

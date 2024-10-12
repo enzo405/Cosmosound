@@ -66,13 +66,3 @@ h6 {
 #__next {
   isolation: isolate;
 }
-
-
-.sidebar {
-  width: 200px;
-  min-width: 200px;
-}
-
-.main {
-  width: calc(100% - 200px);
-}
