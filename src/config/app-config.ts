@@ -1,7 +1,6 @@
 import { IconType } from "react-icons";
 import { FaHouse, FaMusic, FaMagnifyingGlass } from "react-icons/fa6";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 const APPLICATION_NAME = "CosmoSound";
 const DEFAULT_PAGE_TITLE = "CosmoSound";
 
