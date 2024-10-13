@@ -27,7 +27,6 @@ const routesConfig: RoutesConfig = {
   home: { path: "/", getParameterPath: (_) => "/", title: DEFAULT_PAGE_TITLE },
   account: { path: "/account", getParameterPath: (_) => "/account", title: "Account" },
   login: { path: "/login", getParameterPath: (_) => "/login", title: "Login" },
-  logout: { path: "/logout", getParameterPath: (_) => "/logout", title: "Logout" },
   register: { path: "/register", getParameterPath: (_) => "/register", title: "Register" },
   explore: { path: "/explore", getParameterPath: (_) => "/explore", title: "Explore" },
   library: { path: "/library", getParameterPath: (_) => "/library", title: "Library" },

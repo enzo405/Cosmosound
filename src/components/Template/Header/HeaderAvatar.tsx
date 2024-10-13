@@ -19,6 +19,10 @@ function HeaderAvatar(): ReactElement {
     setProfileModalOpen(!profileModalOpen);
   };
 
+  const logout = () => {
+    localStorage.removeItem("user");
+  };
+
   useEffect(() => {
     setProfileModalOpen(false);
   }, [window.location.pathname]);
@@ -67,7 +71,7 @@ function HeaderAvatar(): ReactElement {
               </span>
               <DarkModeSwitch checked={checked} setChecked={setChecked} />
             </HeaderAvatarOptions>
-            <HeaderAvatarOptions onClick={() => navigate(routesConfig.logout.path)}>
+            <HeaderAvatarOptions onClick={logout}>
               <LuLogOut className="mt-1" />
               Logout
             </HeaderAvatarOptions>

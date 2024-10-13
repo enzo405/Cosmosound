@@ -1,10 +1,12 @@
-import { RouterProvider } from "react-router-dom";
-import authenticatedRouter from "./routes/authenticatedRouter";
+import { UserProvider } from "providers/UserProvider";
+import RouterWrapper from "routes/RouterWrapper";
 
 function App() {
   return (
     <>
-      <RouterProvider router={authenticatedRouter} />
+      <UserProvider>
+        <RouterWrapper />
+      </UserProvider>
     </>
   );
 }

@@ -2,20 +2,12 @@ import { type ReactElement } from "react";
 import HeaderAvatar from "./HeaderAvatar";
 import HeaderSearchbar from "./HeaderSearchbar";
 
-type HeaderProps = { unAuthenticated?: boolean };
-
-function Header({ unAuthenticated = false }: Readonly<HeaderProps>): ReactElement {
+function Header(): ReactElement {
   return (
-    <>
-      {unAuthenticated ? (
-        <span>You are not authenticated</span>
-      ) : (
-        <div className="flex items-center h-24 mx-1 xsm:mx-4 py-2 gap-2">
-          <HeaderSearchbar />
-          <HeaderAvatar />
-        </div>
-      )}
-    </>
+    <div className="flex items-center h-24 mx-1 xsm:mx-4 py-2 gap-2">
+      <HeaderSearchbar />
+      <HeaderAvatar />
+    </div>
   );
 }
 
