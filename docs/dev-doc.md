@@ -59,11 +59,8 @@ Tous les endpoints de l'API seront préfixés par `/api`.
 
 ### **Authentification**
 
-| Verbe    | Endpoint    | Description | Détails                                        | Response |
-| -------- | ----------- | ----------- | ---------------------------------------------- | -------- |
-| **GET**  | `/logout`   | logout      | Déconnecte l'utilisateur en invalidant le JWT. | *empty*  |
-| **POST** | `/register` | register    | Crée un compte utilisateur.                    | User.Id  |
-| **POST** | `/login`    | login       | Connecte un utilisateur et renvoie un JWT.     | *empty*  |
+| Verbe | Endpoint | Description | Détails | Response |
+| ----- | -------- | ----------- | ------- | -------- |
 
 ### **Recherche**
 

@@ -9,6 +9,7 @@ import LoginPage from "pages/Login/LoginPage";
 import RegisterPage from "pages/Register/RegisterPage";
 import LibraryPage from "pages/Library/LibraryPage";
 import ExplorePage from "pages/Explore/ExplorePage";
+import AboutUsPage from "pages/AboutUs/AboutUsPage";
 
 const authenticatedRouter = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ const authenticatedRouter = createBrowserRouter([
       },
       {
         path: routesConfig.aboutUs.path,
-        element: <HomePage />,
+        element: <AboutUsPage />,
       },
       {
         path: routesConfig.any.path,
