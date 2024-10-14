@@ -6,21 +6,14 @@ import { useNavigate } from "react-router-dom";
 import HeaderAvatarOptions from "./HeaderAvatarOptions";
 import { LuLogOut } from "react-icons/lu";
 import DarkModeSwitch from "./DarkModeSwitch";
-import { useUser } from "hooks/useUser";
-import { BiLogIn } from "react-icons/bi";
 
 function HeaderAvatar(): ReactElement {
   const [checked, setChecked] = useState(localStorage.theme === "dark");
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { user } = useUser();
 
   const handleProfileModal = () => {
     setProfileModalOpen(!profileModalOpen);
-  };
-
-  const logout = () => {
-    localStorage.removeItem("user");
   };
 
   useEffect(() => {
@@ -39,21 +32,12 @@ function HeaderAvatar(): ReactElement {
     }
   }, [checked]);
 
-  if (!user) {
-    return (
-      <div className="cursor-pointer">
-        <span onClick={() => navigate(routesConfig.login.path)}>LOGIN</span>
-        <BiLogIn></BiLogIn>
-      </div>
-    );
-  }
-
   return (
     <>
       <img
         onClick={handleProfileModal}
         className="w-[2.8rem] h-[2.8rem] p-1 rounded-full ring-1 ring-gray-300 cursor-pointer"
-        src={user.picture_profile}
+        src="/src/assets/img/default_avatar.png"
       />
       {profileModalOpen && (
         <div className="absolute top-0 right-0 z-10 transform-gpu translate-x-[-10px] translate-y-[80px]">
@@ -61,7 +45,7 @@ function HeaderAvatar(): ReactElement {
             {/* Profile Section */}
             <HeaderAvatarOptions onClick={() => navigate(routesConfig.account.path)}>
               <FaUser className="mt-1" />
-              {user.name}
+              Me
             </HeaderAvatarOptions>
             <Divider />
             {/* Settings Section */}
@@ -71,7 +55,7 @@ function HeaderAvatar(): ReactElement {
               </span>
               <DarkModeSwitch checked={checked} setChecked={setChecked} />
             </HeaderAvatarOptions>
-            <HeaderAvatarOptions onClick={logout}>
+            <HeaderAvatarOptions>
               <LuLogOut className="mt-1" />
               Logout
             </HeaderAvatarOptions>
