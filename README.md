@@ -46,7 +46,7 @@ Le projet wa été réalisé dans le cadre d'une formation en Licence CDA (Conce
 - **Node.js** avec **Express** : Serveur backend pour gérer les requêtes API et la logique métier.
 
 ### Base de données
-- **PostgreSQL** ou **MongoDB** : Pour le stockage des données (utilisateurs, musiques, playlists, etc.).
+- **MongoDB** : Pour le stockage des données (utilisateurs, musiques, playlists, etc.).
 
 ### API REST
 - Communication entre le frontend et le backend via une API RESTful.

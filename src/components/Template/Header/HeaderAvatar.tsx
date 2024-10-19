@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import HeaderAvatarOptions from "./HeaderAvatarOptions";
 import { LuLogOut } from "react-icons/lu";
 import DarkModeSwitch from "./DarkModeSwitch";
+import { IoIosArrowDown } from "react-icons/io";
 
 function HeaderAvatar(): ReactElement {
   const [checked, setChecked] = useState(localStorage.theme === "dark");
@@ -13,6 +14,7 @@ function HeaderAvatar(): ReactElement {
   const navigate = useNavigate();
 
   const handleProfileModal = () => {
+    // Animate header avatar
     setProfileModalOpen(!profileModalOpen);
   };
 
@@ -34,11 +36,15 @@ function HeaderAvatar(): ReactElement {
 
   return (
     <>
-      <img
-        onClick={handleProfileModal}
-        className="w-[2.8rem] h-[2.8rem] p-1 rounded-full ring-1 ring-gray-300 cursor-pointer"
-        src="/src/assets/img/default_avatar.png"
-      />
+      <span
+        className="cursor-pointer flex flex-row gap-3 items-center"
+        onClick={handleProfileModal}>
+        <img
+          className="w-[3rem] h-[3rem] p-1 rounded-full ring-gray-300 cursor-pointer"
+          src="/src/assets/img/default_avatar.png"
+        />
+        <IoIosArrowDown className="h-full cursor-pointer transition-transform" />
+      </span>
       {profileModalOpen && (
         <div className="absolute top-0 right-0 z-10 transform-gpu translate-x-[-10px] translate-y-[80px]">
           <div className="block py-1 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 w-44 xsm:w-52">
