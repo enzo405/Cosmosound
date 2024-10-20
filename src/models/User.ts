@@ -11,6 +11,20 @@ export interface User {
 }
 
 export interface Artist extends User {
-  social_media: string[];
+  social_media: SocialMediaLink[];
   genre: Genre;
+  artist_name: string;
+}
+
+export interface SocialMediaLink {
+  media: Media;
+  link: string;
+}
+
+export enum Media {
+  X,
+  SPOTIFY,
+  APPLE_MUSIC,
+  YTB_MUSIC,
+  INSTAGRAM,
 }
