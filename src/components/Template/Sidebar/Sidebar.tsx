@@ -4,7 +4,7 @@ import SidebarContent from "./SidebarContent";
 
 function Sidebar(): ReactElement {
   return (
-    <div className="flex flex-col min-w-20 xsm:min-w-48">
+    <div className="bg-sidebar-bg border-soft-beige border-r-[1px] flex flex-col p-2 gap-10 min-w-20 xsm:min-w-56">
       <TopSidebar />
       <SidebarContent />
     </div>

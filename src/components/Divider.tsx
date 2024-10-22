@@ -4,5 +4,5 @@ export default function Divider({
   className,
   ...props
 }: React.HTMLAttributes<HTMLHRElement>): ReactElement {
-  return <hr className={`border border-gray-300 w-auto my-2 ${className}`} {...props} />;
+  return <hr className={`border border-settings-divider w-auto my-2 ${className}`} {...props} />;
 }

@@ -1,5 +1,4 @@
-import { IconType } from "react-icons";
-import { FaHouse, FaMusic, FaMagnifyingGlass } from "react-icons/fa6";
+import { IconName } from "constants/iconName";
 
 const APPLICATION_NAME = "CosmoSound";
 const DEFAULT_PAGE_TITLE = "CosmoSound";
@@ -8,7 +7,7 @@ type RoutesConfig = Record<
   string,
   {
     path: string;
-    getParameterPath: (...parameters: Array<string>) => string;
+    getParameter: (...parameters: Array<string>) => string;
     title: string;
   }
 >;
@@ -18,30 +17,46 @@ type RoutesSidebar = Record<
   {
     path: string;
     displayText: string;
-    icon: IconType;
-    iconActiv: IconType;
+    iconName: IconName;
+    iconActiveName: IconName;
   }
 >;
 
 const routesConfig: RoutesConfig = {
-  home: { path: "/", getParameterPath: (_) => "/", title: DEFAULT_PAGE_TITLE },
-  account: { path: "/account", getParameterPath: (_) => "/account", title: "Account" },
-  login: { path: "/login", getParameterPath: (_) => "/login", title: "Login" },
-  register: { path: "/register", getParameterPath: (_) => "/register", title: "Register" },
-  explore: { path: "/explore", getParameterPath: (_) => "/explore", title: "Explore" },
-  library: { path: "/library", getParameterPath: (_) => "/library", title: "Library" },
-  aboutUs: { path: "/about-us", getParameterPath: (_) => "/explore", title: "Explore" },
-  any: { path: "*", getParameterPath: (_) => "*", title: DEFAULT_PAGE_TITLE },
+  home: { path: "/", getParameter: (_) => "/", title: DEFAULT_PAGE_TITLE },
+  account: { path: "/account", getParameter: (_) => "/account", title: "Account" },
+  login: { path: "/login", getParameter: (_) => "/login", title: "Login" },
+  register: { path: "/register", getParameter: (_) => "/register", title: "Register" },
+  explore: { path: "/explore", getParameter: (_) => "/explore", title: "Explore" },
+  library: { path: "/library", getParameter: (_) => "/library", title: "Library" },
+  aboutUs: { path: "/about-us", getParameter: (_) => "/explore", title: "Explore" },
+  artistPanel: {
+    path: "/artist-panel",
+    getParameter: (_) => "/artist-panel",
+    title: "Artist Panel",
+  },
+  legal: { path: "/legal", getParameter: (_) => "/legal", title: "Legal Terms" },
+  any: { path: "*", getParameter: (_) => "*", title: DEFAULT_PAGE_TITLE },
 };
 
 const routesSidebar: RoutesSidebar = {
-  home: { path: "/", displayText: "Home", icon: FaHouse, iconActiv: FaHouse },
-  library: { path: "/library", displayText: "Library", icon: FaMusic, iconActiv: FaMusic },
+  home: {
+    path: "/",
+    displayText: "Home",
+    iconName: "homeIcon-black",
+    iconActiveName: "homeIcon-orange",
+  },
+  library: {
+    path: "/library",
+    displayText: "Library",
+    iconName: "heart-black",
+    iconActiveName: "heart-orange",
+  },
   explore: {
     path: "/explore",
     displayText: "Explore",
-    icon: FaMagnifyingGlass,
-    iconActiv: FaMagnifyingGlass,
+    iconName: "compass-black",
+    iconActiveName: "compass-orange",
   },
 };
 

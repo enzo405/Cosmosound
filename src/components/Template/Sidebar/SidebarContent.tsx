@@ -1,3 +1,4 @@
+import { Icon } from "components/Icon";
 import { routesSidebar } from "config/app-config";
 import { type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,14 +13,12 @@ function SidebarContent(): ReactElement {
   return (
     <div className="flex flex-col items-center gap-2 h-full mt-1 px-2 xsm:items-start">
       {Object.entries(routesSidebar).flatMap((objRoute, i) => {
-        const Icon = objRoute[1].icon;
-        const IconActiv = objRoute[1].iconActiv;
+        const IconName = objRoute[1].iconName;
+        const IconNameActive = objRoute[1].iconActiveName;
         let active = isActive(objRoute[1].path);
         let classes = "";
         if (active) {
-          classes += "bg-gray-300";
-        } else {
-          classes += "hover:bg-gray-200";
+          classes += "bg-sidebar-item-bg text-primary-orange ";
         }
         return (
           <div
@@ -30,7 +29,7 @@ function SidebarContent(): ReactElement {
               " w-full flex flex-col px-2 py-1 cursor-pointer rounded-lg justify-center xsm:justify-normal xsm:flex-row"
             }>
             <span className="flex w-full justify-center xsm:justify-normal xsm:w-auto">
-              {active ? <IconActiv className="h-8 flex" /> : <Icon className="h-8 flex" />}
+              <Icon iconName={active ? IconNameActive : IconName} className="h-8 w-8 flex" />
             </span>
             <a className="flex w-full justify-center xsm:justify-normal xsm:ml-2 items-center text-xs xsm:text-lg">
               {objRoute[1].displayText}

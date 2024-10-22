@@ -1,10 +1,12 @@
 import { type ReactElement } from "react";
-import HeaderAvatar from "./HeaderAvatar";
+import HeaderAvatar from "./Avatar/HeaderAvatar";
 import HeaderSearchbar from "./HeaderSearchbar";
+import HeaderNavigation from "./HeaderNavigation";
 
 function Header(): ReactElement {
   return (
-    <div className="flex items-center h-24 mx-1 xsm:mx-4 py-2 gap-2">
+    <div className="flex items-center h-24 gap-6">
+      <HeaderNavigation />
       <HeaderSearchbar />
       <HeaderAvatar />
     </div>
