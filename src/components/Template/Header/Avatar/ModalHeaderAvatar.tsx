@@ -5,13 +5,15 @@ import { useNavigate } from "react-router-dom";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { Icon } from "components/Icon";
 import SettingsOptions from "components/SettingsOptions";
+import { useTheme } from "hooks/useTheme";
 
 interface DropdownHeaderAvatar {
   closeModal: () => void;
 }
 
 export default function DropdownHeaderAvatar({ closeModal }: DropdownHeaderAvatar): ReactElement {
-  const [checked, setChecked] = useState(localStorage.theme === "dark");
+  const { theme, setTheme } = useTheme();
+  const [checked, setChecked] = useState(theme === "dark");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,13 +32,9 @@ export default function DropdownHeaderAvatar({ closeModal }: DropdownHeaderAvata
 
   useEffect(() => {
     if (checked) {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-      localStorage.theme = "dark";
+      setTheme("dark");
     } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-      localStorage.theme = "light";
+      setTheme("light");
     }
   }, [checked]);
 

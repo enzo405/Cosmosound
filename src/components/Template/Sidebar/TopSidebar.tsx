@@ -7,7 +7,7 @@ function TopSidebar(): ReactElement {
   return (
     <a
       onClick={() => navigate("/")}
-      className="cursor-pointer h-24 w-full flex flex-row justify-center items-center xsm:mx-1">
+      className="cursor-pointer h-24 w-full flex flex-row justify-center items-center">
       <img src="./src/assets/img/sidebar/CosmoSound_logoSidebar.png" alt="CosmoSound" />
     </a>
   );

@@ -1,12 +1,15 @@
+import { ThemeProvider } from "providers/ThemeProvider";
 import { UserProvider } from "providers/UserProvider";
 import RouterWrapper from "routes/RouterWrapper";
 
 function App() {
   return (
     <>
-      <UserProvider>
-        <RouterWrapper />
-      </UserProvider>
+      <ThemeProvider>
+        <UserProvider>
+          <RouterWrapper />
+        </UserProvider>
+      </ThemeProvider>
     </>
   );
 }
