@@ -21,7 +21,7 @@ function SidebarContent(): ReactElement {
         if (active) {
           classes += "bg-sidebar-item-bg text-primary-orange ";
         } else {
-          classes += "hover:bg-sidebar-item-bg-hover ";
+          classes += "hover:bg-sidebar-item-bg-hover text-dark-custom ";
         }
         return (
           <div

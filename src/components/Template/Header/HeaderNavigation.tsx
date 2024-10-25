@@ -6,25 +6,17 @@ function HeaderNavigation(): ReactElement {
   const { canGoBack, canGoForward, goBackHandler, goForwardHandler } = useAppNavigate();
 
   return (
-    <span className="flex gap-5">
-      {canGoBack ? (
-        <Icon
-          iconName="arrow-left-activ"
-          className="w-4 h-4 cursor-pointer"
-          onClick={goBackHandler}
-        />
-      ) : (
-        <Icon iconName="arrow-left" className="w-4 h-4" onClick={goBackHandler} />
-      )}
-      {canGoForward ? (
-        <Icon
-          iconName="arrow-right-activ"
-          className="w-4 h-4 cursor-pointer"
-          onClick={goForwardHandler}
-        />
-      ) : (
-        <Icon iconName="arrow-right" className="w-4 h-4" onClick={goForwardHandler} />
-      )}
+    <span className="flex gap-1">
+      <span
+        onClick={goBackHandler}
+        className={`p-4 rounded-full ${canGoBack ? "cursor-pointer hover:bg-gray-200" : ""}`}>
+        <Icon iconName={canGoBack ? "arrow-left-activ" : "arrow-left"} className="h-4 w-4" />
+      </span>
+      <span
+        className={`p-4 rounded-full ${canGoForward ? "cursor-pointer hover:bg-gray-200" : ""}`}
+        onClick={goForwardHandler}>
+        <Icon iconName={canGoForward ? "arrow-right-activ" : "arrow-right"} className="h-4 w-4" />
+      </span>
     </span>
   );
 }
