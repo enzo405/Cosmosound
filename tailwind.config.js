@@ -15,6 +15,8 @@ export default {
         "body-bg": "var(--color-body-bg)",
         "sidebar-bg": "var(--color-sidebar-bg)",
         "sidebar-item-bg": "var(--color-sidebar-item-bg)",
+        "sidebar-item-bg-hover": "var(--color-sidebar-item-bg-hover)",
+        "sidebar-category-font": "var(--color-sidebar-category-font)",
         "primary-orange": "var(--color-primary)",
         "searchbar-white": "var(--color-searchbar-white)",
         "settings-divider": "var(--color-settings-divider)",

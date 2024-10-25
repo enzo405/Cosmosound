@@ -1,11 +1,11 @@
 import Divider from "components/Divider";
 import { routesConfig } from "config/app-config";
 import { useEffect, useState, type ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { Icon } from "components/Icon";
 import SettingsOptions from "components/SettingsOptions";
 import { useTheme } from "hooks/useTheme";
+import { useNavigate } from "react-router-dom";
 
 interface DropdownHeaderAvatar {
   closeModal: () => void;

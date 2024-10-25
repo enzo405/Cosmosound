@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactElement } from "react";
+import { useState, type ReactElement } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import DropdownHeaderAvatar from "./ModalHeaderAvatar";
 
@@ -6,13 +6,8 @@ function HeaderAvatar(): ReactElement {
   const [profileModalOpen, setProfileModalOpen] = useState(false);
 
   const handleProfileModal = () => {
-    // Animate header avatar
     setProfileModalOpen(!profileModalOpen);
   };
-
-  useEffect(() => {
-    setProfileModalOpen(false);
-  }, [window.location.pathname]);
 
   return (
     <span id="avatar-button">

@@ -12,6 +12,7 @@ function SidebarContent(): ReactElement {
 
   return (
     <div className="flex flex-col items-center gap-2 h-full mt-1 px-2 xsm:items-start">
+      <span className="text-sidebar-category-font font-semibold text-2xl font-mono">Menu</span>
       {Object.entries(routesSidebar).flatMap((objRoute, i) => {
         const IconName = objRoute[1].iconName;
         const IconNameActive = objRoute[1].iconActiveName;
@@ -19,6 +20,8 @@ function SidebarContent(): ReactElement {
         let classes = "";
         if (active) {
           classes += "bg-sidebar-item-bg text-primary-orange ";
+        } else {
+          classes += "hover:bg-sidebar-item-bg-hover ";
         }
         return (
           <div
@@ -31,7 +34,7 @@ function SidebarContent(): ReactElement {
             <span className="flex w-full justify-center xsm:justify-normal xsm:w-auto">
               <Icon iconName={active ? IconNameActive : IconName} className="h-8 w-8 flex" />
             </span>
-            <a className="flex w-full justify-center xsm:justify-normal xsm:ml-2 items-center text-xs xsm:text-lg">
+            <a className="flex w-full justify-center xsm:justify-normal xsm:ml-2 items-center text-sm xsm:text-xl font-bold">
               {objRoute[1].displayText}
             </a>
           </div>
