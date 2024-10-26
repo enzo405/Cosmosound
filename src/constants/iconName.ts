@@ -16,6 +16,7 @@ export type IconName =
   | "pauseButton"
   | "right-nextsound"
   | "volume-high"
+  | "volume-muted"
   | "aboutus"
   | "copylink"
   | "darkmode"

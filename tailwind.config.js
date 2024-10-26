@@ -19,7 +19,7 @@ export default {
         "sidebar-item-bg": "var(--color-sidebar-item-bg)",
         "sidebar-item-bg-hover": "var(--color-sidebar-item-bg-hover)",
         "sidebar-category-font": "var(--color-sidebar-category-font)",
-        "primary-orange": "var(--color-primary)",
+        "primary-orange": "var(--color-primary-orange)",
         "secondary-orange": "var(--color-secondary-orange)",
         "searchbar-white": "var(--color-searchbar-white)",
         "settings-divider": "var(--color-settings-divider)",

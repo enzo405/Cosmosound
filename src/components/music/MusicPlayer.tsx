@@ -1,10 +1,12 @@
 import { Icon } from "components/Icon";
-import { ReactElement, useState } from "react";
+import { useMusic } from "hooks/useMusic";
+import { ReactElement, HTMLAttributes } from "react";
+import MusicInfo from "./MusicInfo";
+import TimeMusicSlider from "./TimeMusicSlider";
+import SoundSlider from "./SoundSlider";
 
-export default function MusicPlayer({
-  className,
-}: React.HTMLAttributes<HTMLHRElement>): ReactElement {
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+export default function MusicPlayer({ className }: HTMLAttributes<HTMLHRElement>): ReactElement {
+  const { music, isPlaying, soundValue, time, setIsPlaying, setSoundValue, setTime } = useMusic();
 
   const handleIsPlaying = () => {
     setIsPlaying(!isPlaying);
@@ -12,21 +14,9 @@ export default function MusicPlayer({
 
   return (
     <div
-      className={`bg-music-player-bg gap-8 px-24 border-music-player-border flex justify-around items-center h-32 shadow-music-player ${className}`}>
-      <div className="flex flex-row gap-2 items-center w-[20%]">
-        <span>
-          <img
-            className="rounded-lg w-12 h-12 min-w-12 min-h-12 select-none"
-            src="./src/assets/img/temp/music/seasonIn.png"
-            alt="music thumbnail"
-          />
-        </span>
-        <span className="flex flex-col items-start w-full">
-          <p className="font-bold text-black text-lg">Seasons In</p>
-          <p className="text-music-player-artist font-semibold text-sm cursor-pointer hover:underline">
-            James
-          </p>
-        </span>
+      className={`bg-music-player-bg gap-8 pr-24 pl-8 border-music-player-border flex justify-around items-center h-32 shadow-music-player ${className}`}>
+      <div className="flex flex-row gap-2 items-center w-fit">
+        <MusicInfo music={music} />
       </div>
       <div className="flex flex-col gap-2 items-center w-full">
         <div className="flex flex-row items-center gap-3">
@@ -39,21 +29,20 @@ export default function MusicPlayer({
           <Icon iconName="right-nextsound" className="w-8 h-8" />
         </div>
         <div className="flex flex-row gap-1 items-center w-2/3">
-          <span className="text-soft-gray text-xs">1:21</span>
-          <span className="w-full h-1 flex relative items-center mx-2">
-            <span className="bg-primary-orange h-1 w-3/5 rounded-s-md" />
-            <span className="absolute left-[13.5em] w-3 h-3 rounded-full bg-primary-orange border-border-music-player-dot border-2" />
-            <span className="bg-secondary-orange h-1 w-2/5 rounded-e-md" />
-          </span>
-          <span className="text-soft-gray text-xs">4:12</span>
+          <TimeMusicSlider time={time} setTime={setTime} duration={music.duration} />
         </div>
       </div>
-      <div className="flex flex-row gap-2 items-center w-[12%]">
-        <Icon iconName="volume-high" className="w-6 h-6" />
-        <span className="w-full h-[2px] flex relative items-center mx-1">
-          <span className="bg-primary-orange h-[2px] w-3/5 rounded-s-md" />
-          <span className="bg-secondary-orange h-[2px] w-2/5 rounded-e-md" />
-        </span>
+      <div className="flex flex-row gap-1 items-center w-[12%]">
+        <Icon
+          iconName={soundValue === 0 ? "volume-muted" : "volume-high"}
+          className="w-8 h-8"
+          onClick={() =>
+            setSoundValue(() => {
+              return soundValue === 0 ? 50 : 0;
+            })
+          }
+        />
+        <SoundSlider sound={soundValue} setSound={setSoundValue} />
       </div>
     </div>
   );
