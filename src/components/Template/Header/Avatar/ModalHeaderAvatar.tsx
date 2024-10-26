@@ -31,10 +31,6 @@ export default function DropdownHeaderAvatar({ closeModal }: DropdownHeaderAvata
   }, []);
 
   useEffect(() => {
-    closeModal();
-  }, [window.location.pathname]);
-
-  useEffect(() => {
     if (checked) {
       setTheme("dark");
     } else {

@@ -14,7 +14,7 @@
             <path fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M11.88 26.56l8.693-8.693c1.027-1.027 1.027-2.707 0-3.733l-8.693-8.693"></path>
         </symbol>
         <!-- Icon Searchbar -->
-        <symbol id="icon-filter_searchbar" viewBox="0 0 35 32">
+        <symbol id="icon-filter-searchbar" viewBox="0 0 35 32">
             <path fill="none" stroke="#3C3C43" stroke-opacity="0.6" stroke-width="2.4" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="miter" d="M2.725 24.889h17.746"></path>
             <path fill="none" stroke="#3C3C43" stroke-opacity="0.6" stroke-width="2.4" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="miter" d="M15.147 7.111h17.746"></path>
             <path fill="none" stroke="#3C3C43" stroke-opacity="0.6" stroke-width="2.4" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M33.467 24.889c0 3.267-2.643 5.911-5.898 5.911s-5.898-2.644-5.898-5.911c0-3.267 2.643-5.911 5.898-5.911s5.898 2.645 5.898 5.911z"></path>
@@ -49,6 +49,9 @@
         </symbol>
         <symbol id="icon-playButton" viewBox="0 0 31 32">
             <path fill="#ff7e3a" style="fill: var(#ff7e3a)" d="M15.451 0.683c-8.411 0-15.238 6.827-15.238 15.238s6.827 15.238 15.238 15.238 15.238-6.827 15.238-15.238c0-8.411-6.827-15.238-15.238-15.238zM19.504 18.557l-3.901 2.255c-2.514 1.448-4.571 0.259-4.571-2.636v-4.51c0-2.91 2.057-4.084 4.571-2.636l3.901 2.255c2.514 1.448 2.514 3.825 0 5.272z"></path>
+        </symbol>
+        <symbol id="icon-pauseButton" viewBox="0 0 32 32">
+            <path fill="#ff7e3a" style="fill: var(#ff7e3a)" d="M31.435 16.389c0-8.577-6.953-15.529-15.529-15.529s-15.529 6.953-15.529 15.529c0 8.577 6.953 15.529 15.529 15.529s15.529-6.953 15.529-15.529zM10.082 12.507c0-1.072 0.869-1.941 1.941-1.941s1.941 0.869 1.941 1.941v7.765c0 1.072-0.869 1.941-1.941 1.941s-1.941-0.869-1.941-1.941v-7.765zM19.787 10.566c1.072 0 1.941 0.869 1.941 1.941v7.765c0 1.072-0.869 1.941-1.941 1.941s-1.941-0.869-1.941-1.941v-7.765c0-1.072 0.869-1.941 1.941-1.941z"></path>
         </symbol>
         <symbol id="icon-right-nextsound" viewBox="0 0 32 32">
             <path fill="#ff7e3a" style="fill: var(#ff7e3a)" d="M5.964 9.771v12.25c0 2.509 2.726 4.083 4.902 2.829l5.312-3.059 5.312-3.072c2.176-1.254 2.176-4.39 0-5.645l-5.312-3.072-5.312-3.059c-2.176-1.254-4.902 0.307-4.902 2.829z"></path>

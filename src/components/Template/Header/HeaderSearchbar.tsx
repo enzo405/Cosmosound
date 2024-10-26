@@ -18,7 +18,7 @@ function HeaderSearchbar(): ReactElement {
             className="w-full block p-1 ps-10 xsm:ps-10 text-lg outline-none"
             placeholder="Search"
           />
-          <Icon iconName="filter_searchbar" className="w-6 h-6 mr-2 cursor-pointer" />
+          <Icon iconName="filter-searchbar" className="w-6 h-6 mr-2 cursor-pointer" />
         </span>
       </div>
     </div>
