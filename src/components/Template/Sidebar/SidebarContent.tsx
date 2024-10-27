@@ -11,8 +11,10 @@ function SidebarContent(): ReactElement {
   };
 
   return (
-    <div className="flex flex-col items-center gap-2 h-full mt-1 px-2 xsm:items-start">
-      <span className="text-sidebar-category-font font-semibold text-2xl font-mono">Menu</span>
+    <div className="flex flex-col gap-2 h-full mt-1 px-2 xsm:items-start">
+      <span className="hidden xsm:block text-sidebar-category-font font-semibold text-lg sm:text-2xl font-mono">
+        Menu
+      </span>
       {Object.entries(routesSidebar).flatMap((objRoute, i) => {
         const IconName = objRoute[1].iconName;
         const IconNameActive = objRoute[1].iconActiveName;
@@ -29,12 +31,15 @@ function SidebarContent(): ReactElement {
             onClick={() => navigate(objRoute[1].path)}
             className={
               classes +
-              " w-full flex flex-col px-2 py-1 cursor-pointer rounded-lg justify-center xsm:justify-normal xsm:flex-row"
+              " w-full flex flex-col px-2 py-1 cursor-pointer rounded-lg justify-center sm:justify-normal sm:flex-row"
             }>
-            <span className="flex w-full justify-center xsm:justify-normal xsm:w-auto">
-              <Icon iconName={active ? IconNameActive : IconName} className="h-8 w-8 flex" />
+            <span className="flex w-full justify-center sm:justify-normal sm:w-auto">
+              <Icon
+                iconName={active ? IconNameActive : IconName}
+                className="min-h-6 h-6 min-w-6 w-6 sm:h-8 sm:w-8 flex"
+              />
             </span>
-            <a className="flex w-full justify-center xsm:justify-normal xsm:ml-2 items-center text-sm xsm:text-xl font-bold">
+            <a className="flex w-full justify-center sm:justify-normal sm:ml-2 items-center text-sm sm:text-xl font-bold">
               {objRoute[1].displayText}
             </a>
           </div>

@@ -25,15 +25,11 @@ export default function SoundSlider({ sound, setSound }: SoundSliderProps): Reac
       <style>{`
         #sound-slider {
           -webkit-appearance: none;
-          appearance: none;
-          width: 100%;
-          height: 2px;
           background: linear-gradient(
             to right,
             var(--color-primary-orange) ${sound}%,
             var(--color-secondary-orange) ${sound}%
           );
-          border-radius: 2px;
         }
 
         #sound-slider::-webkit-slider-thumb {
