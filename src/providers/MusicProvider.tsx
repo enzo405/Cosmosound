@@ -37,7 +37,7 @@ export const MusicProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const [music, setMusic] = useState<Music>(defaultMusic);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [soundValue, setSoundValue] = useState<number>(0.5);
+  const [soundValue, setSoundValue] = useState<number>(50);
   const [time, setTime] = useState<number>(0); // seconds
 
   const value = useMemo(() => {

@@ -3,7 +3,7 @@ import { type ReactElement } from "react";
 
 function HeaderSearchbar(): ReactElement {
   return (
-    <div className="w-2/3 mr-auto">
+    <div className="w-3/4 mr-1 sm:w-2/3 sm:mr-auto">
       <label htmlFor="search" className="mb-2 text-sm font-medium text-gray-900 sr-only">
         Search
       </label>
@@ -11,7 +11,7 @@ function HeaderSearchbar(): ReactElement {
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <Icon iconName="magnifyingglass" className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
         </div>
-        <span className="flex flex-row items-center justify-between bg-white w-full p-2 rounded-2xl">
+        <span className="flex flex-row items-center justify-between bg-white w-full p-1 sm:p-2 rounded-2xl">
           <input
             type="search"
             id="search"

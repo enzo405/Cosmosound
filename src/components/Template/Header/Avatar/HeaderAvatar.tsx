@@ -1,8 +1,11 @@
-import { useState, type ReactElement } from "react";
+import { HTMLAttributes, useState, type ReactElement } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import DropdownHeaderAvatar from "./ModalHeaderAvatar";
 
-function HeaderAvatar(): ReactElement {
+function HeaderAvatar({
+  className,
+  id = "avatar-button",
+}: HTMLAttributes<HTMLHRElement>): ReactElement {
   const [profileModalOpen, setProfileModalOpen] = useState(false);
 
   const handleProfileModal = () => {
@@ -10,7 +13,7 @@ function HeaderAvatar(): ReactElement {
   };
 
   return (
-    <span id="avatar-button">
+    <span id={id} className={className}>
       <span
         className="cursor-pointer flex flex-row gap-3 items-center"
         onClick={handleProfileModal}>
@@ -20,7 +23,9 @@ function HeaderAvatar(): ReactElement {
         />
         <IoIosArrowDown className="hidden md:block min-w-4 min-h-4 h-full cursor-pointer transition-transform" />
       </span>
-      {profileModalOpen && <DropdownHeaderAvatar closeModal={() => setProfileModalOpen(false)} />}
+      {profileModalOpen && (
+        <DropdownHeaderAvatar idDropdown={id} closeModal={() => setProfileModalOpen(false)} />
+      )}
     </span>
   );
 }

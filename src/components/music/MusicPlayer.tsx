@@ -69,7 +69,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
       {/* Music Player for Mobile */}
       <div
         className={`${defaultStyleParent} flex flex-col-reverse sm:hidden w-full gap-4 py-4 h-28`}>
-        <div className="flex flex-row items-center w-full p-1">
+        <div className="flex flex-row items-center w-full p-1 xsm:px-3">
           <div className="flex items-center flex-shrink-0 w-2/3">
             <MusicInfo music={music} />
           </div>

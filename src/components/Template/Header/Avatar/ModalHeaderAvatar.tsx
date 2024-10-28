@@ -9,16 +9,20 @@ import { useNavigate } from "react-router-dom";
 
 interface DropdownHeaderAvatar {
   closeModal: () => void;
+  idDropdown: string;
 }
 
-export default function DropdownHeaderAvatar({ closeModal }: DropdownHeaderAvatar): ReactElement {
+export default function DropdownHeaderAvatar({
+  closeModal,
+  idDropdown,
+}: DropdownHeaderAvatar): ReactElement {
   const { theme, setTheme } = useTheme();
   const [checked, setChecked] = useState(theme === "dark");
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickAway = (event: MouseEvent) => {
-      const avatarButton = document.getElementById("avatar-button");
+      const avatarButton = document.getElementById(idDropdown);
       const target = event.target as Node;
       const clickIsOnModal = avatarButton?.contains(target);
 
@@ -28,6 +32,10 @@ export default function DropdownHeaderAvatar({ closeModal }: DropdownHeaderAvata
     };
 
     window.addEventListener("click", handleClickAway);
+
+    return () => {
+      window.removeEventListener("click", handleClickAway);
+    };
   }, []);
 
   useEffect(() => {
