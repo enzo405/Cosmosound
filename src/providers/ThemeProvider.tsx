@@ -4,7 +4,7 @@ import React, { PropsWithChildren, useEffect, useMemo } from "react";
 import { useState } from "react";
 
 export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [theme, setTheme] = useState<Themes>("light");
+  const [theme, setTheme] = useState<Themes>((localStorage.getItem("theme") as Themes) ?? "light");
 
   const value = useMemo(() => ({ theme, setTheme }), [theme]);
 

@@ -15,7 +15,7 @@ function HeaderSearchbar(): ReactElement {
           <input
             type="search"
             id="search"
-            className="w-full block p-1 ps-10 text-lg outline-none"
+            className="w-full block p-0 sm:p-1 ps-10 sm:ps-10 text-lg outline-none"
             placeholder="Search"
           />
           <Icon
