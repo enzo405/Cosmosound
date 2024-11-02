@@ -22,7 +22,10 @@ function HeaderAvatar({
           src="/src/assets/img/header/default_avatar.png"
         />
         <span className="hidden md:block p-4 cursor-pointer rounded-xl group-hover:bg-gray-200">
-          <Icon iconName="arrow-right-activ" className="rotate-90 h-3 w-3 min-w-3 min-h-3" />
+          <Icon
+            iconName="arrow-right-activ"
+            className={`transition-transform duration-150 h-3 w-3 min-w-3 min-h-3 ${profileModalOpen ? "-rotate-90" : "rotate-90"}`}
+          />
         </span>
       </span>
       {profileModalOpen && (
