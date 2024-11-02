@@ -32,7 +32,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     <>
       {/* Music Player for Desktop */}
       <div
-        className={`${defaultStyleParent} hidden sm:flex w-full gap-4 lg:gap-8 pr-2 pl-2 lg:pr-24 lg:pl-8 h-32`}>
+        className={`${defaultStyleParent} hidden sm:flex w-full gap-4 xl:gap-8 pr-2 pl-2 lg:pr-12 xl:pr-24 xl:pl-8 h-32`}>
         <div className="flex flex-row gap-2 items-center w-fit">
           <MusicInfo music={music} />
         </div>

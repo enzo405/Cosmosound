@@ -11,7 +11,7 @@ export default function SoundSlider({ sound, setSound }: SoundSliderProps): Reac
   };
 
   return (
-    <div className="w-full flex items-center mx-2 relative">
+    <div className="w-full flex items-center mx-2 relative lg:min-w-[70px]">
       <input
         id="sound-slider"
         type="range"
