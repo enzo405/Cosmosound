@@ -1,7 +1,7 @@
 import { routesSidebar } from "config/app-config";
 import { type ReactElement } from "react";
 import SidebarItem from "./SidebarItem";
-import HeaderAvatar from "../Header/Avatar/HeaderAvatar";
+import HeaderAvatar from "components/Template/Avatar/HeaderAvatar";
 
 interface SidebarContentProps {
   showHeaderAvatar: boolean;
