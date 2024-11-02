@@ -15,12 +15,12 @@ function HeaderSearchbar(): ReactElement {
           <input
             type="search"
             id="search"
-            className="w-full block p-0 sm:p-1 ps-10 sm:ps-10 text-lg outline-none"
+            className="w-full block p-0 xsm:p-1 ps-10 xsm:ps-10 text-base sm:text-lg outline-none"
             placeholder="Search"
           />
           <Icon
             iconName="filter-searchbar"
-            className="w-5 h-5 min-w-5 min-h-5 sm:w-6 sm:h-6 mr-2 cursor-pointer"
+            className="w-4 h-4 min-w-4 min-h-4 sm:w-6 sm:h-6 mr-2 cursor-pointer"
           />
         </span>
       </div>

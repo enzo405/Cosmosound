@@ -51,7 +51,7 @@ export default function TimeMusicSlider({
           width: 10px;
           height: 10px;
           background: var(--color-primary-orange);
-          border: 2px solid var(--color-border-music-player-dot);
+          border: 2px solid var(--color-brown-music-player-dot);
           border-radius: 50%;
           cursor: grab;
         }
@@ -60,7 +60,7 @@ export default function TimeMusicSlider({
           width: 10px;
           height: 10px;
           background: var(--color-primary-orange);
-          border: 2px solid var(--color-border-music-player-dot);
+          border: 2px solid var(--color-brown-music-player-dot);
           border-radius: 50%;
           cursor: grab;
         }`}</style>

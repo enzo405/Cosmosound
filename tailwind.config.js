@@ -30,7 +30,7 @@ export default {
         "settings-divider": "var(--color-settings-divider)",
         "settings-text-grey": "var(--color-settings-text-grey)",
         "music-player-artist": "var(--color-shadow-music-player)",
-        "border-music-player-dot": "var(--color-border-music-player-dot)",
+        "brown-music-player-dot": "var(--color-brown-music-player-dot)",
       },
       boxShadow: {
         "music-player": "0 19px 100px 0px var(--color-shadow-music-player)",

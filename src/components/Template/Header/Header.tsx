@@ -11,7 +11,7 @@ function Header(): ReactElement {
       <HeaderAvatar className="sm:flex hidden" id="avatar-button-1" />
       <img
         className="block sm:hidden w-8 h-8 mr-2 "
-        src="./src/assets/img/cosmosound.svg"
+        src="./src/assets/img/cosmosound.png"
         alt="CosmoSound"
       />
     </div>

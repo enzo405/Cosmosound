@@ -10,7 +10,7 @@ interface IconProps {
 
 export const Icon: React.FC<IconProps> = ({ className = "", onClick = () => {}, iconName }) => {
   return (
-    <svg className={className} onClick={onClick}>
+    <svg className={`${className} select-none`} onClick={onClick}>
       <use xlinkHref={`${sprite}#icon-${iconName}`}></use>
     </svg>
   );

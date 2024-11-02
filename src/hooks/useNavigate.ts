@@ -7,7 +7,7 @@ export const useAppNavigate = () => {
   const [isManual, setIsManual] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const MAX_LIMIT_HISTORY: number = 100;
+  const MAX_LIMIT_HISTORY: number = 50;
 
   useEffect(() => {
     let history: string[] = localStorage.getItem("routesHistory")?.split(",") ?? [];

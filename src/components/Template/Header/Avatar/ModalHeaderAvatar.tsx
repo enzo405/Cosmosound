@@ -47,12 +47,12 @@ export default function DropdownHeaderAvatar({
   }, [checked]);
 
   return (
-    <div className="absolute top-0 right-0 z-10 transform-gpu translate-x-[-10px] translate-y-[80px]">
-      <div className="bg-white block py-1 text-gray-900 rounded-xl w-44 xsm:w-72 border border-settings-divider">
+    <div className="absolute top-0 right-0 z-10 transform-gpu translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px]">
+      <div className="bg-white block py-1 text-gray-900 rounded-xl w-44 xsm:w-60 sm:w-72 border border-settings-divider">
         {/* Profile Section */}
         <SettingsOptions>
           <img
-            className="w-[2.6rem] h-[2.6rem] rounded-xl ring-gray-300"
+            className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300"
             src="/src/assets/img/header/default_avatar.png"
           />
           <span className="ml-2">
@@ -63,31 +63,31 @@ export default function DropdownHeaderAvatar({
         <Divider />
         {/* Settings Section */}
         <SettingsOptions
-          className="cursor-pointer"
+          className="cursor-pointer gap-2"
           onClick={() => navigate(routesConfig.account.path)}>
           <Icon iconName="account" className="mr-1 w-5 h-5" />
           Account
         </SettingsOptions>
         <SettingsOptions
-          className="cursor-pointer"
+          className="cursor-pointer gap-2"
           onClick={() => navigate(routesConfig.artistPanel.path)}>
           <Icon iconName="artistPanel" className="mr-1 w-5 h-5" />
           Artist Panel
         </SettingsOptions>
         <SettingsOptions
-          className="cursor-pointer"
+          className="cursor-pointer gap-2"
           onClick={() => navigate(routesConfig.legal.path)}>
           <Icon iconName="legal" className="mr-1 w-5 h-5" />
           Legal
         </SettingsOptions>
         <SettingsOptions
-          className="cursor-pointer"
+          className="cursor-pointer gap-2"
           onClick={() => navigate(routesConfig.aboutUs.path)}>
           <Icon iconName="aboutus" className="mr-1 w-5 h-5" />
           About us
         </SettingsOptions>
         <Divider />
-        <SettingsOptions>
+        <SettingsOptions className="gap-2">
           <span
             className="flex flex-row gap-2 justify-start items-center cursor-pointer w-full"
             onClick={() => setChecked(!checked)}>
@@ -98,7 +98,7 @@ export default function DropdownHeaderAvatar({
         </SettingsOptions>
         <Divider />
         {/* Footer Section */}
-        <SettingsOptions className="cursor-pointer">
+        <SettingsOptions className="cursor-pointer gap-2">
           <Icon iconName="logout" className="mr-1 w-5 h-5" />
           Logout
         </SettingsOptions>
