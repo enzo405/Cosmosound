@@ -25,6 +25,12 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     return soundValue > 0 ? (soundValue > 50 ? "volume-high" : "volume-low") : "volume-muted";
   };
 
+  const onWheel = (event: React.WheelEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const step = event.deltaY > 0 ? -10 : 10;
+    setSoundValue(Math.max(0, Math.min(100, soundValue + step)));
+  };
+
   const defaultStyleParent =
     "bg-music-player-bg border-music-player-border justify-around items-center shadow-music-player";
 
@@ -58,7 +64,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
             <TimeMusicSlider time={time} setTime={setTime} duration={music.duration} />
           </div>
         </div>
-        <div className="flex flex-row gap-1 items-center w-[12%]">
+        <div className="flex flex-row gap-1 items-center w-[12%]" onWheel={onWheel}>
           <Icon
             iconName={getSoundIcon()}
             className="min-h-5 min-w-5 w-5 h-5 fill-primary-orange cursor-pointer"

@@ -10,12 +10,6 @@ export default function SoundSlider({ sound, setSound }: SoundSliderProps): Reac
     setSound(parseInt(event.target.value));
   };
 
-  const onWheel = (event: React.WheelEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    const step = event.deltaY > 0 ? -10 : 10;
-    setSound(Math.max(0, Math.min(100, sound + step)));
-  };
-
   return (
     <div className="w-full flex items-center mx-2 relative lg:min-w-[70px]">
       <input
@@ -24,7 +18,6 @@ export default function SoundSlider({ sound, setSound }: SoundSliderProps): Reac
         min="0"
         max="100"
         value={sound}
-        onWheel={onWheel}
         onChange={handleSoundChange}
         className="cursor-pointer w-full h-1 appearance-none rounded-full"
       />
