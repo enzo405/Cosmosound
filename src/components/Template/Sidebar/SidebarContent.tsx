@@ -9,8 +9,8 @@ interface SidebarContentProps {
 
 function SidebarContent({ showHeaderAvatar }: SidebarContentProps): ReactElement {
   return (
-    <div className="flex flex-row justify-around sm:justify-start sm:flex-col sm:gap-2 w-full h-full mt-1 px-2 xsm:items-start">
-      <span className="hidden sm:block text-sidebar-category-font font-medium sm:font-semibold text-lg sm:text-2xl font-mono">
+    <div className="flex flex-row justify-around sm:justify-start sm:flex-col sm:gap-2 w-full h-full xsm:items-start">
+      <span className="hidden sm:block sm:px-4 text-sidebar-category-font font-medium sm:font-semibold text-lg sm:text-2xl font-mono">
         Menu
       </span>
       {Object.entries(routesSidebar).flatMap((objRoute, i) => (

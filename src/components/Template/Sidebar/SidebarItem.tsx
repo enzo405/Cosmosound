@@ -25,14 +25,14 @@ export default function SidebarItem({
   let active = isActive(path);
   let classes = "";
   if (active) {
-    classes += "bg-sidebar-item-bg text-primary-orange ";
+    classes += "bg-sidebar-item-bg text-primary-orange";
   } else {
-    classes += "hover:bg-sidebar-item-bg-hover text-dark-custom ";
+    classes += "hover:bg-sidebar-item-bg-hover text-dark-custom";
   }
   return (
     <div
       onClick={() => navigate(path)}
-      className={`${classes} w-auto sm:w-full flex flex-col px-2 py-1 cursor-pointer rounded-lg justify-center sm:justify-normal sm:flex-row`}>
+      className={`${classes} w-auto sm:w-11/12 flex flex-col px-2 xsm:px-4 py-1 cursor-pointer rounded-t-2xl sm:rounded-e-full justify-center sm:justify-normal sm:flex-row`}>
       <span className="flex justify-center sm:justify-normal sm:w-auto">
         <Icon
           iconName={active ? iconNameActive : iconName}

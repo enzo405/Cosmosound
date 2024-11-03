@@ -9,7 +9,7 @@ interface SidebarProps {
 
 function Sidebar({ className, showHeaderAvatar = false }: SidebarProps): ReactElement {
   return (
-    <div className={`${className} bg-sidebar-bg border-soft-beige border-r-[1px]`}>
+    <div className={`${className} bg-sidebar-bg sm:border-soft-beige sm:border-r-[1px]`}>
       <TopSidebar />
       <SidebarContent showHeaderAvatar={showHeaderAvatar} />
     </div>
