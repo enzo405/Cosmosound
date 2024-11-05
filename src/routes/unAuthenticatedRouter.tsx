@@ -1,7 +1,7 @@
 import { routesConfig } from "config/app-config";
 import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "pages/errors/ErrorPage";
-import UnauthenticatedRoot from "components/Template/UnauthenticatedRoot";
+import UnauthenticatedRoot from "components/template/UnauthenticatedRoot";
 import RegisterPage from "pages/Register/RegisterPage";
 import LoginPage from "pages/Login/LoginPage";
 import AboutUsPage from "pages/AboutUs/AboutUsPage";

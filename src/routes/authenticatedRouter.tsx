@@ -1,4 +1,4 @@
-import Root from "components/Template/Root";
+import Root from "components/template/Root";
 import { routesConfig } from "config/app-config";
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "pages/Home/HomePage";
