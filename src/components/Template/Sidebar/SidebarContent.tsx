@@ -23,7 +23,7 @@ function SidebarContent({ showHeaderAvatar }: SidebarContentProps): ReactElement
     navigate(path);
   };
 
-  const spanIndicatorClasses = "absolute bg-sidebar-item-bg transition-all duration-200 z-0";
+  const spanIndicatorClasses = "absolute transition-all duration-200 z-0";
 
   return (
     <div className="flex flex-row justify-start sm:flex-col gap-2 w-full h-full">
@@ -43,13 +43,14 @@ function SidebarContent({ showHeaderAvatar }: SidebarContentProps): ReactElement
         ))}
         {/* Desktop Sidebar item background indicator */}
         <span
-          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "hidden sm:block" : "hidden"} w-5/6 left-0 h-10 rounded-e-full`}
+          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "hidden sm:block" : "hidden"} bg-soft-beige w-5/6 left-0 h-10 rounded-e-full`}
           style={{ top: `${activeIndex * 48}px` }}
         />
         <span
-          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "block sm:hidden" : "hidden"} bottom-0 h-[3.25rem] w-1/3 rounded-t-lg`}
-          style={{ left: `${activeIndex * (100 / 3)}%` }}
-        />
+          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "flex sm:hidden" : "hidden"} bottom-0 h-[3.25rem] w-1/3 justify-center`}
+          style={{ left: `${activeIndex * (100 / 3)}%` }}>
+          <span className="bg-soft-beige rounded-t-lg w-1/2 min-w-14" />
+        </span>
       </span>
       {showHeaderAvatar && <HeaderAvatar className="sm:hidden flex mr-3" id="avatar-button-2" />}
     </div>
