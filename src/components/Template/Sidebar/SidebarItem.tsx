@@ -1,41 +1,31 @@
 import { Icon } from "components/Icon";
 import { IconName } from "constants/iconName";
 import { ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface SidebarItemProps {
   iconName: IconName;
   iconNameActive: IconName;
   text: string;
-  path: string;
+  onClick: () => void;
+  isActive: boolean;
 }
 
 export default function SidebarItem({
   iconNameActive,
   iconName,
   text,
-  path,
+  onClick,
+  isActive,
 }: SidebarItemProps): ReactElement {
-  const navigate = useNavigate();
+  let classes = isActive ? "text-primary-orange" : "text-dark-custom";
 
-  const isActive = (path: string) => {
-    return window.location.pathname === path;
-  };
-
-  let active = isActive(path);
-  let classes = "";
-  if (active) {
-    classes += "bg-sidebar-item-bg text-primary-orange";
-  } else {
-    classes += "hover:bg-sidebar-item-bg-hover text-dark-custom";
-  }
   return (
     <div
-      onClick={() => navigate(path)}
-      className={`${classes} w-auto sm:w-11/12 flex flex-col px-2 xsm:px-4 py-1 cursor-pointer rounded-t-2xl sm:rounded-e-full justify-center sm:justify-normal sm:flex-row`}>
+      onClick={onClick}
+      className={`${classes} z-10 w-full flex flex-col px-2 xsm:px-4 py-1 cursor-pointer justify-center sm:justify-normal sm:flex-row`}>
       <span className="flex justify-center sm:justify-normal sm:w-auto">
         <Icon
-          iconName={active ? iconNameActive : iconName}
+          iconName={isActive ? iconNameActive : iconName}
           className="min-h-6 h-6 min-w-6 w-6 sm:h-8 sm:w-8 flex"
         />
       </span>
