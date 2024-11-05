@@ -13,17 +13,24 @@ function SidebarContent({ showHeaderAvatar }: SidebarContentProps): ReactElement
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   useEffect(() => {
-    let i = Object.entries(routesSidebar).findIndex(
-      ([, route]) => route.path === window.location.pathname,
-    );
-    setActiveIndex(i);
+    updateSidebar();
   }, [window.location.pathname]);
 
-  const handleItemClick = (path: string) => {
+  const updateSidebar = (index?: number) => {
+    if (index === undefined) {
+      index = Object.entries(routesSidebar).findIndex(
+        ([, route]) => route.path === window.location.pathname,
+      );
+    }
+    setActiveIndex(index);
+  };
+
+  const handleSidebarClick = (index: number, path: string) => {
+    updateSidebar(index);
     navigate(path);
   };
 
-  const spanIndicatorClasses = "absolute transition-all duration-200 z-0";
+  const spanIndicatorClasses = "absolute transition-all z-0 duration-150";
 
   return (
     <div className="flex flex-row justify-start sm:flex-col gap-2 w-full h-full">
@@ -38,18 +45,19 @@ function SidebarContent({ showHeaderAvatar }: SidebarContentProps): ReactElement
             iconNameActive={route.iconActiveName}
             text={route.displayText}
             isActive={index === activeIndex}
-            onClick={() => handleItemClick(route.path)}
+            onClick={() => handleSidebarClick(index, route.path)}
           />
         ))}
         {/* Desktop Sidebar item background indicator */}
         <span
-          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "hidden sm:block" : "hidden"} bg-soft-beige w-5/6 left-0 h-10 rounded-e-full`}
+          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "hidden sm:block w-5/6" : "block w-0"} bg-soft-beige left-0 h-10 rounded-e-full`}
           style={{ top: `${activeIndex * 48}px` }}
         />
+        {/* Mobile Sidebar item background indicator */}
         <span
-          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "flex sm:hidden" : "hidden"} bottom-0 h-[3.25rem] w-1/3 justify-center`}
+          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "flex sm:hidden w-1/3" : "flex w-0"} bottom-0 h-[3.25rem] justify-center`}
           style={{ left: `${activeIndex * (100 / 3)}%` }}>
-          <span className="bg-soft-beige rounded-t-lg w-1/2 min-w-14" />
+          <span className="bg-soft-beige rounded-t-lg w-4/5 min-w-14" />
         </span>
       </span>
       {showHeaderAvatar && <HeaderAvatar className="sm:hidden flex mr-3" id="avatar-button-2" />}

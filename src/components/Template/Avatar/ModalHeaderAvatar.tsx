@@ -48,7 +48,7 @@ export default function DropdownHeaderAvatar({
 
   return (
     <div className="absolute top-0 right-0 z-10 transform-gpu translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px]">
-      <div className="bg-white block py-1 text-gray-900 rounded-xl w-44 xsm:w-60 sm:w-72 border border-settings-divider">
+      <div className="bg-white block py-1 text-gray-900 rounded-xl w-44 xsm:w-52 sm:w-60 border border-settings-divider">
         {/* Profile Section */}
         <SettingsOptions>
           <img
