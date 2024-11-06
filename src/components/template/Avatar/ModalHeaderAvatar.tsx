@@ -54,6 +54,7 @@ export default function DropdownHeaderAvatar({
           <img
             className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300"
             src="/src/assets/img/header/default_avatar.png"
+            alt="profile picture"
           />
           <span className="ml-2">
             <p>Belo Smile</p>

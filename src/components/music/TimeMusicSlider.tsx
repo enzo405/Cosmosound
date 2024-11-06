@@ -24,6 +24,9 @@ export default function TimeMusicSlider({
   return (
     <div className="w-full flex items-center mx-2 relative">
       <span className="mr-2 text-soft-gray text-sm font-medium">{stringifyTime(time)}</span>
+      <label htmlFor="music-slider" className="sr-only">
+        Music timestamp input
+      </label>
       <input
         id="music-slider"
         type="range"
@@ -32,6 +35,11 @@ export default function TimeMusicSlider({
         value={time}
         onChange={handleTimeChange}
         className="cursor-pointer w-full h-1 rounded-full appearance-none [&::-moz-range-thumb]:appearance-none [&::-webkit-slider-thumb]:appearance-none"
+        aria-label="Music timestamp input"
+        aria-valuemin={0}
+        aria-valuemax={duration}
+        aria-valuenow={time}
+        aria-valuetext={stringifyTime(time)}
       />
       <span className="ml-2 text-soft-gray text-sm font-medium">{stringifyTime(duration)}</span>
 

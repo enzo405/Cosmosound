@@ -12,6 +12,9 @@ export default function SoundSlider({ sound, setSound }: SoundSliderProps): Reac
 
   return (
     <div className="w-full flex items-center mx-2 relative lg:min-w-[70px]">
+      <label htmlFor="sound-slider" className="sr-only">
+        Sound slider
+      </label>
       <input
         id="sound-slider"
         type="range"
@@ -20,6 +23,11 @@ export default function SoundSlider({ sound, setSound }: SoundSliderProps): Reac
         value={sound}
         onChange={handleSoundChange}
         className="cursor-pointer w-full h-1 appearance-none rounded-full"
+        aria-label="Sound slider"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={sound}
+        aria-valuetext={`${sound}% volume`}
       />
 
       <style>{`
