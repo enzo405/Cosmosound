@@ -3,6 +3,7 @@ import { type ReactElement, useEffect, useState } from "react";
 import SidebarItem from "./SidebarItem";
 import HeaderAvatar from "components/template/Avatar/HeaderAvatar";
 import { useNavigate } from "react-router-dom";
+import { useScreenSize } from "hooks/useScreenSize";
 
 interface SidebarContentProps {
   showHeaderAvatar: boolean;
@@ -10,6 +11,7 @@ interface SidebarContentProps {
 
 function SidebarContent({ showHeaderAvatar }: SidebarContentProps): ReactElement {
   const navigate = useNavigate();
+  const isMobile = useScreenSize();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -48,17 +50,18 @@ function SidebarContent({ showHeaderAvatar }: SidebarContentProps): ReactElement
             onClick={() => handleSidebarClick(index, route.path)}
           />
         ))}
-        {/* Desktop Sidebar item background indicator */}
-        <span
-          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "hidden sm:block w-5/6" : "block w-0"} bg-soft-beige left-0 h-10 rounded-e-full`}
-          style={{ top: `${activeIndex * 48}px` }}
-        />
-        {/* Mobile Sidebar item background indicator */}
-        <span
-          className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "flex sm:hidden w-1/3" : "flex w-0"} bottom-0 h-[3.25rem] justify-center`}
-          style={{ left: `${activeIndex * (100 / 3)}%` }}>
-          <span className="bg-soft-beige rounded-t-lg w-4/5 min-w-14" />
-        </span>
+        {isMobile ? (
+          <span
+            className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "flex sm:hidden w-1/3" : "flex w-0"} bottom-0 h-[3.25rem] justify-center`}
+            style={{ left: `${activeIndex * (100 / 3)}%` }}>
+            <span className="bg-soft-beige rounded-t-lg w-4/5 min-w-14" />
+          </span>
+        ) : (
+          <span
+            className={`${spanIndicatorClasses} ${activeIndex >= 0 ? "hidden sm:block w-5/6" : "block w-0"} bg-soft-beige left-0 h-10 rounded-e-full`}
+            style={{ top: `${activeIndex * 48}px` }}
+          />
+        )}
       </span>
       {showHeaderAvatar && <HeaderAvatar className="sm:hidden flex mr-3" id="avatar-button-2" />}
     </div>
