@@ -4,7 +4,7 @@ export interface User {
   id: number;
   name: string; // name of the user
   email: string; // email of the user
-  date_creation: Date; // Date in UTC of the creation of the account
+  date_creation: string; // Date in UTC of the creation of the account
   picture_profile: string;
   followers: number;
   followings: Array<Artist>;
