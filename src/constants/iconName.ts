@@ -1,8 +1,6 @@
 export type IconName =
   | "arrow-left"
-  | "arrow-left-activ"
   | "arrow-right"
-  | "arrow-right-activ"
   | "filter-searchbar"
   | "magnifyingglass"
   | "compass-black"

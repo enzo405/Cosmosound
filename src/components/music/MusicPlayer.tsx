@@ -1,4 +1,4 @@
-import { Icon } from "components/Icon";
+import { Icon } from "components/icons/Icon";
 import { useMusic } from "hooks/useMusic";
 import { ReactElement, HTMLAttributes } from "react";
 import MusicInfo from "./MusicInfo";
@@ -12,8 +12,8 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
   const isMobile = useScreenSize();
 
   const handleIsPlaying = () => setIsPlaying(!isPlaying);
-  const handleNextMusic = () => {}; // play next music
-  const handlePreviousMusic = () => {}; // play previous music
+  const handleNextMusic = () => {};
+  const handlePreviousMusic = () => {};
 
   const getSoundIcon = (): IconName => {
     return soundValue > 0 ? (soundValue > 50 ? "volume-high" : "volume-low") : "volume-muted";

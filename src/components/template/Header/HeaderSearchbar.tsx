@@ -1,4 +1,4 @@
-import { Icon } from "components/Icon";
+import { Icon } from "components/icons/Icon";
 import { useRef, useState, type ReactElement } from "react";
 import { IoIosClose } from "react-icons/io";
 

@@ -1,6 +1,6 @@
 import { HTMLAttributes, useState, type ReactElement } from "react";
 import DropdownHeaderAvatar from "./ModalHeaderAvatar";
-import { Icon } from "components/Icon";
+import { Icon } from "components/icons/Icon";
 
 function HeaderAvatar({
   className,
@@ -24,8 +24,8 @@ function HeaderAvatar({
         />
         <span className="hidden md:block p-4 cursor-pointer rounded-xl group-hover:bg-gray-200">
           <Icon
-            iconName="arrow-right-activ"
-            className={`transition-transform duration-150 h-3 w-3 min-w-3 min-h-3 ${profileModalOpen ? "-rotate-90" : "rotate-90"}`}
+            iconName="arrow-right"
+            className={`transition-transform duration-150 stroke-black h-3 w-3 min-w-3 min-h-3 ${profileModalOpen ? "-rotate-90" : "rotate-90"}`}
           />
         </span>
       </span>

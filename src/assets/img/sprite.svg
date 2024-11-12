@@ -2,16 +2,10 @@
     <defs>
         <!-- Icon Navigation -->
         <symbol id="icon-arrow-left" viewBox="0 0 32 32">
-            <path fill="none" stroke="#99938f" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M20 26.56l-8.693-8.693c-1.027-1.027-1.027-2.707 0-3.733l8.693-8.693"></path>
+            <path fill="none" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M20 26.56l-8.693-8.693c-1.027-1.027-1.027-2.707 0-3.733l8.693-8.693"></path>
         </symbol>
         <symbol id="icon-arrow-right" viewBox="0 0 32 32">
-            <path fill="none" stroke="#99938f" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M11.88 26.56l8.693-8.693c1.027-1.027 1.027-2.707 0-3.733l-8.693-8.693"></path>
-        </symbol>
-        <symbol id="icon-arrow-left-activ" viewBox="0 0 32 32">
-            <path fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M20 26.56l-8.693-8.693c-1.027-1.027-1.027-2.707 0-3.733l8.693-8.693"></path>
-        </symbol>
-        <symbol id="icon-arrow-right-activ" viewBox="0 0 32 32">
-            <path fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M11.88 26.56l8.693-8.693c1.027-1.027 1.027-2.707 0-3.733l-8.693-8.693"></path>
+            <path fill="none" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M11.88 26.56l8.693-8.693c1.027-1.027 1.027-2.707 0-3.733l-8.693-8.693"></path>
         </symbol>
         <!-- Icon Searchbar -->
         <symbol id="icon-filter-searchbar" viewBox="0 0 35 32">

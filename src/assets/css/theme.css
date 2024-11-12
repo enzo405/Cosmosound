@@ -2,7 +2,7 @@
 
 .light {
     --color-music-player-border: rgba(255, 255, 255, 0.1);
-    --color-soft-beige: rgba(255, 215, 194, 0.69);
+    --color-soft-beige: rgba(255, 229, 215, 0.69);
     --color-body-bg: rgba(243, 244, 248, 1);
     --color-sidebar-bg: rgba(249, 249, 249, 1);
     --color-sidebar-item-bg: rgba(255, 195, 179, 255);
@@ -17,15 +17,15 @@
     --color-secondary-orange: rgba(255, 236, 225, 1);
     --color-soft-gray: rgb(116, 110, 107);
     --color-dark: rgba(37, 39, 43, 1);
+    --color-box-bg: rgba(255, 255, 255, 0.7);
+    --color-grey-inactiv: rgba(153, 147, 143, 1);
     --color-2: rgba(255, 255, 255, 1);
     --color-4: rgba(10, 5, 2, 1);
     --color-6: rgba(0, 0, 0, 1);
-    --color-8: rgba(153, 147, 143, 1);
     --color-9: rgba(0, 0, 0, 0.44);
     --color-10: rgba(173, 173, 173, 1);
     --color-14: rgba(102, 102, 102, 1);
     --color-15: rgba(255, 126, 58, 0.25);
-    --color-16: rgba(255, 255, 255, 0.7);
     --color-18: rgba(255, 112, 37, 1);
     --color-22: rgba(192, 192, 192, 1);
     --color-25: rgba(255, 0, 0, 1);

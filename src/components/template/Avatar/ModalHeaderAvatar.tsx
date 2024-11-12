@@ -2,7 +2,7 @@ import Divider from "components/Divider";
 import { routesConfig } from "config/app-config";
 import { useEffect, useState, type ReactElement } from "react";
 import DarkModeSwitch from "./DarkModeSwitch";
-import { Icon } from "components/Icon";
+import { Icon } from "components/icons/Icon";
 import SettingsOptions from "components/SettingsOptions";
 import { useTheme } from "hooks/useTheme";
 import { useNavigate } from "react-router-dom";
