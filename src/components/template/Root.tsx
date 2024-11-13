@@ -1,60 +1,70 @@
-import { MouseEvent, useState, type ReactElement } from "react";
+import { MouseEvent, useEffect, useState, type ReactElement } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header/Header";
 import Sidebar from "./Sidebar/Sidebar";
 import MusicPlayer from "components/music/MusicPlayer";
 import { useScreenSize } from "hooks/useScreenSize";
 
+const DEFAULT_SIDEBAR_WIDTH = 224;
+const MIN_SIDEBAR_WIDTH = 180;
+const MAX_SIDEBAR_WIDTH = 260;
+const SMALL_SIDEBAR_WIDTH = 65;
+
 function Root(): ReactElement {
   const [drag, setDrag] = useState({ active: false, x: 0 });
-  const [sidebarWidth, setSidebarWidth] = useState(224);
+  const [sidebarWidth, setSidebarWidth] = useState<number>(DEFAULT_SIDEBAR_WIDTH);
 
   const isMobile = useScreenSize();
-  const smallSizeSidebar = 65;
 
-  const resizeFrame = (e: MouseEvent) => {
-    const { active, x } = drag;
-    if (active) {
-      const xDiff = Math.abs(x - e.clientX);
+  useEffect(() => {
+    const savedWidth = localStorage.getItem("sidebarWidth");
+    setSidebarWidth(savedWidth ? Number(savedWidth) : DEFAULT_SIDEBAR_WIDTH);
+  }, []);
 
-      const newW = x > e.clientX ? sidebarWidth - xDiff : sidebarWidth + xDiff;
+  const resizeSidebar = (e: MouseEvent) => {
+    if (!drag.active) return;
 
-      if (180 < newW && newW < 300) {
-        setDrag({ ...drag, x: e.clientX });
-        setSidebarWidth(newW);
-      } else if (newW <= smallSizeSidebar) {
-        setDrag({ ...drag, x: e.clientX });
-        setSidebarWidth(65);
-      }
+    const xDiff = Math.abs(drag.x - e.clientX);
+
+    const newW = drag.x > e.clientX ? sidebarWidth - xDiff : sidebarWidth + xDiff;
+
+    if (MIN_SIDEBAR_WIDTH < newW && newW < MAX_SIDEBAR_WIDTH) {
+      setDrag({ ...drag, x: e.clientX });
+      setSidebarWidth(newW);
+    } else if (newW <= SMALL_SIDEBAR_WIDTH) {
+      setDrag({ ...drag, x: e.clientX });
+      setSidebarWidth(SMALL_SIDEBAR_WIDTH);
     }
   };
 
-  const startResize = (e: { clientX: any }) => {
-    setDrag({
-      active: true,
-      x: e.clientX,
-    });
+  const startResizing = (e: MouseEvent) => {
+    setDrag({ active: true, x: e.clientX });
   };
 
-  const stopResize = () => {
-    setDrag({ ...drag, active: false });
+  const stopResizing = () => {
+    if (drag.active) {
+      setDrag({ ...drag, active: false });
+      localStorage.setItem("sidebarWidth", sidebarWidth.toString());
+    }
   };
 
   return (
     <div
       className="select-none flex flex-col h-screen w-screen"
-      onMouseMove={resizeFrame}
-      onMouseUp={stopResize}>
+      onMouseMove={resizeSidebar}
+      onMouseUp={stopResizing}>
       <div className="font-bs h-full w-auto flex flex-row bg-body-bg">
         {!isMobile && (
           <div className="h-full flex flex-row" style={{ width: `${sidebarWidth}px` }}>
             <Sidebar
               className="hidden sm:flex flex-col gap-10 w-full h-full"
-              isSidebarSmall={sidebarWidth == smallSizeSidebar}
+              isSidebarSmall={sidebarWidth === SMALL_SIDEBAR_WIDTH}
             />
             <div
-              onMouseDown={startResize}
-              className={`${drag.active ? "border-2" : ""} w-[3px] z-10 hover:cursor-col-resize border-red-400 border-1 h-full`}
+              onMouseDown={startResizing}
+              className={`${
+                drag.active ? "border-2" : ""
+              } w-[3px] z-50 hover:cursor-col-resize border-red-400 border-1 h-full`}
             />
           </div>
         )}
