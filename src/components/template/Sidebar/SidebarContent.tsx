@@ -7,9 +7,10 @@ import { useScreenSize } from "hooks/useScreenSize";
 
 interface SidebarContentProps {
   showHeaderAvatar: boolean;
+  isSidebarSmall: boolean;
 }
 
-function SidebarContent({ showHeaderAvatar }: SidebarContentProps): ReactElement {
+function SidebarContent({ showHeaderAvatar, isSidebarSmall }: SidebarContentProps): ReactElement {
   const navigate = useNavigate();
   const isMobile = useScreenSize();
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -36,13 +37,16 @@ function SidebarContent({ showHeaderAvatar }: SidebarContentProps): ReactElement
 
   return (
     <div className="flex flex-row justify-start sm:flex-col gap-2 w-full h-full">
-      <span className="z-10 hidden sm:block sm:px-4 text-sidebar-category-font font-medium sm:font-semibold text-lg sm:text-2xl font-mono">
-        Menu
-      </span>
+      {!isSidebarSmall && (
+        <span className="z-10 hidden sm:block sm:px-4 text-sidebar-category-font font-medium sm:font-semibold text-lg sm:text-2xl font-mono">
+          Menu
+        </span>
+      )}
       <span className="relative flex flex-row justify-around sm:justify-start sm:flex-col sm:gap-2 w-full h-full xsm:items-start">
         {Object.entries(routesSidebar).map(([key, route], index) => (
           <SidebarItem
             key={key}
+            isSidebarSmall={isSidebarSmall}
             iconName={route.iconName}
             iconNameActive={route.iconActiveName}
             text={route.displayText}

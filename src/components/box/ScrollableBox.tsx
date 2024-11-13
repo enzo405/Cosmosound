@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import ArrowLeft from "components/icons/ArrowLeft";
 import ArrowRight from "components/icons/ArrowRight";
+import { titleStyle } from "./styles";
 
 interface ScrollableBoxProps {
   title: string;
@@ -39,25 +40,23 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
   return (
     <div className="bg-box-bg rounded-3xl h-min w-full flex flex-col pl-4">
       <div className="w-full flex py-4">
-        <span className="mr-auto text-lg font-bs font-light">{title}</span>
-        <span className="flex flex-row gap-4 mr-2">
-          <span
-            onClick={scrollLeft}
-            className={`${canScrollLeft ? "cursor-pointer hover:bg-gray-200" : ""}`}>
-            <ArrowLeft isActiv={canScrollLeft} />
-          </span>
-          <span
-            onClick={scrollRight}
-            className={`${canScrollRight ? "cursor-pointer hover:bg-gray-200" : ""}`}>
-            <ArrowRight isActiv={canScrollRight} />
-          </span>
-        </span>
+        <span className={titleStyle}>{title}</span>
       </div>
       <div
         onScroll={updateScrollButtons}
         ref={scrollContainerRef}
-        className="flex flex-nowrap overflow-x-scroll w-full scroll-smooth">
+        className="relative flex flex-nowrap overflow-x-scroll w-full scroll-smooth items-center">
+        <span
+          onClick={scrollLeft}
+          className={`sticky left-0 flex items-center h-1/2 p-3 rounded-full ${canScrollLeft ? "cursor-pointer bg-gray-200" : ""}`}>
+          <ArrowLeft isActiv={canScrollLeft} />
+        </span>
         {children}
+        <span
+          onClick={scrollRight}
+          className={`sticky right-0 flex items-center h-1/2 p-3 rounded-full ${canScrollRight ? "cursor-pointer bg-gray-200" : ""}`}>
+          <ArrowRight isActiv={canScrollRight} />
+        </span>
       </div>
     </div>
   );

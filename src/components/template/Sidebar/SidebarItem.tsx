@@ -8,6 +8,7 @@ interface SidebarItemProps {
   text: string;
   onClick: () => void;
   isActive: boolean;
+  isSidebarSmall: boolean;
 }
 
 export default function SidebarItem({
@@ -16,6 +17,7 @@ export default function SidebarItem({
   text,
   onClick,
   isActive,
+  isSidebarSmall,
 }: SidebarItemProps): ReactElement {
   let classes = isActive ? "text-primary-orange" : "text-dark-custom";
 
@@ -29,9 +31,11 @@ export default function SidebarItem({
           className="min-h-6 h-6 min-w-6 w-6 sm:h-8 sm:w-8 flex"
         />
       </span>
-      <a className="flex w-full justify-center items-center text-sm font-bold sm:text-xl sm:justify-normal sm:ml-2">
-        {text}
-      </a>
+      {!isSidebarSmall && (
+        <a className="flex w-full justify-center items-center text-sm font-bold sm:text-xl sm:justify-normal sm:ml-2">
+          {text}
+        </a>
+      )}
     </div>
   );
 }

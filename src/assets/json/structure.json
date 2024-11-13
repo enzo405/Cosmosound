@@ -427,7 +427,7 @@
                             ],
                             "fieldName": "thumbnail",
                             "valueOptions": {
-                                "text": "https://randomuser.me/api/"
+                                "text": "https://random.imagecdn.app/500/150"
                             },
                             "nullValue": "0",
                             "selectedDependencies": {}
@@ -509,7 +509,7 @@
                                     ],
                                     "fieldName": "picture_profile",
                                     "valueOptions": {
-                                        "text": "https://randomuser.me/api/"
+                                        "text": "https://random.imagecdn.app/500/150"
                                     },
                                     "nullValue": "0",
                                     "selectedDependencies": {}
@@ -578,7 +578,7 @@
                                                     ],
                                                     "fieldName": "picture_profile",
                                                     "valueOptions": {
-                                                        "text": "https://randomuser.me/api/"
+                                                        "text": "https://random.imagecdn.app/500/150"
                                                     },
                                                     "nullValue": "0",
                                                     "selectedDependencies": {}
@@ -1504,7 +1504,7 @@
                             ],
                             "fieldName": "picture_profile",
                             "valueOptions": {
-                                "text": "https://randomuser.me/api/"
+                                "text": "https://random.imagecdn.app/500/150"
                             },
                             "nullValue": "0",
                             "selectedDependencies": {}
@@ -1573,7 +1573,7 @@
                                             ],
                                             "fieldName": "picture_profile",
                                             "valueOptions": {
-                                                "text": "https://randomuser.me/api/"
+                                                "text": "https://random.imagecdn.app/500/150"
                                             },
                                             "nullValue": "0",
                                             "selectedDependencies": {}
