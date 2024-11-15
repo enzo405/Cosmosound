@@ -2,6 +2,7 @@
 
 .light {
     --color-music-player-border: rgba(255, 255, 255, 0.1);
+    --color-music-player-bg: rgba(255, 255, 255, 0.80);
     --color-soft-beige: rgba(255, 229, 215, 0.69);
     --color-body-bg: rgba(243, 244, 248, 1);
     --color-sidebar-bg: rgba(249, 249, 249, 1);

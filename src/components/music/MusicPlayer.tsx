@@ -26,7 +26,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
   };
 
   const defaultStyleParent =
-    "bg-music-player-bg border-music-player-border justify-around items-center shadow-music-player";
+    "bg-music-player-bg sm:backdrop-blur-lg border-music-player-border justify-around items-center shadow-music-player";
 
   return (
     <>

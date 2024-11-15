@@ -50,14 +50,14 @@ function Root(): ReactElement {
 
   return (
     <div
-      className="select-none flex flex-col h-screen w-screen"
+      className="flex flex-col h-screen w-screen"
       onMouseMove={resizeSidebar}
       onMouseUp={stopResizing}>
-      <div className="font-bs h-full w-auto flex flex-row bg-body-bg">
+      <div className="font-bs h-full w-auto flex flex-row flex-grow bg-body-bg">
         {!isMobile && (
-          <div className="h-full flex flex-row" style={{ width: `${sidebarWidth}px` }}>
+          <div className="h-full flex flex-row flex-grow" style={{ width: `${sidebarWidth}px` }}>
             <Sidebar
-              className="hidden sm:flex flex-col gap-10 w-full h-full"
+              className="fixed z-10 hidden sm:flex flex-col gap-10 h-full"
               isSidebarSmall={sidebarWidth === SMALL_SIDEBAR_WIDTH}
             />
             <div
@@ -77,8 +77,10 @@ function Root(): ReactElement {
           </div>
         </div>
       </div>
-      <MusicPlayer />
-      {isMobile && <Sidebar className="sm:hidden flex flex-row gap-6" showHeaderAvatar={true} />}
+      <div className="fixed bottom-0 w-full z-20">
+        <MusicPlayer />
+        {isMobile && <Sidebar className="sm:hidden flex flex-row gap-6" showHeaderAvatar={true} />}
+      </div>
     </div>
   );
 }

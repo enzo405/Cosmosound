@@ -32,31 +32,46 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
     }
   };
 
+  const onWheelHandler = (event: React.WheelEvent<HTMLDivElement>) => {
+    // Vertical Mouse Wheel
+    let scrollBy;
+    if (event.deltaY !== 0) {
+      scrollBy = event.deltaY < 0 ? -40 : 40;
+    }
+    // Horizontal Mouse Wheel
+    else if (event.deltaX) {
+      scrollBy = event.deltaX < 0 ? -40 : 40;
+    }
+    scrollContainerRef.current?.scrollBy({ left: scrollBy, behavior: "instant" });
+  };
+
+  // On component load
   useEffect(() => {
     updateScrollButtons();
   }, []);
 
   return (
-    <div className="bg-box-bg rounded-3xl h-min w-full flex flex-col">
+    <div className="bg-box-bg rounded-3xl h-min w-full flex flex-col overflow-hidden pb-4">
       <div className="w-full flex py-4 pl-4">
-        <span className="mr-auto text-lg font-bs font-light">{title}</span>
+        <span className="mr-auto text-2xl font-bs font-light">{title}</span>
         <span className="relative flex flex-row gap-3 mr-4">
           <span
             onClick={scrollLeft}
-            className={`rounded-full flex justify-center items-center w-6 h-6 ${canScrollLeft ? "cursor-pointer hover:bg-gray-200" : ""} `}>
+            className={`rounded-full flex justify-center items-center w-7 h-7 ${canScrollLeft ? "cursor-pointer hover:bg-gray-200" : ""} `}>
             <ArrowLeft isActiv={canScrollLeft} />
           </span>
           <span
             onClick={scrollRight}
-            className={`rounded-full flex justify-center items-center w-6 h-6 ${canScrollRight ? "cursor-pointer hover:bg-gray-200" : ""}`}>
+            className={`rounded-full flex justify-center items-center w-7 h-7 ${canScrollRight ? "cursor-pointer hover:bg-gray-200" : ""}`}>
             <ArrowRight isActiv={canScrollRight} />
           </span>
         </span>
       </div>
       <div
         onScroll={updateScrollButtons}
+        onWheel={onWheelHandler}
         ref={scrollContainerRef}
-        className="flex flex-nowrap overflow-x-scroll w-full scroll-smooth pl-4">
+        className="scrollbar-thin flex flex-nowrap overflow-x-scroll w-full scroll-smooth pl-4 gap-2">
         {children}
       </div>
     </div>

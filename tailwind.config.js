@@ -16,6 +16,7 @@ export default {
       },
       colors: {
         "music-player-border": "var(--color-music-player-border)",
+        "music-player-bg": "var(--color-music-player-bg)",
         "dark-custom": "var(--color-dark)",
         "dark-glassy": "var(--color-darkglassy)",
         "grey-inactiv": "var(--color-grey-inactiv)",
@@ -40,5 +41,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };
