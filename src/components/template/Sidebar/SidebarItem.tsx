@@ -24,7 +24,7 @@ export default function SidebarItem({
   return (
     <div
       onClick={onClick}
-      className={`${classes} z-10 w-full flex flex-col px-2 xsm:px-4 py-1 cursor-pointer justify-center sm:justify-normal sm:flex-row`}>
+      className={`${classes} z-10 w-11/12 flex flex-col px-2 xsm:px-4 py-1 cursor-pointer justify-center sm:justify-normal sm:flex-row`}>
       <span className="flex justify-center sm:justify-normal sm:w-auto">
         <Icon
           iconName={isActive ? iconNameActive : iconName}

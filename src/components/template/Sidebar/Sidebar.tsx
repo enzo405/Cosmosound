@@ -14,7 +14,7 @@ function Sidebar({
   isSidebarSmall = false,
 }: SidebarProps): ReactElement {
   return (
-    <div className={`${className} bg-sidebar-bg sm:border-soft-beige sm:border-r-[1px]`}>
+    <div className={`${className} sm:bg-sidebar-bg select-none`}>
       <TopSidebar isSidebarSmall={isSidebarSmall} />
       <SidebarContent showHeaderAvatar={showHeaderAvatar} isSidebarSmall={isSidebarSmall} />
     </div>

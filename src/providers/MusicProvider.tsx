@@ -10,7 +10,7 @@ export const MusicProvider: React.FC<PropsWithChildren> = ({ children }) => {
     id: 1,
     artist_name: "Linkin Park",
     name: "Linkin Park",
-    date_creation: new Date(10, 10, 2024),
+    date_creation: "10-10-2024",
     email: "belo.smile@gmail.com",
     followers: 0,
     followings: [],
@@ -23,7 +23,7 @@ export const MusicProvider: React.FC<PropsWithChildren> = ({ children }) => {
     artist: artistTemp,
     title: "The Emptiness Machine",
     duration: 260,
-    date_creation: new Date(5, 8, 2024),
+    date_creation: "10-10-2024",
     genres: [{ name: "Metal" }],
     catalog: {
       id: 1,

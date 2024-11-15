@@ -14,7 +14,7 @@ function HeaderSearchbar(): ReactElement {
   };
 
   return (
-    <div className="w-3/4 mr-1 sm:w-1/2 sm:mr-auto">
+    <div className="w-3/4 mr-1 sm:w-1/2">
       <div className="relative" onClick={handleClick}>
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <Icon iconName="magnifyingglass" className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
@@ -30,7 +30,7 @@ function HeaderSearchbar(): ReactElement {
             autoFocus
             type="search"
             id="searchbar"
-            className="w-full block p-0 xsm:p-1 ps-10 xsm:ps-10 text-base font-normal text-dark-custom tracking-wide outline-none"
+            className="w-full block p-0 xsm:p-1 ps-10 xsm:ps-10 text-base font-normal text-dark-custom tracking-wide outline-none rounded-full"
             placeholder="Search"
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}

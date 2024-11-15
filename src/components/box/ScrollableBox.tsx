@@ -51,10 +51,10 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
   }, []);
 
   return (
-    <div className="bg-box-bg rounded-3xl h-min w-full flex flex-col overflow-hidden pb-4">
-      <div className="w-full flex py-4 pl-4">
+    <div className="bg-box-bg rounded-3xl h-full w-full flex flex-col pb-4">
+      <div className="w-full h-min flex py-4 pl-4">
         <span className="mr-auto text-2xl font-bs font-light">{title}</span>
-        <span className="relative flex flex-row gap-3 mr-4">
+        <span className="flex flex-row gap-3 mr-4">
           <span
             onClick={scrollLeft}
             className={`rounded-full flex justify-center items-center w-7 h-7 ${canScrollLeft ? "cursor-pointer hover:bg-gray-200" : ""} `}>
@@ -71,7 +71,7 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
         onScroll={updateScrollButtons}
         onWheel={onWheelHandler}
         ref={scrollContainerRef}
-        className="scrollbar-thin flex flex-nowrap overflow-x-scroll w-full scroll-smooth pl-4 gap-2">
+        className="scrollbar-thin flex flex-nowrap overflow-x-scroll w-full h-full scroll-smooth pl-4 gap-2">
         {children}
       </div>
     </div>

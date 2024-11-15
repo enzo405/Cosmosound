@@ -25,13 +25,10 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     setSoundValue(Math.max(0, Math.min(100, soundValue + step)));
   };
 
-  const defaultStyleParent =
-    "bg-music-player-bg sm:backdrop-blur-lg border-music-player-border justify-around items-center shadow-music-player";
-
   return (
     <>
       {isMobile ? (
-        <div className={`${defaultStyleParent} flex flex-col-reverse w-full gap-4 py-4 h-28`}>
+        <div className={`justify-around flex flex-col-reverse w-full gap-4 py-4 h-28`}>
           {/* Mobile Music Player */}
           <div className="flex flex-row items-center w-full p-1 xsm:px-3">
             <div className="flex items-center flex-shrink-0 w-2/3">
@@ -61,7 +58,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
         </div>
       ) : (
         <div
-          className={`${defaultStyleParent} hidden sm:flex w-full gap-4 xl:gap-8 pr-2 pl-2 lg:pr-12 xl:pr-24 xl:pl-8 h-32`}>
+          className={`bg-music-player-bg backdrop-blur-lg border-music-player-border justify-around items-center shadow-music-player hidden sm:flex w-full gap-4 xl:gap-8 pr-2 pl-2 lg:pr-12 xl:pr-24 xl:pl-8 h-28`}>
           {/* Desktop Music Player */}
           <div className="flex flex-row gap-2 items-center w-fit">
             <MusicInfo music={music} />

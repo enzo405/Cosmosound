@@ -38,10 +38,12 @@ function Root(): ReactElement {
   };
 
   const startResizing = (e: MouseEvent) => {
+    document.body.style.cursor = "col-resize";
     setDrag({ active: true, x: e.clientX });
   };
 
   const stopResizing = () => {
+    document.body.style.cursor = "auto";
     if (drag.active) {
       setDrag({ ...drag, active: false });
       localStorage.setItem("sidebarWidth", sidebarWidth.toString());
@@ -50,34 +52,37 @@ function Root(): ReactElement {
 
   return (
     <div
-      className="flex flex-col h-screen w-screen"
+      className="flex flex-col h-screen w-full"
       onMouseMove={resizeSidebar}
       onMouseUp={stopResizing}>
-      <div className="font-bs h-full w-auto flex flex-row flex-grow bg-body-bg">
+      <div className="font-bs h-full w-full flex flex-row bg-body-bg">
         {!isMobile && (
-          <div className="h-full flex flex-row flex-grow" style={{ width: `${sidebarWidth}px` }}>
+          <div className="fixed left-0 h-full flex flex-row" style={{ width: `${sidebarWidth}px` }}>
             <Sidebar
-              className="fixed z-10 hidden sm:flex flex-col gap-10 h-full"
+              className="hidden sm:flex flex-col gap-10 h-full w-full"
               isSidebarSmall={sidebarWidth === SMALL_SIDEBAR_WIDTH}
             />
             <div
               onMouseDown={startResizing}
               className={`${
-                drag.active ? "border-2" : ""
-              } w-[3px] z-50 hover:cursor-col-resize border-red-400 border-1 h-full`}
+                drag.active ? "bg-red-400" : "bg-soft-beige"
+              } w-[3px] z-20 hover:cursor-col-resize h-full`}
             />
           </div>
         )}
         <div
-          className="flex flex-col flex-grow px-1 sm:px-4 lg:px-10"
-          style={{ width: isMobile ? "100vw" : `calc(100vw - ${sidebarWidth}px)` }}>
+          className="h-min flex flex-col flex-grow"
+          style={{
+            width: isMobile ? "100vw" : `calc(100% - ${sidebarWidth}px)`,
+            marginLeft: isMobile ? "0px" : `${sidebarWidth}px`,
+          }}>
           <Header />
-          <div className="h-full w-auto flex">
+          <div className="h-full w-full bg-body-bg flex flex-col px-1 sm:px-4 lg:px-10 pb-52 sm:pb-28">
             <Outlet />
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 w-full z-20">
+      <div className="fixed bottom-0 w-full z-20 flex flex-col bg-music-player-bg backdrop-blur-2xl">
         <MusicPlayer />
         {isMobile && <Sidebar className="sm:hidden flex flex-row gap-6" showHeaderAvatar={true} />}
       </div>

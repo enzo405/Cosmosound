@@ -5,7 +5,7 @@ const defaultUser: User = {
   name: "me",
   email: "me@gmail.com",
   picture_profile: "/src/assets/img/default_avatar.png",
-  date_creation: new Date(),
+  date_creation: "08-10-2024",
   followings: [],
   followers: 0,
 };
