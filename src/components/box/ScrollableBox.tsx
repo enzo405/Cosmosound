@@ -39,11 +39,11 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
     // Vertical Mouse Wheel
     let scrollBy;
     if (event.deltaY !== 0) {
-      scrollBy = event.deltaY < 0 ? -40 : 40;
+      scrollBy = event.deltaY < 0 ? -75 : 75;
     }
     // Horizontal Mouse Wheel
     else if (event.deltaX) {
-      scrollBy = event.deltaX < 0 ? -40 : 40;
+      scrollBy = event.deltaX < 0 ? -75 : 75;
     }
     scrollContainerRef.current?.scrollBy({ left: scrollBy, behavior: "instant" });
   };
