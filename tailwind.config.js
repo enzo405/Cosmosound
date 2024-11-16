@@ -37,6 +37,7 @@ export default {
         "brown-music-player-dot": "var(--color-brown-music-player-dot)",
       },
       boxShadow: {
+        "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.4)",
         "music-player": "0 25px 60px 0px var(--color-shadow-music-player)",
       },
     },

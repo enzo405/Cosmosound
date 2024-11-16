@@ -32,7 +32,10 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
     }
   };
 
-  const onWheelHandler = (event: React.WheelEvent<HTMLDivElement>) => {
+  const onWheelHandler = (event: WheelEvent) => {
+    // Avoid scroll in the page
+    event.preventDefault();
+
     // Vertical Mouse Wheel
     let scrollBy;
     if (event.deltaY !== 0) {
@@ -48,6 +51,17 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
   // On component load
   useEffect(() => {
     updateScrollButtons();
+
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      const handler = (event: WheelEvent) => onWheelHandler(event);
+
+      scrollContainer.addEventListener("wheel", handler, { passive: false });
+
+      return () => {
+        scrollContainer.removeEventListener("wheel", handler);
+      };
+    }
   }, []);
 
   return (
@@ -69,7 +83,6 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
       </div>
       <div
         onScroll={updateScrollButtons}
-        onWheel={onWheelHandler}
         ref={scrollContainerRef}
         className="scrollbar-thin flex flex-nowrap overflow-x-scroll w-full h-full scroll-smooth pl-4 gap-2">
         {children}

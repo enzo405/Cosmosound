@@ -39,11 +39,13 @@ function Root(): ReactElement {
 
   const startResizing = (e: MouseEvent) => {
     document.body.style.cursor = "col-resize";
+    document.getElementById("root-parent")?.classList.add("select-none");
     setDrag({ active: true, x: e.clientX });
   };
 
   const stopResizing = () => {
     document.body.style.cursor = "auto";
+    document.getElementById("root-parent")?.classList.remove("select-none");
     if (drag.active) {
       setDrag({ ...drag, active: false });
       localStorage.setItem("sidebarWidth", sidebarWidth.toString());
@@ -52,6 +54,7 @@ function Root(): ReactElement {
 
   return (
     <div
+      id="root-parent"
       className="flex flex-col h-screen w-full"
       onMouseMove={resizeSidebar}
       onMouseUp={stopResizing}>
