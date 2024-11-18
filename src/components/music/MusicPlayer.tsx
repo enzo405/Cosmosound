@@ -58,7 +58,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
         </div>
       ) : (
         <div
-          className={`bg-music-player-bg backdrop-blur-lg border-music-player-border justify-around items-center shadow-music-player hidden sm:flex w-full gap-4 xl:gap-8 pr-2 pl-2 lg:pr-12 xl:pr-24 xl:pl-8 h-28`}>
+          className={`border-music-player-border justify-around items-center shadow-music-player hidden sm:flex w-full gap-4 xl:gap-8 pr-2 pl-2 lg:pr-12 xl:pr-24 xl:pl-8 h-28`}>
           {/* Desktop Music Player */}
           <div className="flex flex-row gap-2 items-center w-fit">
             <MusicInfo music={music} />

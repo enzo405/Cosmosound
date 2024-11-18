@@ -23,7 +23,11 @@ export default function Card({
     <div
       onClick={() => navigate(link)}
       className={`group cursor-pointer h-52 w-44 min-h-52 min-w-44 max-h-52 max-w-44 ${cardStyle} ${className}`}>
-      <img className="h-full w-full rounded-lg object-cover" src={thumbnail} alt={title} />
+      <img
+        className="h-full w-full rounded-lg object-cover select-none"
+        src={thumbnail}
+        alt={title}
+      />
       <div className="h-2/6 overflow-hidden cursor-pointer">
         <div className="group-hover:underline text-sm font-medium truncate">{title}</div>
         <div className="group-hover:underline text-xs text-gray-500 truncate">{description}</div>

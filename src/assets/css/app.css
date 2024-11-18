@@ -66,3 +66,11 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+html::-webkit-scrollbar {
+  display: none;
+}
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
