@@ -67,7 +67,9 @@ function SidebarContent({ showHeaderAvatar, isSidebarSmall }: SidebarContentProp
           />
         )}
       </span>
-      {showHeaderAvatar && <HeaderAvatar className="sm:hidden flex mr-3" id="avatar-button-2" />}
+      {showHeaderAvatar && (
+        <HeaderAvatar className="sm:hidden flex mr-3" id="avatar-button-mobile" />
+      )}
     </div>
   );
 }

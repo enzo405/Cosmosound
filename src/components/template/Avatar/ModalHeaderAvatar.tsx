@@ -6,23 +6,22 @@ import { Icon } from "components/icons/Icon";
 import SettingsOptions from "components/SettingsOptions";
 import { useTheme } from "hooks/useTheme";
 import { useNavigate } from "react-router-dom";
+import { useOpenAvatarModal } from "hooks/useOpenAvatarModal";
+import { useScreenSize } from "hooks/useScreenSize";
 
-interface DropdownHeaderAvatar {
-  closeModal: () => void;
-  idDropdown: string;
-}
+interface DropdownHeaderAvatar {}
 
-export default function DropdownHeaderAvatar({
-  closeModal,
-  idDropdown,
-}: DropdownHeaderAvatar): ReactElement {
+export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactElement {
   const { theme, setTheme } = useTheme();
   const [checked, setChecked] = useState(theme === "dark");
+  const { isModalOpen, closeModal } = useOpenAvatarModal();
   const navigate = useNavigate();
+  const isMobile = useScreenSize();
 
   useEffect(() => {
     const handleClickAway = (event: MouseEvent) => {
-      const avatarButton = document.getElementById(idDropdown);
+      let id = `avatar-button-${isMobile ? "mobile" : "desktop"}`;
+      const avatarButton = document.getElementById(id);
       const target = event.target as Node;
       const clickIsOnModal = avatarButton?.contains(target);
 
@@ -36,7 +35,7 @@ export default function DropdownHeaderAvatar({
     return () => {
       window.removeEventListener("click", handleClickAway);
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     if (checked) {
@@ -47,7 +46,11 @@ export default function DropdownHeaderAvatar({
   }, [checked]);
 
   return (
-    <div className="absolute top-0 right-0 z-30 transform-gpu rounded-xl translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px] shadow-xl">
+    <div
+      className="fixed top-0 right-0 z-30 transform-gpu rounded-xl translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px] shadow-xl"
+      style={{
+        display: isModalOpen ? "block" : "none",
+      }}>
       <div className="bg-white block py-1 text-gray-900 rounded-xl w-44 xsm:w-52 sm:w-60 border border-settings-divider">
         {/* Profile Section */}
         <SettingsOptions>

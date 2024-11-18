@@ -10,7 +10,7 @@ function Header(): ReactElement {
         <HeaderNavigation />
         <HeaderSearchbar />
       </div>
-      <HeaderAvatar className="sm:flex hidden" id="avatar-button-1" />
+      <HeaderAvatar className="sm:flex hidden" id="avatar-button-desktop" />
       <img
         className="block sm:hidden w-8 h-8 mr-2 "
         src="./src/assets/img/cosmosound.png"

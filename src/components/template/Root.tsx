@@ -4,6 +4,7 @@ import Header from "./Header/Header";
 import Sidebar from "./Sidebar/Sidebar";
 import MusicPlayer from "components/music/MusicPlayer";
 import { useScreenSize } from "hooks/useScreenSize";
+import DropdownHeaderAvatar from "./Avatar/ModalHeaderAvatar";
 
 const DEFAULT_SIDEBAR_WIDTH = 224;
 const MIN_SIDEBAR_WIDTH = 180;
@@ -44,9 +45,9 @@ function Root(): ReactElement {
   };
 
   const stopResizing = () => {
-    document.body.style.cursor = "auto";
-    document.getElementById("root-parent")?.classList.remove("select-none");
     if (drag.active) {
+      document.body.style.cursor = "auto";
+      document.getElementById("root-parent")?.classList.remove("select-none");
       setDrag({ ...drag, active: false });
       localStorage.setItem("sidebarWidth", sidebarWidth.toString());
     }
@@ -89,6 +90,7 @@ function Root(): ReactElement {
         <MusicPlayer />
         {isMobile && <Sidebar className="sm:hidden flex flex-row gap-6" showHeaderAvatar={true} />}
       </div>
+      <DropdownHeaderAvatar />
     </div>
   );
 }
