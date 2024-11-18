@@ -1,0 +1,2440 @@
+{
+    "id": "ccd2f57-3abb-b8f2-c6d1-5166a30bef8",
+    "type": "array",
+    "valueType": "",
+    "children": [
+        {
+            "id": "267363-c048-c12-bcc-d382bd3adda",
+            "type": "object",
+            "valueType": "",
+            "children": [
+                {
+                    "id": "a10252-cf72-8c4-646f-07ebbe162f76",
+                    "type": "value",
+                    "valueType": "index",
+                    "children": [],
+                    "repeatCount": [
+                        "1",
+                        "100"
+                    ],
+                    "fieldName": "id",
+                    "valueOptions": {},
+                    "nullValue": "0",
+                    "selectedDependencies": {}
+                },
+                {
+                    "id": "8612313-3aa4-5f3-34e5-3e25e6c5eba0",
+                    "type": "value",
+                    "valueType": "jobTitle",
+                    "children": [],
+                    "repeatCount": [
+                        "1",
+                        "100"
+                    ],
+                    "fieldName": "title",
+                    "valueOptions": {},
+                    "nullValue": "0",
+                    "selectedDependencies": {}
+                },
+                {
+                    "id": "d440d8d-522a-d224-68ea-71138f77c86",
+                    "type": "value",
+                    "valueType": "dateTime",
+                    "children": [],
+                    "repeatCount": [
+                        "1",
+                        "100"
+                    ],
+                    "fieldName": "date_creation",
+                    "valueOptions": {
+                        "min": "2023-11-09",
+                        "max": "2024-11-09",
+                        "format": "YYYY-MM-DD"
+                    },
+                    "nullValue": "0",
+                    "selectedDependencies": {}
+                },
+                {
+                    "id": "1a47857-e16a-0c55-da4f-7436a06c5016",
+                    "type": "value",
+                    "valueType": "number",
+                    "children": [],
+                    "repeatCount": [
+                        "1",
+                        "100"
+                    ],
+                    "fieldName": "duration",
+                    "valueOptions": {
+                        "min": {
+                            "number": "30",
+                            "checked": true
+                        },
+                        "max": {
+                            "number": "300",
+                            "checked": true
+                        },
+                        "decimals": "0",
+                        "multipleOf": "0"
+                    },
+                    "nullValue": "0",
+                    "selectedDependencies": {}
+                },
+                {
+                    "id": "d365b4b-bcad-66d6-d6f6-d86ffc3dd537",
+                    "type": "array",
+                    "valueType": "",
+                    "children": [
+                        {
+                            "id": "4d10704-e676-7f00-36-1b36865f6de",
+                            "type": "object",
+                            "valueType": "object",
+                            "children": [
+                                {
+                                    "id": "687e822-6bc5-60ff-f504-8a073ac0c1aa",
+                                    "type": "oneOf",
+                                    "valueType": "oneOf",
+                                    "children": [
+                                        {
+                                            "id": "a13c272-f45d-524-bf3f-00acd28edab",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Pop"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "febbdc-fa8-aee5-27-c5048ea64152",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Rock"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "586242-b74-b2b4-eca6-fb031885cc2a",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Metal"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "85f6768-ae36-7f1-6ba5-f06f5d5b4cbf",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Funk"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "fb8178b-3b3-553a-2e44-2a7b557ea36",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Harcore"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "3c563a1-d6ea-7562-537-0a20fda88f4",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Deathcore"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "20b6d0d-d84c-74-35c0-4bac56eab11a",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Hip hop"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "af1fac3-5b6e-24a6-f2df-a0f26521f5f",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Blues"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "4ae83d8-d865-ae-d6f6-43e38a8a257",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Jazz"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "203eee-b65d-17af-ed53-1efe6f840",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Classical"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "a5a4db-3bc-c72e-1b0b-ce3f4661e5",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Heavy Metal"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "a8ff6e8-cc27-57db-cc21-e5e1712f57",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Raggae"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "63d11d7-f412-b7a-d8f-f73ce3d655f1",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Alternative"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "8c1be4-2322-fb6d-f88b-3dac766f0531",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "House"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "633d21f-2d2e-4848-1bcc-b8bd346042ff",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Dupstep"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "d21bce8-fb0a-a12-1a00-d471ab8bb8c",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Trance"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        }
+                                    ],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "name",
+                                    "valueOptions": {},
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                }
+                            ],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "",
+                            "valueOptions": {},
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        }
+                    ],
+                    "repeatCount": [
+                        "1",
+                        "3"
+                    ],
+                    "fieldName": "genres",
+                    "valueOptions": {},
+                    "nullValue": "0"
+                },
+                {
+                    "id": "3b41f3-a776-e1c6-1875-07f71e21585e",
+                    "type": "object",
+                    "valueType": "",
+                    "children": [
+                        {
+                            "id": "1d048f7-c37-d704-e171-03dfb6c85262",
+                            "type": "value",
+                            "valueType": "index",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "id",
+                            "valueOptions": {},
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "373c67b-abc8-465e-2886-5f06e8103de8",
+                            "type": "value",
+                            "valueType": "string",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "title",
+                            "valueOptions": {
+                                "format": "catalog title",
+                                "unit": "word",
+                                "maxLength": "15",
+                                "minLength": "1"
+                            },
+                            "nullValue": "0"
+                        },
+                        {
+                            "id": "64d4638-fdfd-cc8c-2ec5-2f23fdc750",
+                            "type": "value",
+                            "valueType": "constant",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "thumbnail",
+                            "valueOptions": {
+                                "text": "https://random.imagecdn.app/500/150"
+                            },
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "1d7a8ff-4ad-a33a-236c-a542b80781a4",
+                            "type": "object",
+                            "valueType": "",
+                            "children": [
+                                {
+                                    "id": "e1b154-b862-0561-4fb6-e64f1054cd1b",
+                                    "type": "value",
+                                    "valueType": "index",
+                                    "children": [],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "id",
+                                    "valueOptions": {},
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                },
+                                {
+                                    "id": "7f6dedd-3dd7-ad80-f32d-df1f668cf8f2",
+                                    "type": "value",
+                                    "valueType": "fullName",
+                                    "children": [],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "name",
+                                    "valueOptions": {
+                                        "gender": "any",
+                                        "language": "en"
+                                    },
+                                    "nullValue": "0"
+                                },
+                                {
+                                    "id": "61a356-3506-82e8-7bcf-5cafdc52e10",
+                                    "type": "value",
+                                    "valueType": "email",
+                                    "children": [],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "email",
+                                    "valueOptions": {},
+                                    "nullValue": "0"
+                                },
+                                {
+                                    "id": "51cae57-0335-cdb-116b-ca7e6f11ffb",
+                                    "type": "value",
+                                    "valueType": "dateTime",
+                                    "children": [],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "date_creation",
+                                    "valueOptions": {
+                                        "min": "2023-11-09",
+                                        "max": "2024-11-09",
+                                        "format": "YYYY-MM-DD"
+                                    },
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                },
+                                {
+                                    "id": "2567cb6-d561-fd70-1dd-fe3816406c3b",
+                                    "type": "value",
+                                    "valueType": "const",
+                                    "children": [],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "picture_profile",
+                                    "valueOptions": {
+                                        "text": "https://random.imagecdn.app/500/150"
+                                    },
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                },
+                                {
+                                    "id": "af7ea6-4df3-ce5-eab1-c7b85743e8e",
+                                    "type": "value",
+                                    "valueType": "number",
+                                    "children": [],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "followers",
+                                    "valueOptions": {
+                                        "min": {
+                                            "number": "0",
+                                            "checked": true
+                                        },
+                                        "max": {
+                                            "number": "1000000",
+                                            "checked": true
+                                        },
+                                        "decimals": "0",
+                                        "multipleOf": "0"
+                                    },
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                },
+                                {
+                                    "id": "4106e13-4018-f6fb-8a32-dc75f2c6ee3",
+                                    "type": "array",
+                                    "valueType": "array",
+                                    "children": [
+                                        {
+                                            "id": "c885bd-725b-b458-d172-71e7867501c",
+                                            "type": "object",
+                                            "valueType": "",
+                                            "children": [
+                                                {
+                                                    "id": "8a47cc-1e6-aba3-0725-8be568dc7fd",
+                                                    "type": "value",
+                                                    "valueType": "seqNumber",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "id",
+                                                    "valueOptions": {
+                                                        "start": 0,
+                                                        "gapMin": 1,
+                                                        "gapMax": 1
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "d8c450-ca35-711b-1c87-055e86c5ee",
+                                                    "type": "value",
+                                                    "valueType": "const",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "picture_profile",
+                                                    "valueOptions": {
+                                                        "text": "https://random.imagecdn.app/500/150"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "21d11cb-0b-bb2e-ac51-7eaf03440f16",
+                                                    "type": "value",
+                                                    "valueType": "number",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "followers",
+                                                    "valueOptions": {
+                                                        "min": {
+                                                            "number": "0",
+                                                            "checked": true
+                                                        },
+                                                        "max": {
+                                                            "number": "1000000",
+                                                            "checked": true
+                                                        },
+                                                        "decimals": "0",
+                                                        "multipleOf": "0"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "ac72bb-5868-f863-c71-840def641ea2",
+                                                    "type": "array",
+                                                    "valueType": "array",
+                                                    "children": [
+                                                        {
+                                                            "id": "001ed3c-dd10-6f64-462b-a208be65ff84",
+                                                            "type": "object",
+                                                            "valueType": "object",
+                                                            "children": [
+                                                                {
+                                                                    "id": "5bdc808-8d1-ddc-dbe7-7ec636ccf248",
+                                                                    "type": "oneOf",
+                                                                    "valueType": "oneOf",
+                                                                    "children": [
+                                                                        {
+                                                                            "id": "c326c0b-3e42-cf7-f2c-0ddd4b28da7",
+                                                                            "type": "value",
+                                                                            "valueType": "constant",
+                                                                            "children": [],
+                                                                            "repeatCount": [
+                                                                                "1",
+                                                                                "100"
+                                                                            ],
+                                                                            "fieldName": "",
+                                                                            "valueOptions": {
+                                                                                "text": 0
+                                                                            },
+                                                                            "nullValue": "0",
+                                                                            "selectedDependencies": {}
+                                                                        },
+                                                                        {
+                                                                            "id": "2536f8b-7caf-6353-48c8-bfe34ba37cc6",
+                                                                            "type": "value",
+                                                                            "valueType": "constant",
+                                                                            "children": [],
+                                                                            "repeatCount": [
+                                                                                "1",
+                                                                                "100"
+                                                                            ],
+                                                                            "fieldName": "",
+                                                                            "valueOptions": {
+                                                                                "text": 1
+                                                                            },
+                                                                            "nullValue": "0",
+                                                                            "selectedDependencies": {}
+                                                                        },
+                                                                        {
+                                                                            "id": "7d1dff8-55-ae33-21c7-1c3131c5ee72",
+                                                                            "type": "value",
+                                                                            "valueType": "constant",
+                                                                            "children": [],
+                                                                            "repeatCount": [
+                                                                                "1",
+                                                                                "100"
+                                                                            ],
+                                                                            "fieldName": "",
+                                                                            "valueOptions": {
+                                                                                "text": 2
+                                                                            },
+                                                                            "nullValue": "0",
+                                                                            "selectedDependencies": {}
+                                                                        },
+                                                                        {
+                                                                            "id": "f81bee2-75b-137-0fbe-84a3135f1661",
+                                                                            "type": "value",
+                                                                            "valueType": "constant",
+                                                                            "children": [],
+                                                                            "repeatCount": [
+                                                                                "1",
+                                                                                "100"
+                                                                            ],
+                                                                            "fieldName": "",
+                                                                            "valueOptions": {
+                                                                                "text": 3
+                                                                            },
+                                                                            "nullValue": "0",
+                                                                            "selectedDependencies": {}
+                                                                        },
+                                                                        {
+                                                                            "id": "a83cf42-cd76-c180-3700-b1151b30bf6a",
+                                                                            "type": "value",
+                                                                            "valueType": "constant",
+                                                                            "children": [],
+                                                                            "repeatCount": [
+                                                                                "1",
+                                                                                "100"
+                                                                            ],
+                                                                            "fieldName": "",
+                                                                            "valueOptions": {
+                                                                                "text": 4
+                                                                            },
+                                                                            "nullValue": "0",
+                                                                            "selectedDependencies": {}
+                                                                        }
+                                                                    ],
+                                                                    "repeatCount": [
+                                                                        "1",
+                                                                        "100"
+                                                                    ],
+                                                                    "fieldName": "media",
+                                                                    "valueOptions": {},
+                                                                    "nullValue": "0",
+                                                                    "selectedDependencies": {}
+                                                                },
+                                                                {
+                                                                    "id": "2f1a83-356-77bd-0a-11f7b066cc3e",
+                                                                    "type": "value",
+                                                                    "valueType": "const",
+                                                                    "children": [],
+                                                                    "repeatCount": [
+                                                                        "1",
+                                                                        "100"
+                                                                    ],
+                                                                    "fieldName": "link",
+                                                                    "valueOptions": {
+                                                                        "text": "https://www.google.com/"
+                                                                    },
+                                                                    "nullValue": "0",
+                                                                    "selectedDependencies": {}
+                                                                }
+                                                            ],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {},
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        }
+                                                    ],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "3"
+                                                    ],
+                                                    "fieldName": "social_media",
+                                                    "valueOptions": {},
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "03f10bf-274-dd8c-ae8-25e826ffe4d",
+                                                    "type": "value",
+                                                    "valueType": "companyName",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "artist_name",
+                                                    "valueOptions": {
+                                                        "type": "fake"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "525e7b0-eb-acb0-2223-4555dd66e",
+                                                    "type": "oneOf",
+                                                    "valueType": "oneOf",
+                                                    "children": [
+                                                        {
+                                                            "id": "6e27a83-852f-e7ed-f03-e3d6458c8",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "Metal"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "27ffdcf-6ad-db5a-c268-243da1f3435b",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "Pop"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "38dd12-ec32-5ca6-d7ba-bdd5a178b24",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "Rock"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "d2b686c-e43-3b3-0ed1-087ebf330d13",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "Country"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "b81ac6-e16-3baa-306a-42b07f64fa8d",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "Alternative"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "ed482fc-d80-e4df-d7a6-215687acb8f",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "Deathcore"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "76c5df5-dd15-361a-6ef8-3e724fecffb6",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "Electro"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "ca0f7b4-75ec-e20c-4d4-d6d33c176",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "Funk"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        }
+                                                    ],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "genre",
+                                                    "valueOptions": {},
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                }
+                                            ],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "artist",
+                                            "valueOptions": {},
+                                            "nullValue": "0"
+                                        }
+                                    ],
+                                    "repeatCount": [
+                                        "0",
+                                        "0"
+                                    ],
+                                    "fieldName": "followings",
+                                    "valueOptions": {},
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                },
+                                {
+                                    "id": "2d6ee74-7374-3d0f-3fdc-ff0e1c88615",
+                                    "type": "value",
+                                    "valueType": "companyName",
+                                    "children": [],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "artist_name",
+                                    "valueOptions": {
+                                        "type": "fake"
+                                    },
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                },
+                                {
+                                    "id": "2042e3-c26f-eb12-33ce-aad0c1dc260",
+                                    "type": "object",
+                                    "valueType": "object",
+                                    "children": [
+                                        {
+                                            "id": "f5afe7a-a15f-2da2-1247-283ffb04aae",
+                                            "type": "oneOf",
+                                            "valueType": "oneOf",
+                                            "children": [
+                                                {
+                                                    "id": "07148fa-cc21-1a2e-1b1b-a657de0de48d",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Pop"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "e3cedd3-b4d0-ea72-f23-a05fc5553705",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Rock"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "b52073-fb5a-fc20-20a8-610be24fe4c",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Metal"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "630aee3-6566-b4ef-f03b-0e05f066c2",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Funk"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "ade06ba-d53-efd5-b1b-e15af2fc1b20",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Harcore"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "0f320f3-6437-0d00-4216-8e332b760c",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Deathcore"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "16cf50-56d7-cc-a6de-8a1b804eecbf",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Hip hop"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "e72b2a-58a6-8cd-257-e0fbaf28f4",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Blues"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "eac204a-4d07-007-3ff-4d51b5d3e53",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Jazz"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "2411b1-5c21-c46f-6ac-7cdf0015b6c",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Classical"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "3db077-2b5-1514-bd01-854b24503c6",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Heavy Metal"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "af32d3a-77-06eb-2ed6-74ef3bffd7a3",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Raggae"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "12e517c-c3d5-d4d8-a77a-44100beebcb0",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Alternative"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "af8fe32-c65-8b20-ef47-a2ec11b486",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "House"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "24bd362-ab7-d6a-0b64-c87a33080a5",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Dupstep"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "2122a0b-240f-bb4-f40f-d31e30fb3bc",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Trance"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                }
+                                            ],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "name",
+                                            "valueOptions": {},
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        }
+                                    ],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "genre",
+                                    "valueOptions": {},
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                },
+                                {
+                                    "id": "ec74ff-6666-8d52-ad4-bdcc35c065",
+                                    "type": "array",
+                                    "valueType": "array",
+                                    "children": [
+                                        {
+                                            "id": "2dcffb-cd7d-88f-b435-b5d2201f812",
+                                            "type": "object",
+                                            "valueType": "object",
+                                            "children": [
+                                                {
+                                                    "id": "14761-2a63-cb84-3018-260c2bd47d",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "link",
+                                                    "valueOptions": {
+                                                        "text": "https://mockturtle.net/"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "a6ea2bd-70e7-5ad6-3546-68786aee76a",
+                                                    "type": "oneOf",
+                                                    "valueType": "oneOf",
+                                                    "children": [
+                                                        {
+                                                            "id": "1e64c42-c866-1414-f041-e2cad43c84b",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "0"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "5db5cfa-6a82-6571-82a7-31f3533c45e",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "1"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "248e22-5d6-f0f5-cf73-614126ba7f",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "2"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "5fef6f-030-8d4-2c0-f82c2ae076c",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "3"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "00b78ef-861-7870-d4d-0e030d770f7e",
+                                                            "type": "value",
+                                                            "valueType": "constant",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "",
+                                                            "valueOptions": {
+                                                                "text": "4"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        }
+                                                    ],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "media",
+                                                    "valueOptions": {},
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                }
+                                            ],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {},
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        }
+                                    ],
+                                    "repeatCount": [
+                                        "0",
+                                        "5"
+                                    ],
+                                    "fieldName": "social_media",
+                                    "valueOptions": {},
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                }
+                            ],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "owner",
+                            "valueOptions": {},
+                            "nullValue": "0"
+                        },
+                        {
+                            "id": "e600a2d-cdb-64fc-ef3a-4277d57cd7c1",
+                            "type": "value",
+                            "valueType": "number",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "type",
+                            "valueOptions": {
+                                "min": {
+                                    "number": "0",
+                                    "checked": true
+                                },
+                                "max": {
+                                    "number": "2",
+                                    "checked": true
+                                },
+                                "decimals": "0",
+                                "multipleOf": "0"
+                            },
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "1afdd45-7ca7-0185-134e-bb2651c47fc4",
+                            "type": "array",
+                            "valueType": "array",
+                            "children": [],
+                            "repeatCount": [
+                                "0",
+                                "0"
+                            ],
+                            "fieldName": "musics",
+                            "valueOptions": {},
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        }
+                    ],
+                    "repeatCount": [
+                        "1",
+                        "100"
+                    ],
+                    "fieldName": "catalog",
+                    "valueOptions": {},
+                    "nullValue": "0"
+                },
+                {
+                    "id": "8a2c25a-dcaa-5d80-b3f2-64a7e0a267fa",
+                    "type": "object",
+                    "valueType": "",
+                    "children": [
+                        {
+                            "id": "8b26152-ad65-65cb-7254-6d1f0b65085e",
+                            "type": "value",
+                            "valueType": "index",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "id",
+                            "valueOptions": {},
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "7f682ec-0ff8-650e-ccde-cbfbc1cd5c8",
+                            "type": "value",
+                            "valueType": "fullName",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "name",
+                            "valueOptions": {
+                                "gender": "any",
+                                "language": "en"
+                            },
+                            "nullValue": "0"
+                        },
+                        {
+                            "id": "7ee4400-a5f5-c051-286b-465d6cfff26",
+                            "type": "value",
+                            "valueType": "email",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "email",
+                            "valueOptions": {},
+                            "nullValue": "0"
+                        },
+                        {
+                            "id": "2a4ead1-e1bf-adef-36b-a0c7746c78d",
+                            "type": "value",
+                            "valueType": "dateTime",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "date_creation",
+                            "valueOptions": {
+                                "min": "2023-11-09",
+                                "max": "2024-11-09",
+                                "format": "YYYY-MM-DD"
+                            },
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "2c34d3e-ad72-450c-24ac-41c1f5c72bea",
+                            "type": "value",
+                            "valueType": "const",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "picture_profile",
+                            "valueOptions": {
+                                "text": "https://random.imagecdn.app/500/150"
+                            },
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "6f16ee7-f30-8f1f-2c7b-2774f4d3c400",
+                            "type": "value",
+                            "valueType": "number",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "followers",
+                            "valueOptions": {
+                                "min": {
+                                    "number": "0",
+                                    "checked": true
+                                },
+                                "max": {
+                                    "number": "1000000",
+                                    "checked": true
+                                },
+                                "decimals": "0",
+                                "multipleOf": "0"
+                            },
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "5c7c0-bad5-8c8a-f2a2-b8817ee34fa2",
+                            "type": "array",
+                            "valueType": "array",
+                            "children": [
+                                {
+                                    "id": "f081148-04b5-6bea-a3bb-230bfdafe0a",
+                                    "type": "object",
+                                    "valueType": "",
+                                    "children": [
+                                        {
+                                            "id": "564d71-5758-a281-bda5-4e163614db0",
+                                            "type": "value",
+                                            "valueType": "seqNumber",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "id",
+                                            "valueOptions": {
+                                                "start": 0,
+                                                "gapMin": 1,
+                                                "gapMax": 1
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "1ae0f7-f2c8-fa0-25c-c6800fd01ba5",
+                                            "type": "value",
+                                            "valueType": "const",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "picture_profile",
+                                            "valueOptions": {
+                                                "text": "https://random.imagecdn.app/500/150"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "db1d08-cc0a-6b4e-b1-056e3ded8222",
+                                            "type": "value",
+                                            "valueType": "number",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "followers",
+                                            "valueOptions": {
+                                                "min": {
+                                                    "number": "0",
+                                                    "checked": true
+                                                },
+                                                "max": {
+                                                    "number": "1000000",
+                                                    "checked": true
+                                                },
+                                                "decimals": "0",
+                                                "multipleOf": "0"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "cbbcdff-cb53-ad6-e5f-e4ee112c877b",
+                                            "type": "array",
+                                            "valueType": "array",
+                                            "children": [
+                                                {
+                                                    "id": "7a6a655-6306-fe47-3788-5eb85332828",
+                                                    "type": "object",
+                                                    "valueType": "object",
+                                                    "children": [
+                                                        {
+                                                            "id": "e7bd70-c7da-c0b-3675-7a21a662ace",
+                                                            "type": "oneOf",
+                                                            "valueType": "oneOf",
+                                                            "children": [
+                                                                {
+                                                                    "id": "3f6a48f-ed-7c2-e101-ee7fd4ba18a8",
+                                                                    "type": "value",
+                                                                    "valueType": "constant",
+                                                                    "children": [],
+                                                                    "repeatCount": [
+                                                                        "1",
+                                                                        "100"
+                                                                    ],
+                                                                    "fieldName": "",
+                                                                    "valueOptions": {
+                                                                        "text": 0
+                                                                    },
+                                                                    "nullValue": "0",
+                                                                    "selectedDependencies": {}
+                                                                },
+                                                                {
+                                                                    "id": "24f28b-2048-46f8-00f5-f7a4171213c",
+                                                                    "type": "value",
+                                                                    "valueType": "constant",
+                                                                    "children": [],
+                                                                    "repeatCount": [
+                                                                        "1",
+                                                                        "100"
+                                                                    ],
+                                                                    "fieldName": "",
+                                                                    "valueOptions": {
+                                                                        "text": 1
+                                                                    },
+                                                                    "nullValue": "0",
+                                                                    "selectedDependencies": {}
+                                                                },
+                                                                {
+                                                                    "id": "fd56f1-e5b-48b1-17db-704ca2e58b",
+                                                                    "type": "value",
+                                                                    "valueType": "constant",
+                                                                    "children": [],
+                                                                    "repeatCount": [
+                                                                        "1",
+                                                                        "100"
+                                                                    ],
+                                                                    "fieldName": "",
+                                                                    "valueOptions": {
+                                                                        "text": 2
+                                                                    },
+                                                                    "nullValue": "0",
+                                                                    "selectedDependencies": {}
+                                                                },
+                                                                {
+                                                                    "id": "18b6d3-60d0-81db-b7f3-866d2f4f2ed4",
+                                                                    "type": "value",
+                                                                    "valueType": "constant",
+                                                                    "children": [],
+                                                                    "repeatCount": [
+                                                                        "1",
+                                                                        "100"
+                                                                    ],
+                                                                    "fieldName": "",
+                                                                    "valueOptions": {
+                                                                        "text": 3
+                                                                    },
+                                                                    "nullValue": "0",
+                                                                    "selectedDependencies": {}
+                                                                },
+                                                                {
+                                                                    "id": "1b7d1b0-dfbd-5c2b-80e-dd142e1568",
+                                                                    "type": "value",
+                                                                    "valueType": "constant",
+                                                                    "children": [],
+                                                                    "repeatCount": [
+                                                                        "1",
+                                                                        "100"
+                                                                    ],
+                                                                    "fieldName": "",
+                                                                    "valueOptions": {
+                                                                        "text": 4
+                                                                    },
+                                                                    "nullValue": "0",
+                                                                    "selectedDependencies": {}
+                                                                }
+                                                            ],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "media",
+                                                            "valueOptions": {},
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        },
+                                                        {
+                                                            "id": "5fc105d-3b4-8843-f4df-66da22d61df5",
+                                                            "type": "value",
+                                                            "valueType": "const",
+                                                            "children": [],
+                                                            "repeatCount": [
+                                                                "1",
+                                                                "100"
+                                                            ],
+                                                            "fieldName": "link",
+                                                            "valueOptions": {
+                                                                "text": "https://www.google.com/"
+                                                            },
+                                                            "nullValue": "0",
+                                                            "selectedDependencies": {}
+                                                        }
+                                                    ],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {},
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                }
+                                            ],
+                                            "repeatCount": [
+                                                "1",
+                                                "3"
+                                            ],
+                                            "fieldName": "social_media",
+                                            "valueOptions": {},
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "7d557ab-bacf-a603-013c-646d56b3c18d",
+                                            "type": "value",
+                                            "valueType": "companyName",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "artist_name",
+                                            "valueOptions": {
+                                                "type": "fake"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "cabf1cd-5ba3-7d16-0487-57edc3f0f7f5",
+                                            "type": "oneOf",
+                                            "valueType": "oneOf",
+                                            "children": [
+                                                {
+                                                    "id": "4b63b-a674-c1fc-dace-e5f58645a4d",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Metal"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "823bd7b-c17e-d264-a8ea-3f313473fa3c",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Pop"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "6845aec-52b5-322f-efc2-ab340c70ccb3",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Rock"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "8b3c128-f736-8485-436f-dac8401666",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Country"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "bd1a66-d0a2-1250-efe6-f2eee3a63",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Alternative"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "603fa7-bd87-46a7-ac16-47efdaf6dca7",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Deathcore"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "e25288b-1120-4c8b-5f4-40561fc24d10",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Electro"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "41c060-383c-2b74-fa3-fa4a5f7f062",
+                                                    "type": "value",
+                                                    "valueType": "constant",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "text": "Funk"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                }
+                                            ],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "genre",
+                                            "valueOptions": {},
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        }
+                                    ],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "artist",
+                                    "valueOptions": {},
+                                    "nullValue": "0"
+                                }
+                            ],
+                            "repeatCount": [
+                                "0",
+                                "0"
+                            ],
+                            "fieldName": "followings",
+                            "valueOptions": {},
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "fc6464-af11-6ee3-7bd-b0815c15e2b8",
+                            "type": "value",
+                            "valueType": "companyName",
+                            "children": [],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "artist_name",
+                            "valueOptions": {
+                                "type": "fake"
+                            },
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "b7428c5-63a0-2310-d17d-2bd0075d3d1",
+                            "type": "object",
+                            "valueType": "object",
+                            "children": [
+                                {
+                                    "id": "55c8da-afdd-6eab-053-28dbf0b08c",
+                                    "type": "oneOf",
+                                    "valueType": "oneOf",
+                                    "children": [
+                                        {
+                                            "id": "ba4a6cb-6ff6-1bdd-a64d-6ebfc80a17f",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Pop"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "1bfed61-85c-4537-fc28-b0e428c4ff1a",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Rock"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "2317ec4-a076-6d0-7e6a-50446cd0f7e",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Metal"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "a14fd4-18d4-7b8f-3a65-4c587b61a15",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Funk"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "37b4044-66-c4a1-364e-b2dcfdfc2ff",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Harcore"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "2dad725-e6c6-adcf-5d2-0c31d7f8c78a",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Deathcore"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "2622474-74a3-d2aa-5c2f-52fb6e4abb",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Hip hop"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "8424154-d258-af40-6bea-05a7eb02e53",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Blues"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "bb6a615-4775-334c-c3c0-f658e164f5b",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Jazz"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "420c221-d3-061f-d6f4-8df3738a0ec",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Classical"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "a0657c4-68dc-e0f-562-c8d60b411b25",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Heavy Metal"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "df1e440-1e08-ed8e-7228-fac555338d2e",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Raggae"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "ca1b5-317e-aead-3828-01da83776472",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Alternative"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "aadccd7-7bb8-8d5-eb64-b2612f104c4",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "House"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "772862-3f5d-3f53-3b03-c6fe7e636e27",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Dupstep"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "dff087-62-c32e-6a0-4ee75ace08",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "",
+                                            "valueOptions": {
+                                                "text": "Trance"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        }
+                                    ],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "name",
+                                    "valueOptions": {},
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                }
+                            ],
+                            "repeatCount": [
+                                "1",
+                                "100"
+                            ],
+                            "fieldName": "genre",
+                            "valueOptions": {},
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        },
+                        {
+                            "id": "c72de-7ba-42a-74c3-f61a0b88c88a",
+                            "type": "array",
+                            "valueType": "array",
+                            "children": [
+                                {
+                                    "id": "5d0075c-7e26-8f20-8601-62bec080fcb4",
+                                    "type": "object",
+                                    "valueType": "object",
+                                    "children": [
+                                        {
+                                            "id": "14c766-c7a-057b-7f8b-f5e47cc560d6",
+                                            "type": "value",
+                                            "valueType": "constant",
+                                            "children": [],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "link",
+                                            "valueOptions": {
+                                                "text": "https://mockturtle.net/"
+                                            },
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        },
+                                        {
+                                            "id": "a800731-31-3746-f5ba-004bb3cae67",
+                                            "type": "oneOf",
+                                            "valueType": "oneOf",
+                                            "children": [
+                                                {
+                                                    "id": "a66dbd5-8f85-8de-4e7d-44f64f138203",
+                                                    "type": "value",
+                                                    "valueType": "number",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "min": {
+                                                            "number": "1",
+                                                            "checked": true
+                                                        },
+                                                        "max": {
+                                                            "number": "1",
+                                                            "checked": true
+                                                        },
+                                                        "decimals": "0",
+                                                        "multipleOf": "0"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "41f6b1-64f3-2a3-31b5-f411fa62e2c5",
+                                                    "type": "value",
+                                                    "valueType": "number",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "min": {
+                                                            "number": "2",
+                                                            "checked": true
+                                                        },
+                                                        "max": {
+                                                            "number": "2",
+                                                            "checked": true
+                                                        },
+                                                        "decimals": "0",
+                                                        "multipleOf": "0"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "57dc6b8-dea-fc8f-480f-6fee60d260a6",
+                                                    "type": "value",
+                                                    "valueType": "number",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "min": {
+                                                            "number": "3",
+                                                            "checked": true
+                                                        },
+                                                        "max": {
+                                                            "number": "3",
+                                                            "checked": true
+                                                        },
+                                                        "decimals": "0",
+                                                        "multipleOf": "0"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "a1fc1e4-55-7c54-b6a8-c1a8b4408e81",
+                                                    "type": "value",
+                                                    "valueType": "number",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "min": {
+                                                            "number": "0",
+                                                            "checked": true
+                                                        },
+                                                        "max": {
+                                                            "number": "0",
+                                                            "checked": true
+                                                        },
+                                                        "decimals": "0",
+                                                        "multipleOf": "0"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                },
+                                                {
+                                                    "id": "dae14e-11b7-657c-384-85b824eac70c",
+                                                    "type": "value",
+                                                    "valueType": "number",
+                                                    "children": [],
+                                                    "repeatCount": [
+                                                        "1",
+                                                        "100"
+                                                    ],
+                                                    "fieldName": "",
+                                                    "valueOptions": {
+                                                        "min": {
+                                                            "number": "4",
+                                                            "checked": true
+                                                        },
+                                                        "max": {
+                                                            "number": "4",
+                                                            "checked": true
+                                                        },
+                                                        "decimals": "0",
+                                                        "multipleOf": "0"
+                                                    },
+                                                    "nullValue": "0",
+                                                    "selectedDependencies": {}
+                                                }
+                                            ],
+                                            "repeatCount": [
+                                                "1",
+                                                "100"
+                                            ],
+                                            "fieldName": "media",
+                                            "valueOptions": {},
+                                            "nullValue": "0",
+                                            "selectedDependencies": {}
+                                        }
+                                    ],
+                                    "repeatCount": [
+                                        "1",
+                                        "100"
+                                    ],
+                                    "fieldName": "",
+                                    "valueOptions": {},
+                                    "nullValue": "0",
+                                    "selectedDependencies": {}
+                                }
+                            ],
+                            "repeatCount": [
+                                "0",
+                                "5"
+                            ],
+                            "fieldName": "social_media",
+                            "valueOptions": {},
+                            "nullValue": "0",
+                            "selectedDependencies": {}
+                        }
+                    ],
+                    "repeatCount": [
+                        "1",
+                        "100"
+                    ],
+                    "fieldName": "artist",
+                    "valueOptions": {},
+                    "nullValue": "0"
+                }
+            ],
+            "repeatCount": [
+                "1",
+                "100"
+            ],
+            "fieldName": "",
+            "valueOptions": {},
+            "nullValue": "0"
+        }
+    ],
+    "repeatCount": [
+        "10000",
+        "10000"
+    ],
+    "fieldName": "",
+    "valueOptions": {},
+    "nullValue": "0",
+    "selectedDependencies": {}
+}

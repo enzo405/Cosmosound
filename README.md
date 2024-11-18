@@ -2,7 +2,7 @@
 
 ## 1. **Description du projet**
 
-Le projet **Cosmosound** est une plateforme de streaming musical en ligne inspirée de services populaires tels que Spotify, Deezer ou YouTube Music. Cette application permet aux utilisateurs de découvrir de nouveaux artistes, d'écouter leurs morceaux préférés, de créer des playlists personnalisées et de gérer leur profil utilisateur. Le projet vise à offrir une expérience fluide et intuitive, tout en facilitant la découverte musicale.
+Le projet **Cosmosound** est une plateforme de streaming musical en ligne inspirée de services populaires tels que Spotify, Deezer ou YouTube Music. Cette application permet aux utilisateurs de découvrir de nouveaux artistes, d'écouter leurs morceaux préférés, de créer des catalogues et playlists personnalisées et de gérer leur profil utilisateur. Le projet vise à offrir une expérience fluide et intuitive, tout en facilitant la découverte musicale.
 
 Le projet wa été réalisé dans le cadre d'une formation en Licence CDA (Conception et Développement d'Applications).
 
@@ -17,21 +17,21 @@ Le projet wa été réalisé dans le cadre d'une formation en Licence CDA (Conce
 - Les musiques générées par IA sont marquées par un label "IA".
 - Un utilisateur ayant uploadé au moins une musique devient *artiste*.
 
-### Playlists
-- Création, modification et suppression de playlists.
-- Toutes les playlists sont publiques et peuvent être écoutées par tous les utilisateurs.
-- Chaque playlist peut être associée à plusieurs genres musicaux.
+### Catalogues / Playlist
+- Création, modification et suppression.
+- Sont publiques et peuvent être écoutées par tous les utilisateurs.
+- Peut être associée à plusieurs genres musicaux.
 
 ### Abonnements
 - Suivi des artistes pour obtenir des suggestions de titres personnalisées et un accès rapide à leurs contenus.
 
 ### Recherche
-- Recherche multicritères par titre, artiste, playlist, genre et nombre d'abonnés.
+- Recherche multicritères par nom de titre, nom d'artiste, nom de catalogue/playlist, genre et nombre d'abonnés.
 - Filtres avancés pour découvrir de nouvelles musiques.
 
 ### Gestion des rôles et permissions
-- **Auteur** : peut créer, modifier et supprimer ses propres musiques et playlists.
-- **Utilisateur** : peut écouter des musiques et suivre des artistes.
+- **Auteur** : autorisé à effectuer des actions CRUD sur ses contenus (musiques, catalogues et playlist).
+- **Utilisateur connecté** : autorisé à effectuer des actions CRUD sur ses contenus (playlists).
 
 ### Stockage et Streaming
 - Stockage des fichiers audio sur un serveur dédié.
@@ -46,7 +46,7 @@ Le projet wa été réalisé dans le cadre d'une formation en Licence CDA (Conce
 - **Node.js** avec **Express** : Serveur backend pour gérer les requêtes API et la logique métier.
 
 ### Base de données
-- **PostgreSQL** ou **MongoDB** : Pour le stockage des données (utilisateurs, musiques, playlists, etc.).
+- **MongoDB** : Pour le stockage des données (utilisateurs, musiques, catalogues, etc.).
 
 ### API REST
 - Communication entre le frontend et le backend via une API RESTful.
