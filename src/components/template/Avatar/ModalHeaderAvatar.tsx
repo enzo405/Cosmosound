@@ -1,6 +1,6 @@
 import Divider from "components/Divider";
 import { routesConfig } from "config/app-config";
-import { useEffect, useState, type ReactElement } from "react";
+import { useEffect, useRef, useState, type ReactElement } from "react";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { Icon } from "components/icons/Icon";
 import SettingsOptions from "components/SettingsOptions";
@@ -15,6 +15,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
   const { theme, setTheme } = useTheme();
   const [checked, setChecked] = useState(theme === "dark");
   const { isModalOpen, closeModal } = useOpenAvatarModal();
+  const modalRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const isMobile = useScreenSize();
 
@@ -23,7 +24,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
       let id = `avatar-button-${isMobile ? "mobile" : "desktop"}`;
       const avatarButton = document.getElementById(id);
       const target = event.target as Node;
-      const clickIsOnModal = avatarButton?.contains(target);
+      const clickIsOnModal = avatarButton?.contains(target) || modalRef.current?.contains(target);
 
       if (!clickIsOnModal) {
         closeModal();
@@ -47,6 +48,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
 
   return (
     <div
+      ref={modalRef}
       className="fixed top-0 right-0 z-30 transform-gpu rounded-xl translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px] shadow-xl"
       style={{
         display: isModalOpen ? "block" : "none",
