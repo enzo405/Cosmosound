@@ -8,10 +8,13 @@ export enum TypeCatalog {
 }
 
 export interface Catalog {
-  id: number;
+  id: string;
   title: string; // title of the Catalog
   owner: Artist; // User that created the Catalog
-  musics: Array<Music>; // musics of the catalog
   thumbnail: string; // thumbnail of the catalog
   type: TypeCatalog;
+}
+
+export interface CatalogWithMusic extends Catalog {
+  musics: Array<Music>; // musics of the catalog
 }

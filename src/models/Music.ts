@@ -2,7 +2,7 @@ import { Catalog } from "./Catalog";
 import { Artist } from "./User";
 
 export interface Music {
-  id: number;
+  id: string;
   title: string; // title of the music
   date_creation: string; // Date in UTC of the creation of the music
   duration: number; // duration time of the music

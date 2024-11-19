@@ -2,7 +2,7 @@ import { Music } from "./Music";
 import { User } from "./User";
 
 export interface Playlist {
-  id: number;
+  id: string;
   title: string; // title of the playlist
   owner: User; // User that created the playlist
   musics: Array<Music>;
