@@ -83,6 +83,7 @@ async def fetch_album_tracks(session, album):
                 "date_creation": date_creation,
                 "duration": track["duration_ms"] // 1000,  # Convert ms to seconds
                 "catalog_id": album["id"],
+                "is_ai": False,
             }
             for track in tracks["items"]
         ]
