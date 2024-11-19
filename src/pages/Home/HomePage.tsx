@@ -1,14 +1,16 @@
 import { type ReactElement } from "react";
 import Suggestions from "./components/Suggestions";
-import MusicService from "services/musicService";
+import CatalogService from "services/catalogService";
+import RecentMusic from "./components/RecentMusic";
 
 function HomePage(): ReactElement {
-  const musics = MusicService.getAllMusic().slice(1, 20);
+  const catalogs = CatalogService.getAllCatalog();
 
   return (
-    <>
-      <Suggestions musics={musics} />
-    </>
+    <div className="flex flex-col gap-10">
+      <Suggestions catalogs={catalogs} />
+      <RecentMusic />
+    </div>
   );
 }
 

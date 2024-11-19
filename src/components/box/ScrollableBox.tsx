@@ -66,7 +66,7 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
 
   return (
     <div className="bg-box-bg rounded-3xl h-full w-full flex flex-col pb-4">
-      <div className="w-full h-min flex py-4 pl-4">
+      <div className="w-full h-min flex py-6 pl-4">
         <span className="mr-auto text-2xl font-bs font-light">{title}</span>
         <span className="flex flex-row gap-3 mr-4">
           <span

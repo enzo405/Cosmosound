@@ -27,4 +27,7 @@ export type IconName =
   | "artistPanel"
   | "playlistadd"
   | "plus"
+  | "verified-label"
+  | "ai-label"
+  | "ellipsis"
   | "trash";

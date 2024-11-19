@@ -1,8 +1,8 @@
-import { Music } from "models/Music";
+import { MusicDetails } from "models/Music";
 import { ReactElement } from "react";
 
 interface MusicInfoProps {
-  music: Music;
+  music: MusicDetails;
 }
 
 export default function MusicInfo({ music }: MusicInfoProps): ReactElement {

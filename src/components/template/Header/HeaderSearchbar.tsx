@@ -40,7 +40,7 @@ function HeaderSearchbar(): ReactElement {
             aria-valuetext={searchValue}
           />
           {searchValue !== "" && (
-            <IoIosClose onClick={() => setSearchValue("")} className="w-8 h-8 cursor-pointer" />
+            <IoIosClose onClick={() => setSearchValue("")} className="size-8 cursor-pointer" />
           )}
         </span>
       </div>

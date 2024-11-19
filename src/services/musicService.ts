@@ -1,19 +1,38 @@
-import { Music } from "models/Music";
+import { MusicDetails } from "models/Music";
 import data from "assets/json/musics.json";
 
-const musicData: Music[] = data as Music[];
+const musicData: MusicDetails[] = data as MusicDetails[];
 
-function getAllMusic(): Music[] {
+function getAllMusic(): MusicDetails[] {
   return musicData;
 }
 
-function getMusicById(id: string): Music | undefined {
+function getMusicById(id: string): MusicDetails | undefined {
   return musicData.find((music) => music.id === id);
+}
+
+function getMusicHistory(): MusicDetails[] {
+  return musicData.filter((music) =>
+    [
+      "6SShrkXpvyKEMslHdCbqJI",
+      "1EDPVGbyPKJPeGqATwXZvN",
+      "2eKoPnGnuHqIpfph45z44W",
+      "6TlZSSNZd397eYRzbu5SaT",
+      "4ffORoAHM64qesY9g2Pihk",
+      "7efju7ceWRoeHSQytZf4e4",
+      "47enw9R1hdkfuxeSjoDQ0N",
+      "65VHUZPZKgaG4SJVRkBPzn",
+      "7stpbtJzoBx1D38egFeT29",
+      "3LpHzQU2CZzZJGdUWV79SI",
+      "2ktANg8ehDgdR1EG1ANsIX",
+    ].includes(music.id),
+  );
 }
 
 const MusicService = {
   getAllMusic,
   getMusicById,
+  getMusicHistory,
 };
 
 export default MusicService;

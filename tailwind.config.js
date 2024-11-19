@@ -17,6 +17,7 @@ export default {
       colors: {
         "music-player-border": "var(--color-music-player-border)",
         "music-player-bg": "var(--color-music-player-bg)",
+        "label-music-verif": "var(--label-music-verif)",
         "dark-custom": "var(--color-dark)",
         "dark-glassy": "var(--color-darkglassy)",
         "grey-inactiv": "var(--color-grey-inactiv)",

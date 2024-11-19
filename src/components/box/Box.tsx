@@ -8,13 +8,13 @@ interface BoxProps {
 
 export default function Box({ title, children }: BoxProps): ReactElement {
   return (
-    <div className="bg-box-bg rounded-3xl h-min w-full flex flex-col pl-4">
+    <div className="bg-box-bg rounded-3xl h-full w-full flex flex-col pb-4">
       {title && (
-        <div className="w-full flex py-4">
-          <span className={titleStyle}>{title}</span>
+        <div className="w-full h-min flex py-6 pl-4">
+          <span className={`${titleStyle}`}>{title}</span>
         </div>
       )}
-      <div className="flex flex-nowrap overflow-x-scroll w-full scroll-smooth">{children}</div>
+      <div className="flex flex-col w-full pl-4">{children}</div>
     </div>
   );
 }

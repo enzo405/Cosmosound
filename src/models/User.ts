@@ -1,7 +1,7 @@
 import { Genre } from "./Music";
 
 export interface User {
-  id: number;
+  id: string;
   name: string; // name of the user
   email: string; // email of the user
   date_creation: string; // Date in UTC of the creation of the account

@@ -35,6 +35,16 @@ const routesConfig: RoutesConfig = {
     getParameter: (_) => "/artist-panel",
     title: "Artist Panel",
   },
+  catalog: {
+    path: "/catalog/:id",
+    getParameter: (idCatalog: string) => `/catalog/${idCatalog}`,
+    title: "Catalog",
+  },
+  artist: {
+    path: "/artist/:id",
+    getParameter: (idArtist: string) => `/artist/${idArtist}`,
+    title: "Artist",
+  },
   legal: { path: "/legal", getParameter: (_) => "/legal", title: "Legal Terms" },
   any: { path: "*", getParameter: (_) => "*", title: DEFAULT_PAGE_TITLE },
 };

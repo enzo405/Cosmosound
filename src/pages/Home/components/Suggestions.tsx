@@ -1,22 +1,22 @@
 import ScrollableBox from "components/box/ScrollableBox";
 import Card from "components/cards/Card";
-import { Music } from "models/Music";
+import { Catalog, TypeCatalog } from "models/Catalog";
 import { ReactElement } from "react";
 
 interface SuggestionsProps {
-  musics: Array<Music>;
+  catalogs: Array<Catalog>;
 }
 
-export default function Suggestions({ musics }: SuggestionsProps): ReactElement {
+export default function Suggestions({ catalogs }: SuggestionsProps): ReactElement {
   return (
     <ScrollableBox
-      children={musics.map((music) => {
+      children={catalogs.map((catalog) => {
         return (
           <Card
-            title={music.title}
-            description={music.artist.artist_name}
-            link={`/music/${music.id}`}
-            thumbnail={music.catalog.thumbnail}
+            title={catalog.title}
+            description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
+            link={`/catalog/${catalog.id}`}
+            thumbnail={catalog.thumbnail}
           />
         );
       })}

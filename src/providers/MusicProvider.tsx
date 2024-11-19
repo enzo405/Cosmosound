@@ -1,6 +1,6 @@
 import { MusicContext } from "context/musicContext";
 import { TypeCatalog } from "models/Catalog";
-import { Music } from "models/Music";
+import { MusicDetails } from "models/Music";
 import { Artist, Media } from "models/User";
 import React, { PropsWithChildren, useMemo } from "react";
 import { useState } from "react";
@@ -18,15 +18,15 @@ export const MusicProvider: React.FC<PropsWithChildren> = ({ children }) => {
     genre: { name: "Metal" },
     social_media: [{ media: Media.SPOTIFY, link: "" }],
   };
-  const defaultMusic: Music = {
-    id: 1,
+  const defaultMusic: MusicDetails = {
+    id: "1",
     artist: artistTemp,
     title: "The Emptiness Machine",
     duration: 260,
     date_creation: "10-10-2024",
     genres: [{ name: "Metal" }],
     catalog: {
-      id: 1,
+      id: "1",
       type: TypeCatalog.ALBUM,
       title: "From Zero",
       owner: artistTemp,
@@ -35,7 +35,7 @@ export const MusicProvider: React.FC<PropsWithChildren> = ({ children }) => {
     },
   };
 
-  const [music, setMusic] = useState<Music>(defaultMusic);
+  const [music, setMusic] = useState<MusicDetails>(defaultMusic);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [soundValue, setSoundValue] = useState<number>(50);
   const [time, setTime] = useState<number>(0); // seconds

@@ -42,12 +42,12 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
               />
               <Icon
                 iconName={isPlaying ? "playButton" : "pauseButton"}
-                className="min-w-8 w-8 min-h-8 h-8 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+                className="size-8 min-w-8 min-h-8 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
                 onClick={handleIsPlaying}
               />
               <Icon
                 iconName="next-music"
-                className="min-w-6 w-6 min-h-6 h-6 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+                className="size-6 min-w-6 min-h-6 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
                 onClick={handleNextMusic}
               />
             </div>
@@ -67,17 +67,17 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
             <div className="flex flex-row items-center gap-3">
               <Icon
                 iconName="previous-music"
-                className="md:w-8 md:h-8 w-6 h-6 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+                className="md:w-8 md:h-8 size-6 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
                 onClick={handlePreviousMusic}
               />
               <Icon
                 iconName={isPlaying ? "playButton" : "pauseButton"}
-                className="md:w-10 md:h-10 w-8 h-8 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+                className="md:w-10 md:h-10 size-8 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
                 onClick={handleIsPlaying}
               />
               <Icon
                 iconName="next-music"
-                className="md:w-8 md:h-8 w-6 h-6 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+                className="md:w-8 md:h-8 size-6 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
                 onClick={handleNextMusic}
               />
             </div>
@@ -88,7 +88,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
           <div className="flex flex-row gap-1 items-center w-[12%]" onWheel={onWheel}>
             <Icon
               iconName={getSoundIcon()}
-              className="min-h-5 min-w-5 w-5 h-5 fill-primary-orange cursor-pointer"
+              className="min-h-5 min-w-5 size-5 fill-primary-orange cursor-pointer"
               onClick={() => setSoundValue(soundValue === 0 ? 50 : 0)}
             />
             <SoundSlider sound={soundValue} setSound={setSoundValue} />
