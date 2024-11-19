@@ -1,9 +1,11 @@
 import json
 import random
 from datetime import datetime
-import spotipy
+import asyncio
+import aiohttp
 from spotipy.oauth2 import SpotifyClientCredentials
 from conf import CLIENT_SECRET, CLIENT_ID
+from spotipy import Spotify
 
 # File paths
 artist_names_path = "src/assets/json/artist_name.json"
@@ -14,30 +16,29 @@ genres_output_path = "src/assets/json/genres.json"
 
 # Initialize Spotify API client
 credentials = SpotifyClientCredentials(client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
-spotify = spotipy.Spotify(client_credentials_manager=credentials)
+spotify = Spotify(client_credentials_manager=credentials)
 
 
-# Fetch genres from Spotify
-def fetch_genres():
+async def fetch_genres():
     try:
-        response = spotify.recommendation_genre_seeds()
-        return response.get("genres", [])
+        return spotify.recommendation_genre_seeds().get("genres", [])
     except Exception as e:
         print(f"Error fetching genres: {e}")
         return []
 
 
 def album_type_to_enum(album_type):
+    print("album type to enum")
     if album_type.upper() == "ALBUM":
         return 1
     elif album_type.upper() == "SINGLE":
         return 2
-    elif album_type.upper() == "ALBUM":
+    elif album_type.upper() == "COMPILATION":
         return 0
 
 
-# Fetch artist data, including picture, Spotify link, and genres
-def fetch_artist_data(artist_name):
+async def fetch_artist_data(session, artist_name):
+    print(f"fetching artist {artist_name}")
     try:
         results = spotify.search(q=f"artist:{artist_name}", type="artist", limit=1)
         if results["artists"]["items"]:
@@ -52,90 +53,51 @@ def fetch_artist_data(artist_name):
     return None, None, None, []
 
 
-# Fetch artist's catalogs (albums, singles, EPs)
-def fetch_artist_catalogs(artist_id):
+async def fetch_artist_catalogs(session, artist_id):
+    print(f"fetching artist catalog {artist_id}")
     try:
         albums = spotify.artist_albums(artist_id, limit=5)["items"]
-        catalogs = []
-        for album in albums:
-            catalogs.append(
-                {
-                    "id": album["id"],
-                    "title": album["name"],
-                    "thumbnail": album["images"][0]["url"] if album["images"] else None,
-                    "type": album_type_to_enum(album["album_type"]),
-                }
-            )
-        return catalogs
+        return [
+            {
+                "id": album["id"],
+                "title": album["name"],
+                "thumbnail": album["images"][0]["url"] if album["images"] else None,
+                "type": album_type_to_enum(album["album_type"]),
+            }
+            for album in albums
+        ]
     except Exception as e:
         print(f"Error fetching catalogs for artist ID {artist_id}: {e}")
         return []
 
 
-# Fetch top tracks for an artist
-def fetch_artist_tracks(artist_id):
+async def fetch_album_tracks(session, album):
+    print(f"fetching album tracks {album['title']}")
     try:
-        tracks = spotify.artist_top_tracks(artist_id)["tracks"][:5]
-        musics = []
-        for track in tracks:
-            musics.append(
-                {
-                    "id": track["id"],
-                    "title": track["name"],
-                    "date_creation": track["album"]["release_date"],
-                    "duration": track["duration_ms"] // 1000,  # Convert ms to seconds
-                    "catalog_id": track["album"]["id"],
-                }
-            )
-        return musics
+        tracks = spotify.album_tracks(album["id"])
+        date_creation = spotify.album(album["id"])["release_date"]
+        return [
+            {
+                "id": track["id"],
+                "title": track["name"],
+                "date_creation": date_creation,
+                "duration": track["duration_ms"] // 1000,  # Convert ms to seconds
+                "catalog_id": album["id"],
+            }
+            for track in tracks["items"]
+        ]
     except Exception as e:
-        print(f"Error fetching tracks for artist ID {artist_id}: {e}")
+        print(f"Error fetching tracks of the album {album['id']}: {e}")
         return []
 
 
-# Ensure all catalogs referenced by tracks are fetched
-def fetch_catalog_if_missing(catalog_id):
-    try:
-        # Check if the catalog is already in the list
-        existing_catalog = next((c for c in catalogs if c["id"] == catalog_id), None)
-        if existing_catalog:
-            return existing_catalog
-
-        # Fetch the catalog directly from Spotify
-        album = spotify.album(catalog_id)
-        if album:
-            catalog = {
-                "id": album["id"],
-                "title": album["name"],
-                "thumbnail": album["images"][0]["url"] if album["images"] else None,
-                "type": album_type_to_enum(album["album_type"]),
-                "owner": None,
-                "musics": [],
-            }
-            catalogs.append(catalog)
-            return catalog
-    except Exception as e:
-        print(f"Error fetching catalog with ID {catalog_id}: {e}")
-    return None
-
-
-# Fetch genres
-all_genres = fetch_genres()
-
-# Load artist names
-with open(artist_names_path, "r") as artist_file:
-    artist_names = json.load(artist_file)
-
-# Generate artists, catalogs, and musics
-artists = []
-catalogs = []
-musics = []
-
-for i, name in enumerate(artist_names, start=1):
-    artist_id, picture_profile, spotify_link, genres = fetch_artist_data(name)
+async def process_artist(session, artist_name, all_genres, artist_index):
+    artist_id, picture_profile, spotify_link, genres = await fetch_artist_data(
+        session, artist_name
+    )
     if not artist_id:
-        print(f"Artist not found for name: {name}. Skipping...")
-        continue
+        print(f"Artist not found for name: {artist_name}. Skipping...")
+        return None, [], []
 
     # Use Spotify's genres if available, else fallback to random genres
     artist_genres = (
@@ -143,62 +105,86 @@ for i, name in enumerate(artist_names, start=1):
     )
 
     artist_data = {
-        "id": int(i),
-        "name": name,
-        "email": f"{name.lower().replace(' ', '_')}@example.com",
+        "id": int(artist_index),
+        "name": artist_name,
+        "email": f"{artist_name.lower().replace(' ', '_')}@example.com",
         "date_creation": datetime.now().isoformat() + "Z",
-        "picture_profile": picture_profile or f"https://picsum.photos/seed/{i}/200",
+        "picture_profile": picture_profile
+        or f"https://picsum.photos/seed/{artist_index}/200",
         "followers": random.randint(10, 100000),
         "followings": [],
         "social_media": [{"media": 1, "link": spotify_link}],
         "genre": {"name": random.choice(artist_genres)},
-        "artist_name": name,
+        "artist_name": artist_name,
     }
-    artists.append(artist_data)
 
-    # Fetch artist's catalogs
-    artist_catalogs = fetch_artist_catalogs(artist_id)
+    artist_catalogs = await fetch_artist_catalogs(session, artist_id)
+    catalogs = []
+    musics = []
+
     for catalog in artist_catalogs:
         catalog["owner"] = artist_data
         catalog["musics"] = []
         catalogs.append(catalog)
 
-    # Fetch artist's top tracks
-    artist_tracks = fetch_artist_tracks(artist_id)
-    for track in artist_tracks:
-        catalog = fetch_catalog_if_missing(track["catalog_id"])
-        if catalog and not catalog.get("owner"):
-            catalog["owner"] = artist_data
-
-        musics.append(
-            {
-                "id": track["id"],
-                "title": track["title"],
-                "date_creation": track["date_creation"],
-                "duration": track["duration"],
-                "artist": artist_data,
-                "genres": [{"name": g} for g in artist_genres],
-                "catalog": catalog,
-            }
-        )
-
-        # Link the track to the catalog
-        if catalog:
+        album_tracks = await fetch_album_tracks(session, catalog)
+        for track in album_tracks:
+            musics.append(
+                {
+                    "id": track["id"],
+                    "title": track["title"],
+                    "date_creation": track["date_creation"],
+                    "duration": track["duration"],
+                    "artist": artist_data,
+                    "genres": [{"name": g} for g in artist_genres],
+                    "catalog": catalog,
+                }
+            )
             catalog["musics"].append(track)
 
-# Write data to JSON files
-with open(artists_output_path, "w") as artist_file:
-    json.dump(artists, artist_file, indent=4)
+    return artist_data, catalogs, musics
 
-with open(catalogs_output_path, "w") as catalogs_file:
-    json.dump(catalogs, catalogs_file, indent=4)
 
-with open(musics_output_path, "w") as musics_file:
-    json.dump(musics, musics_file, indent=4)
+async def main():
+    async with aiohttp.ClientSession() as session:
+        # Fetch genres
+        all_genres = await fetch_genres()
 
-with open(genres_output_path, "w") as genres_file:
-    json.dump(all_genres, genres_file, indent=4)
+        # Load artist names
+        with open(artist_names_path, "r") as artist_file:
+            artist_names = json.load(artist_file)
 
-print(
-    f"Generated {artists_output_path}, {catalogs_output_path}, {musics_output_path}, and {genres_output_path} successfully."
-)
+        tasks = [
+            process_artist(session, name, all_genres, i)
+            for i, name in enumerate(artist_names, start=1)
+        ]
+
+        results = await asyncio.gather(*tasks)
+
+        artists, catalogs, musics = [], [], []
+        for artist, artist_catalogs, artist_musics in results:
+            if artist:
+                artists.append(artist)
+                catalogs.extend(artist_catalogs)
+                musics.extend(artist_musics)
+
+        # Write data to JSON files
+        with open(artists_output_path, "w") as artist_file:
+            json.dump(artists, artist_file, indent=4)
+
+        with open(catalogs_output_path, "w") as catalogs_file:
+            json.dump(catalogs, catalogs_file, indent=4)
+
+        with open(musics_output_path, "w") as musics_file:
+            json.dump(musics, musics_file, indent=4)
+
+        with open(genres_output_path, "w") as genres_file:
+            json.dump(all_genres, genres_file, indent=4)
+
+        print(
+            f"Generated {artists_output_path}, {catalogs_output_path}, {musics_output_path}, and {genres_output_path} successfully."
+        )
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
