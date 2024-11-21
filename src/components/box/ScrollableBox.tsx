@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import ArrowLeft from "components/icons/ArrowLeft";
 import ArrowRight from "components/icons/ArrowRight";
+import { titleStyle } from "./styles";
 
 interface ScrollableBoxProps {
   title: string;
@@ -67,7 +68,7 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
   return (
     <div className="bg-box-bg rounded-3xl h-full w-full flex flex-col pb-4">
       <div className="w-full h-min flex py-6 pl-4">
-        <span className="mr-auto text-2xl font-bs font-light">{title}</span>
+        <span className={titleStyle}>{title}</span>
         <span className="flex flex-row gap-3 mr-4">
           <span
             onClick={scrollLeft}
@@ -84,7 +85,7 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
       <div
         onScroll={updateScrollButtons}
         ref={scrollContainerRef}
-        className="scrollbar-thin flex flex-nowrap overflow-x-scroll w-full h-full scroll-smooth pl-4 gap-2">
+        className="scrollbar-none flex flex-nowrap overflow-x-scroll w-full h-full scroll-smooth pl-4 gap-2">
         {children}
       </div>
     </div>

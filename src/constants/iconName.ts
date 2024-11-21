@@ -7,6 +7,7 @@ export type IconName =
   | "compass-orange"
   | "heart-black"
   | "heart-orange"
+  | "heart-orange-empty"
   | "homeIcon-black"
   | "homeIcon-orange"
   | "previous-music"

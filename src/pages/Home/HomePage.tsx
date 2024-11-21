@@ -4,7 +4,7 @@ import CatalogService from "services/catalogService";
 import RecentMusic from "./components/RecentMusic";
 
 function HomePage(): ReactElement {
-  const catalogs = CatalogService.getAllCatalog();
+  const catalogs = CatalogService.getAllCatalog().slice(1, 20);
 
   return (
     <div className="flex flex-col gap-10">

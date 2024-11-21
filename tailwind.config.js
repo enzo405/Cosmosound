@@ -1,3 +1,5 @@
+const plugin = require("tailwindcss/plugin");
+
 export default {
   darkMode: ["selector", '[data-mode="dark"]'],
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
@@ -41,7 +43,41 @@ export default {
         "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.4)",
         "music-player": "0 25px 60px 0px var(--color-shadow-music-player)",
       },
+      keyframes: {
+        pop: {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.1)" },
+          "100%": { transform: "scale(1)" },
+        },
+      },
+      animation: {
+        pop: "pop 0.3s ease-in-out",
+      },
     },
   },
-  plugins: [require("tailwind-scrollbar")],
+  plugins: [
+    require("tailwind-scrollbar"),
+    plugin(function ({ addUtilities, theme, e }) {
+      const sizes = theme("spacing");
+      const newUtilities = Object.entries(sizes).reduce((acc, [key, value]) => {
+        acc[`.min-size-${e(key)}`] = {
+          minWidth: value,
+          minHeight: value,
+        };
+        acc[`.max-size-${e(key)}`] = {
+          maxWidth: value,
+          maxHeight: value,
+        };
+        acc[`.size-${e(key)}`] = {
+          minWidth: value,
+          minHeight: value,
+          maxWidth: value,
+          maxHeight: value,
+        };
+        return acc;
+      }, {});
+
+      addUtilities(newUtilities, ["responsive"]);
+    }),
+  ],
 };

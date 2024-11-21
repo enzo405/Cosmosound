@@ -17,17 +17,12 @@ export default function Card({
   className = "",
 }: CardProps): ReactElement {
   const navigate = useNavigate();
-  const cardStyle = "border border-dark-glassy rounded-2xl p-4 flex flex-col gap-2";
 
   return (
     <div
       onClick={() => navigate(link)}
-      className={`group cursor-pointer h-52 w-44 min-h-52 min-w-44 max-h-52 max-w-44 ${cardStyle} ${className}`}>
-      <img
-        className="h-full w-full rounded-lg object-cover select-none"
-        src={thumbnail}
-        alt={title}
-      />
+      className={`group cursor-pointer min-h-44 min-w-36 sm:min-h-52 sm:min-w-44 max-h-44 max-w-36 sm:max-h-52 sm:max-w-44 border border-dark-glassy rounded-2xl p-2 sm:p-4 flex flex-col gap-2 ${className}`}>
+      <img className="h-full w-full rounded-lg object-cover" src={thumbnail} alt={title} />
       <div className="h-2/6 overflow-hidden cursor-pointer">
         <div className="group-hover:underline text-sm font-medium truncate">{title}</div>
         <div className="group-hover:underline text-xs text-gray-500 truncate">{description}</div>
