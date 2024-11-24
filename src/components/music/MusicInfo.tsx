@@ -1,5 +1,6 @@
 import { MusicDetails } from "models/Music";
 import { ReactElement } from "react";
+import ArtistInfo from "./ArtistInfo";
 
 interface MusicInfoProps {
   music: MusicDetails;
@@ -13,14 +14,16 @@ export default function MusicInfo({ music }: MusicInfoProps): ReactElement {
         src={music.catalog.thumbnail}
         alt={`${music.title} ${music?.artist.artist_name}`}
       />
-      <span className="flex flex-col items-start w-full overflow-hidden">
-        <p className="font-bold text-dark-custom text-sm xsm:text-base md:text-lg w-full overflow-hidden whitespace-nowrap text-ellipsis">
+      <span className="flex flex-col items-start w-full overflow-hidden lg:gap-1">
+        <p className="font-bold text-dark-custom text-sm xsm:text-base w-full truncate">
           {music.title}
         </p>
         <span className="flex flex-row gap-1 items-center text-music-player-artist font-semibold text-sm">
-          <p className="cursor-pointer hover:underline">{music.artist.artist_name}</p>
-          <span className="hidden sm:block">-</span>
-          <p className="hidden sm:block cursor-pointer hover:underline">{music.catalog.title}</p>
+          <ArtistInfo artist={music.artist} />
+          <span className="hidden lg:block">-</span>
+          <p className="hidden lg:block cursor-pointer hover:underline truncate">
+            {music.catalog.title}
+          </p>
         </span>
       </span>
     </div>

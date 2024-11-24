@@ -13,6 +13,8 @@ export type IconName =
   | "previous-music"
   | "playButton"
   | "pauseButton"
+  | "playButton-opek"
+  | "pauseButton-opek"
   | "next-music"
   | "volume-high"
   | "volume-low"

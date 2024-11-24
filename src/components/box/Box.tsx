@@ -14,7 +14,7 @@ export default function Box({ title, children }: BoxProps): ReactElement {
           <span className={`${titleStyle}`}>{title}</span>
         </div>
       )}
-      <div className="flex flex-col w-full pl-4">{children}</div>
+      <div className="flex flex-col w-full px-2 sm:px-4 gap-2">{children}</div>
     </div>
   );
 }
