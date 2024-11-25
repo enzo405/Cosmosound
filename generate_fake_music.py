@@ -136,6 +136,7 @@ async def process_artist(session, artist_name, all_genres, artist_index):
                     "title": track["title"],
                     "date_creation": track["date_creation"],
                     "duration": track["duration"],
+                    "is_ai": False,
                     "artist": artist_data,
                     "genres": [{"name": g} for g in artist_genres],
                     "catalog": catalog,
@@ -187,5 +188,4 @@ async def main():
         )
 
 
-if __name__ == "__main__":
-    asyncio.run(main())
+asyncio.run(main())
