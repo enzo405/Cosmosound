@@ -35,7 +35,7 @@ export default {
         "secondary-orange": "var(--color-secondary-orange)",
         "searchbar-white": "var(--color-searchbar-white)",
         "settings-divider": "var(--color-settings-divider)",
-        "settings-text-grey": "var(--color-settings-text-grey)",
+        "dark-grey": "var(--color-dark-grey)",
         "music-player-artist": "var(--color-shadow-music-player)",
         "brown-music-player-dot": "var(--color-brown-music-player-dot)",
       },

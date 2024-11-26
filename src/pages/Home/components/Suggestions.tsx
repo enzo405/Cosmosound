@@ -13,6 +13,7 @@ export default function Suggestions({ catalogs }: SuggestionsProps): ReactElemen
       children={catalogs.map((catalog) => {
         return (
           <Card
+            key={catalog.id}
             title={catalog.title}
             description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
             link={`/catalog/${catalog.id}`}

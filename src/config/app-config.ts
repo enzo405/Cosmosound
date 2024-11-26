@@ -40,6 +40,11 @@ const routesConfig: RoutesConfig = {
     getParameter: (idCatalog: string) => `/catalog/${idCatalog}`,
     title: "Catalog",
   },
+  catalogEdit: {
+    path: "/catalog/:id/edit",
+    getParameter: (idCatalog: string) => `/catalog/${idCatalog}/edit`,
+    title: "Edit Catalog",
+  },
   artist: {
     path: "/artist/:id",
     getParameter: (idArtist: string) => `/artist/${idArtist}`,

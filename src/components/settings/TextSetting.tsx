@@ -1,0 +1,18 @@
+import { Icon } from "components/icons/Icon";
+import { IconName } from "constants/iconName";
+import { ReactElement } from "react";
+
+interface TextSettingProps {
+  iconName: IconName;
+  text: string;
+  onClick: () => void;
+}
+
+export default function TextSetting({ iconName, text, onClick }: TextSettingProps): ReactElement {
+  return (
+    <span onClick={onClick} className="inline-flex w-full items-center cursor-pointer">
+      <Icon className="size-5 mr-2" iconName={iconName} />
+      <span className="w-max text-dark-grey">{text}</span>
+    </span>
+  );
+}

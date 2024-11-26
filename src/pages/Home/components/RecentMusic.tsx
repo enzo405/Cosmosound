@@ -12,7 +12,7 @@ export default function RecentMusic({}: RecentMusicProps): ReactElement {
     <Box
       title="Recent Music"
       children={musicHistory.map((m) => {
-        return <MusicItem music={m} />;
+        return <MusicItem music={m} key={m.id} />;
       })}
     />
   );
