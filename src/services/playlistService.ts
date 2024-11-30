@@ -10,6 +10,24 @@ function getMyPlaylist(): Playlist[] {
       owner: UserService.getUser(),
       musics: MusicService.getMusicHistory(),
     },
+    {
+      id: "2",
+      title: ":)",
+      owner: UserService.getUser(),
+      musics: MusicService.getMusicHistory(),
+    },
+    {
+      id: "3",
+      title: "Your Top Songs 2023",
+      owner: UserService.getUser(),
+      musics: MusicService.getMusicHistory(),
+    },
+    {
+      id: "4",
+      title: "To Listen Later",
+      owner: UserService.getUser(),
+      musics: MusicService.getMusicHistory(),
+    },
   ];
 }
 

@@ -2,11 +2,12 @@ import { Icon } from "components/icons/Icon";
 import { routesConfig } from "config/app-config";
 import { useMusic } from "hooks/useMusic";
 import { MusicDetails } from "models/Music";
-import { ReactElement, useState } from "react";
+import { ReactElement, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatDuration, formatTime } from "utils/date";
 import ArtistInfo from "./ArtistInfo";
 import MusicSettings from "components/settings/MusicSettings";
+import { enqueueSnackbar } from "notistack";
 
 interface MusicItemProps {
   music: MusicDetails;
@@ -20,11 +21,24 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
   const [isAnimating, setIsAnimating] = useState(false);
   const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
+  const musicItemRef = useRef<HTMLInputElement>(null);
+
+  const dropdownSettingPosition =
+    musicItemRef?.current?.getBoundingClientRect()?.bottom! > window.innerHeight / 2; // Divided by 2 since the header + music player takes a lot of space
 
   const handleClickHeart = () => {
-    setIsLiked(!isLiked);
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 300);
+    if (isLiked) {
+      enqueueSnackbar(`Song removed to your favourite songs`, {
+        variant: "success",
+      });
+    } else {
+      enqueueSnackbar(`Song added to your favourite songs`, {
+        variant: "success",
+      });
+    }
+    setIsLiked(!isLiked);
   };
 
   const handleClickSettings = () => {
@@ -64,7 +78,7 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
   const isCurrentMusicPlaying = isPlaying && music.id === playingMusic.id;
 
   return (
-    <div className="relative">
+    <div className="relative" ref={musicItemRef}>
       <div
         className={`flex flex-row w-full p-1 justify-between h-16 md:h-[72px] lg:h-20 ${playingMusic.id == music.id ? "bg-slate-200" : "hover:bg-slate-100"} rounded-xl`}>
         <div
@@ -135,6 +149,7 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
           />
           {displaySettings && (
             <MusicSettings
+              dropdownPosition={dropdownSettingPosition ? "top" : "bottom"}
               music={music}
               onDeleteSong={() => navigate(routesConfig.catalogEdit.getParameter(music.catalog.id))}
               onCloseSetting={() => setDisplaySettings(false)}

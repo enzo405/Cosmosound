@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 interface TextSettingProps {
   iconName: IconName;
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function TextSetting({ iconName, text, onClick }: TextSettingProps): ReactElement {
