@@ -35,18 +35,20 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
 
   const onWheelHandler = (event: WheelEvent) => {
     // Avoid scroll in the page
-    event.preventDefault();
+    if (canScrollLeft || canScrollRight) {
+      event.preventDefault();
 
-    // Vertical Mouse Wheel
-    let scrollBy;
-    if (event.deltaY !== 0) {
-      scrollBy = event.deltaY < 0 ? -75 : 75;
+      // Vertical Mouse Wheel
+      let scrollBy;
+      if (event.deltaY !== 0) {
+        scrollBy = event.deltaY < 0 ? -75 : 75;
+      }
+      // Horizontal Mouse Wheel
+      else if (event.deltaX) {
+        scrollBy = event.deltaX < 0 ? -75 : 75;
+      }
+      scrollContainerRef.current?.scrollBy({ left: scrollBy, behavior: "instant" });
     }
-    // Horizontal Mouse Wheel
-    else if (event.deltaX) {
-      scrollBy = event.deltaX < 0 ? -75 : 75;
-    }
-    scrollContainerRef.current?.scrollBy({ left: scrollBy, behavior: "instant" });
   };
 
   // On component load

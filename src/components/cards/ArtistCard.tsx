@@ -1,22 +1,15 @@
 import { Icon } from "components/icons/Icon";
+import { routesConfig } from "config/app-config";
+import { Artist } from "models/User";
 import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface CardProps {
-  thumbnail: string;
-  title: string;
-  description: string;
-  link: string;
+interface ArtistCardProps {
+  artist: Artist;
   className?: string;
 }
 
-export default function Card({
-  thumbnail,
-  title,
-  description,
-  link,
-  className = "",
-}: CardProps): ReactElement {
+export default function ArtistCard({ artist, className = "" }: ArtistCardProps): ReactElement {
   const navigate = useNavigate();
   const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
@@ -26,7 +19,7 @@ export default function Card({
     const target = event.target as Node;
 
     if (!likeBtn?.contains(target)) {
-      navigate(link);
+      navigate(routesConfig.artist.getParameter(artist.id.toString()));
     }
   };
 
@@ -35,22 +28,23 @@ export default function Card({
       onMouseEnter={() => setDisplayLikeBtn(true)}
       onMouseLeave={() => setDisplayLikeBtn(false)}
       onClick={(e) => handleOnClick(e)}
-      className={`relative flex flex-col items-center group cursor-pointer min-w-36 max-w-36 sm:min-w-40 sm:max-w-40 min-h-44 max-h-44 sm:min-h-52 sm:max-h-52 border border-dark-glassy rounded-2xl p-2 gap-2 ${className}`}>
+      className={`relative flex flex-col items-center group cursor-pointer min-w-[8.5rem] max-w-[8.5rem] border border-dark-glassy rounded-2xl p-2 md:pt-2 md:pb-5 gap-2 mx-0.5 ${className}`}>
       <div className="w-full flex flex-row justify-center">
         <img
-          className="h-full w-[95%] rounded-lg object-contain"
-          src={thumbnail}
-          alt={`${title} ${description}`}
+          className="h-24 w-24 md:h-28 md:w-28 rounded-full object-cover pt-1"
+          src={artist.picture_profile}
+          alt={artist.artist_name}
         />
       </div>
-      <div className="h-2/6 flex flex-col cursor-pointer w-full ml-4">
-        <div className="text-sm font-medium truncate">{title}</div>
-        <div className="text-xs text-gray-500 truncate">{description}</div>
+      <div className="flex flex-col cursor-pointer w-full items-center">
+        <div className="group-hover:underline underline-offset-2 text-sm font-medium truncate pb-6">
+          {artist.artist_name}
+        </div>
       </div>
       {displayLikeBtn && (
         <div id="likeBtn" className="z-10 absolute bottom-1 right-1">
           <Icon
-            className="size-5"
+            className="size-6"
             iconName={isLiked ? "heart-orange-empty" : "heart-orange"}
             onClick={() => setIsLiked(!isLiked)}
           />
