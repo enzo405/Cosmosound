@@ -1,12 +1,12 @@
-import { Music } from "models/Music";
+import { MusicDetails } from "models/Music";
 import { createContext } from "react";
 
 interface MusicContextProps {
-  music: Music;
+  playingMusic: MusicDetails;
   soundValue: number;
   isPlaying: boolean;
   time: number;
-  setMusic: React.Dispatch<React.SetStateAction<Music>>;
+  setPlayingMusic: React.Dispatch<React.SetStateAction<MusicDetails>>;
   setSoundValue: React.Dispatch<React.SetStateAction<number>>;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   setTime: React.Dispatch<React.SetStateAction<number>>;

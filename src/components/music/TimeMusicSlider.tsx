@@ -23,7 +23,7 @@ export default function TimeMusicSlider({
 
   return (
     <div className="w-full flex items-center mx-2 relative">
-      <span className="mr-2 text-soft-gray text-sm font-medium">{stringifyTime(time)}</span>
+      <span className="mr-2 text-soft-gray text-sm font-semibold">{stringifyTime(time)}</span>
       <label htmlFor="music-slider" className="sr-only">
         Music timestamp input
       </label>
@@ -41,7 +41,7 @@ export default function TimeMusicSlider({
         aria-valuenow={time}
         aria-valuetext={stringifyTime(time)}
       />
-      <span className="ml-2 text-soft-gray text-sm font-medium">{stringifyTime(duration)}</span>
+      <span className="ml-2 text-soft-gray text-sm font-semibold">{stringifyTime(duration)}</span>
 
       <style>{`
         #music-slider {

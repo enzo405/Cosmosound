@@ -1,4 +1,4 @@
-import { Music } from "./Music";
+import { Music, MusicDetails } from "./Music";
 import { Artist } from "./User";
 
 export enum TypeCatalog {
@@ -8,10 +8,13 @@ export enum TypeCatalog {
 }
 
 export interface Catalog {
-  id: number;
-  title: string; // title of the Catalog
-  owner: Artist; // User that created the Catalog
-  musics: Array<Music>; // musics of the catalog
-  thumbnail: string; // thumbnail of the catalog
+  id: string;
+  title: string;
+  owner: Artist;
+  thumbnail: string;
   type: TypeCatalog;
+}
+
+export interface CatalogWithMusic extends Catalog {
+  musics: Array<MusicDetails> | Array<Music>;
 }

@@ -1,0 +1,1237 @@
+[
+    {
+        "id": 1,
+        "name": "Oathbreaker",
+        "email": "oathbreaker@example.com",
+        "date_creation": "2024-11-25T00:09:27.401391Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb14cba66d6224325ae526805b",
+        "followers": 17631,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/5kDp9RPBnmQzBLwVnVyVvz"
+            }
+        ],
+        "genre": {
+            "name": "blackened hardcore"
+        },
+        "artist_name": "Oathbreaker"
+    },
+    {
+        "id": 2,
+        "name": "Tallah",
+        "email": "tallah@example.com",
+        "date_creation": "2024-11-25T00:09:28.315291Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebf41950669f1c9eb45685884a",
+        "followers": 14173,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6Idb4IHX4Mf8IlB6sXcsdf"
+            }
+        ],
+        "genre": {
+            "name": "nu-metalcore"
+        },
+        "artist_name": "Tallah"
+    },
+    {
+        "id": 3,
+        "name": "Synestia",
+        "email": "synestia@example.com",
+        "date_creation": "2024-11-25T00:09:29.112720Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1543b36dde39fbf4b402910f",
+        "followers": 84431,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/5q6QQFwE4elu0q1HA10HTb"
+            }
+        ],
+        "genre": {
+            "name": "symphonic deathcore"
+        },
+        "artist_name": "Synestia"
+    },
+    {
+        "id": 4,
+        "name": "Paleface Swiss",
+        "email": "paleface_swiss@example.com",
+        "date_creation": "2024-11-25T00:09:29.885767Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb371ad64a15a3ea618035ca3d",
+        "followers": 78122,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/467M2s2YxXdlL2ZpDUNL3A"
+            }
+        ],
+        "genre": {
+            "name": "slamming deathcore"
+        },
+        "artist_name": "Paleface Swiss"
+    },
+    {
+        "id": 5,
+        "name": "Make Them Suffer",
+        "email": "make_them_suffer@example.com",
+        "date_creation": "2024-11-25T00:09:30.689226Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb0475c1139bdd0b23787cc96f",
+        "followers": 98803,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/0FZcPgWI3BsFQl4rOAGSHT"
+            }
+        ],
+        "genre": {
+            "name": "australian metalcore"
+        },
+        "artist_name": "Make Them Suffer"
+    },
+    {
+        "id": 6,
+        "name": "Lauren Babic",
+        "email": "lauren_babic@example.com",
+        "date_creation": "2024-11-25T00:09:31.634284Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb2193e86a77d7647ecfd0c52f",
+        "followers": 88047,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6nT7RjBCuuggrafnb43vUX"
+            }
+        ],
+        "genre": {
+            "name": "hel"
+        },
+        "artist_name": "Lauren Babic"
+    },
+    {
+        "id": 7,
+        "name": "Kim Dracula",
+        "email": "kim_dracula@example.com",
+        "date_creation": "2024-11-25T00:09:32.536617Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb760b5cab64307663339b6762",
+        "followers": 30008,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/526TMJFuJibm9j2p9td9Yp"
+            }
+        ],
+        "genre": {
+            "name": "viral rap"
+        },
+        "artist_name": "Kim Dracula"
+    },
+    {
+        "id": 8,
+        "name": "Disembodied Tyrant",
+        "email": "disembodied_tyrant@example.com",
+        "date_creation": "2024-11-25T00:09:33.324314Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1559be72e4f4e35cce0ced44",
+        "followers": 78492,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6Mik5bw5uqwmpwjvc5PGYk"
+            }
+        ],
+        "genre": {
+            "name": "symphonic deathcore"
+        },
+        "artist_name": "Disembodied Tyrant"
+    },
+    {
+        "id": 9,
+        "name": "Deadlands",
+        "email": "deadlands@example.com",
+        "date_creation": "2024-11-25T00:09:34.172913Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb8c55acc131c3acd632bdbd32",
+        "followers": 8186,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/75ItOLlAwbDFJFx3PhyzTc"
+            }
+        ],
+        "genre": {
+            "name": "classical"
+        },
+        "artist_name": "Deadlands"
+    },
+    {
+        "id": 10,
+        "name": "CORPSE",
+        "email": "corpse@example.com",
+        "date_creation": "2024-11-25T00:09:34.910179Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebed2fd5aa8e1c20922c190d30",
+        "followers": 81535,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/7yntSJ6uojO3z6GFUVwhAW"
+            }
+        ],
+        "genre": {
+            "name": "pov: indie"
+        },
+        "artist_name": "CORPSE"
+    },
+    {
+        "id": 11,
+        "name": "Citizen Soldier",
+        "email": "citizen_soldier@example.com",
+        "date_creation": "2024-11-25T00:09:35.646716Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb7edd3d627999e8f4899375ae",
+        "followers": 41505,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/7fM0h2CG7zKqKc0jEa1b4R"
+            }
+        ],
+        "genre": {
+            "name": "gymcore"
+        },
+        "artist_name": "Citizen Soldier"
+    },
+    {
+        "id": 12,
+        "name": "Hollywood Undead",
+        "email": "hollywood_undead@example.com",
+        "date_creation": "2024-11-25T00:09:36.669688Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb4159f85a5a40c655380821da",
+        "followers": 74968,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/0CEFCo8288kQU7mJi25s6E"
+            }
+        ],
+        "genre": {
+            "name": "rap rock"
+        },
+        "artist_name": "Hollywood Undead"
+    },
+    {
+        "id": 13,
+        "name": "Skillet",
+        "email": "skillet@example.com",
+        "date_creation": "2024-11-25T00:09:37.635455Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb8d1be46721e37bc398ec96e7",
+        "followers": 75801,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/49bzE5vRBRIota4qeHtQM8"
+            }
+        ],
+        "genre": {
+            "name": "christian alternative rock"
+        },
+        "artist_name": "Skillet"
+    },
+    {
+        "id": 14,
+        "name": "Linkin Park",
+        "email": "linkin_park@example.com",
+        "date_creation": "2024-11-25T00:09:38.580860Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebc7e6bd9e65eab62a53355576",
+        "followers": 82479,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6XyY86QOPPrYVGvF9ch6wz"
+            }
+        ],
+        "genre": {
+            "name": "nu metal"
+        },
+        "artist_name": "Linkin Park"
+    },
+    {
+        "id": 15,
+        "name": "Attila",
+        "email": "attila@example.com",
+        "date_creation": "2024-11-25T00:09:43.065861Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb5cd14ea9fce7f80d61306b9f",
+        "followers": 58811,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/4Uv5bceTJ2h3tLlssUNDNP"
+            }
+        ],
+        "genre": {
+            "name": "deathcore"
+        },
+        "artist_name": "Attila"
+    },
+    {
+        "id": 16,
+        "name": "Sleep Token",
+        "email": "sleep_token@example.com",
+        "date_creation": "2024-11-25T00:09:44.036783Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebdbc568c9d871256b9a3e34a1",
+        "followers": 56434,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/2n2RSaZqBuUUukhbLlpnE6"
+            }
+        ],
+        "genre": {
+            "name": "prog metal"
+        },
+        "artist_name": "Sleep Token"
+    },
+    {
+        "id": 17,
+        "name": "Polyphia",
+        "email": "polyphia@example.com",
+        "date_creation": "2024-11-25T00:09:44.993028Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebd0d5560f6b2ebe39a6d20704",
+        "followers": 2119,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/4vGrte8FDu062Ntj0RsPiZ"
+            }
+        ],
+        "genre": {
+            "name": "instrumental rock"
+        },
+        "artist_name": "Polyphia"
+    },
+    {
+        "id": 18,
+        "name": "Viscera",
+        "email": "viscera@example.com",
+        "date_creation": "2024-11-25T00:09:45.967553Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb4b098173a5cbf7ca03293401",
+        "followers": 19759,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/0iXGgjkn97AolhD6yR3FbO"
+            }
+        ],
+        "genre": {
+            "name": "alt-rock"
+        },
+        "artist_name": "Viscera"
+    },
+    {
+        "id": 19,
+        "name": "Architects",
+        "email": "architects@example.com",
+        "date_creation": "2024-11-25T00:09:46.753053Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb4e7b995ea7cf092e6372c6d2",
+        "followers": 50570,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/3ZztVuWxHzNpl0THurTFCv"
+            }
+        ],
+        "genre": {
+            "name": "melodic metalcore"
+        },
+        "artist_name": "Architects"
+    },
+    {
+        "id": 20,
+        "name": "STARSET",
+        "email": "starset@example.com",
+        "date_creation": "2024-11-25T00:09:47.573919Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebf4961e42a5b4c8869019fd1a",
+        "followers": 97910,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/0kD8IT1CzF7js2XKM9lLLa"
+            }
+        ],
+        "genre": {
+            "name": "future rock"
+        },
+        "artist_name": "STARSET"
+    },
+    {
+        "id": 21,
+        "name": "Metallica",
+        "email": "metallica@example.com",
+        "date_creation": "2024-11-25T00:09:48.629593Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb69ca98dd3083f1082d740e44",
+        "followers": 77602,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/2ye2Wgw4gimLv2eAKyk1NB"
+            }
+        ],
+        "genre": {
+            "name": "old school thrash"
+        },
+        "artist_name": "Metallica"
+    },
+    {
+        "id": 22,
+        "name": "Iron Maiden",
+        "email": "iron_maiden@example.com",
+        "date_creation": "2024-11-25T00:09:49.861950Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebf9978ad4808f6f2723124d19",
+        "followers": 88125,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6mdiAmATAx73kdxrNrnlao"
+            }
+        ],
+        "genre": {
+            "name": "metal"
+        },
+        "artist_name": "Iron Maiden"
+    },
+    {
+        "id": 23,
+        "name": "Daughtry",
+        "email": "daughtry@example.com",
+        "date_creation": "2024-11-25T00:09:52.979837Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb8d77449249782b0163f351a2",
+        "followers": 74937,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/5P5FTygHyx2G57oszR3Wot"
+            }
+        ],
+        "genre": {
+            "name": "alternative metal"
+        },
+        "artist_name": "Daughtry"
+    },
+    {
+        "id": 24,
+        "name": "Falling In Reverse",
+        "email": "falling_in_reverse@example.com",
+        "date_creation": "2024-11-25T00:09:54.014881Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb642bb35794af159840a9bd30",
+        "followers": 92333,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/2CmaKO2zEGJ1NWpS1yfVGz"
+            }
+        ],
+        "genre": {
+            "name": "rap metal"
+        },
+        "artist_name": "Falling In Reverse"
+    },
+    {
+        "id": 25,
+        "name": "Slipknot",
+        "email": "slipknot@example.com",
+        "date_creation": "2024-11-25T00:09:54.930411Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebd0cdb283a7384a0edb665182",
+        "followers": 55679,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/05fG473iIaoy82BF1aGhL8"
+            }
+        ],
+        "genre": {
+            "name": "alternative metal"
+        },
+        "artist_name": "Slipknot"
+    },
+    {
+        "id": 26,
+        "name": "Green Day",
+        "email": "green_day@example.com",
+        "date_creation": "2024-11-25T00:09:55.956783Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb6ff0cd5ef2ecf733804984bb",
+        "followers": 87884,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/7oPftvlwr6VrsViSDV7fJY"
+            }
+        ],
+        "genre": {
+            "name": "rock"
+        },
+        "artist_name": "Green Day"
+    },
+    {
+        "id": 27,
+        "name": "System Of A Down",
+        "email": "system_of_a_down@example.com",
+        "date_creation": "2024-11-25T00:09:57.453165Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb60063d3451ade8f9fab397c2",
+        "followers": 10887,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1"
+            }
+        ],
+        "genre": {
+            "name": "nu metal"
+        },
+        "artist_name": "System Of A Down"
+    },
+    {
+        "id": 28,
+        "name": "Hallow Sanctum",
+        "email": "hallow_sanctum@example.com",
+        "date_creation": "2024-11-25T00:09:58.474362Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb6d989bd34f37944b31d6049d",
+        "followers": 71093,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/2xOZHdIPyqrwZPrl9bHCU5"
+            }
+        ],
+        "genre": {
+            "name": "summer"
+        },
+        "artist_name": "Hallow Sanctum"
+    },
+    {
+        "id": 29,
+        "name": "Spiritbox",
+        "email": "spiritbox@example.com",
+        "date_creation": "2024-11-25T00:09:59.157604Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1f497cb1d8c477c3f5498f03",
+        "followers": 26305,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/4MzJMcHQBl9SIYSjwWn8QW"
+            }
+        ],
+        "genre": {
+            "name": "canadian metalcore"
+        },
+        "artist_name": "Spiritbox"
+    },
+    {
+        "id": 30,
+        "name": "Jinjer",
+        "email": "jinjer@example.com",
+        "date_creation": "2024-11-25T00:09:59.943046Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebed492174d89956bf1f6af3ff",
+        "followers": 84189,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/7o6cOczXTB8ioTAAJTbESf"
+            }
+        ],
+        "genre": {
+            "name": "slayer"
+        },
+        "artist_name": "Jinjer"
+    },
+    {
+        "id": 31,
+        "name": "Bullet For My Valentine",
+        "email": "bullet_for_my_valentine@example.com",
+        "date_creation": "2024-11-25T00:10:01.853406Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb083627f7d306f40cd7ff8893",
+        "followers": 28783,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/7iWiAD5LLKyiox2grgfmUT"
+            }
+        ],
+        "genre": {
+            "name": "post-grunge"
+        },
+        "artist_name": "Bullet For My Valentine"
+    },
+    {
+        "id": 32,
+        "name": "blackfear",
+        "email": "blackfear@example.com",
+        "date_creation": "2024-11-25T00:10:02.841970Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb5b69358acccf50febc7fbe43",
+        "followers": 21590,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6MHcidYh7ctdP2DWep0kkf"
+            }
+        ],
+        "genre": {
+            "name": "alt-rock"
+        },
+        "artist_name": "blackfear"
+    },
+    {
+        "id": 33,
+        "name": "Alestorm",
+        "email": "alestorm@example.com",
+        "date_creation": "2024-11-25T00:10:03.547753Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb5966a725ecd546664b20055e",
+        "followers": 80718,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/3OpqU68JpZlzvjAJj3B2Da"
+            }
+        ],
+        "genre": {
+            "name": "pirate"
+        },
+        "artist_name": "Alestorm"
+    },
+    {
+        "id": 34,
+        "name": "Ice Nine Kills",
+        "email": "ice_nine_kills@example.com",
+        "date_creation": "2024-11-25T00:10:04.665515Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebe8119ccdb928a59489dada04",
+        "followers": 64246,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/52qKfVcIV4GS8A8Vay2xtt"
+            }
+        ],
+        "genre": {
+            "name": "metalcore"
+        },
+        "artist_name": "Ice Nine Kills"
+    },
+    {
+        "id": 35,
+        "name": "Windwaker",
+        "email": "windwaker@example.com",
+        "date_creation": "2024-11-25T00:10:05.715534Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eba230e7e617fd1e686dea2a26",
+        "followers": 86261,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/46le9d4IkW3C6zTxhkuxIS"
+            }
+        ],
+        "genre": {
+            "name": "metalcore"
+        },
+        "artist_name": "Windwaker"
+    },
+    {
+        "id": 36,
+        "name": "Bad Omens",
+        "email": "bad_omens@example.com",
+        "date_creation": "2024-11-25T00:10:06.652148Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb5d4b995885f2d687bb5c48ac",
+        "followers": 5825,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/3Ri4H12KFyu98LMjSoij5V"
+            }
+        ],
+        "genre": {
+            "name": "american metalcore"
+        },
+        "artist_name": "Bad Omens"
+    },
+    {
+        "id": 37,
+        "name": "NF",
+        "email": "nf@example.com",
+        "date_creation": "2024-11-25T00:10:07.499277Z",
+        "picture_profile": "https://i.scdn.co/image/ab67616d0000b273224e3de975885230a45ca8d4",
+        "followers": 36008,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/0WjcdSKSTiNtfM4uQDIPDm"
+            }
+        ],
+        "genre": {
+            "name": "musical advocacy"
+        },
+        "artist_name": "NF"
+    },
+    {
+        "id": 38,
+        "name": "What Lies Below",
+        "email": "what_lies_below@example.com",
+        "date_creation": "2024-11-25T00:10:07.796868Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb79eded82e0453b6e535b66aa",
+        "followers": 1170,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/65KiNVGu9JSwerZgaDZcdj"
+            }
+        ],
+        "genre": {
+            "name": "synth-pop"
+        },
+        "artist_name": "What Lies Below"
+    },
+    {
+        "id": 39,
+        "name": "In This Moment",
+        "email": "in_this_moment@example.com",
+        "date_creation": "2024-11-25T00:10:08.641731Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb285ee23e367e081e90606ea1",
+        "followers": 71214,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6tbLPxj1uQ6vsRQZI2YFCT"
+            }
+        ],
+        "genre": {
+            "name": "post-grunge"
+        },
+        "artist_name": "In This Moment"
+    },
+    {
+        "id": 40,
+        "name": "Emmure",
+        "email": "emmure@example.com",
+        "date_creation": "2024-11-25T00:10:11.718880Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebf96bdaaa18f139e25d218f9e",
+        "followers": 61305,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/1C62FV9Cltn9L4c9jAwCyk"
+            }
+        ],
+        "genre": {
+            "name": "rap metal"
+        },
+        "artist_name": "Emmure"
+    },
+    {
+        "id": 41,
+        "name": "Self Deception",
+        "email": "self_deception@example.com",
+        "date_creation": "2024-11-25T00:10:12.680314Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb33f897957779fb45c74fa562",
+        "followers": 55610,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/0FHW0Lp33r3fvIG0HL4mW0"
+            }
+        ],
+        "genre": {
+            "name": "swedish alternative rock"
+        },
+        "artist_name": "Self Deception"
+    },
+    {
+        "id": 42,
+        "name": "We Came As Romans",
+        "email": "we_came_as_romans@example.com",
+        "date_creation": "2024-11-25T00:10:13.493396Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb2e224c8db29ba890b9299418",
+        "followers": 8717,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6qO6LhD6FuXK5e2PtfAIMz"
+            }
+        ],
+        "genre": {
+            "name": "pop punk"
+        },
+        "artist_name": "We Came As Romans"
+    },
+    {
+        "id": 43,
+        "name": "Powerwolf",
+        "email": "powerwolf@example.com",
+        "date_creation": "2024-11-25T00:10:14.463425Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebfa98bd6af388ecfe167efbd8",
+        "followers": 92768,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/5HFkc3t0HYETL4JeEbDB1v"
+            }
+        ],
+        "genre": {
+            "name": "german power metal"
+        },
+        "artist_name": "Powerwolf"
+    },
+    {
+        "id": 44,
+        "name": "Alex Terrible",
+        "email": "alex_terrible@example.com",
+        "date_creation": "2024-11-25T00:10:15.441437Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebbe251f4f3901c5887569dd7a",
+        "followers": 29176,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/5imFWt9rzlx5iGqS58ArtO"
+            }
+        ],
+        "genre": {
+            "name": "rock-n-roll"
+        },
+        "artist_name": "Alex Terrible"
+    },
+    {
+        "id": 45,
+        "name": "Sidilarsen",
+        "email": "sidilarsen@example.com",
+        "date_creation": "2024-11-25T00:10:16.255327Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb339a17dda0e438bc81b341bf",
+        "followers": 38911,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/0pWJ2WUFCQCikB9LBGRe2U"
+            }
+        ],
+        "genre": {
+            "name": "french rock"
+        },
+        "artist_name": "Sidilarsen"
+    },
+    {
+        "id": 46,
+        "name": "Brand of Sacrifice",
+        "email": "brand_of_sacrifice@example.com",
+        "date_creation": "2024-11-25T00:10:16.979323Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb0fcf3ab9c4f663f516ecd2ca",
+        "followers": 10333,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/4d6Rawrese4OLF1zZCztod"
+            }
+        ],
+        "genre": {
+            "name": "metalcore"
+        },
+        "artist_name": "Brand of Sacrifice"
+    },
+    {
+        "id": 47,
+        "name": "Ultra Vomit",
+        "email": "ultra_vomit@example.com",
+        "date_creation": "2024-11-25T00:10:17.781845Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb630a111200ad88a54f4b735e",
+        "followers": 43461,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/4mnp6YW545j0Qb5PYS9Wmv"
+            }
+        ],
+        "genre": {
+            "name": "neo metal"
+        },
+        "artist_name": "Ultra Vomit"
+    },
+    {
+        "id": 48,
+        "name": "Scorpions",
+        "email": "scorpions@example.com",
+        "date_creation": "2024-11-25T00:10:18.702532Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb7440170c0628c2945da819c3",
+        "followers": 13243,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/27T030eWyCQRmDyuvr1kxY"
+            }
+        ],
+        "genre": {
+            "name": "hard rock"
+        },
+        "artist_name": "Scorpions"
+    },
+    {
+        "id": 49,
+        "name": "Oasis",
+        "email": "oasis@example.com",
+        "date_creation": "2024-11-25T00:10:22.936098Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb0522e98a6f0cf1ddbee9a74f",
+        "followers": 55795,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/2DaxqgrOhkeH0fpeiQq2f4"
+            }
+        ],
+        "genre": {
+            "name": "beatlesque"
+        },
+        "artist_name": "Oasis"
+    },
+    {
+        "id": 50,
+        "name": "Gojira",
+        "email": "gojira@example.com",
+        "date_creation": "2024-11-25T00:10:23.869926Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb96c4949ee078fbef5d5adb68",
+        "followers": 55835,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/0GDGKpJFhVpcjIGF8N6Ewt"
+            }
+        ],
+        "genre": {
+            "name": "french death metal"
+        },
+        "artist_name": "Gojira"
+    },
+    {
+        "id": 51,
+        "name": "Slaughter to Prevail",
+        "email": "slaughter_to_prevail@example.com",
+        "date_creation": "2024-11-25T00:10:24.746564Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eba11684a1f0d1ceacaee7d109",
+        "followers": 65344,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/24Oiw7BlvO1BETecDLJt6m"
+            }
+        ],
+        "genre": {
+            "name": "russian metalcore"
+        },
+        "artist_name": "Slaughter to Prevail"
+    },
+    {
+        "id": 52,
+        "name": "Will Ramos",
+        "email": "will_ramos@example.com",
+        "date_creation": "2024-11-25T00:10:25.572173Z",
+        "picture_profile": "https://i.scdn.co/image/ab67616d0000b273a687aa43dea502c00eb11fc4",
+        "followers": 41542,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/0LQyNolD82BRJeXoEr4bwa"
+            }
+        ],
+        "genre": {
+            "name": "trip-hop"
+        },
+        "artist_name": "Will Ramos"
+    },
+    {
+        "id": 53,
+        "name": "LANDMVRKS",
+        "email": "landmvrks@example.com",
+        "date_creation": "2024-11-25T00:10:26.404146Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebfb2a5ab152daccf48d62ffdd",
+        "followers": 9486,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6G43CiunIxMwb2tQ12vNP6"
+            }
+        ],
+        "genre": {
+            "name": "melodic metalcore"
+        },
+        "artist_name": "LANDMVRKS"
+    },
+    {
+        "id": 54,
+        "name": "thrown",
+        "email": "thrown@example.com",
+        "date_creation": "2024-11-25T00:10:27.362941Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb7e1dcf948c29845bf2b13789",
+        "followers": 17612,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/5eBCPtU2iPbzuMRre9BePt"
+            }
+        ],
+        "genre": {
+            "name": "drum-and-bass"
+        },
+        "artist_name": "thrown"
+    },
+    {
+        "id": 55,
+        "name": "Electric Callboy",
+        "email": "electric_callboy@example.com",
+        "date_creation": "2024-11-25T00:10:28.072087Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebbda2600611c433b59f75652f",
+        "followers": 84365,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/1WNoKxsp715jez1Td4vthc"
+            }
+        ],
+        "genre": {
+            "name": "comic metal"
+        },
+        "artist_name": "Electric Callboy"
+    },
+    {
+        "id": 56,
+        "name": "The Used",
+        "email": "the_used@example.com",
+        "date_creation": "2024-11-25T00:10:29.213895Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb23386906645d2552106a61be",
+        "followers": 19847,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/55VydwMyCuGcavwPuhutPL"
+            }
+        ],
+        "genre": {
+            "name": "screamo"
+        },
+        "artist_name": "The Used"
+    },
+    {
+        "id": 57,
+        "name": "Pierce The Veil",
+        "email": "pierce_the_veil@example.com",
+        "date_creation": "2024-11-25T00:10:32.296138Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebc9461fa3257fbddc14c33202",
+        "followers": 43242,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/4iJLPqClelZOBCBifm8Fzv"
+            }
+        ],
+        "genre": {
+            "name": "modern rock"
+        },
+        "artist_name": "Pierce The Veil"
+    },
+    {
+        "id": 58,
+        "name": "Knocked Loose",
+        "email": "knocked_loose@example.com",
+        "date_creation": "2024-11-25T00:10:33.363048Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1c80f002a9c5aada3c8633a9",
+        "followers": 27617,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/4qrHkx5cgWIslciLXUMrYw"
+            }
+        ],
+        "genre": {
+            "name": "kentucky punk"
+        },
+        "artist_name": "Knocked Loose"
+    },
+    {
+        "id": 59,
+        "name": "Lorna Shore",
+        "email": "lorna_shore@example.com",
+        "date_creation": "2024-11-25T00:10:34.181639Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb49e1d0975748b726a7a0032c",
+        "followers": 69531,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/6vXYoy8ouRVib302zxaxFF"
+            }
+        ],
+        "genre": {
+            "name": "symphonic deathcore"
+        },
+        "artist_name": "Lorna Shore"
+    },
+    {
+        "id": 60,
+        "name": "Poppy",
+        "email": "poppy@example.com",
+        "date_creation": "2024-11-25T00:10:35.146013Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb296b862a0c544c4d50050e7f",
+        "followers": 59445,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/4STmXOXUF3UieHU46NWLVt"
+            }
+        ],
+        "genre": {
+            "name": "anime"
+        },
+        "artist_name": "Poppy"
+    },
+    {
+        "id": 61,
+        "name": "The Algorithm",
+        "email": "the_algorithm@example.com",
+        "date_creation": "2024-11-25T00:10:35.996947Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb7270dd9c47349e205b31215b",
+        "followers": 62893,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/14u4KXVp0iXQil79EpxXGc"
+            }
+        ],
+        "genre": {
+            "name": "electronic djent"
+        },
+        "artist_name": "The Algorithm"
+    },
+    {
+        "id": 62,
+        "name": "Bring Me The Horizon",
+        "email": "bring_me_the_horizon@example.com",
+        "date_creation": "2024-11-25T00:10:36.997314Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebe7c9399d0b5d813c20cbec65",
+        "followers": 94637,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/1Ffb6ejR6Fe5IamqA5oRUF"
+            }
+        ],
+        "genre": {
+            "name": "uk metalcore"
+        },
+        "artist_name": "Bring Me The Horizon"
+    },
+    {
+        "id": 63,
+        "name": "Stupeflip",
+        "email": "stupeflip@example.com",
+        "date_creation": "2024-11-25T00:10:37.987026Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebce384984fca8e63831c2c269",
+        "followers": 17305,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/7qiRNP9z0FhN63YcLmb8Ai"
+            }
+        ],
+        "genre": {
+            "name": "french rock"
+        },
+        "artist_name": "Stupeflip"
+    },
+    {
+        "id": 64,
+        "name": "Sounds Like Color",
+        "email": "sounds_like_color@example.com",
+        "date_creation": "2024-11-25T00:10:38.956802Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebd17c2429fc08d7f008d652e6",
+        "followers": 38942,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/1rZ1UWlK0GSQiYKSxwLvr3"
+            }
+        ],
+        "genre": {
+            "name": "goth"
+        },
+        "artist_name": "Sounds Like Color"
+    },
+    {
+        "id": 65,
+        "name": "Time, The Valuator",
+        "email": "time,_the_valuator@example.com",
+        "date_creation": "2024-11-25T00:10:41.789672Z",
+        "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebd6013867e857742e3392d3ee",
+        "followers": 41561,
+        "followings": [],
+        "social_media": [
+            {
+                "media": 1,
+                "link": "https://open.spotify.com/artist/5XMVfR85CUqujqUkN9c9VQ"
+            }
+        ],
+        "genre": {
+            "name": "german metalcore"
+        },
+        "artist_name": "Time, The Valuator"
+    }
+]

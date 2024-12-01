@@ -81,7 +81,7 @@ function Root(): ReactElement {
             marginLeft: isMobile ? "0px" : `${sidebarWidth}px`,
           }}>
           <Header />
-          <div className="h-full w-full bg-body-bg flex flex-col px-1 sm:px-4 lg:px-10 pb-52 sm:pb-28">
+          <div className="h-full w-full bg-body-bg flex flex-col px-3 sm:px-4 lg:px-10 pb-52 sm:pb-28">
             <Outlet />
           </div>
         </div>

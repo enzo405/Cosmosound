@@ -1,14 +1,18 @@
-import { Catalog } from "./Catalog";
+import { Catalog, CatalogWithMusic } from "./Catalog";
 import { Artist } from "./User";
 
 export interface Music {
-  id: number;
-  title: string; // title of the music
+  id: string;
+  title: string;
   date_creation: string; // Date in UTC of the creation of the music
-  duration: number; // duration time of the music
-  artist: Artist; // User that uploaded the Music
-  genres: Array<Genre>; // list of musical genre of the music
-  catalog: Catalog; // catalog that this music belong
+  duration: number;
+  is_ai: boolean;
+}
+
+export interface MusicDetails extends Music {
+  artist: Artist;
+  genres: Array<Genre>;
+  catalog: Catalog | CatalogWithMusic;
 }
 
 export interface Genre {

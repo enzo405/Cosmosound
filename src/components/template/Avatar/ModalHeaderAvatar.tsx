@@ -3,7 +3,7 @@ import { routesConfig } from "config/app-config";
 import { useEffect, useRef, useState, type ReactElement } from "react";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { Icon } from "components/icons/Icon";
-import SettingsOptions from "components/SettingsOptions";
+import SettingsOptions from "components/settings/SettingsOptions";
 import { useTheme } from "hooks/useTheme";
 import { useNavigate } from "react-router-dom";
 import { useOpenAvatarModal } from "hooks/useOpenAvatarModal";
@@ -49,7 +49,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
   return (
     <div
       ref={modalRef}
-      className="fixed top-0 right-0 z-30 transform-gpu rounded-xl translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px] shadow-xl"
+      className="fixed top-0 right-0 z-50 transform-gpu rounded-xl translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px] shadow-xl"
       style={{
         display: isModalOpen ? "block" : "none",
       }}>
@@ -63,7 +63,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
           />
           <span className="ml-2">
             <p>Belo Smile</p>
-            <p className="text-settings-text-grey">belo.smile@gmail.com</p>
+            <p className="text-dark-grey">belo.smile@gmail.com</p>
           </span>
         </SettingsOptions>
         <Divider />
