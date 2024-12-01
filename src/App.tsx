@@ -8,7 +8,7 @@ import RouterWrapper from "routes/RouterWrapper";
 function App() {
   return (
     <>
-      <SnackbarProvider maxSnack={3}>
+      <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
         <ThemeProvider>
           <UserProvider>
             <MusicProvider>

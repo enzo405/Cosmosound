@@ -5,7 +5,7 @@ import HeaderNavigation from "./HeaderNavigation";
 
 function Header(): ReactElement {
   return (
-    <div className="sticky top-0 flex items-center w-full h-24 gap-2 sm:gap-6 px-2 bg-body-bg">
+    <div className="sticky top-0 z-40 flex items-center w-full h-24 gap-2 sm:gap-6 px-2 bg-body-bg">
       <div className="flex w-full">
         <HeaderNavigation />
         <HeaderSearchbar />

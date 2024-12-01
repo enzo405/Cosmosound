@@ -49,7 +49,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
   return (
     <div
       ref={modalRef}
-      className="fixed top-0 right-0 z-30 transform-gpu rounded-xl translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px] shadow-xl"
+      className="fixed top-0 right-0 z-50 transform-gpu rounded-xl translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px] shadow-xl"
       style={{
         display: isModalOpen ? "block" : "none",
       }}>

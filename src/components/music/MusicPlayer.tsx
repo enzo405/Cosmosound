@@ -87,7 +87,9 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
             <div className="hidden lg:block h-full w-2/3"></div>
             <div
               className="flex flex-row gap-1 items-center w-auto max-w-28 lg:max-w-36"
-              onWheel={onWheel}>
+              onWheel={onWheel}
+              onMouseLeave={() => document.body.classList.remove("overflow-hidden")}
+              onMouseEnter={() => document.body.classList.add("overflow-hidden")}>
               <Icon
                 iconName={getSoundIcon()}
                 className="size-5 fill-primary-orange cursor-pointer"

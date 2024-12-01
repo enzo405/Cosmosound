@@ -100,7 +100,7 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
                   className="flex justify-center items-center h-full w-full absolute top-0 left-0 p-3">
                   <Icon
                     iconName={isCurrentMusicPlaying ? "pauseButton-opek" : "playButton-opek"}
-                    className="z-20 rounded-full h-full w-full fill-white/80"
+                    className="z-10 rounded-full h-full w-full fill-white/80"
                   />
                 </span>
               )}
