@@ -30,7 +30,6 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     <>
       {isMobile ? (
         <div className={`justify-around flex flex-col-reverse w-full gap-4 py-4 h-28`}>
-          {/* Mobile Music Player */}
           <div className="flex flex-row items-center w-full p-1 xsm:px-3">
             <div className="flex items-center flex-shrink-0 w-2/3 min-w-2/3 max-w-2/3">
               <MusicInfo music={playingMusic} />
@@ -58,9 +57,8 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
           </div>
         </div>
       ) : (
-        <div className="border-music-player-border justify-around items-center shadow-music-player hidden sm:flex w-full gap-4 xl:gap-8 px-2 lg:px-12 xl:px-8 h-28">
-          {/* Desktop Music Player */}
-          <div className="flex flex-row gap-2 items-center h-full w-1/4 lg:w-1/3">
+        <div className="border-music-player-border justify-around items-center shadow-music-player flex w-full gap-4 xl:gap-8 px-2 lg:px-4 xl:px-8 h-[6.5rem]">
+          <div className="flex flex-row gap-2 items-center h-full w-0 sm:w-[11rem] sm:min-w-[11rem] sm:max-w-[11rem] md:w-[14rem] md:min-w-[14rem] md:max-w-[14rem] lg:w-[16rem] lg:min-w-[16rem] lg:max-w-[16rem] xl:w-[18rem] xl:min-w-[18rem] xl:max-w-[18rem] 2xl:w-[20rem] 2xl:min-w-[20rem] 2xl:max-w-[20rem]">
             <MusicInfo music={playingMusic} />
           </div>
           <div className="flex flex-col gap-2 justify-center items-center h-full w-1/2 lg:w-full max-w-7xl">

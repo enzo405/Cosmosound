@@ -19,11 +19,11 @@ export default function MusicInfo({ music }: MusicInfoProps): ReactElement {
           {music.title}
         </p>
         <span className="flex flex-row gap-1 items-center text-music-player-artist font-semibold text-sm">
-          <ArtistInfo artist={music.artist} />
+          <ArtistInfo artist={music.artist} className="min-w-fit" />
           <span className="hidden lg:block">-</span>
-          <p className="hidden lg:block cursor-pointer hover:underline truncate">
+          <span className="hidden lg:block cursor-pointer hover:underline truncate">
             {music.catalog.title}
-          </p>
+          </span>
         </span>
       </span>
     </div>

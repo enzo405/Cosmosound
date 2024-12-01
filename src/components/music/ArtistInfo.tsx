@@ -5,14 +5,15 @@ import { useNavigate } from "react-router-dom";
 
 interface ArtistInfoProps {
   artist: Artist;
+  className?: string;
 }
 
-export default function ArtistInfo({ artist }: ArtistInfoProps): ReactElement {
+export default function ArtistInfo({ artist, className }: ArtistInfoProps): ReactElement {
   const navigate = useNavigate();
 
   return (
     <span
-      className="cursor-pointer hover:underline flex flex-row gap-1 min-w-0 truncate"
+      className={`${className} cursor-pointer hover:underline flex flex-row gap-1 min-w-0 truncate`}
       onClick={() => navigate(routesConfig.artist.getParameter(artist.id))}>
       <img
         src={artist.picture_profile}
