@@ -19,14 +19,6 @@ credentials = SpotifyClientCredentials(client_id=CLIENT_ID, client_secret=CLIENT
 spotify = Spotify(client_credentials_manager=credentials)
 
 
-async def fetch_genres():
-    try:
-        return spotify.recommendation_genre_seeds().get("genres", [])
-    except Exception as e:
-        print(f"Error fetching genres: {e}")
-        return []
-
-
 def album_type_to_enum(album_type):
     print("album type to enum")
     if album_type.upper() == "ALBUM":
@@ -150,7 +142,9 @@ async def process_artist(session, artist_name, all_genres, artist_index):
 async def main():
     async with aiohttp.ClientSession() as session:
         # Fetch genres
-        all_genres = await fetch_genres()
+        all_genres = []
+        with open(genres_output_path, "r") as genres_file:
+            all_genres = json.load(genres_file)
 
         # Load artist names
         with open(artist_names_path, "r") as artist_file:
