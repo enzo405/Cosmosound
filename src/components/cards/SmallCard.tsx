@@ -2,21 +2,13 @@ import { Icon } from "components/icons/Icon";
 import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface CardProps {
-  thumbnail: string;
+interface SmallCardProps {
   title: string;
-  description: string;
   link: string;
   className?: string;
 }
 
-export default function Card({
-  thumbnail,
-  title,
-  description,
-  link,
-  className = "",
-}: CardProps): ReactElement {
+export default function SmallCard({ title, link, className = "" }: SmallCardProps): ReactElement {
   const navigate = useNavigate();
   const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
@@ -35,20 +27,12 @@ export default function Card({
       onMouseEnter={() => setDisplayLikeBtn(true)}
       onMouseLeave={() => setDisplayLikeBtn(false)}
       onClick={(e) => handleOnClick(e)}
-      className={`relative flex flex-col items-center group cursor-pointer min-w-36 max-w-36 sm:min-w-40 sm:max-w-40 min-h-44 max-h-44 sm:min-h-52 sm:max-h-52 border border-dark-glassy rounded-2xl p-2 gap-2 ${className}`}>
-      <div className="w-full flex flex-row justify-center">
-        <img
-          className="h-full w-[95%] rounded-lg object-contain"
-          src={thumbnail}
-          alt={`${title} ${description}`}
-        />
-      </div>
-      <div className="h-2/6 flex flex-col cursor-pointer w-full ml-4">
-        <div className="text-sm font-medium truncate">{title}</div>
-        <div className="text-xs text-gray-500 truncate">{description}</div>
+      className={`relative flex flex-col group cursor-pointer min-w-24 max-w-24 sm:min-w-32 sm:max-w-32 h-14 border border-dark-glassy rounded-[1.2rem] p-2 ${className}`}>
+      <div className="h-full w-full flex items-center justify-center group-hover:underline underline-offset-2 text-sm font-medium truncate">
+        {title}
       </div>
       {displayLikeBtn && (
-        <div id="likeBtn" className="z-10 absolute bottom-1 right-1">
+        <div id="likeBtn" className="z-10 absolute -bottom-2 -right-1">
           <Icon
             className="size-6"
             iconName={isLiked ? "heart-orange-empty" : "heart-orange"}

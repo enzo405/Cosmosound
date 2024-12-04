@@ -11,6 +11,7 @@ export default function RecentMusic({}: RecentMusicProps): ReactElement {
   return (
     <Box
       title="Recent Music"
+      className="flex-col"
       children={musicHistory.map((m) => {
         return <MusicItem music={m} key={m.id} />;
       })}

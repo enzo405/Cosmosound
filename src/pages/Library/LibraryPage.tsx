@@ -1,9 +1,12 @@
+import Box from "components/box/Box";
 import ScrollableBox from "components/box/ScrollableBox";
 import ArtistCard from "components/cards/ArtistCard";
 import Card from "components/cards/Card";
+import SmallCard from "components/cards/SmallCard";
 import { routesConfig } from "config/app-config";
 import { type ReactElement } from "react";
 import ArtistService from "services/artistService";
+import GenresService from "services/genresService";
 import PlaylistService from "services/playlistService";
 
 function LibraryPage(): ReactElement {
@@ -27,6 +30,17 @@ function LibraryPage(): ReactElement {
           );
         })}
       </ScrollableBox>
+      <Box title="Liked Genres" className="flex-wrap">
+        {GenresService.getMyFavouriteGenres().map((genre) => {
+          return (
+            <SmallCard
+              key={genre.name}
+              title={genre.name}
+              link={routesConfig.genres.getParameter(genre.name)}
+            />
+          );
+        })}
+      </Box>
     </div>
   );
 }
