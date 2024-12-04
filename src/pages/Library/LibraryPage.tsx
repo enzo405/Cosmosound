@@ -11,13 +11,14 @@ function LibraryPage(): ReactElement {
     <div className="flex flex-col gap-10">
       <ScrollableBox title="Favourite Artists">
         {ArtistService.getMyFavouriteArtist().map((artist) => {
-          return <ArtistCard artist={artist} />;
+          return <ArtistCard key={artist.id} artist={artist} />;
         })}
       </ScrollableBox>
       <ScrollableBox title="Liked Playlist">
         {PlaylistService.getMyPlaylist().map((playlist) => {
           return (
             <Card
+              key={playlist.id}
               description={playlist.owner.name}
               thumbnail={playlist.musics[0].catalog.thumbnail}
               title={playlist.title}

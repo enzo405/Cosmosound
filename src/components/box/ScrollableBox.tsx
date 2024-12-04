@@ -34,7 +34,7 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
   };
 
   const onWheelHandler = (event: WheelEvent) => {
-    // Avoid scroll in the page
+    // Avoid scroll in the page when the box is empty
     if (canScrollLeft || canScrollRight) {
       event.preventDefault();
 
@@ -65,7 +65,7 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
         scrollContainer.removeEventListener("wheel", handler);
       };
     }
-  }, []);
+  }, [canScrollLeft, canScrollRight]);
 
   return (
     <div className="bg-box-bg rounded-3xl h-full w-full flex flex-col pb-4">
