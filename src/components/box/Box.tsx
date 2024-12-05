@@ -4,9 +4,10 @@ import { titleStyle } from "./styles";
 interface BoxProps {
   title?: string;
   children: React.ReactNode;
+  className?: string;
 }
 
-export default function Box({ title, children }: BoxProps): ReactElement {
+export default function Box({ title, children, className }: BoxProps): ReactElement {
   return (
     <div className="bg-box-bg rounded-3xl h-full w-full flex flex-col pb-4">
       {title && (
@@ -14,7 +15,7 @@ export default function Box({ title, children }: BoxProps): ReactElement {
           <span className={`${titleStyle}`}>{title}</span>
         </div>
       )}
-      <div className="flex flex-col w-full px-2 sm:px-4 gap-2">{children}</div>
+      <div className={`flex w-full px-2 sm:px-4 gap-2 ${className}`}>{children}</div>
     </div>
   );
 }

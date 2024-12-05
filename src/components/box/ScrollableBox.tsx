@@ -34,19 +34,21 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
   };
 
   const onWheelHandler = (event: WheelEvent) => {
-    // Avoid scroll in the page
-    event.preventDefault();
+    // Avoid scroll in the page when the box is empty
+    if (canScrollLeft || canScrollRight) {
+      event.preventDefault();
 
-    // Vertical Mouse Wheel
-    let scrollBy;
-    if (event.deltaY !== 0) {
-      scrollBy = event.deltaY < 0 ? -75 : 75;
+      // Vertical Mouse Wheel
+      let scrollBy;
+      if (event.deltaY !== 0) {
+        scrollBy = event.deltaY < 0 ? -75 : 75;
+      }
+      // Horizontal Mouse Wheel
+      else if (event.deltaX) {
+        scrollBy = event.deltaX < 0 ? -75 : 75;
+      }
+      scrollContainerRef.current?.scrollBy({ left: scrollBy, behavior: "instant" });
     }
-    // Horizontal Mouse Wheel
-    else if (event.deltaX) {
-      scrollBy = event.deltaX < 0 ? -75 : 75;
-    }
-    scrollContainerRef.current?.scrollBy({ left: scrollBy, behavior: "instant" });
   };
 
   // On component load
@@ -63,7 +65,7 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
         scrollContainer.removeEventListener("wheel", handler);
       };
     }
-  }, []);
+  }, [canScrollLeft, canScrollRight]);
 
   return (
     <div className="bg-box-bg rounded-3xl h-full w-full flex flex-col pb-4">

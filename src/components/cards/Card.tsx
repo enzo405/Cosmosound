@@ -1,4 +1,5 @@
-import { ReactElement } from "react";
+import { Icon } from "components/icons/Icon";
+import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface CardProps {
@@ -17,20 +18,44 @@ export default function Card({
   className = "",
 }: CardProps): ReactElement {
   const navigate = useNavigate();
+  const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+
+  const handleOnClick = (event: MouseEvent) => {
+    let likeBtn = document.getElementById("likeBtn");
+    const target = event.target as Node;
+
+    if (!likeBtn?.contains(target)) {
+      navigate(link);
+    }
+  };
 
   return (
     <div
-      onClick={() => navigate(link)}
-      className={`group cursor-pointer min-h-44 min-w-36 sm:min-h-52 sm:min-w-44 max-h-44 max-w-36 sm:max-h-52 sm:max-w-44 border border-dark-glassy rounded-2xl p-2 sm:p-4 flex flex-col gap-2 ${className}`}>
-      <img
-        className="h-full w-full rounded-lg object-cover"
-        src={thumbnail}
-        alt={`${title} ${description}`}
-      />
-      <div className="h-2/6 overflow-hidden cursor-pointer">
-        <div className="group-hover:underline text-sm font-medium truncate">{title}</div>
-        <div className="group-hover:underline text-xs text-gray-500 truncate">{description}</div>
+      onMouseEnter={() => setDisplayLikeBtn(true)}
+      onMouseLeave={() => setDisplayLikeBtn(false)}
+      onClick={(e) => handleOnClick(e)}
+      className={`relative flex flex-col items-center group cursor-pointer min-w-36 max-w-36 sm:min-w-40 sm:max-w-40 min-h-44 max-h-44 sm:min-h-52 sm:max-h-52 border border-dark-glassy rounded-2xl p-2 gap-2 ${className}`}>
+      <div className="w-full flex flex-row justify-center">
+        <img
+          className="h-full w-[95%] rounded-lg object-contain"
+          src={thumbnail}
+          alt={`${title} ${description}`}
+        />
       </div>
+      <div className="h-2/6 flex flex-col cursor-pointer w-full ml-4">
+        <div className="text-sm font-medium truncate">{title}</div>
+        <div className="text-xs text-gray-500 truncate">{description}</div>
+      </div>
+      {displayLikeBtn && (
+        <div id="likeBtn" className="z-10 absolute bottom-1 right-1">
+          <Icon
+            className="size-6"
+            iconName={isLiked ? "heart-orange-empty" : "heart-orange"}
+            onClick={() => setIsLiked(!isLiked)}
+          />
+        </div>
+      )}
     </div>
   );
 }
