@@ -9,8 +9,19 @@ function getMyFavouriteArtist(): Artist[] {
   );
 }
 
+function searchArtistByName(value: string): Artist[] {
+  const searchTerm = value.toLowerCase().trim();
+
+  const artistNameMatch = dataArtist
+    .filter((artist) => (artist.artist_name || artist.name).toLowerCase().includes(searchTerm))
+    .slice(0, 10);
+
+  return [...new Set(artistNameMatch)];
+}
+
 const ArtistService = {
   getMyFavouriteArtist,
+  searchArtistByName,
 };
 
 export default ArtistService;

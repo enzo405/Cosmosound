@@ -11,6 +11,21 @@ function getMusicById(id: string): MusicDetails | undefined {
   return musicData.find((music) => music.id === id);
 }
 
+function searchMusicByTitle(value: string): MusicDetails[] {
+  const searchTerm = value.toLowerCase().trim();
+
+  const musicNameMatch = musicData
+    .filter((music) => music.title.toLowerCase().includes(searchTerm))
+    .slice(0, 7);
+
+  const musicArtistMatch = musicData
+    .filter((music) => music.artist.artist_name.toLowerCase().includes(searchTerm))
+    .slice(0, 3);
+
+  const result = [...musicNameMatch, ...musicArtistMatch];
+  return [...new Set(result)];
+}
+
 function getMusicHistory(): MusicDetails[] {
   return musicData.filter((music) =>
     [
@@ -33,6 +48,7 @@ const MusicService = {
   getAllMusic,
   getMusicById,
   getMusicHistory,
+  searchMusicByTitle,
 };
 
 export default MusicService;

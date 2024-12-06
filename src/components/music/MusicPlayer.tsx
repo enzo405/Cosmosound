@@ -93,7 +93,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
               <Icon
                 iconName={getSoundIcon()}
                 className="size-5 fill-primary-orange cursor-pointer"
-                onClick={() => setSoundValue(soundValue === 0 ? 50 : 0)}
+                onClick={() => setSoundValue(soundValue == 0 ? 50 : 0)}
               />
               <SoundSlider sound={soundValue} setSound={setSoundValue} />
             </div>

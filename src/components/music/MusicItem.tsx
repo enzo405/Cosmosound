@@ -75,7 +75,7 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
     handlePlayMusic(music);
   };
 
-  const isCurrentMusicPlaying = isPlaying && music.id === playingMusic.id;
+  const isCurrentMusicPlaying = isPlaying && music.id == playingMusic.id;
 
   return (
     <div className="relative" ref={musicItemRef}>

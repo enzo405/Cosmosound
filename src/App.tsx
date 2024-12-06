@@ -4,6 +4,7 @@ import { ThemeProvider } from "providers/ThemeProvider";
 import { UserProvider } from "providers/UserProvider";
 import { SnackbarProvider } from "notistack";
 import RouterWrapper from "routes/RouterWrapper";
+import { SearchProvider } from "providers/SearchProvider";
 
 function App() {
   return (
@@ -11,11 +12,13 @@ function App() {
       <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
         <ThemeProvider>
           <UserProvider>
-            <MusicProvider>
-              <OpenAvatarModalProvider>
-                <RouterWrapper />
-              </OpenAvatarModalProvider>
-            </MusicProvider>
+            <SearchProvider>
+              <MusicProvider>
+                <OpenAvatarModalProvider>
+                  <RouterWrapper />
+                </OpenAvatarModalProvider>
+              </MusicProvider>
+            </SearchProvider>
           </UserProvider>
         </ThemeProvider>
       </SnackbarProvider>
