@@ -11,21 +11,12 @@ function getMyPlaylist(): Playlist[] {
 
 function searchPlaylistByTitle(value: string): Playlist[] {
   const searchTerm = value.toLowerCase().trim();
-  const MAX_RESULTS = 10;
 
   const playlistsTitleMatch = playlistsData
-    .filter((playlist) => {
-      return playlist.title.toLowerCase().includes(searchTerm);
-    })
-    .slice(0, MAX_RESULTS);
+    .filter((playlist) => playlist.title.toLowerCase().includes(searchTerm))
+    .slice(0, 10);
 
-  if (playlistsTitleMatch.length > MAX_RESULTS) return playlistsTitleMatch;
-
-  const playlistsMusicNameMatch = playlistsData.filter((playlist) => {
-    return playlist.musics.some((music) => music.title.toLowerCase().includes(searchTerm));
-  });
-
-  return [...playlistsTitleMatch, ...playlistsMusicNameMatch].slice(0, MAX_RESULTS);
+  return [...new Set(playlistsTitleMatch)];
 }
 
 const PlaylistService = {

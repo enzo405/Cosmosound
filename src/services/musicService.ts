@@ -13,25 +13,17 @@ function getMusicById(id: string): MusicDetails | undefined {
 
 function searchMusicByTitle(value: string): MusicDetails[] {
   const searchTerm = value.toLowerCase().trim();
-  const MAX_RESULTS = 10;
 
-  const musicNameMatch = musicData.filter((music) =>
-    music.title.toLowerCase().includes(searchTerm),
-  );
-  if (musicNameMatch.length >= MAX_RESULTS) return musicNameMatch.slice(0, MAX_RESULTS);
+  const musicNameMatch = musicData
+    .filter((music) => music.title.toLowerCase().includes(searchTerm))
+    .slice(0, 7);
 
-  const musicArtistMatch = musicData.filter((music) =>
-    music.artist.artist_name.toLowerCase().includes(searchTerm),
-  );
+  const musicArtistMatch = musicData
+    .filter((music) => music.artist.artist_name.toLowerCase().includes(searchTerm))
+    .slice(0, 3);
 
-  const combinedMatches = [...musicNameMatch, ...musicArtistMatch].slice(0, MAX_RESULTS);
-
-  if (combinedMatches.length >= MAX_RESULTS) return combinedMatches;
-
-  const musicCatalogMatch = musicData.filter((music) =>
-    music.catalog.title.toLowerCase().includes(searchTerm),
-  );
-  return [...combinedMatches, ...musicCatalogMatch].slice(0, MAX_RESULTS);
+  const result = [...musicNameMatch, ...musicArtistMatch];
+  return [...new Set(result)];
 }
 
 function getMusicHistory(): MusicDetails[] {

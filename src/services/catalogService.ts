@@ -13,31 +13,12 @@ function getCatalogById(id: string): CatalogWithMusic | undefined {
 
 function searchCatalogByTitle(value: string): Catalog[] {
   const searchTerm = value.toLowerCase().trim();
-  const MAX_RESULTS = 10;
 
   const catalogsTitleMatch = catalogData
-    .filter((catalog) => {
-      return catalog.title.toLowerCase().includes(searchTerm);
-    })
-    .slice(0, MAX_RESULTS);
+    .filter((catalog) => catalog.title.toLowerCase().includes(searchTerm))
+    .slice(0, 10);
 
-  if (catalogsTitleMatch.length > MAX_RESULTS) return catalogsTitleMatch;
-
-  const catalogsMusicNameMatch = catalogData.filter((catalog) => {
-    return catalog.musics.some((music) => music.title.toLowerCase().includes(searchTerm));
-  });
-
-  const combinedMatches = [...catalogsTitleMatch, ...catalogsMusicNameMatch].slice(0, MAX_RESULTS);
-
-  if (combinedMatches.length > MAX_RESULTS) return combinedMatches;
-
-  const catalogsOwnerMatches = catalogData.filter((catalog) => {
-    return (catalog.owner.artist_name.toLowerCase() || catalog.owner.name.toLowerCase()).includes(
-      searchTerm,
-    );
-  });
-
-  return [...catalogsOwnerMatches, ...combinedMatches].slice(0, MAX_RESULTS);
+  return [...new Set(catalogsTitleMatch)];
 }
 
 const CatalogService = {

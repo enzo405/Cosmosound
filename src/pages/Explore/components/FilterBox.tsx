@@ -1,28 +1,16 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
+import { Filters } from "../ExplorePage";
 
 interface FilterBoxProps {
-  onFilterClick?: (filter: Filters) => void;
+  onFilterClick: (filter: Filters) => void;
+  activeFilter: Filters;
 }
 
-export enum Filters {
-  ALL = "All",
-  ARTISTS = "Artists",
-  MUSICS = "Musics",
-  PLAYLIST = "Playlists",
-  EP = "EPs",
-  ALBUM = "Albums",
-  SINGLE = "Singles",
-}
-
-export default function FilterBox({ onFilterClick }: FilterBoxProps): ReactElement {
+export default function FilterBox({ onFilterClick, activeFilter }: FilterBoxProps): ReactElement {
   const filterEntries = Object.entries(Filters);
-  const [activeFilter, setActiveFilter] = useState<Filters>(Filters.ALL);
-
-  const sharedClasses = "px-4 py-2 rounded-full cursor-pointer text-gray-800";
 
   const handleOnClick = (filter: Filters) => {
     onFilterClick?.(filter);
-    setActiveFilter(filter);
   };
 
   return (
@@ -30,7 +18,7 @@ export default function FilterBox({ onFilterClick }: FilterBoxProps): ReactEleme
       {filterEntries.map(([key, value]) => (
         <span
           key={key}
-          className={`${sharedClasses} ${
+          className={`px-4 py-2 rounded-full cursor-pointer text-gray-800 select-none ${
             activeFilter === value ? "bg-gray-400" : "bg-gray-200 hover:bg-gray-300"
           }`}
           onClick={() => handleOnClick(value)}
