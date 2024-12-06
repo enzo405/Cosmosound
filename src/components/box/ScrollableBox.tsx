@@ -65,7 +65,7 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
         scrollContainer.removeEventListener("wheel", handler);
       };
     }
-  }, [canScrollLeft, canScrollRight]);
+  }, [canScrollLeft, canScrollRight, children]);
 
   return (
     <div className="bg-box-bg rounded-3xl h-full w-full flex flex-col pb-4">
