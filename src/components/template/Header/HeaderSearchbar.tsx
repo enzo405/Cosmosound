@@ -1,17 +1,27 @@
 import { Icon } from "components/icons/Icon";
-import { useRef, useState, type ReactElement } from "react";
+import { routesConfig } from "config/app-config";
+import { useSearch } from "hooks/useSearch";
+import { useEffect, useRef, useState, type ReactElement } from "react";
 import { IoIosClose } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 function HeaderSearchbar(): ReactElement {
   const [isFocused, setIsFocused] = useState(false);
-  const [searchValue, setSearchValue] = useState<string>("");
+  const { search, setSearch, debouncedValue } = useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   };
+
+  useEffect(() => {
+    if (debouncedValue != "") {
+      navigate(routesConfig.explore.path);
+    }
+  }, [debouncedValue]);
 
   return (
     <div className="w-3/4 mr-1 sm:w-1/2">
@@ -34,13 +44,13 @@ function HeaderSearchbar(): ReactElement {
             placeholder="Search"
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            onChange={(e) => setSearchValue(e.target.value)}
-            value={searchValue}
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
             aria-label="Searchbar value"
-            aria-valuetext={searchValue}
+            aria-valuetext={search}
           />
-          {searchValue !== "" && (
-            <IoIosClose onClick={() => setSearchValue("")} className="size-8 cursor-pointer" />
+          {search !== "" && (
+            <IoIosClose onClick={() => setSearch("")} className="size-8 cursor-pointer" />
           )}
         </span>
       </div>

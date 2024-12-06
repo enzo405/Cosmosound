@@ -11,6 +11,29 @@ function getMusicById(id: string): MusicDetails | undefined {
   return musicData.find((music) => music.id === id);
 }
 
+function searchMusicByTitle(value: string): MusicDetails[] {
+  const searchTerm = value.toLowerCase().trim();
+  const MAX_RESULTS = 10;
+
+  const musicNameMatch = musicData.filter((music) =>
+    music.title.toLowerCase().includes(searchTerm),
+  );
+  if (musicNameMatch.length >= MAX_RESULTS) return musicNameMatch.slice(0, MAX_RESULTS);
+
+  const musicArtistMatch = musicData.filter((music) =>
+    music.artist.artist_name.toLowerCase().includes(searchTerm),
+  );
+
+  const combinedMatches = [...musicNameMatch, ...musicArtistMatch].slice(0, MAX_RESULTS);
+
+  if (combinedMatches.length >= MAX_RESULTS) return combinedMatches;
+
+  const musicCatalogMatch = musicData.filter((music) =>
+    music.catalog.title.toLowerCase().includes(searchTerm),
+  );
+  return [...combinedMatches, ...musicCatalogMatch].slice(0, MAX_RESULTS);
+}
+
 function getMusicHistory(): MusicDetails[] {
   return musicData.filter((music) =>
     [
@@ -33,6 +56,7 @@ const MusicService = {
   getAllMusic,
   getMusicById,
   getMusicHistory,
+  searchMusicByTitle,
 };
 
 export default MusicService;
