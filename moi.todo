@@ -1,0 +1,4 @@
+- ajouter une ref sur MusicItem pour tracker la taille et pouvoir ajuster son contenu par rapport a la taille qui a au lieu de la taille de l'écran
+- filtres dans explore, faire des pages pour chaque filtres au lieu de cacher les composants (e.g => /explore/artists, /explore/musics)
+- gérer quel settings on affiche en fonctione de la page où on se trouve
+- faire les errors page

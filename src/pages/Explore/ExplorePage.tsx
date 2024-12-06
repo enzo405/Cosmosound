@@ -62,18 +62,17 @@ function ExplorePage(): ReactElement {
   }, [debouncedValue]);
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 w-full">
       <FilterBox onFilterClick={(f) => setActiveFilter(f)} activeFilter={activeFilter} />
-      {((activeFilter === Filters.ALL || activeFilter === Filters.ARTISTS) && artists.length) !=
-        0 && (
-        <ScrollableBox title="Artists">
-          {artists.map((artist) => {
-            return <ArtistCard key={artist.id} artist={artist} />;
-          })}
-        </ScrollableBox>
-      )}
-      {((activeFilter === Filters.ALL || activeFilter === Filters.MUSICS) && musics.length) !=
-        0 && (
+      {(activeFilter === Filters.ALL || activeFilter === Filters.ARTISTS) &&
+        artists.length != 0 && (
+          <ScrollableBox title="Artists">
+            {artists.map((artist) => {
+              return <ArtistCard key={artist.id} artist={artist} />;
+            })}
+          </ScrollableBox>
+        )}
+      {(activeFilter === Filters.ALL || activeFilter === Filters.MUSICS) && musics.length != 0 && (
         <Box
           title="Songs"
           className="flex-col"
@@ -82,29 +81,29 @@ function ExplorePage(): ReactElement {
           })}
         />
       )}
-      <div className="flex flex-row gap-6 w-full">
-        {((activeFilter === Filters.ALL || activeFilter === Filters.ALBUMS) && albums.length) !=
-          0 && (
-          <div className="w-1/2">
-            <ScrollableBox
-              children={albums.map((catalog) => {
-                return (
-                  <Card
-                    key={catalog.id}
-                    title={catalog.title}
-                    description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
-                    link={`/catalog/${catalog.id}`}
-                    thumbnail={catalog.thumbnail}
-                  />
-                );
-              })}
-              title="Albums"
-            />
-          </div>
-        )}
+      <div className="flex flex-row w-full">
+        {(activeFilter === Filters.ALL || activeFilter === Filters.ALBUMS) &&
+          albums.length != 0 && (
+            <div className="w-1/2 pr-3">
+              <ScrollableBox
+                children={albums.map((catalog) => {
+                  return (
+                    <Card
+                      key={catalog.id}
+                      title={catalog.title}
+                      description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
+                      link={`/catalog/${catalog.id}`}
+                      thumbnail={catalog.thumbnail}
+                    />
+                  );
+                })}
+                title="Albums"
+              />
+            </div>
+          )}
         {((activeFilter === Filters.ALL || activeFilter === Filters.EPS_SINGLES) &&
           [...singles, ...eps].length) != 0 && (
-          <div className="w-1/2">
+          <div className="w-1/2 pl-3">
             <ScrollableBox
               children={[...singles, ...eps].map((catalog) => {
                 return (
