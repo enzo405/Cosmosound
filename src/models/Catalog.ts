@@ -11,6 +11,7 @@ export interface Catalog {
   id: string;
   title: string;
   owner: Artist;
+  date_creation: string; // Date in UTC of the creation of the account
   thumbnail: string;
   type: TypeCatalog;
 }

@@ -47,7 +47,7 @@ export default function CategoryTabs({ activeTab, onTabSelect }: CategoryTabsPro
       </div>
 
       <span
-        className="absolute rounded-md bottom-0 h-[2px] bg-orange-500 transition-all duration-200"
+        className="absolute rounded-md bottom-0 h-[2px] bg-orange-500 transition-all duration-100"
         style={{ width: underlineStyle.width, left: underlineStyle.left }}
       />
     </div>

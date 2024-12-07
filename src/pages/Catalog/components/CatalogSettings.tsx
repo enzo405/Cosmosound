@@ -1,25 +1,25 @@
 import SettingsOptions from "components/settings/SettingsOptions";
 import TextSetting from "components/settings/TextSetting";
 import { routesConfig } from "config/app-config";
-import { Artist } from "models/User";
+import { Catalog } from "models/Catalog";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface ArtistSettingsProps {
-  artist: Artist;
+interface CatalogSettingsProps {
+  catalog: Catalog;
   onCloseSetting: () => void;
 }
 
-export default function ArtistSettings({
-  artist,
+export default function CatalogSettings({
+  catalog,
   onCloseSetting,
-}: ArtistSettingsProps): ReactElement {
+}: CatalogSettingsProps): ReactElement {
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickAway = (event: MouseEvent) => {
-      let id = `settings-artist`;
+      let id = `settings-catalog`;
       const settings = document.getElementById(id);
       const target = event.target as Node;
 
@@ -40,7 +40,7 @@ export default function ArtistSettings({
   }, []);
 
   const handleCopyLink = () => {
-    const path = routesConfig.artist.getParameter(artist.id.toString());
+    const path = routesConfig.catalog.getParameter(catalog.id.toString());
     const host = window.location.host;
     navigator.clipboard.writeText(`${host}${path}`);
     enqueueSnackbar(`Link copied to clipboard`, {
@@ -49,7 +49,7 @@ export default function ArtistSettings({
   };
 
   const handleNavigate = () => {
-    navigate(routesConfig.artistPanel.path);
+    navigate(routesConfig.catalogEdit.getParameter(catalog.id));
   };
 
   return (
@@ -58,7 +58,7 @@ export default function ArtistSettings({
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>
       <SettingsOptions onClick={handleNavigate}>
-        <TextSetting iconName="artistPanel" text="Artist Panel" />
+        <TextSetting iconName="playlistadd" text="Edit Songs" />
       </SettingsOptions>
     </div>
   );

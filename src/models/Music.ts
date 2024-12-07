@@ -7,15 +7,15 @@ export interface Music {
   date_creation: string; // Date in UTC of the creation of the music
   duration: number;
   is_ai: boolean;
+  genres: Array<Genre>;
 }
 
 export interface MusicWithCatalog extends Music {
   catalog: Catalog | CatalogWithMusic;
 }
 
-export interface MusicDetails extends MusicWithCatalog {
+export interface MusicDetails extends Music {
   artist: Artist;
-  genres: Array<Genre>;
   catalog: Catalog | CatalogWithMusic;
 }
 

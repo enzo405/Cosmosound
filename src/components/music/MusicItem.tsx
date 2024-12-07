@@ -1,7 +1,7 @@
 import { Icon } from "components/icons/Icon";
 import { routesConfig } from "config/app-config";
 import { useMusic } from "hooks/useMusic";
-import { Music, MusicDetails } from "models/Music";
+import { Music } from "models/Music";
 import { ReactElement, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatDuration, formatTime } from "utils/date";
@@ -15,9 +15,21 @@ interface MusicItemProps {
   music: Music;
   artist: Artist;
   catalog: Catalog;
+  showArtist?: boolean;
+  showCatalog?: boolean;
+  showCatalogThumbnail?: boolean;
+  index?: number;
 }
 
-export default function MusicItem({ music, artist, catalog }: MusicItemProps): ReactElement {
+export default function MusicItem({
+  music,
+  artist,
+  catalog,
+  showArtist = true,
+  showCatalog = true,
+  showCatalogThumbnail = true,
+  index,
+}: MusicItemProps): ReactElement {
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const [displaySettings, setDisplaySettings] = useState<boolean>(false);
   const [displayPlay, setDisplayPlay] = useState<boolean>(false);
@@ -49,16 +61,16 @@ export default function MusicItem({ music, artist, catalog }: MusicItemProps): R
     setDisplaySettings(!displaySettings);
   };
 
-  const handlePlayMusic = (music: MusicDetails | Music) => {
+  const handlePlayMusic = (music: Music) => {
     if (isCurrentMusicPlaying) {
       setIsPlaying(false);
     } else {
-      setPlayingMusic(music);
+      setPlayingMusic({ ...music, artist, catalog });
       setIsPlaying(true);
     }
   };
 
-  const handleClickPlay = (music: MusicDetails | Music) => {
+  const handleClickPlay = (music: Music) => {
     if (clickTimeout) {
       clearTimeout(clickTimeout);
       setClickTimeout(null);
@@ -71,7 +83,7 @@ export default function MusicItem({ music, artist, catalog }: MusicItemProps): R
     }
   };
 
-  const handleDoubleClickPlay = (music: MusicDetails | Music) => {
+  const handleDoubleClickPlay = (music: Music) => {
     if (clickTimeout) {
       clearTimeout(clickTimeout);
       setClickTimeout(null);
@@ -84,7 +96,7 @@ export default function MusicItem({ music, artist, catalog }: MusicItemProps): R
   return (
     <div className="relative" ref={musicItemRef}>
       <div
-        className={`flex flex-row w-full p-1 justify-between h-16 md:h-[72px] lg:h-20 ${playingMusic.id == music.id ? "bg-slate-200" : "hover:bg-slate-100"} rounded-xl`}>
+        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[72px] lg:h-20 ${playingMusic.id == music.id ? "bg-slate-200" : "hover:bg-slate-100"} rounded-xl`}>
         <div
           onDoubleClick={() => handleDoubleClickPlay(music)}
           className="flex flex-row w-full justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer">
@@ -93,12 +105,25 @@ export default function MusicItem({ music, artist, catalog }: MusicItemProps): R
               onMouseEnter={() => setDisplayPlay(true)}
               onMouseLeave={() => setDisplayPlay(false)}
               className="relative p-0.5 h-5/6 xsm:h-full">
-              <img
-                className="rounded-xl object-contain h-full"
-                src={catalog.thumbnail}
-                alt={`${music.title} ${catalog.title} ${artist.artist_name}`}
-              />
-              {displayPlay && (
+              {showCatalogThumbnail && (
+                <img
+                  className="rounded-xl object-contain h-full"
+                  src={catalog.thumbnail}
+                  alt={`${music.title} ${catalog.title} ${artist.artist_name}`}
+                />
+              )}
+              {!showCatalogThumbnail && (
+                <div
+                  className="flex justify-center items-center h-full w-8"
+                  onClick={() => handleClickPlay(music)}>
+                  <span className="group-hover:hidden flex">{index}</span>
+                  <Icon
+                    iconName={isCurrentMusicPlaying ? "pauseButton" : "playButton"}
+                    className="w-4/5 group-hover:block hidden rounded-full fill-primary-orange"
+                  />
+                </div>
+              )}
+              {displayPlay && showCatalogThumbnail && (
                 <span
                   onClick={() => handleClickPlay(music)}
                   className="flex justify-center items-center h-full w-full absolute top-0 left-0 p-3">
@@ -109,7 +134,7 @@ export default function MusicItem({ music, artist, catalog }: MusicItemProps): R
                 </span>
               )}
             </div>
-            <div className="flex flex-col xsm:gap-1 h-full max-w-full overflow-hidden items-start">
+            <div className="flex flex-col xsm:gap-1 h-full max-w-full overflow-hidden items-start justify-center">
               <span className="text-base text-dark-custom flex gap-1 xsm:gap-2 items-center w-full">
                 <span className="font-semibold text-sm xsm:font-normal xsm:text-base truncate">
                   {music.title}
@@ -121,13 +146,17 @@ export default function MusicItem({ music, artist, catalog }: MusicItemProps): R
                 </span>
               </span>
               <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
-                <ArtistInfo artist={artist} />
-                <span className="hidden lg:block flex-shrink-0">-</span>
-                <span
-                  className="hidden lg:block cursor-pointer hover:underline truncate"
-                  onClick={() => navigate(routesConfig.catalog.getParameter(catalog.id))}>
-                  {catalog.title}
-                </span>
+                {showArtist && <ArtistInfo artist={artist} className="min-w-fit" />}
+                {showArtist && showCatalog && (
+                  <span className="hidden lg:block flex-shrink-0">-</span>
+                )}
+                {showCatalog && (
+                  <span
+                    className="hidden lg:block cursor-pointer hover:underline truncate"
+                    onClick={() => navigate(routesConfig.catalog.getParameter(catalog.id))}>
+                    {catalog.title}
+                  </span>
+                )}
               </span>
             </div>
           </div>
@@ -149,7 +178,7 @@ export default function MusicItem({ music, artist, catalog }: MusicItemProps): R
           <Icon
             onClick={handleClickSettings}
             iconName="ellipsis"
-            className="fill-primary-orange cursor-pointer size-6 sm:size-[30px]"
+            className="fill-dark-custom cursor-pointer size-6 sm:size-[30px]"
           />
           {displaySettings && (
             <MusicSettings

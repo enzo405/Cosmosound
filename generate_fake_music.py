@@ -53,6 +53,7 @@ async def fetch_artist_catalogs(session, artist_id):
             {
                 "id": album["id"],
                 "title": album["name"],
+                "date_creation": datetime.now().isoformat() + "Z",
                 "thumbnail": album["images"][0]["url"] if album["images"] else None,
                 "type": album_type_to_enum(album["album_type"]),
             }
