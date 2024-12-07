@@ -2,5 +2,4 @@
 - filtres dans explore, faire des pages pour chaque filtres au lieu de cacher les composants (e.g => /explore/artists, /explore/musics)
 - gérer quel settings on affiche en fonctione de la page où on se trouve
 - faire les errors page
-- bug sidebar when small
 - min size for album thumbnail in MusicItem

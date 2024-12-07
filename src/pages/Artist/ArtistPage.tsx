@@ -126,14 +126,14 @@ export default function ArtistPage(): ReactElement {
           </span>
           <span className="flex flex-row-reverse sm:flex-row gap-4 mt-2 md:mt-auto w-full justify-start">
             <Icon
-              className="drop-shadow-2xl lg:size-16 md:size-14 size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+              className="lg:size-16 md:size-14 size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
               iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
               onClick={handlePlaying}
             />
             <Icon
               onClick={handleClickHeart}
               iconName={isArtistLiked ? "heart-orange" : "heart-orange-empty"}
-              className={`drop-shadow-2xl lg:size-16 md:size-14 size-12 cursor-pointer ${isAnimating ? "animate-pop" : ""}`}
+              className={`lg:size-16 md:size-14 size-12 cursor-pointer ${isAnimating ? "animate-pop" : ""}`}
             />
           </span>
         </div>
@@ -152,8 +152,8 @@ export default function ArtistPage(): ReactElement {
         <CategoryTabs activeTab={activeTab} onTabSelect={handleTabChange} />
         <div className={`flex ${activeTab == ArtistTabs.MUSIC ? "flex-col" : "flex-wrap gap-2"}`}>
           {content.length != 0 ? (
-            content.map((item) => {
-              if (activeTab == ArtistTabs.MUSIC) {
+            activeTab == ArtistTabs.MUSIC ? (
+              content.map((item) => {
                 return (
                   <MusicItem
                     key={item.id}
@@ -162,7 +162,9 @@ export default function ArtistPage(): ReactElement {
                     catalog={artist.musics.find((m) => m.id == item.id)?.catalog!}
                   />
                 );
-              } else {
+              })
+            ) : (
+              content.map((item) => {
                 const catalog = item as Catalog;
                 return (
                   <Card
@@ -173,8 +175,8 @@ export default function ArtistPage(): ReactElement {
                     link={routesConfig.catalog.getParameter(catalog.id)}
                   />
                 );
-              }
-            })
+              })
+            )
           ) : (
             <span className="text-dark-custom">
               {artist.artist_name} haven't made any {activeTab.valueOf()} yet
