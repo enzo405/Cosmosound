@@ -29,6 +29,11 @@ export enum ArtistTabs {
 
 export default function ArtistPage(): ReactElement {
   const { idArtist } = useParams();
+
+  if (idArtist == undefined) {
+    return <NotFoundErrorPage />;
+  }
+
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const artist = ArtistService.getArtistById(Number(idArtist));
 
@@ -59,7 +64,8 @@ export default function ArtistPage(): ReactElement {
 
   const handlePlaying = () => {
     if (!isPlayingSongCurrentPage && artist != undefined) {
-      setPlayingMusic(artist.musics[0]);
+      const firstMusicCatalog = artist.musics.find((m) => m.id == artist.musics[0].id)?.catalog;
+      setPlayingMusic({ ...artist.musics[0], artist, catalog: firstMusicCatalog! });
     }
     setIsPlaying(!isPlaying);
   };
@@ -158,8 +164,9 @@ export default function ArtistPage(): ReactElement {
                   <MusicItem
                     key={item.id}
                     music={item as Music}
-                    artist={artist}
                     catalog={artist.musics.find((m) => m.id == item.id)?.catalog!}
+                    artist={artist}
+                    showArtist={false}
                   />
                 );
               })

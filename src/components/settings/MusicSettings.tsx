@@ -53,7 +53,7 @@ export default function MusicSettings({
     const path = routesConfig.catalog.getParameter(music.catalog.id);
     const host = window.location.host;
     navigator.clipboard.writeText(`${host}${path}`);
-    enqueueSnackbar(`Link copied to your clipboard`, {
+    enqueueSnackbar(`Link copied to clipboard`, {
       variant: "info",
     });
   };
