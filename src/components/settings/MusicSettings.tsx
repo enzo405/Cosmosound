@@ -1,7 +1,7 @@
 import Divider from "components/Divider";
 import SettingsOptions from "components/settings/SettingsOptions";
 import { routesConfig } from "config/app-config";
-import { MusicDetails } from "models/Music";
+import { MusicWithCatalog } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { ReactElement, useEffect, useState } from "react";
 import TextSetting from "./TextSetting";
@@ -10,7 +10,7 @@ import SelectPlaylist from "./SelectPlaylist";
 
 interface MusicSettingsProps {
   dropdownPosition: "top" | "bottom";
-  music: MusicDetails;
+  music: MusicWithCatalog;
   isFav: boolean;
   onDeleteSong: () => void;
   onCloseSetting: () => void;

@@ -1,19 +1,23 @@
 import { Icon } from "components/icons/Icon";
 import { routesConfig } from "config/app-config";
 import { useMusic } from "hooks/useMusic";
-import { MusicDetails } from "models/Music";
+import { Music, MusicDetails } from "models/Music";
 import { ReactElement, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatDuration, formatTime } from "utils/date";
 import ArtistInfo from "./ArtistInfo";
 import MusicSettings from "components/settings/MusicSettings";
 import { enqueueSnackbar } from "notistack";
+import { Artist } from "models/User";
+import { Catalog } from "models/Catalog";
 
 interface MusicItemProps {
-  music: MusicDetails;
+  music: Music;
+  artist: Artist;
+  catalog: Catalog;
 }
 
-export default function MusicItem({ music }: MusicItemProps): ReactElement {
+export default function MusicItem({ music, artist, catalog }: MusicItemProps): ReactElement {
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const [displaySettings, setDisplaySettings] = useState<boolean>(false);
   const [displayPlay, setDisplayPlay] = useState<boolean>(false);
@@ -45,7 +49,7 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
     setDisplaySettings(!displaySettings);
   };
 
-  const handlePlayMusic = (music: MusicDetails) => {
+  const handlePlayMusic = (music: MusicDetails | Music) => {
     if (isCurrentMusicPlaying) {
       setIsPlaying(false);
     } else {
@@ -54,7 +58,7 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
     }
   };
 
-  const handleClickPlay = (music: MusicDetails) => {
+  const handleClickPlay = (music: MusicDetails | Music) => {
     if (clickTimeout) {
       clearTimeout(clickTimeout);
       setClickTimeout(null);
@@ -67,7 +71,7 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
     }
   };
 
-  const handleDoubleClickPlay = (music: MusicDetails) => {
+  const handleDoubleClickPlay = (music: MusicDetails | Music) => {
     if (clickTimeout) {
       clearTimeout(clickTimeout);
       setClickTimeout(null);
@@ -91,8 +95,8 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
               className="relative p-0.5 h-5/6 xsm:h-full">
               <img
                 className="rounded-xl object-contain h-full"
-                src={music.catalog.thumbnail}
-                alt={`${music.title} ${music.catalog.title} ${music.artist.artist_name}`}
+                src={catalog.thumbnail}
+                alt={`${music.title} ${catalog.title} ${artist.artist_name}`}
               />
               {displayPlay && (
                 <span
@@ -117,12 +121,12 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
                 </span>
               </span>
               <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
-                <ArtistInfo artist={music.artist} />
+                <ArtistInfo artist={artist} />
                 <span className="hidden lg:block flex-shrink-0">-</span>
                 <span
                   className="hidden lg:block cursor-pointer hover:underline truncate"
-                  onClick={() => navigate(routesConfig.catalog.getParameter(music.catalog.id))}>
-                  {music.catalog.title}
+                  onClick={() => navigate(routesConfig.catalog.getParameter(catalog.id))}>
+                  {catalog.title}
                 </span>
               </span>
             </div>
@@ -145,13 +149,13 @@ export default function MusicItem({ music }: MusicItemProps): ReactElement {
           <Icon
             onClick={handleClickSettings}
             iconName="ellipsis"
-            className="cursor-pointer size-6 sm:size-[30px]"
+            className="fill-primary-orange cursor-pointer size-6 sm:size-[30px]"
           />
           {displaySettings && (
             <MusicSettings
               dropdownPosition={dropdownSettingPosition ? "top" : "bottom"}
-              music={music}
-              onDeleteSong={() => navigate(routesConfig.catalogEdit.getParameter(music.catalog.id))}
+              music={{ ...music, catalog }}
+              onDeleteSong={() => navigate(routesConfig.catalogEdit.getParameter(catalog.id))}
               onCloseSetting={() => setDisplaySettings(false)}
               onAddToFav={handleClickHeart}
               isFav={isLiked}

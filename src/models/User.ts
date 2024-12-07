@@ -1,4 +1,5 @@
-import { Genre } from "./Music";
+import { Catalog } from "./Catalog";
+import { Genre, MusicWithCatalog } from "./Music";
 
 export interface User {
   id: number;
@@ -14,6 +15,11 @@ export interface Artist extends User {
   social_media: SocialMediaLink[];
   genre: Genre;
   artist_name: string;
+}
+
+export interface DetailedArtistInfo extends Artist {
+  musics: MusicWithCatalog[];
+  catalogs: Catalog[];
 }
 
 export interface SocialMediaLink {
