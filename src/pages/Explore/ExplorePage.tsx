@@ -77,7 +77,7 @@ function ExplorePage(): ReactElement {
           title="Songs"
           className="flex-col"
           children={musics.map((m) => {
-            return <MusicItem music={m} key={m.id} />;
+            return <MusicItem music={m} artist={m.artist} catalog={m.catalog} key={m.id} />;
           })}
         />
       )}

@@ -13,7 +13,7 @@ function Header(): ReactElement {
       <HeaderAvatar className="sm:flex hidden" id="avatar-button-desktop" />
       <img
         className="block sm:hidden size-8 mr-2 "
-        src="./src/assets/img/cosmosound.png"
+        src="/src/assets/img/cosmosound.png"
         alt="CosmoSound"
       />
     </div>

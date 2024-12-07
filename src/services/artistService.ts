@@ -1,5 +1,10 @@
 import dataArtist from "assets/json/artists.json";
-import { Artist } from "models/User";
+import data from "assets/json/musics.json";
+import dataCatalogs from "assets/json/catalogs.json";
+import { Artist, DetailedArtistInfo } from "models/User";
+import { MusicDetails } from "models/Music";
+
+const musicData: MusicDetails[] = data as MusicDetails[];
 
 function getMyFavouriteArtist(): Artist[] {
   return dataArtist.filter((artist) =>
@@ -7,6 +12,20 @@ function getMyFavouriteArtist(): Artist[] {
       artist.id,
     ),
   );
+}
+
+function getArtistById(id: number): DetailedArtistInfo | undefined {
+  const artist = dataArtist.find((artist) => artist.id == id);
+  if (!artist) return undefined;
+
+  const musics = musicData.filter((music) => music.artist.id === id);
+  const catalogs = dataCatalogs.filter((catalog) => catalog.owner.id === id);
+
+  return {
+    ...artist,
+    musics,
+    catalogs,
+  };
 }
 
 function searchArtistByName(value: string): Artist[] {
@@ -22,6 +41,7 @@ function searchArtistByName(value: string): Artist[] {
 const ArtistService = {
   getMyFavouriteArtist,
   searchArtistByName,
+  getArtistById,
 };
 
 export default ArtistService;

@@ -13,7 +13,7 @@ export default function RecentMusic({}: RecentMusicProps): ReactElement {
       title="Recent Music"
       className="flex-col"
       children={musicHistory.map((m) => {
-        return <MusicItem music={m} key={m.id} />;
+        return <MusicItem music={m} artist={m.artist} catalog={m.catalog} key={m.id} />;
       })}
     />
   );

@@ -36,27 +36,27 @@ const routesConfig: RoutesConfig = {
     title: "Artist Panel",
   },
   catalog: {
-    path: "/catalog/:id",
+    path: "/catalog/:idCatalog",
     getParameter: (idCatalog: string) => `/catalog/${idCatalog}`,
     title: "Catalog",
   },
   playlist: {
-    path: "/playlist/:id",
+    path: "/playlist/:idPlaylist",
     getParameter: (idPlaylist: string) => `/playlist/${idPlaylist}`,
     title: "Playlist",
   },
   genres: {
-    path: "/genres/:name",
+    path: "/genres/:nameGenre",
     getParameter: (nameGenre: string) => `/genres/${nameGenre}`,
     title: "Genre",
   },
   catalogEdit: {
-    path: "/catalog/:id/edit",
+    path: "/catalog/:idCatalog/edit",
     getParameter: (idCatalog: string) => `/catalog/${idCatalog}/edit`,
     title: "Edit Catalog",
   },
   artist: {
-    path: "/artist/:id",
+    path: "/artist/:idArtist",
     getParameter: (idArtist: string) => `/artist/${idArtist}`,
     title: "Artist",
   },

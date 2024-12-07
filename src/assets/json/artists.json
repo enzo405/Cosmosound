@@ -256,8 +256,24 @@
         "followings": [],
         "social_media": [
             {
+                "media": 0,
+                "link": "https://x.com/linkinpark"
+            },
+            {
                 "media": 1,
                 "link": "https://open.spotify.com/artist/6XyY86QOPPrYVGvF9ch6wz"
+            },
+            {
+                "media": 2,
+                "link": "https://music.apple.com/fr/artist/linkin-park/148662"
+            },
+            {
+                "media": 3,
+                "link": "https://music.youtube.com/channel/UCxgN32UVVztKAQd2HkXzBtw"
+            },
+            {
+                "media": 4,
+                "link": "https://www.instagram.com/linkinpark/?hl=en"
             }
         ],
         "genre": {

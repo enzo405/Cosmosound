@@ -9,7 +9,11 @@ export interface Music {
   is_ai: boolean;
 }
 
-export interface MusicDetails extends Music {
+export interface MusicWithCatalog extends Music {
+  catalog: Catalog | CatalogWithMusic;
+}
+
+export interface MusicDetails extends MusicWithCatalog {
   artist: Artist;
   genres: Array<Genre>;
   catalog: Catalog | CatalogWithMusic;
