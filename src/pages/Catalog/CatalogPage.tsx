@@ -59,7 +59,7 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
     <div className="relative flex flex-col rounded-lg bg-box-bg h-full w-full gap-4 py-8 px-4">
       <div className="flex flex-col sm:flex-row w-full lg:gap-10 md:gap-6 gap-4 pb-6 border-b border-gray-300">
         <img
-          className="rounded-full lg:size-64 md:size-52 size-40"
+          className="rounded-full lg:size-64 md:size-52 size-40 shadow-2xl"
           src={catalog.thumbnail}
           alt={catalog.title}
         />
