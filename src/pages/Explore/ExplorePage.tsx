@@ -1,6 +1,6 @@
 import { useSearch } from "hooks/useSearch";
 import { Catalog, TypeCatalog } from "models/Catalog";
-import { MusicDetails } from "models/Music";
+import { Genre, MusicDetails } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { Artist } from "models/User";
 import { useEffect, useState, type ReactElement } from "react";
@@ -14,6 +14,9 @@ import MusicItem from "components/music/MusicItem";
 import ScrollableBox from "components/box/ScrollableBox";
 import Card from "components/cards/Card";
 import ArtistCard from "components/cards/ArtistCard";
+import GenresService from "services/genresService";
+import SmallCard from "components/cards/SmallCard";
+import { routesConfig } from "config/app-config";
 
 export enum Filters {
   ALL = "All",
@@ -22,6 +25,7 @@ export enum Filters {
   PLAYLISTS = "Playlists",
   EPS_SINGLES = "EPs & Singles",
   ALBUMS = "Albums",
+  GENRES = "Genres",
 }
 
 function ExplorePage(): ReactElement {
@@ -34,21 +38,24 @@ function ExplorePage(): ReactElement {
   const [albums, setAlbums] = useState<Catalog[]>([]);
   const [eps, setEps] = useState<Catalog[]>([]);
   const [singles, setSingles] = useState<Catalog[]>([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [fetchedMusics, fetchedArtists, fetchedPlaylists, fetchedCatalogs] =
+        const [fetchedMusics, fetchedArtists, fetchedPlaylists, fetchedCatalogs, fetchedGenres] =
           await Promise.all([
             MusicService.searchMusicByTitle(search),
             ArtistService.searchArtistByName(search),
             PlaylistService.searchPlaylistByTitle(search),
             CatalogService.searchCatalogByTitle(search),
+            GenresService.getGenreByName(search),
           ]);
 
         setMusics(fetchedMusics);
         setArtists(fetchedArtists);
         setPlaylists(fetchedPlaylists);
+        setGenres(fetchedGenres.slice(0, 20));
 
         setAlbums(fetchedCatalogs.filter((c) => c.type === TypeCatalog.ALBUM));
         setEps(fetchedCatalogs.filter((c) => c.type === TypeCatalog.EP));
@@ -81,10 +88,10 @@ function ExplorePage(): ReactElement {
           })}
         />
       )}
-      <div className="flex flex-row w-full">
+      <div className="flex flex-wrap w-full">
         {(activeFilter === Filters.ALL || activeFilter === Filters.ALBUMS) &&
           albums.length != 0 && (
-            <div className="w-1/2 pr-3">
+            <div className="w-1/2 p-3">
               <ScrollableBox
                 children={albums.map((catalog) => {
                   return (
@@ -103,7 +110,7 @@ function ExplorePage(): ReactElement {
           )}
         {((activeFilter === Filters.ALL || activeFilter === Filters.EPS_SINGLES) &&
           [...singles, ...eps].length) != 0 && (
-          <div className="w-1/2 pl-3">
+          <div className="w-1/2 p-3">
             <ScrollableBox
               children={[...singles, ...eps].map((catalog) => {
                 return (
@@ -120,24 +127,42 @@ function ExplorePage(): ReactElement {
             />
           </div>
         )}
+        {(activeFilter === Filters.ALL || activeFilter === Filters.PLAYLISTS) &&
+          playlists.length != 0 && (
+            <div className="w-1/2 p-3">
+              <ScrollableBox
+                children={playlists.map((playlist) => {
+                  return (
+                    <Card
+                      key={playlist.id}
+                      title={playlist.title}
+                      description={`${playlist.title} - ${playlist.owner.name}`}
+                      link={`/playlist/${playlist.id}`}
+                      thumbnail={playlist.musics[0].catalog.thumbnail}
+                    />
+                  );
+                })}
+                title="Playlists"
+              />
+            </div>
+          )}
+        {(activeFilter === Filters.ALL || activeFilter === Filters.GENRES) &&
+          genres.length != 0 && (
+            <div className="w-1/2 p-3">
+              <Box title="Genres" className="flex-wrap">
+                {genres.map((genre) => {
+                  return (
+                    <SmallCard
+                      key={genre.name}
+                      title={genre.name}
+                      link={routesConfig.genres.getParameter(genre.name)}
+                    />
+                  );
+                })}
+              </Box>
+            </div>
+          )}
       </div>
-      {(activeFilter === Filters.ALL || activeFilter === Filters.PLAYLISTS) &&
-        playlists.length != 0 && (
-          <ScrollableBox
-            children={playlists.map((playlist) => {
-              return (
-                <Card
-                  key={playlist.id}
-                  title={playlist.title}
-                  description={`${playlist.title} - ${playlist.owner.name}`}
-                  link={`/playlist/${playlist.id}`}
-                  thumbnail={playlist.musics[0].catalog.thumbnail}
-                />
-              );
-            })}
-            title="Playlists"
-          />
-        )}
     </div>
   );
 }

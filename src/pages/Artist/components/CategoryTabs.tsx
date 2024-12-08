@@ -1,12 +1,16 @@
 import { ReactElement, useState, useEffect, useRef } from "react";
-import { ArtistTabs } from "../ArtistPage";
 
-interface CategoryTabsProps {
-  activeTab: ArtistTabs;
-  onTabSelect: (tab: ArtistTabs) => void;
+interface CategoryTabsProps<T extends string> {
+  activeTab: T;
+  tabs: Record<string, T>;
+  onTabSelect: (tab: T) => void;
 }
 
-export default function CategoryTabs({ activeTab, onTabSelect }: CategoryTabsProps): ReactElement {
+export default function CategoryTabs<T extends string>({
+  activeTab,
+  tabs,
+  onTabSelect,
+}: CategoryTabsProps<T>): ReactElement {
   const [underlineStyle, setUnderlineStyle] = useState({ width: 0, left: 0 });
   const tabsRef = useRef<HTMLDivElement>(null);
 
@@ -26,14 +30,14 @@ export default function CategoryTabs({ activeTab, onTabSelect }: CategoryTabsPro
     }
   }, [activeTab]);
 
-  const handleTabClick = (tab: ArtistTabs) => {
+  const handleTabClick = (tab: T) => {
     onTabSelect(tab);
   };
 
   return (
     <div className="relative">
       <div ref={tabsRef} className="flex border-b border-gray-300">
-        {Object.entries(ArtistTabs).map(([key, tab]) => (
+        {Object.entries(tabs).map(([key, tab]) => (
           <button
             key={key}
             data-tab={tab}

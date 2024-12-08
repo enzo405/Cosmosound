@@ -155,7 +155,7 @@ export default function ArtistPage(): ReactElement {
         )}
       </div>
       <div className="flex flex-col gap-3">
-        <CategoryTabs activeTab={activeTab} onTabSelect={handleTabChange} />
+        <CategoryTabs tabs={ArtistTabs} activeTab={activeTab} onTabSelect={handleTabChange} />
         <div className={`flex ${activeTab == ArtistTabs.MUSIC ? "flex-col" : "flex-wrap gap-2"}`}>
           {content.length != 0 ? (
             activeTab == ArtistTabs.MUSIC ? (

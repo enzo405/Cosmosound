@@ -23,6 +23,7 @@ async def main():
             playlist = {
                 "id": i,
                 "title": f"Playlist {random.randint(1, 1000)}",
+                "date_creation": datetime.now().isoformat(),
                 "owner": {
                     "id": 1,
                     "name": "Me",

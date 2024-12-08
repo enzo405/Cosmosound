@@ -15,6 +15,7 @@ interface MusicSettingsProps {
   onDeleteSong: () => void;
   onCloseSetting: () => void;
   onAddToFav: () => void;
+  onDeleteFromPlaylist: (() => void) | undefined;
 }
 
 export default function MusicSettings({
@@ -24,6 +25,7 @@ export default function MusicSettings({
   onDeleteSong,
   onCloseSetting,
   onAddToFav,
+  onDeleteFromPlaylist,
 }: MusicSettingsProps): ReactElement {
   const [displayPlaylistSelect, setDisplayPlaylistSelect] = useState(false);
 
@@ -68,6 +70,10 @@ export default function MusicSettings({
     });
   };
 
+  const isPlaylistPageView = window.location.pathname.startsWith(
+    routesConfig.playlist.path.split(":")[0],
+  );
+
   return (
     <div
       className={`absolute ${
@@ -86,9 +92,11 @@ export default function MusicSettings({
         <TextSetting text="Add to Playlist" iconName="plus" />
       </SettingsOptions>
       <Divider />
-      <SettingsOptions onClick={onDeleteSong}>
-        <TextSetting iconName="minus" text="Remove From Playlist" />
-      </SettingsOptions>
+      {isPlaylistPageView && (
+        <SettingsOptions onClick={onDeleteFromPlaylist}>
+          <TextSetting iconName="minus" text="Remove From Playlist" />
+        </SettingsOptions>
+      )}
       <SettingsOptions onClick={onDeleteSong}>
         <TextSetting iconName="trash" text="Delete Song" />
       </SettingsOptions>

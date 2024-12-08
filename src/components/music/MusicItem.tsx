@@ -19,6 +19,7 @@ interface MusicItemProps {
   showCatalog?: boolean;
   showCatalogThumbnail?: boolean;
   index?: number;
+  handleDeleteFromPlaylist?: () => void;
 }
 
 export default function MusicItem({
@@ -29,6 +30,7 @@ export default function MusicItem({
   showCatalog = true,
   showCatalogThumbnail = true,
   index,
+  handleDeleteFromPlaylist,
 }: MusicItemProps): ReactElement {
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const [displaySettings, setDisplaySettings] = useState<boolean>(false);
@@ -187,6 +189,7 @@ export default function MusicItem({
               onDeleteSong={() => navigate(routesConfig.catalogEdit.getParameter(catalog.id))}
               onCloseSetting={() => setDisplaySettings(false)}
               onAddToFav={handleClickHeart}
+              onDeleteFromPlaylist={handleDeleteFromPlaylist}
               isFav={isLiked}
             />
           )}

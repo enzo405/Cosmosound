@@ -19,9 +19,14 @@ function searchPlaylistByTitle(value: string): Playlist[] {
   return [...new Set(playlistsTitleMatch)];
 }
 
+function getPlaylistById(id: string): Playlist | undefined {
+  return playlistsData.find((playlist) => playlist.id == id);
+}
+
 const PlaylistService = {
   getMyPlaylist,
   searchPlaylistByTitle,
+  getPlaylistById,
 };
 
 export default PlaylistService;
