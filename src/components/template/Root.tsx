@@ -2,7 +2,7 @@ import { MouseEvent, useEffect, useState, type ReactElement } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header/Header";
 import Sidebar from "./Sidebar/Sidebar";
-import MusicPlayer from "components/music/MusicPlayer";
+import MusicPlayer from "components/template/MusicPlayer/MusicPlayer";
 import { useScreenSize } from "hooks/useScreenSize";
 import DropdownHeaderAvatar from "./Avatar/ModalHeaderAvatar";
 

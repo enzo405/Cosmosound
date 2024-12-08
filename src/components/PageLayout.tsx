@@ -1,0 +1,63 @@
+import { ReactNode } from "react";
+import { Icon } from "components/icons/Icon";
+import { IconName } from "constants/iconName";
+
+interface PageLayoutProps {
+  title: string;
+  subtitle: ReactNode;
+  headerActions: ReactNode;
+  thumbnail?: string;
+  actionIconName?: IconName;
+  onPageActionClick?: () => void;
+  displaySettings?: boolean;
+  settingsComponent?: ReactNode;
+  content: ReactNode;
+}
+
+export default function PageLayout({
+  thumbnail,
+  title,
+  subtitle,
+  headerActions,
+  actionIconName = "ellipsis",
+  onPageActionClick,
+  displaySettings = false,
+  settingsComponent,
+  content,
+}: PageLayoutProps) {
+  return (
+    <div className="relative flex flex-col rounded-lg bg-box-bg h-full w-full gap-4 py-8 px-4">
+      <div className="flex flex-col sm:flex-row w-full lg:gap-10 md:gap-6 gap-4">
+        {thumbnail && (
+          <img
+            className="rounded-full lg:size-64 md:size-52 size-40 shadow-2xl"
+            src={thumbnail}
+            alt={title}
+          />
+        )}
+        <div
+          className={`w-full ${thumbnail ? "sm:w-4/5 flex-col gap-2" : "flex-row gap-6 items-center"} flex text-dark-custom`}>
+          <h1
+            className={`${thumbnail ? "lg:text-5xl md:text-3xl text-2xl" : "sm:text-6xl text-4xl"} font-bs font-semibold`}>
+            {title}
+          </h1>
+          <span className="font-light">{subtitle}</span>
+          <span className="flex flex-row-reverse sm:flex-row gap-4 mt-2 md:mt-auto w-full justify-start">
+            {headerActions}
+          </span>
+        </div>
+        {onPageActionClick && (
+          <span id="settings">
+            <Icon
+              onClick={onPageActionClick}
+              iconName={actionIconName}
+              className="absolute top-6 right-4 fill-dark-custom cursor-pointer md:size-8 size-6"
+            />
+          </span>
+        )}
+        {displaySettings && settingsComponent}
+      </div>
+      <div className="flex flex-col gap-3">{content}</div>
+    </div>
+  );
+}

@@ -1,7 +1,7 @@
 import Divider from "components/Divider";
 import { Icon } from "components/icons/Icon";
 import { Playlist } from "models/Playlist";
-import { ReactElement, useRef, useState } from "react";
+import { ReactElement, useMemo, useRef, useState } from "react";
 import PlaylistService from "services/playlistService";
 
 interface SelectPlaylistProps {
@@ -27,7 +27,7 @@ export default function SelectPlaylist({
     closeSettings();
   };
 
-  const playlists = PlaylistService.getMyPlaylist();
+  const playlists = useMemo(() => PlaylistService.getMyPlaylist(), []);
 
   const filteredPlaylists = playlists.filter((playlist) =>
     playlist.title.toLowerCase().includes(searchTerm.toLowerCase()),

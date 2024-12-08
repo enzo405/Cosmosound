@@ -10,6 +10,7 @@ import MusicSettings from "components/settings/MusicSettings";
 import { enqueueSnackbar } from "notistack";
 import { Artist } from "models/User";
 import { Catalog } from "models/Catalog";
+import UserService from "services/userService";
 
 interface MusicItemProps {
   music: Music;
@@ -19,7 +20,7 @@ interface MusicItemProps {
   showCatalog?: boolean;
   showCatalogThumbnail?: boolean;
   index?: number;
-  handleDeleteFromPlaylist?: () => void;
+  handleDeleteFromPlaylist?: (music: Music) => void;
 }
 
 export default function MusicItem({
@@ -48,10 +49,12 @@ export default function MusicItem({
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 300);
     if (isLiked) {
+      UserService.removeLike(music);
       enqueueSnackbar(`Song removed to your favourite songs`, {
         variant: "success",
       });
     } else {
+      UserService.like(music);
       enqueueSnackbar(`Song added to your favourite songs`, {
         variant: "success",
       });
@@ -98,7 +101,7 @@ export default function MusicItem({
   return (
     <div className="relative" ref={musicItemRef}>
       <div
-        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[72px] lg:h-20 ${playingMusic.id == music.id ? "bg-slate-200" : "hover:bg-slate-100"} rounded-xl`}>
+        className={`group flex flex-row w-full p-1 justify-between h-16 ${showCatalogThumbnail ? "md:h-[72px] lg:h-20" : "md:h-[64px] lg:h-18"} ${playingMusic.id == music.id ? "bg-slate-200" : "hover:bg-slate-100"} rounded-xl`}>
         <div
           onDoubleClick={() => handleDoubleClickPlay(music)}
           className="flex flex-row w-full justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer">

@@ -1,5 +1,6 @@
 import { Playlist } from "models/Playlist";
 import data from "assets/json/playlists.json";
+import { Music } from "models/Music";
 
 const playlistsData = data as Playlist[];
 
@@ -23,14 +24,31 @@ function searchPlaylistByTitle(value: string): Playlist[] {
   return [...new Set(playlistsTitleMatch)];
 }
 
-function getPlaylistById(id: string): Playlist | undefined {
+function getPlaylistById(id?: string): Playlist | undefined {
+  if (id == undefined) return undefined;
+
   return playlistsData.find((playlist) => playlist.id == id);
+}
+
+function deletePlaylist(playlist: Playlist): void {
+  console.log("playlist", playlist);
+}
+
+function deleteMusic(playlist: Playlist, music: Music) {
+  console.log("playlist, music", playlist, music);
+}
+
+function addMusic(playlist: Playlist, music: Music) {
+  console.log("playlist, music", playlist, music);
 }
 
 const PlaylistService = {
   getMyPlaylist,
   searchPlaylistByTitle,
   getPlaylistById,
+  deletePlaylist,
+  deleteMusic,
+  addMusic,
 };
 
 export default PlaylistService;
