@@ -33,4 +33,5 @@ export type IconName =
   | "verified-label"
   | "ai-label"
   | "ellipsis"
+  | "trash-red"
   | "trash";
