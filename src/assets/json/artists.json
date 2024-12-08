@@ -3,9 +3,9 @@
         "id": 1,
         "name": "Oathbreaker",
         "email": "oathbreaker@example.com",
-        "date_creation": "2024-12-08T03:37:18.864736Z",
+        "date_creation": "2024-12-08T03:45:29.920347Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb14cba66d6224325ae526805b",
-        "followers": 33839,
+        "followers": 33174,
         "followings": [],
         "social_media": [
             {
@@ -22,9 +22,9 @@
         "id": 2,
         "name": "Tallah",
         "email": "tallah@example.com",
-        "date_creation": "2024-12-08T03:37:19.593157Z",
+        "date_creation": "2024-12-08T03:45:30.688922Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebf41950669f1c9eb45685884a",
-        "followers": 90209,
+        "followers": 55219,
         "followings": [],
         "social_media": [
             {
@@ -41,9 +41,9 @@
         "id": 3,
         "name": "Synestia",
         "email": "synestia@example.com",
-        "date_creation": "2024-12-08T03:37:20.258710Z",
+        "date_creation": "2024-12-08T03:45:31.414771Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1543b36dde39fbf4b402910f",
-        "followers": 86737,
+        "followers": 1239,
         "followings": [],
         "social_media": [
             {
@@ -60,9 +60,9 @@
         "id": 4,
         "name": "Paleface Swiss",
         "email": "paleface_swiss@example.com",
-        "date_creation": "2024-12-08T03:37:21.065111Z",
+        "date_creation": "2024-12-08T03:45:32.060918Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb371ad64a15a3ea618035ca3d",
-        "followers": 37848,
+        "followers": 55246,
         "followings": [],
         "social_media": [
             {
@@ -79,9 +79,9 @@
         "id": 5,
         "name": "Make Them Suffer",
         "email": "make_them_suffer@example.com",
-        "date_creation": "2024-12-08T03:37:21.759218Z",
+        "date_creation": "2024-12-08T03:45:32.813845Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb0475c1139bdd0b23787cc96f",
-        "followers": 83186,
+        "followers": 17789,
         "followings": [],
         "social_media": [
             {
@@ -98,9 +98,9 @@
         "id": 6,
         "name": "Lauren Babic",
         "email": "lauren_babic@example.com",
-        "date_creation": "2024-12-08T03:37:22.578585Z",
+        "date_creation": "2024-12-08T03:45:33.565655Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb2193e86a77d7647ecfd0c52f",
-        "followers": 34192,
+        "followers": 18010,
         "followings": [],
         "social_media": [
             {
@@ -109,7 +109,7 @@
             }
         ],
         "genre": {
-            "name": "canadian post-hardcore"
+            "name": "hel"
         },
         "artist_name": "Lauren Babic"
     },
@@ -117,9 +117,9 @@
         "id": 7,
         "name": "Kim Dracula",
         "email": "kim_dracula@example.com",
-        "date_creation": "2024-12-08T03:37:23.294017Z",
+        "date_creation": "2024-12-08T03:45:34.325138Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb760b5cab64307663339b6762",
-        "followers": 53331,
+        "followers": 60485,
         "followings": [],
         "social_media": [
             {
@@ -136,9 +136,9 @@
         "id": 8,
         "name": "Disembodied Tyrant",
         "email": "disembodied_tyrant@example.com",
-        "date_creation": "2024-12-08T03:37:24.226259Z",
+        "date_creation": "2024-12-08T03:45:35.089953Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1559be72e4f4e35cce0ced44",
-        "followers": 556,
+        "followers": 7417,
         "followings": [],
         "social_media": [
             {
@@ -155,9 +155,9 @@
         "id": 9,
         "name": "Deadlands",
         "email": "deadlands@example.com",
-        "date_creation": "2024-12-08T03:37:24.796911Z",
+        "date_creation": "2024-12-08T03:45:35.806037Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb8c55acc131c3acd632bdbd32",
-        "followers": 72923,
+        "followers": 77419,
         "followings": [],
         "social_media": [
             {
@@ -166,7 +166,7 @@
             }
         ],
         "genre": {
-            "name": "punk"
+            "name": "turkish"
         },
         "artist_name": "Deadlands"
     },
@@ -174,9 +174,9 @@
         "id": 10,
         "name": "CORPSE",
         "email": "corpse@example.com",
-        "date_creation": "2024-12-08T03:37:25.408957Z",
+        "date_creation": "2024-12-08T03:45:36.487745Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebed2fd5aa8e1c20922c190d30",
-        "followers": 64258,
+        "followers": 29812,
         "followings": [],
         "social_media": [
             {
@@ -193,9 +193,9 @@
         "id": 11,
         "name": "Citizen Soldier",
         "email": "citizen_soldier@example.com",
-        "date_creation": "2024-12-08T03:37:26.015969Z",
+        "date_creation": "2024-12-08T03:45:42.127860Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb7edd3d627999e8f4899375ae",
-        "followers": 67760,
+        "followers": 43529,
         "followings": [],
         "social_media": [
             {
@@ -212,9 +212,9 @@
         "id": 12,
         "name": "Hollywood Undead",
         "email": "hollywood_undead@example.com",
-        "date_creation": "2024-12-08T03:37:26.830967Z",
+        "date_creation": "2024-12-08T03:45:42.925489Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb4159f85a5a40c655380821da",
-        "followers": 91175,
+        "followers": 99947,
         "followings": [],
         "social_media": [
             {
@@ -223,7 +223,7 @@
             }
         ],
         "genre": {
-            "name": "rap rock"
+            "name": "modern rock"
         },
         "artist_name": "Hollywood Undead"
     },
@@ -231,9 +231,9 @@
         "id": 13,
         "name": "Skillet",
         "email": "skillet@example.com",
-        "date_creation": "2024-12-08T03:37:31.630480Z",
+        "date_creation": "2024-12-08T03:45:43.794104Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb8d1be46721e37bc398ec96e7",
-        "followers": 3045,
+        "followers": 8239,
         "followings": [],
         "social_media": [
             {
@@ -250,9 +250,9 @@
         "id": 14,
         "name": "Linkin Park",
         "email": "linkin_park@example.com",
-        "date_creation": "2024-12-08T03:37:32.424407Z",
+        "date_creation": "2024-12-08T03:45:44.654561Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebc7e6bd9e65eab62a53355576",
-        "followers": 68014,
+        "followers": 16222,
         "followings": [],
         "social_media": [
             {
@@ -261,7 +261,7 @@
             }
         ],
         "genre": {
-            "name": "post-grunge"
+            "name": "rap metal"
         },
         "artist_name": "Linkin Park"
     },
@@ -269,9 +269,9 @@
         "id": 15,
         "name": "Attila",
         "email": "attila@example.com",
-        "date_creation": "2024-12-08T03:37:33.493651Z",
+        "date_creation": "2024-12-08T03:45:45.761321Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb5cd14ea9fce7f80d61306b9f",
-        "followers": 58784,
+        "followers": 78068,
         "followings": [],
         "social_media": [
             {
@@ -280,7 +280,7 @@
             }
         ],
         "genre": {
-            "name": "metalcore"
+            "name": "nu-metalcore"
         },
         "artist_name": "Attila"
     },
@@ -288,9 +288,9 @@
         "id": 16,
         "name": "Sleep Token",
         "email": "sleep_token@example.com",
-        "date_creation": "2024-12-08T03:37:34.495061Z",
+        "date_creation": "2024-12-08T03:45:46.540031Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebdbc568c9d871256b9a3e34a1",
-        "followers": 14288,
+        "followers": 58975,
         "followings": [],
         "social_media": [
             {
@@ -307,9 +307,9 @@
         "id": 17,
         "name": "Polyphia",
         "email": "polyphia@example.com",
-        "date_creation": "2024-12-08T03:37:35.283553Z",
+        "date_creation": "2024-12-08T03:45:47.320072Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebd0d5560f6b2ebe39a6d20704",
-        "followers": 84718,
+        "followers": 62690,
         "followings": [],
         "social_media": [
             {
@@ -326,9 +326,9 @@
         "id": 18,
         "name": "Viscera",
         "email": "viscera@example.com",
-        "date_creation": "2024-12-08T03:37:36.006620Z",
+        "date_creation": "2024-12-08T03:45:48.063418Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb4b098173a5cbf7ca03293401",
-        "followers": 75291,
+        "followers": 29922,
         "followings": [],
         "social_media": [
             {
@@ -337,7 +337,7 @@
             }
         ],
         "genre": {
-            "name": "soul"
+            "name": "sleep"
         },
         "artist_name": "Viscera"
     },
@@ -345,9 +345,9 @@
         "id": 19,
         "name": "Architects",
         "email": "architects@example.com",
-        "date_creation": "2024-12-08T03:37:36.589387Z",
+        "date_creation": "2024-12-08T03:45:51.695181Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb4e7b995ea7cf092e6372c6d2",
-        "followers": 47262,
+        "followers": 42546,
         "followings": [],
         "social_media": [
             {
@@ -364,9 +364,9 @@
         "id": 20,
         "name": "STARSET",
         "email": "starset@example.com",
-        "date_creation": "2024-12-08T03:37:37.349577Z",
+        "date_creation": "2024-12-08T03:45:52.419340Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebf4961e42a5b4c8869019fd1a",
-        "followers": 25319,
+        "followers": 62705,
         "followings": [],
         "social_media": [
             {
@@ -383,9 +383,9 @@
         "id": 21,
         "name": "Metallica",
         "email": "metallica@example.com",
-        "date_creation": "2024-12-08T03:37:42.184942Z",
+        "date_creation": "2024-12-08T03:45:53.309089Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb69ca98dd3083f1082d740e44",
-        "followers": 83849,
+        "followers": 45722,
         "followings": [],
         "social_media": [
             {
@@ -394,7 +394,7 @@
             }
         ],
         "genre": {
-            "name": "metal"
+            "name": "rock"
         },
         "artist_name": "Metallica"
     },
@@ -402,9 +402,9 @@
         "id": 22,
         "name": "Iron Maiden",
         "email": "iron_maiden@example.com",
-        "date_creation": "2024-12-08T03:37:43.165980Z",
+        "date_creation": "2024-12-08T03:45:54.237025Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebf9978ad4808f6f2723124d19",
-        "followers": 23885,
+        "followers": 55677,
         "followings": [],
         "social_media": [
             {
@@ -413,7 +413,7 @@
             }
         ],
         "genre": {
-            "name": "hard rock"
+            "name": "alternative metal"
         },
         "artist_name": "Iron Maiden"
     },
@@ -421,9 +421,9 @@
         "id": 23,
         "name": "Daughtry",
         "email": "daughtry@example.com",
-        "date_creation": "2024-12-08T03:37:44.071682Z",
+        "date_creation": "2024-12-08T03:45:54.986390Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb8d77449249782b0163f351a2",
-        "followers": 95015,
+        "followers": 56849,
         "followings": [],
         "social_media": [
             {
@@ -440,9 +440,9 @@
         "id": 24,
         "name": "Falling In Reverse",
         "email": "falling_in_reverse@example.com",
-        "date_creation": "2024-12-08T03:37:44.948687Z",
+        "date_creation": "2024-12-08T03:45:55.895980Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb642bb35794af159840a9bd30",
-        "followers": 23605,
+        "followers": 96759,
         "followings": [],
         "social_media": [
             {
@@ -459,9 +459,9 @@
         "id": 25,
         "name": "Slipknot",
         "email": "slipknot@example.com",
-        "date_creation": "2024-12-08T03:37:45.741230Z",
+        "date_creation": "2024-12-08T03:45:56.724521Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebd0cdb283a7384a0edb665182",
-        "followers": 32851,
+        "followers": 78240,
         "followings": [],
         "social_media": [
             {
@@ -470,7 +470,7 @@
             }
         ],
         "genre": {
-            "name": "rock"
+            "name": "nu metal"
         },
         "artist_name": "Slipknot"
     },
@@ -478,9 +478,9 @@
         "id": 26,
         "name": "Green Day",
         "email": "green_day@example.com",
-        "date_creation": "2024-12-08T03:37:46.618687Z",
+        "date_creation": "2024-12-08T03:45:57.546342Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb6ff0cd5ef2ecf733804984bb",
-        "followers": 13013,
+        "followers": 29844,
         "followings": [],
         "social_media": [
             {
@@ -497,9 +497,9 @@
         "id": 27,
         "name": "System Of A Down",
         "email": "system_of_a_down@example.com",
-        "date_creation": "2024-12-08T03:37:47.900039Z",
+        "date_creation": "2024-12-08T03:45:59.090514Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb60063d3451ade8f9fab397c2",
-        "followers": 52964,
+        "followers": 95099,
         "followings": [],
         "social_media": [
             {
@@ -508,7 +508,7 @@
             }
         ],
         "genre": {
-            "name": "alternative metal"
+            "name": "rap metal"
         },
         "artist_name": "System Of A Down"
     },
@@ -516,9 +516,9 @@
         "id": 28,
         "name": "Hallow Sanctum",
         "email": "hallow_sanctum@example.com",
-        "date_creation": "2024-12-08T03:37:48.737839Z",
+        "date_creation": "2024-12-08T03:46:01.935774Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb6d989bd34f37944b31d6049d",
-        "followers": 1270,
+        "followers": 92587,
         "followings": [],
         "social_media": [
             {
@@ -527,7 +527,7 @@
             }
         ],
         "genre": {
-            "name": "dub"
+            "name": "songwriter"
         },
         "artist_name": "Hallow Sanctum"
     },
@@ -535,9 +535,9 @@
         "id": 29,
         "name": "Spiritbox",
         "email": "spiritbox@example.com",
-        "date_creation": "2024-12-08T03:37:51.303508Z",
+        "date_creation": "2024-12-08T03:46:02.481576Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1f497cb1d8c477c3f5498f03",
-        "followers": 97811,
+        "followers": 40380,
         "followings": [],
         "social_media": [
             {
@@ -554,9 +554,9 @@
         "id": 30,
         "name": "Jinjer",
         "email": "jinjer@example.com",
-        "date_creation": "2024-12-08T03:37:52.004767Z",
+        "date_creation": "2024-12-08T03:46:03.447683Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebed492174d89956bf1f6af3ff",
-        "followers": 78457,
+        "followers": 23829,
         "followings": [],
         "social_media": [
             {
@@ -573,9 +573,9 @@
         "id": 31,
         "name": "Bullet For My Valentine",
         "email": "bullet_for_my_valentine@example.com",
-        "date_creation": "2024-12-08T03:37:52.711639Z",
+        "date_creation": "2024-12-08T03:46:04.239136Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb18219fa877c67b4eda00550c",
-        "followers": 45851,
+        "followers": 99772,
         "followings": [],
         "social_media": [
             {
@@ -584,7 +584,7 @@
             }
         ],
         "genre": {
-            "name": "nu metal"
+            "name": "post-grunge"
         },
         "artist_name": "Bullet For My Valentine"
     },
@@ -592,9 +592,9 @@
         "id": 32,
         "name": "blackfear",
         "email": "blackfear@example.com",
-        "date_creation": "2024-12-08T03:37:53.712400Z",
+        "date_creation": "2024-12-08T03:46:05.151240Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb5b69358acccf50febc7fbe43",
-        "followers": 79777,
+        "followers": 54647,
         "followings": [],
         "social_media": [
             {
@@ -603,7 +603,7 @@
             }
         ],
         "genre": {
-            "name": "show-tunes"
+            "name": "rainy-day"
         },
         "artist_name": "blackfear"
     },
@@ -611,9 +611,9 @@
         "id": 33,
         "name": "Alestorm",
         "email": "alestorm@example.com",
-        "date_creation": "2024-12-08T03:37:54.291416Z",
+        "date_creation": "2024-12-08T03:46:05.815566Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb5966a725ecd546664b20055e",
-        "followers": 3789,
+        "followers": 40989,
         "followings": [],
         "social_media": [
             {
@@ -622,7 +622,7 @@
             }
         ],
         "genre": {
-            "name": "scottish metal"
+            "name": "power metal"
         },
         "artist_name": "Alestorm"
     },
@@ -630,9 +630,9 @@
         "id": 34,
         "name": "Ice Nine Kills",
         "email": "ice_nine_kills@example.com",
-        "date_creation": "2024-12-08T03:37:55.355891Z",
+        "date_creation": "2024-12-08T03:46:06.761471Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebe8119ccdb928a59489dada04",
-        "followers": 40940,
+        "followers": 29645,
         "followings": [],
         "social_media": [
             {
@@ -649,9 +649,9 @@
         "id": 35,
         "name": "Windwaker",
         "email": "windwaker@example.com",
-        "date_creation": "2024-12-08T03:37:56.279045Z",
+        "date_creation": "2024-12-08T03:46:07.612186Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eba230e7e617fd1e686dea2a26",
-        "followers": 52352,
+        "followers": 39520,
         "followings": [],
         "social_media": [
             {
@@ -668,9 +668,9 @@
         "id": 36,
         "name": "Bad Omens",
         "email": "bad_omens@example.com",
-        "date_creation": "2024-12-08T03:37:57.109921Z",
+        "date_creation": "2024-12-08T03:46:11.481503Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb5d4b995885f2d687bb5c48ac",
-        "followers": 21688,
+        "followers": 71136,
         "followings": [],
         "social_media": [
             {
@@ -687,9 +687,9 @@
         "id": 37,
         "name": "NF",
         "email": "nf@example.com",
-        "date_creation": "2024-12-08T03:37:58.004836Z",
+        "date_creation": "2024-12-08T03:46:12.288317Z",
         "picture_profile": "https://i.scdn.co/image/ab67616d0000b273224e3de975885230a45ca8d4",
-        "followers": 87494,
+        "followers": 27760,
         "followings": [],
         "social_media": [
             {
@@ -706,9 +706,9 @@
         "id": 38,
         "name": "What Lies Below",
         "email": "what_lies_below@example.com",
-        "date_creation": "2024-12-08T03:38:01.290444Z",
+        "date_creation": "2024-12-08T03:46:12.496507Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb79eded82e0453b6e535b66aa",
-        "followers": 2760,
+        "followers": 75871,
         "followings": [],
         "social_media": [
             {
@@ -717,7 +717,7 @@
             }
         ],
         "genre": {
-            "name": "deep-house"
+            "name": "trance"
         },
         "artist_name": "What Lies Below"
     },
@@ -725,9 +725,9 @@
         "id": 39,
         "name": "In This Moment",
         "email": "in_this_moment@example.com",
-        "date_creation": "2024-12-08T03:38:01.965262Z",
+        "date_creation": "2024-12-08T03:46:13.234824Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb285ee23e367e081e90606ea1",
-        "followers": 52669,
+        "followers": 44443,
         "followings": [],
         "social_media": [
             {
@@ -736,7 +736,7 @@
             }
         ],
         "genre": {
-            "name": "nu metal"
+            "name": "alternative metal"
         },
         "artist_name": "In This Moment"
     },
@@ -744,9 +744,9 @@
         "id": 40,
         "name": "Emmure",
         "email": "emmure@example.com",
-        "date_creation": "2024-12-08T03:38:02.816178Z",
+        "date_creation": "2024-12-08T03:46:14.101198Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebf96bdaaa18f139e25d218f9e",
-        "followers": 97330,
+        "followers": 89159,
         "followings": [],
         "social_media": [
             {
@@ -755,7 +755,7 @@
             }
         ],
         "genre": {
-            "name": "metalcore"
+            "name": "melodic metalcore"
         },
         "artist_name": "Emmure"
     },
@@ -763,9 +763,9 @@
         "id": 41,
         "name": "Self Deception",
         "email": "self_deception@example.com",
-        "date_creation": "2024-12-08T03:38:03.634133Z",
+        "date_creation": "2024-12-08T03:46:14.854376Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb33f897957779fb45c74fa562",
-        "followers": 68058,
+        "followers": 5462,
         "followings": [],
         "social_media": [
             {
@@ -782,9 +782,9 @@
         "id": 42,
         "name": "We Came As Romans",
         "email": "we_came_as_romans@example.com",
-        "date_creation": "2024-12-08T03:38:04.388114Z",
+        "date_creation": "2024-12-08T03:46:15.706181Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb2e224c8db29ba890b9299418",
-        "followers": 74902,
+        "followers": 35100,
         "followings": [],
         "social_media": [
             {
@@ -793,7 +793,7 @@
             }
         ],
         "genre": {
-            "name": "metalcore"
+            "name": "pop punk"
         },
         "artist_name": "We Came As Romans"
     },
@@ -801,9 +801,9 @@
         "id": 43,
         "name": "Powerwolf",
         "email": "powerwolf@example.com",
-        "date_creation": "2024-12-08T03:38:05.165452Z",
+        "date_creation": "2024-12-08T03:46:16.442236Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebfa98bd6af388ecfe167efbd8",
-        "followers": 23567,
+        "followers": 90614,
         "followings": [],
         "social_media": [
             {
@@ -812,7 +812,7 @@
             }
         ],
         "genre": {
-            "name": "german power metal"
+            "name": "german metal"
         },
         "artist_name": "Powerwolf"
     },
@@ -820,9 +820,9 @@
         "id": 44,
         "name": "Alex Terrible",
         "email": "alex_terrible@example.com",
-        "date_creation": "2024-12-08T03:38:06.240575Z",
+        "date_creation": "2024-12-08T03:46:17.300058Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebbe251f4f3901c5887569dd7a",
-        "followers": 91752,
+        "followers": 16513,
         "followings": [],
         "social_media": [
             {
@@ -831,7 +831,7 @@
             }
         ],
         "genre": {
-            "name": "industrial"
+            "name": "romance"
         },
         "artist_name": "Alex Terrible"
     },
@@ -839,9 +839,9 @@
         "id": 45,
         "name": "Sidilarsen",
         "email": "sidilarsen@example.com",
-        "date_creation": "2024-12-08T03:38:06.836294Z",
+        "date_creation": "2024-12-08T03:46:21.949416Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb339a17dda0e438bc81b341bf",
-        "followers": 56185,
+        "followers": 96705,
         "followings": [],
         "social_media": [
             {
@@ -850,7 +850,7 @@
             }
         ],
         "genre": {
-            "name": "french rock"
+            "name": "neo metal"
         },
         "artist_name": "Sidilarsen"
     },
@@ -858,9 +858,9 @@
         "id": 46,
         "name": "Brand of Sacrifice",
         "email": "brand_of_sacrifice@example.com",
-        "date_creation": "2024-12-08T03:38:07.634063Z",
+        "date_creation": "2024-12-08T03:46:22.706747Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb0fcf3ab9c4f663f516ecd2ca",
-        "followers": 1067,
+        "followers": 18622,
         "followings": [],
         "social_media": [
             {
@@ -869,7 +869,7 @@
             }
         ],
         "genre": {
-            "name": "deathcore"
+            "name": "metalcore"
         },
         "artist_name": "Brand of Sacrifice"
     },
@@ -877,9 +877,9 @@
         "id": 47,
         "name": "Ultra Vomit",
         "email": "ultra_vomit@example.com",
-        "date_creation": "2024-12-08T03:38:12.384861Z",
+        "date_creation": "2024-12-08T03:46:23.440529Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb630a111200ad88a54f4b735e",
-        "followers": 88196,
+        "followers": 52272,
         "followings": [],
         "social_media": [
             {
@@ -888,7 +888,7 @@
             }
         ],
         "genre": {
-            "name": "french rock"
+            "name": "french punk"
         },
         "artist_name": "Ultra Vomit"
     },
@@ -896,9 +896,9 @@
         "id": 48,
         "name": "Scorpions",
         "email": "scorpions@example.com",
-        "date_creation": "2024-12-08T03:38:13.091942Z",
+        "date_creation": "2024-12-08T03:46:24.208692Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb7440170c0628c2945da819c3",
-        "followers": 76477,
+        "followers": 14352,
         "followings": [],
         "social_media": [
             {
@@ -907,7 +907,7 @@
             }
         ],
         "genre": {
-            "name": "german metal"
+            "name": "german hard rock"
         },
         "artist_name": "Scorpions"
     },
@@ -915,9 +915,9 @@
         "id": 49,
         "name": "Oasis",
         "email": "oasis@example.com",
-        "date_creation": "2024-12-08T03:38:13.911561Z",
+        "date_creation": "2024-12-08T03:46:24.998443Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb0522e98a6f0cf1ddbee9a74f",
-        "followers": 27793,
+        "followers": 77,
         "followings": [],
         "social_media": [
             {
@@ -934,9 +934,9 @@
         "id": 50,
         "name": "Gojira",
         "email": "gojira@example.com",
-        "date_creation": "2024-12-08T03:38:14.739262Z",
+        "date_creation": "2024-12-08T03:46:25.698225Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb96c4949ee078fbef5d5adb68",
-        "followers": 50820,
+        "followers": 68060,
         "followings": [],
         "social_media": [
             {
@@ -945,7 +945,7 @@
             }
         ],
         "genre": {
-            "name": "french death metal"
+            "name": "french metal"
         },
         "artist_name": "Gojira"
     },
@@ -953,9 +953,9 @@
         "id": 51,
         "name": "Slaughter to Prevail",
         "email": "slaughter_to_prevail@example.com",
-        "date_creation": "2024-12-08T03:38:15.490077Z",
+        "date_creation": "2024-12-08T03:46:26.455415Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eba11684a1f0d1ceacaee7d109",
-        "followers": 25599,
+        "followers": 68387,
         "followings": [],
         "social_media": [
             {
@@ -964,7 +964,7 @@
             }
         ],
         "genre": {
-            "name": "russian metal"
+            "name": "slamming deathcore"
         },
         "artist_name": "Slaughter to Prevail"
     },
@@ -972,9 +972,9 @@
         "id": 52,
         "name": "Will Ramos",
         "email": "will_ramos@example.com",
-        "date_creation": "2024-12-08T03:38:16.269681Z",
+        "date_creation": "2024-12-08T03:46:27.400354Z",
         "picture_profile": "https://i.scdn.co/image/ab67616d0000b273a687aa43dea502c00eb11fc4",
-        "followers": 44153,
+        "followers": 70889,
         "followings": [],
         "social_media": [
             {
@@ -983,7 +983,7 @@
             }
         ],
         "genre": {
-            "name": "dub"
+            "name": "synth-pop"
         },
         "artist_name": "Will Ramos"
     },
@@ -991,9 +991,9 @@
         "id": 53,
         "name": "LANDMVRKS",
         "email": "landmvrks@example.com",
-        "date_creation": "2024-12-08T03:38:16.970471Z",
+        "date_creation": "2024-12-08T03:46:27.985244Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebfb2a5ab152daccf48d62ffdd",
-        "followers": 2431,
+        "followers": 24736,
         "followings": [],
         "social_media": [
             {
@@ -1002,7 +1002,7 @@
             }
         ],
         "genre": {
-            "name": "metalcore"
+            "name": "melodic metalcore"
         },
         "artist_name": "LANDMVRKS"
     },
@@ -1010,9 +1010,9 @@
         "id": 54,
         "name": "thrown",
         "email": "thrown@example.com",
-        "date_creation": "2024-12-08T03:38:17.808305Z",
+        "date_creation": "2024-12-08T03:46:31.870080Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb7e1dcf948c29845bf2b13789",
-        "followers": 16617,
+        "followers": 57753,
         "followings": [],
         "social_media": [
             {
@@ -1021,7 +1021,7 @@
             }
         ],
         "genre": {
-            "name": "groove"
+            "name": "turkish"
         },
         "artist_name": "thrown"
     },
@@ -1029,9 +1029,9 @@
         "id": 55,
         "name": "Electric Callboy",
         "email": "electric_callboy@example.com",
-        "date_creation": "2024-12-08T03:38:21.468987Z",
+        "date_creation": "2024-12-08T03:46:32.535723Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebbda2600611c433b59f75652f",
-        "followers": 71930,
+        "followers": 36872,
         "followings": [],
         "social_media": [
             {
@@ -1048,9 +1048,9 @@
         "id": 56,
         "name": "The Used",
         "email": "the_used@example.com",
-        "date_creation": "2024-12-08T03:38:22.274377Z",
+        "date_creation": "2024-12-08T03:46:33.387730Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb23386906645d2552106a61be",
-        "followers": 65029,
+        "followers": 81242,
         "followings": [],
         "social_media": [
             {
@@ -1059,7 +1059,7 @@
             }
         ],
         "genre": {
-            "name": "post-grunge"
+            "name": "screamo"
         },
         "artist_name": "The Used"
     },
@@ -1067,9 +1067,9 @@
         "id": 57,
         "name": "Pierce The Veil",
         "email": "pierce_the_veil@example.com",
-        "date_creation": "2024-12-08T03:38:23.145777Z",
+        "date_creation": "2024-12-08T03:46:34.214631Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb6f8f8d13be17bf486219edc7",
-        "followers": 15107,
+        "followers": 4253,
         "followings": [],
         "social_media": [
             {
@@ -1078,7 +1078,7 @@
             }
         ],
         "genre": {
-            "name": "modern rock"
+            "name": "screamo"
         },
         "artist_name": "Pierce The Veil"
     },
@@ -1086,9 +1086,9 @@
         "id": 58,
         "name": "Knocked Loose",
         "email": "knocked_loose@example.com",
-        "date_creation": "2024-12-08T03:38:23.901803Z",
+        "date_creation": "2024-12-08T03:46:35.101897Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1c80f002a9c5aada3c8633a9",
-        "followers": 74640,
+        "followers": 99335,
         "followings": [],
         "social_media": [
             {
@@ -1105,9 +1105,9 @@
         "id": 59,
         "name": "Lorna Shore",
         "email": "lorna_shore@example.com",
-        "date_creation": "2024-12-08T03:38:24.724193Z",
+        "date_creation": "2024-12-08T03:46:35.784980Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb49e1d0975748b726a7a0032c",
-        "followers": 37373,
+        "followers": 30540,
         "followings": [],
         "social_media": [
             {
@@ -1116,7 +1116,7 @@
             }
         ],
         "genre": {
-            "name": "symphonic deathcore"
+            "name": "melodic metalcore"
         },
         "artist_name": "Lorna Shore"
     },
@@ -1124,9 +1124,9 @@
         "id": 60,
         "name": "Poppy",
         "email": "poppy@example.com",
-        "date_creation": "2024-12-08T03:38:25.423275Z",
+        "date_creation": "2024-12-08T03:46:36.446016Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb296b862a0c544c4d50050e7f",
-        "followers": 85807,
+        "followers": 39279,
         "followings": [],
         "social_media": [
             {
@@ -1135,7 +1135,7 @@
             }
         ],
         "genre": {
-            "name": "rock-n-roll"
+            "name": "emo"
         },
         "artist_name": "Poppy"
     },
@@ -1143,9 +1143,9 @@
         "id": 61,
         "name": "The Algorithm",
         "email": "the_algorithm@example.com",
-        "date_creation": "2024-12-08T03:38:26.108969Z",
+        "date_creation": "2024-12-08T03:46:37.128369Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb7270dd9c47349e205b31215b",
-        "followers": 11969,
+        "followers": 67793,
         "followings": [],
         "social_media": [
             {
@@ -1154,7 +1154,7 @@
             }
         ],
         "genre": {
-            "name": "instrumental rock"
+            "name": "djent"
         },
         "artist_name": "The Algorithm"
     },
@@ -1162,9 +1162,9 @@
         "id": 62,
         "name": "Bring Me The Horizon",
         "email": "bring_me_the_horizon@example.com",
-        "date_creation": "2024-12-08T03:38:26.902541Z",
+        "date_creation": "2024-12-08T03:46:41.963833Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebe7c9399d0b5d813c20cbec65",
-        "followers": 94582,
+        "followers": 11167,
         "followings": [],
         "social_media": [
             {
@@ -1173,7 +1173,7 @@
             }
         ],
         "genre": {
-            "name": "rock"
+            "name": "modern rock"
         },
         "artist_name": "Bring Me The Horizon"
     },
@@ -1181,9 +1181,9 @@
         "id": 63,
         "name": "Stupeflip",
         "email": "stupeflip@example.com",
-        "date_creation": "2024-12-08T03:38:31.756097Z",
+        "date_creation": "2024-12-08T03:46:42.688915Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebce384984fca8e63831c2c269",
-        "followers": 21310,
+        "followers": 98888,
         "followings": [],
         "social_media": [
             {
@@ -1200,9 +1200,9 @@
         "id": 64,
         "name": "Sounds Like Color",
         "email": "sounds_like_color@example.com",
-        "date_creation": "2024-12-08T03:38:32.621257Z",
+        "date_creation": "2024-12-08T03:46:43.594438Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebd17c2429fc08d7f008d652e6",
-        "followers": 55666,
+        "followers": 49202,
         "followings": [],
         "social_media": [
             {
@@ -1211,7 +1211,7 @@
             }
         ],
         "genre": {
-            "name": "idm"
+            "name": "songwriter"
         },
         "artist_name": "Sounds Like Color"
     },
@@ -1219,9 +1219,9 @@
         "id": 65,
         "name": "Time, The Valuator",
         "email": "time,_the_valuator@example.com",
-        "date_creation": "2024-12-08T03:38:33.397303Z",
+        "date_creation": "2024-12-08T03:46:44.206056Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebd6013867e857742e3392d3ee",
-        "followers": 9410,
+        "followers": 17766,
         "followings": [],
         "social_media": [
             {
@@ -1230,7 +1230,7 @@
             }
         ],
         "genre": {
-            "name": "german metalcore"
+            "name": "djent"
         },
         "artist_name": "Time, The Valuator"
     },
@@ -1238,9 +1238,9 @@
         "id": 66,
         "name": "The Anchor",
         "email": "the_anchor@example.com",
-        "date_creation": "2024-12-08T03:38:34.002906Z",
+        "date_creation": "2024-12-08T03:46:44.932292Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb906cd17ac9a6db1aa6ed63ab",
-        "followers": 45588,
+        "followers": 60445,
         "followings": [],
         "social_media": [
             {
@@ -1249,7 +1249,7 @@
             }
         ],
         "genre": {
-            "name": "opera"
+            "name": "movies"
         },
         "artist_name": "The Anchor"
     },
@@ -1257,9 +1257,9 @@
         "id": 67,
         "name": "Brymir",
         "email": "brymir@example.com",
-        "date_creation": "2024-12-08T03:38:34.678084Z",
+        "date_creation": "2024-12-08T03:46:45.529347Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb3699b76e37a6519d82736b6f",
-        "followers": 46032,
+        "followers": 43909,
         "followings": [],
         "social_media": [
             {
@@ -1268,7 +1268,7 @@
             }
         ],
         "genre": {
-            "name": "melodic death metal"
+            "name": "finnish melodeath"
         },
         "artist_name": "Brymir"
     },
@@ -1276,9 +1276,9 @@
         "id": 68,
         "name": "Chelsea Grin",
         "email": "chelsea_grin@example.com",
-        "date_creation": "2024-12-08T03:38:35.442326Z",
+        "date_creation": "2024-12-08T03:46:46.394441Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebeb67a456038e8c16ad78a894",
-        "followers": 82615,
+        "followers": 31199,
         "followings": [],
         "social_media": [
             {
@@ -1287,7 +1287,7 @@
             }
         ],
         "genre": {
-            "name": "metalcore"
+            "name": "melodic metalcore"
         },
         "artist_name": "Chelsea Grin"
     },
@@ -1295,9 +1295,9 @@
         "id": 69,
         "name": "Wage War",
         "email": "wage_war@example.com",
-        "date_creation": "2024-12-08T03:38:36.322563Z",
+        "date_creation": "2024-12-08T03:46:47.102466Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebcdb5a08eb788524df83e8c3e",
-        "followers": 52548,
+        "followers": 67162,
         "followings": [],
         "social_media": [
             {
@@ -1306,7 +1306,7 @@
             }
         ],
         "genre": {
-            "name": "melodic metalcore"
+            "name": "metalcore"
         },
         "artist_name": "Wage War"
     },
@@ -1314,9 +1314,9 @@
         "id": 70,
         "name": "The Pretty Wild",
         "email": "the_pretty_wild@example.com",
-        "date_creation": "2024-12-08T03:38:37.086178Z",
+        "date_creation": "2024-12-08T03:46:51.937116Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebb58020e183a698301ba859ca",
-        "followers": 91965,
+        "followers": 81728,
         "followings": [],
         "social_media": [
             {
@@ -1325,7 +1325,7 @@
             }
         ],
         "genre": {
-            "name": "grindcore"
+            "name": "j-pop"
         },
         "artist_name": "The Pretty Wild"
     },
@@ -1333,9 +1333,9 @@
         "id": 71,
         "name": "Shadow of Intent",
         "email": "shadow_of_intent@example.com",
-        "date_creation": "2024-12-08T03:38:37.688182Z",
+        "date_creation": "2024-12-08T03:46:52.518711Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebd80af5629e3391c99f491bb6",
-        "followers": 11866,
+        "followers": 40384,
         "followings": [],
         "social_media": [
             {
@@ -1352,9 +1352,9 @@
         "id": 72,
         "name": "Netherwalker",
         "email": "netherwalker@example.com",
-        "date_creation": "2024-12-08T03:38:41.522242Z",
+        "date_creation": "2024-12-08T03:46:53.349585Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebe6dc88f3e64f5c5828621f07",
-        "followers": 35789,
+        "followers": 92565,
         "followings": [],
         "social_media": [
             {
@@ -1363,7 +1363,7 @@
             }
         ],
         "genre": {
-            "name": "turkish"
+            "name": "j-idol"
         },
         "artist_name": "Netherwalker"
     },
@@ -1371,9 +1371,9 @@
         "id": 73,
         "name": "Entheos",
         "email": "entheos@example.com",
-        "date_creation": "2024-12-08T03:38:41.945007Z",
+        "date_creation": "2024-12-08T03:46:53.754585Z",
         "picture_profile": "https://i.scdn.co/image/ab6761610000e5ebba65d733f9f5a5cf2213df35",
-        "followers": 96115,
+        "followers": 28473,
         "followings": [],
         "social_media": [
             {

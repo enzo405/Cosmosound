@@ -64,7 +64,7 @@ async def fetch_artist_catalogs(session, artist_id):
         return []
 
 
-async def fetch_album_tracks(session, album):
+async def fetch_album_tracks(session, album, all_genres):
     print(f"fetching album tracks {album['title']}")
     try:
         tracks = spotify.album_tracks(album["id"])
@@ -77,7 +77,7 @@ async def fetch_album_tracks(session, album):
                 "duration": track["duration_ms"] // 1000,  # Convert ms to seconds
                 "catalog_id": album["id"],
                 "is_ai": False,
-                "genres": albumApi["genres"],
+                "genres": random.sample(all_genres, random.randint(1, 3)),
             }
             for track in tracks["items"]
         ]
@@ -122,7 +122,7 @@ async def process_artist(session, artist_name, all_genres, artist_index):
         catalog["musics"] = []
         catalogs.append(catalog)
 
-        album_tracks = await fetch_album_tracks(session, catalog)
+        album_tracks = await fetch_album_tracks(session, catalog, all_genres)
         for track in album_tracks:
             musics.append(
                 {
