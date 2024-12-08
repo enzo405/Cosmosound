@@ -68,15 +68,16 @@ async def fetch_album_tracks(session, album):
     print(f"fetching album tracks {album['title']}")
     try:
         tracks = spotify.album_tracks(album["id"])
-        date_creation = spotify.album(album["id"])["release_date"]
+        albumApi = spotify.album(album["id"])
         return [
             {
                 "id": track["id"],
                 "title": track["name"],
-                "date_creation": date_creation,
+                "date_creation": albumApi["release_date"],
                 "duration": track["duration_ms"] // 1000,  # Convert ms to seconds
                 "catalog_id": album["id"],
                 "is_ai": False,
+                "genres": albumApi["genres"],
             }
             for track in tracks["items"]
         ]

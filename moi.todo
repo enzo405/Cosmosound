@@ -5,3 +5,7 @@
 - min size for album thumbnail in MusicItem
 - Artist page make top part sticky
 - explore when input becomes empty bug content
+- popup music label (change color?)
+- add Genre to explore page
+- some musics with long name go off screen when mobile
+- playlist & catalog add time duration and number of tracks
