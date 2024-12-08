@@ -19,7 +19,7 @@ export default function ArtistSettings({
 
   useEffect(() => {
     const handleClickAway = (event: MouseEvent) => {
-      let id = `settings-artist`;
+      let id = `settings`;
       const settings = document.getElementById(id);
       const target = event.target as Node;
 
@@ -53,7 +53,7 @@ export default function ArtistSettings({
   };
 
   return (
-    <div className={`absolute mt-10 right-2 z-20 bg-white rounded-md drop-shadow-md`}>
+    <div className={`absolute mt-7 right-2 z-20 bg-white rounded-md drop-shadow-md`}>
       <SettingsOptions onClick={handleCopyLink}>
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>

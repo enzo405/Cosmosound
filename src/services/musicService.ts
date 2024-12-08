@@ -1,4 +1,4 @@
-import { MusicDetails } from "models/Music";
+import { Music, MusicDetails } from "models/Music";
 import data from "assets/json/musics.json";
 
 const musicData: MusicDetails[] = data as MusicDetails[];
@@ -30,6 +30,10 @@ function searchMusicByTitle(value: string): MusicDetails[] {
   return [...new Set(result)];
 }
 
+function deleteMusic(music: Music): void {
+  console.log("music", music);
+}
+
 function getMusicHistory(): MusicDetails[] {
   return musicData.filter((music) =>
     [
@@ -53,6 +57,7 @@ const MusicService = {
   getMusicById,
   getMusicHistory,
   searchMusicByTitle,
+  deleteMusic,
 };
 
 export default MusicService;

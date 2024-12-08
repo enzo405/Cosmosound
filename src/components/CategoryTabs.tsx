@@ -35,14 +35,14 @@ export default function CategoryTabs<T extends string>({
   };
 
   return (
-    <div className="relative">
-      <div ref={tabsRef} className="flex border-b border-gray-300">
+    <div className="relative w-full">
+      <div ref={tabsRef} className="w-full flex border-b border-gray-300">
         {Object.entries(tabs).map(([key, tab]) => (
           <button
             key={key}
             data-tab={tab}
             onClick={() => handleTabClick(tab)}
-            className={`px-4 py-2 text-sm font-medium ${
+            className={`px-4 py-2 text-sm font-medium truncate ${
               activeTab === tab ? "text-orange-500" : "text-gray-500 hover:text-orange-500"
             }`}>
             {tab}

@@ -7,7 +7,8 @@ function getAllCatalog(): CatalogWithMusic[] {
   return catalogData;
 }
 
-function getCatalogById(id: string): CatalogWithMusic | undefined {
+function getCatalogById(id?: string): CatalogWithMusic | undefined {
+  if (!id) return undefined;
   return catalogData.find((music) => music.id === id);
 }
 
@@ -25,10 +26,15 @@ function searchCatalogByTitle(value: string): Catalog[] {
   return [...new Set(catalogsTitleMatch)];
 }
 
+function deleteCatalog(catalog: Catalog): void {
+  console.log("catalog", catalog);
+}
+
 const CatalogService = {
   getAllCatalog,
   getCatalogById,
   searchCatalogByTitle,
+  deleteCatalog,
 };
 
 export default CatalogService;

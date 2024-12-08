@@ -12,13 +12,15 @@ import { ReactElement, useState } from "react";
 import { useParams } from "react-router-dom";
 import ArtistService from "services/artistService";
 import { formatTime } from "utils/date";
-import CategoryTabs from "./components/CategoryTabs";
+import CategoryTabs from "../../components/CategoryTabs";
 import { Catalog, TypeCatalog } from "models/Catalog";
 import { Music } from "models/Music";
 import MusicItem from "components/music/MusicItem";
 import Card from "components/cards/Card";
 import { routesConfig } from "config/app-config";
 import ArtistSettings from "./components/ArtistSettings";
+import PageLayout from "components/PageLayout";
+import UserService from "services/userService";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -29,11 +31,6 @@ export enum ArtistTabs {
 
 export default function ArtistPage(): ReactElement {
   const { idArtist } = useParams();
-
-  if (idArtist == undefined) {
-    return <NotFoundErrorPage />;
-  }
-
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const artist = ArtistService.getArtistById(Number(idArtist));
 
@@ -74,10 +71,12 @@ export default function ArtistPage(): ReactElement {
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 300);
     if (isArtistLiked) {
+      UserService.removeLike(artist);
       enqueueSnackbar(`Artist removed from your favourite artist`, {
         variant: "success",
       });
     } else {
+      UserService.like(artist);
       enqueueSnackbar(`Artist added to your favourite artists`, {
         variant: "success",
       });
@@ -106,18 +105,15 @@ export default function ArtistPage(): ReactElement {
   const isPlayingSongCurrentPage = artist?.musics.find((m) => m.id == playingMusic.id) != undefined;
 
   return (
-    <div className="relative flex flex-col rounded-lg bg-box-bg h-full w-full gap-8 py-8 px-4">
-      <div className="flex flex-col sm:flex-row w-full lg:gap-10 md:gap-6 gap-4">
-        <img
-          className="rounded-full lg:size-64 md:size-52 size-40"
-          src={artist.picture_profile}
-          alt={artist.artist_name}
-        />
-        <div className="w-full sm:w-4/5 flex flex-col gap-2 text-dark-custom">
-          <h1 className="lg:text-5xl md:text-3xl text-2xl font-bs font-semibold">
-            {artist.artist_name}
-          </h1>
-          <span className="font-light">Since {formatTime(artist.date_creation)}</span>
+    <PageLayout
+      thumbnail={artist.picture_profile}
+      settingsComponent={
+        <ArtistSettings artist={artist} onCloseSetting={() => setDisplaySettings(false)} />
+      }
+      title={artist.artist_name}
+      subtitle={
+        <div className="flex flex-col gap-1">
+          <span className="font-light">Member since {formatTime(artist.date_creation)}</span>
           <span className="font-light">{artist.followers} followers</span>
           <span className="flex flex-row gap-3 items-center">
             {artist.social_media.map(({ link, media }) => (
@@ -130,67 +126,63 @@ export default function ArtistPage(): ReactElement {
               </a>
             ))}
           </span>
-          <span className="flex flex-row-reverse sm:flex-row gap-4 mt-2 md:mt-auto w-full justify-start">
-            <Icon
-              className="lg:size-16 md:size-14 size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
-              iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
-              onClick={handlePlaying}
-            />
-            <Icon
-              onClick={handleClickHeart}
-              iconName={isArtistLiked ? "heart-orange" : "heart-orange-empty"}
-              className={`lg:size-16 md:size-14 size-12 cursor-pointer ${isAnimating ? "animate-pop" : ""}`}
-            />
-          </span>
         </div>
-        <span id="settings-artist">
+      }
+      displaySettings={displaySettings}
+      headerActions={
+        <>
           <Icon
-            onClick={() => setDisplaySettings(!displaySettings)}
-            iconName="ellipsis"
-            className="absolute top-6 right-4 rotate-90 fill-dark-custom cursor-pointer md:size-8 size-6"
+            className="lg:size-16 md:size-14 size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+            iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
+            onClick={handlePlaying}
           />
-        </span>
-        {displaySettings && (
-          <ArtistSettings artist={artist} onCloseSetting={() => setDisplaySettings(false)} />
-        )}
-      </div>
-      <div className="flex flex-col gap-3">
-        <CategoryTabs tabs={ArtistTabs} activeTab={activeTab} onTabSelect={handleTabChange} />
-        <div className={`flex ${activeTab == ArtistTabs.MUSIC ? "flex-col" : "flex-wrap gap-2"}`}>
-          {content.length != 0 ? (
-            activeTab == ArtistTabs.MUSIC ? (
-              content.map((item) => {
-                return (
-                  <MusicItem
-                    key={item.id}
-                    music={item as Music}
-                    catalog={artist.musics.find((m) => m.id == item.id)?.catalog!}
-                    artist={artist}
-                    showArtist={false}
-                  />
-                );
-              })
+          <Icon
+            onClick={handleClickHeart}
+            iconName={isArtistLiked ? "heart-orange" : "heart-orange-empty"}
+            className={`lg:size-16 md:size-14 size-12 cursor-pointer ${isAnimating ? "animate-pop" : ""}`}
+          />
+        </>
+      }
+      onPageActionClick={() => setDisplaySettings(!displaySettings)}
+      content={
+        <div className="flex flex-col gap-3">
+          <CategoryTabs tabs={ArtistTabs} activeTab={activeTab} onTabSelect={handleTabChange} />
+          <div className={`flex ${activeTab == ArtistTabs.MUSIC ? "flex-col" : "flex-wrap gap-2"}`}>
+            {content.length != 0 ? (
+              activeTab == ArtistTabs.MUSIC ? (
+                content.map((item) => {
+                  return (
+                    <MusicItem
+                      key={item.id}
+                      music={item as Music}
+                      catalog={artist.musics.find((m) => m.id == item.id)?.catalog!}
+                      artist={artist}
+                      showArtist={false}
+                    />
+                  );
+                })
+              ) : (
+                content.map((item) => {
+                  const catalog = item as Catalog;
+                  return (
+                    <Card
+                      key={catalog.id}
+                      title={catalog.title}
+                      description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
+                      thumbnail={catalog.thumbnail}
+                      link={routesConfig.catalog.getParameter(catalog.id)}
+                    />
+                  );
+                })
+              )
             ) : (
-              content.map((item) => {
-                const catalog = item as Catalog;
-                return (
-                  <Card
-                    key={catalog.id}
-                    title={catalog.title}
-                    description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
-                    thumbnail={catalog.thumbnail}
-                    link={routesConfig.catalog.getParameter(catalog.id)}
-                  />
-                );
-              })
-            )
-          ) : (
-            <span className="text-dark-custom">
-              {artist.artist_name} haven't made any {activeTab.valueOf()} yet
-            </span>
-          )}
+              <span className="text-dark-custom">
+                {artist.artist_name} haven't made any {activeTab.valueOf()} yet
+              </span>
+            )}
+          </div>
         </div>
-      </div>
-    </div>
+      }
+    />
   );
 }

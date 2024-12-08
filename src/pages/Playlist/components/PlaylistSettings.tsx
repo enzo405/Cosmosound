@@ -4,6 +4,7 @@ import { routesConfig } from "config/app-config";
 import { Playlist } from "models/Playlist";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
+import PlaylistService from "services/playlistService";
 
 interface PlaylistSettingsProps {
   playlist: Playlist;
@@ -16,7 +17,7 @@ export default function PlaylistSettings({
 }: PlaylistSettingsProps): ReactElement {
   useEffect(() => {
     const handleClickAway = (event: MouseEvent) => {
-      let id = `settings-playlist`;
+      let id = `settings`;
       const settings = document.getElementById(id);
       const target = event.target as Node;
 
@@ -45,10 +46,13 @@ export default function PlaylistSettings({
     });
   };
 
-  const handleDeletePlaylist = () => {}; // TODO add modal
+  const handleDeletePlaylist = () => {
+    // TODO add modal
+    PlaylistService.deletePlaylist(playlist);
+  };
 
   return (
-    <div className={`absolute mt-10 right-2 z-20 bg-white rounded-md drop-shadow-md`}>
+    <div className={`absolute mt-7 right-2 z-20 bg-white rounded-md drop-shadow-md`}>
       <SettingsOptions onClick={handleCopyLink}>
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>

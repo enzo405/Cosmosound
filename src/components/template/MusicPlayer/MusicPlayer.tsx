@@ -1,7 +1,7 @@
 import { Icon } from "components/icons/Icon";
 import { useMusic } from "hooks/useMusic";
 import { ReactElement, HTMLAttributes } from "react";
-import MusicInfo from "./MusicInfo";
+import MusicInfo from "../../music/MusicInfo";
 import TimeMusicSlider from "./TimeMusicSlider";
 import SoundSlider from "./SoundSlider";
 import { IconName } from "constants/iconName";

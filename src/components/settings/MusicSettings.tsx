@@ -1,12 +1,13 @@
 import Divider from "components/Divider";
 import SettingsOptions from "components/settings/SettingsOptions";
 import { routesConfig } from "config/app-config";
-import { MusicWithCatalog } from "models/Music";
+import { Music, MusicWithCatalog } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { ReactElement, useEffect, useState } from "react";
 import TextSetting from "./TextSetting";
 import { enqueueSnackbar } from "notistack";
 import SelectPlaylist from "./SelectPlaylist";
+import PlaylistService from "services/playlistService";
 
 interface MusicSettingsProps {
   dropdownPosition: "top" | "bottom";
@@ -15,7 +16,7 @@ interface MusicSettingsProps {
   onDeleteSong: () => void;
   onCloseSetting: () => void;
   onAddToFav: () => void;
-  onDeleteFromPlaylist: (() => void) | undefined;
+  onDeleteFromPlaylist: ((music: Music) => void) | undefined;
 }
 
 export default function MusicSettings({
@@ -68,6 +69,11 @@ export default function MusicSettings({
     enqueueSnackbar(`Added to ${playlist.title}`, {
       variant: "success",
     });
+    PlaylistService.addMusic(playlist, music);
+  };
+
+  const handleDeleteMusicFromPlaylist = () => {
+    if (onDeleteFromPlaylist) onDeleteFromPlaylist(music);
   };
 
   const isPlaylistPageView = window.location.pathname.startsWith(
@@ -93,7 +99,7 @@ export default function MusicSettings({
       </SettingsOptions>
       <Divider />
       {isPlaylistPageView && (
-        <SettingsOptions onClick={onDeleteFromPlaylist}>
+        <SettingsOptions onClick={handleDeleteMusicFromPlaylist}>
           <TextSetting iconName="minus" text="Remove From Playlist" />
         </SettingsOptions>
       )}
