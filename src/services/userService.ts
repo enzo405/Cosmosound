@@ -1,19 +1,25 @@
 import { Catalog } from "models/Catalog";
 import { Genre, Music } from "models/Music";
 import { Playlist } from "models/Playlist";
-import { Artist, User } from "models/User";
+import { Artist, UserDetails } from "models/User";
+import { AccountFormData } from "pages/Account/AccountPage";
 
-const defaultUser: User = {
+const defaultUser: UserDetails = {
   id: 1,
-  name: "me",
-  email: "me@gmail.com",
-  picture_profile: "/src/assets/img/default_avatar.png",
+  name: "John",
+  email: "john.doe@gmail.com",
+  picture_profile: "src/assets/img/header/default_avatar.png",
   date_creation: "08-10-2024",
   followings: [],
   followers: 0,
+  likedArtists: [],
+  likedCatalogs: [],
+  likedGenres: [],
+  likedMusics: [],
+  likedPlaylists: [],
 };
 
-function getUser(): User {
+function getUser(): UserDetails {
   return defaultUser;
 }
 
@@ -25,10 +31,15 @@ function removeLike(item: Artist | Genre | Playlist | Catalog | Music): void {
   console.log("removeLike item", item);
 }
 
+function saveData(data: AccountFormData): void {
+  console.log("submit form data", data);
+}
+
 const UserService = {
   getUser,
   like,
   removeLike,
+  saveData,
 };
 
 export default UserService;

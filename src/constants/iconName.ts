@@ -32,6 +32,9 @@ export type IconName =
   | "plus"
   | "verified-label"
   | "ai-label"
+  | "lock"
+  | "eye"
+  | "eye-blocked"
   | "ellipsis"
   | "trash-red"
   | "trash";

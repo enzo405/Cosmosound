@@ -5,7 +5,10 @@
 - min size for album thumbnail in MusicItem
 - Artist page make top part sticky
 - popup music label (change color?)
-- some musics with long name go off screen when mobile
+- some musics with long name go off screen
 - playlist & catalog add time duration and number of tracks
 - better size for Card responsive
 - afficher les filtres de explore quand y'a du contenue
+- refactor heart icon with the animation
+- responsive scroll icon ScrollableBox
+- media link off screen and description too
