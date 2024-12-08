@@ -22,6 +22,12 @@ interface GenreContent {
   playlists: Playlist[];
 }
 
+function getGenreByName(genreName: string): Genre[] {
+  let genres: Genre[] = [];
+  dataGenre.filter((genre) => genre.includes(genreName)).map((g) => genres.push({ name: g }));
+  return genres;
+}
+
 function getGenreContent(genreName: string): GenreContent {
   const musics = (dataMusic as Music[]).filter((music) =>
     music.genres.includes({ name: genreName }),
@@ -44,6 +50,7 @@ const GenresService = {
   getAllGenres,
   getMyFavouriteGenres,
   getGenreContent,
+  getGenreByName,
 };
 
 export default GenresService;
