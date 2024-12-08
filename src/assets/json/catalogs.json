@@ -1286,82 +1286,6 @@
         ]
     },
     {
-        "id": "3AO82S43rn68Vk4FLgNXKp",
-        "title": "The Poetic Edda",
-        "date_creation": "2024-12-08T03:45:31.480962Z",
-        "thumbnail": "https://i.scdn.co/image/ab67616d0000b27379010c68df3fc6f57ada136c",
-        "type": 2,
-        "owner": {
-            "id": 3,
-            "name": "Synestia",
-            "email": "synestia@example.com",
-            "date_creation": "2024-12-08T03:45:31.414771Z",
-            "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1543b36dde39fbf4b402910f",
-            "followers": 1239,
-            "followings": [],
-            "social_media": [
-                {
-                    "media": 1,
-                    "link": "https://open.spotify.com/artist/5q6QQFwE4elu0q1HA10HTb"
-                }
-            ],
-            "genre": {
-                "name": "symphonic deathcore"
-            },
-            "artist_name": "Synestia"
-        },
-        "musics": [
-            {
-                "id": "3aIf0ReRccgspVGrBMyvvp",
-                "title": "Death Empress",
-                "date_creation": "2024-05-03",
-                "duration": 228,
-                "catalog_id": "3AO82S43rn68Vk4FLgNXKp",
-                "is_ai": false,
-                "genres": [
-                    "iranian",
-                    "rock",
-                    "gospel"
-                ]
-            },
-            {
-                "id": "4aMDPb4XbSICCZndkZ1M3K",
-                "title": "I, The Devourer",
-                "date_creation": "2024-05-03",
-                "duration": 297,
-                "catalog_id": "3AO82S43rn68Vk4FLgNXKp",
-                "is_ai": false,
-                "genres": [
-                    "funk",
-                    "reggae",
-                    "sleep"
-                ]
-            },
-            {
-                "id": "7gQmh1MbKIbXfcVhKS8cZP",
-                "title": "The Poetic Edda",
-                "date_creation": "2024-05-03",
-                "duration": 365,
-                "catalog_id": "3AO82S43rn68Vk4FLgNXKp",
-                "is_ai": false,
-                "genres": [
-                    "mpb"
-                ]
-            },
-            {
-                "id": "5few73enjQUkgA6sgOoLg2",
-                "title": "Winter",
-                "date_creation": "2024-05-03",
-                "duration": 328,
-                "catalog_id": "3AO82S43rn68Vk4FLgNXKp",
-                "is_ai": false,
-                "genres": [
-                    "punk-rock"
-                ]
-            }
-        ]
-    },
-    {
         "id": "5jGNt5BkrGBZl5qfxm4QEa",
         "title": "The Poetic Edda (Singles)",
         "date_creation": "2024-12-08T03:45:31.480962Z",
@@ -1408,45 +1332,6 @@
                 "is_ai": false,
                 "genres": [
                     "reggaeton"
-                ]
-            }
-        ]
-    },
-    {
-        "id": "1q7gropdoH3rmoGLXfp26N",
-        "title": "I, The Devourer",
-        "date_creation": "2024-12-08T03:45:31.481962Z",
-        "thumbnail": "https://i.scdn.co/image/ab67616d0000b27303ced183564f1e3189c41faf",
-        "type": 2,
-        "owner": {
-            "id": 3,
-            "name": "Synestia",
-            "email": "synestia@example.com",
-            "date_creation": "2024-12-08T03:45:31.414771Z",
-            "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1543b36dde39fbf4b402910f",
-            "followers": 1239,
-            "followings": [],
-            "social_media": [
-                {
-                    "media": 1,
-                    "link": "https://open.spotify.com/artist/5q6QQFwE4elu0q1HA10HTb"
-                }
-            ],
-            "genre": {
-                "name": "symphonic deathcore"
-            },
-            "artist_name": "Synestia"
-        },
-        "musics": [
-            {
-                "id": "5n74f6G98IwOhtofCp5bPn",
-                "title": "I, The Devourer",
-                "date_creation": "2023-06-20",
-                "duration": 297,
-                "catalog_id": "1q7gropdoH3rmoGLXfp26N",
-                "is_ai": false,
-                "genres": [
-                    "comedy"
                 ]
             }
         ]
@@ -4115,59 +4000,6 @@
                 "is_ai": false,
                 "genres": [
                     "soundtracks"
-                ]
-            }
-        ]
-    },
-    {
-        "id": "5jGNt5BkrGBZl5qfxm4QEa",
-        "title": "The Poetic Edda (Singles)",
-        "date_creation": "2024-12-08T03:45:35.221063Z",
-        "thumbnail": "https://i.scdn.co/image/ab67616d0000b273950b72ebc6f7f823d6f989f1",
-        "type": 2,
-        "owner": {
-            "id": 8,
-            "name": "Disembodied Tyrant",
-            "email": "disembodied_tyrant@example.com",
-            "date_creation": "2024-12-08T03:45:35.089953Z",
-            "picture_profile": "https://i.scdn.co/image/ab6761610000e5eb1559be72e4f4e35cce0ced44",
-            "followers": 7417,
-            "followings": [],
-            "social_media": [
-                {
-                    "media": 1,
-                    "link": "https://open.spotify.com/artist/6Mik5bw5uqwmpwjvc5PGYk"
-                }
-            ],
-            "genre": {
-                "name": "symphonic deathcore"
-            },
-            "artist_name": "Disembodied Tyrant"
-        },
-        "musics": [
-            {
-                "id": "42eJ4p6e2MkmwKcLuMU1Ve",
-                "title": "The Poetic Edda",
-                "date_creation": "2023-09-26",
-                "duration": 365,
-                "catalog_id": "5jGNt5BkrGBZl5qfxm4QEa",
-                "is_ai": false,
-                "genres": [
-                    "singer-songwriter",
-                    "british",
-                    "breakbeat"
-                ]
-            },
-            {
-                "id": "3nNph6ZJ4j07xtekccUdBI",
-                "title": "I, The Devourer",
-                "date_creation": "2023-09-26",
-                "duration": 297,
-                "catalog_id": "5jGNt5BkrGBZl5qfxm4QEa",
-                "is_ai": false,
-                "genres": [
-                    "disney",
-                    "disco"
                 ]
             }
         ]
