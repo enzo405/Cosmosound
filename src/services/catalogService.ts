@@ -12,6 +12,10 @@ function getCatalogById(id: string): CatalogWithMusic | undefined {
 }
 
 function searchCatalogByTitle(value: string): Catalog[] {
+  if (value == "") {
+    return [];
+  }
+
   const searchTerm = value.toLowerCase().trim();
 
   const catalogsTitleMatch = catalogData

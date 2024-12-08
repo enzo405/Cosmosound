@@ -12,6 +12,10 @@ function getMusicById(id: string): MusicDetails | undefined {
 }
 
 function searchMusicByTitle(value: string): MusicDetails[] {
+  if (value == "") {
+    return [];
+  }
+
   const searchTerm = value.toLowerCase().trim();
 
   const musicNameMatch = musicData

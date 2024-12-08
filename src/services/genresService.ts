@@ -24,22 +24,30 @@ interface GenreContent {
 }
 
 function getGenreByName(genreName: string): Genre[] {
+  if (genreName == "") {
+    return [];
+  }
   return dataGenre.filter((genre) => genre.name.includes(genreName));
 }
 
 function getGenreContent(genreName: string): GenreContent {
   const musics = (dataMusic as MusicDetails[])
     .filter((music) => {
-      return music.genres.filter((genre) => genre.name.includes(genreName));
+      return music.genres.some((genre) => genre.name == genreName);
     })
     .slice(0, 50);
 
-  const catalogs = dataCatalog.filter((catalog) =>
-    catalog.musics.filter((music) => music.genres.includes(genreName)),
-  );
-  const playlists = (dataPlaylist as Playlist[]).filter((playlist) =>
-    playlist.musics.filter((music) => music.genres.includes({ name: genreName })),
-  );
+  const catalogs = dataCatalog
+    .filter((catalog) =>
+      catalog.musics.some((music) => music.genres.some((genre) => genre.name == genreName)),
+    )
+    .slice(0, 50);
+  const playlists = (dataPlaylist as Playlist[])
+    .filter((playlist) =>
+      playlist.musics.some((music) => music.genres.some((genre) => genre.name == genreName)),
+    )
+    .slice(0, 50);
+
   const artists = (dataArtist as Artist[]).filter((artist) => artist.genre.name == genreName);
 
   return {

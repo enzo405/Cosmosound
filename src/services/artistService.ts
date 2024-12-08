@@ -29,6 +29,10 @@ function getArtistById(id: number): DetailedArtistInfo | undefined {
 }
 
 function searchArtistByName(value: string): Artist[] {
+  if (value == "") {
+    return [];
+  }
+
   const searchTerm = value.toLowerCase().trim();
 
   const artistNameMatch = dataArtist

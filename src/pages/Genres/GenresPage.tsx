@@ -7,7 +7,7 @@ import { Artist } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import CategoryTabs from "pages/Artist/components/CategoryTabs";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useMemo } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import GenresService from "services/genresService";
@@ -30,7 +30,8 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
     return <NotFoundErrorPage />;
   }
 
-  const genreContent = GenresService.getGenreContent(nameGenre);
+  const genreContent = useMemo(() => GenresService.getGenreContent(nameGenre), []);
+
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
 
   const [isGenreLiked, setIsGenreLiked] = useState<boolean>(false);
@@ -39,15 +40,23 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
   const [activeTab, setActiveTab] = useState(GenreTabs.ARTISTS);
 
   const handlePlaying = () => {
-    if (!isPlayingSongCurrentPage != undefined) {
-      const firstMusicCatalog = genreContent.musics[0]?.catalog;
-      setPlayingMusic({
-        ...genreContent.musics[0],
-        artist: genreContent.musics[0].artist,
-        catalog: firstMusicCatalog!,
+    setActiveTab(GenreTabs.MUSIC);
+    loadContent(GenreTabs.MUSIC);
+    if (genreContent.musics.length == 0) {
+      enqueueSnackbar(`It seems this genre doesn't have any songs`, {
+        variant: "warning",
       });
+    } else {
+      if (!isPlayingSongCurrentPage != undefined) {
+        const firstMusicCatalog = genreContent.musics[0]?.catalog;
+        setPlayingMusic({
+          ...genreContent.musics[0],
+          artist: genreContent.musics[0].artist,
+          catalog: firstMusicCatalog!,
+        });
+      }
+      setIsPlaying(!isPlaying);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleClickHeart = () => {
