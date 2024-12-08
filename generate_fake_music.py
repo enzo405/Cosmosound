@@ -76,8 +76,11 @@ async def fetch_album_tracks(session, album, all_genres):
                 "date_creation": albumApi["release_date"],
                 "duration": track["duration_ms"] // 1000,  # Convert ms to seconds
                 "catalog_id": album["id"],
-                "is_ai": False,
-                "genres": random.sample(all_genres, random.randint(1, 3)),
+                "is_ai": random.random() < 0.5,
+                "genres": [
+                    {"name": genre}
+                    for genre in random.sample(all_genres, random.randint(1, 3))
+                ],
             }
             for track in tracks["items"]
         ]
@@ -146,7 +149,9 @@ async def main():
         # Fetch genres
         all_genres = []
         with open(genres_output_path, "r") as genres_file:
-            all_genres = json.load(genres_file)
+            all_genre_files = json.load(genres_file)
+            for genre in all_genre_files:
+                all_genres.append(genre["name"])
 
         # Load artist names
         with open(artist_names_path, "r") as artist_file:

@@ -1,15 +1,15 @@
-import { Genre, Music } from "models/Music";
+import { Genre, MusicDetails } from "models/Music";
 import dataGenre from "assets/json/genres.json";
 import dataMusic from "assets/json/musics.json";
 import dataCatalog from "assets/json/catalogs.json";
 import dataPlaylist from "assets/json/playlists.json";
+import dataArtist from "assets/json/artists.json";
 import { Playlist } from "models/Playlist";
 import { Catalog } from "models/Catalog";
+import { Artist } from "models/User";
 
 function getAllGenres(): Genre[] {
-  let genres: Genre[] = [];
-  dataGenre.map((genreName) => genres.push({ name: genreName }));
-  return genres;
+  return dataGenre;
 }
 
 function getMyFavouriteGenres(): Genre[] {
@@ -17,32 +17,44 @@ function getMyFavouriteGenres(): Genre[] {
 }
 
 interface GenreContent {
-  musics: Music[];
+  musics: MusicDetails[];
   catalogs: Catalog[];
   playlists: Playlist[];
+  artists: Artist[];
 }
 
 function getGenreByName(genreName: string): Genre[] {
-  let genres: Genre[] = [];
-  dataGenre.filter((genre) => genre.includes(genreName)).map((g) => genres.push({ name: g }));
-  return genres;
+  if (genreName == "") {
+    return [];
+  }
+  return dataGenre.filter((genre) => genre.name.includes(genreName));
 }
 
 function getGenreContent(genreName: string): GenreContent {
-  const musics = (dataMusic as Music[]).filter((music) =>
-    music.genres.includes({ name: genreName }),
-  );
-  const catalogs = dataCatalog.filter((catalog) =>
-    catalog.musics.filter((music) => music.genres.includes(genreName)),
-  );
-  const playlists = (dataPlaylist as Playlist[]).filter((playlist) =>
-    playlist.musics.filter((music) => music.genres.includes({ name: genreName })),
-  );
+  const musics = (dataMusic as MusicDetails[])
+    .filter((music) => {
+      return music.genres.some((genre) => genre.name == genreName);
+    })
+    .slice(0, 50);
+
+  const catalogs = dataCatalog
+    .filter((catalog) =>
+      catalog.musics.some((music) => music.genres.some((genre) => genre.name == genreName)),
+    )
+    .slice(0, 50);
+  const playlists = (dataPlaylist as Playlist[])
+    .filter((playlist) =>
+      playlist.musics.some((music) => music.genres.some((genre) => genre.name == genreName)),
+    )
+    .slice(0, 50);
+
+  const artists = (dataArtist as Artist[]).filter((artist) => artist.genre.name == genreName);
 
   return {
     musics,
     catalogs,
     playlists,
+    artists,
   };
 }
 

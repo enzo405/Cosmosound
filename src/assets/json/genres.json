@@ -1,128 +1,674 @@
 [
-    "acoustic",
-    "afrobeat",
-    "alt-rock",
-    "alternative",
-    "ambient",
-    "anime",
-    "black-metal",
-    "bluegrass",
-    "blues",
-    "bossanova",
-    "brazil",
-    "breakbeat",
-    "british",
-    "cantopop",
-    "chicago-house",
-    "children",
-    "chill",
-    "classical",
-    "club",
-    "comedy",
-    "country",
-    "dance",
-    "dancehall",
-    "death-metal",
-    "deep-house",
-    "detroit-techno",
-    "disco",
-    "disney",
-    "drum-and-bass",
-    "dub",
-    "dubstep",
-    "edm",
-    "electro",
-    "electronic",
-    "emo",
-    "folk",
-    "forro",
-    "french",
-    "funk",
-    "garage",
-    "german",
-    "gospel",
-    "goth",
-    "grindcore",
-    "groove",
-    "grunge",
-    "guitar",
-    "happy",
-    "hard-rock",
-    "hardcore",
-    "hardstyle",
-    "heavy-metal",
-    "hip-hop",
-    "holidays",
-    "honky-tonk",
-    "house",
-    "idm",
-    "indian",
-    "indie",
-    "indie-pop",
-    "industrial",
-    "iranian",
-    "j-dance",
-    "j-idol",
-    "j-pop",
-    "j-rock",
-    "jazz",
-    "k-pop",
-    "kids",
-    "latin",
-    "latino",
-    "malay",
-    "mandopop",
-    "metal",
-    "metal-misc",
-    "metalcore",
-    "minimal-techno",
-    "movies",
-    "mpb",
-    "new-age",
-    "new-release",
-    "opera",
-    "pagode",
-    "party",
-    "philippines-opm",
-    "piano",
-    "pop",
-    "pop-film",
-    "post-dubstep",
-    "power-pop",
-    "progressive-house",
-    "psych-rock",
-    "punk",
-    "punk-rock",
-    "r-n-b",
-    "rainy-day",
-    "reggae",
-    "reggaeton",
-    "road-trip",
-    "rock",
-    "rock-n-roll",
-    "rockabilly",
-    "romance",
-    "sad",
-    "salsa",
-    "samba",
-    "sertanejo",
-    "show-tunes",
-    "singer-songwriter",
-    "ska",
-    "sleep",
-    "songwriter",
-    "soul",
-    "soundtracks",
-    "spanish",
-    "study",
-    "summer",
-    "swedish",
-    "synth-pop",
-    "tango",
-    "techno",
-    "trance",
-    "trip-hop",
-    "turkish",
-    "work-out",
-    "world-music"
+    {
+        "name": "acoustic"
+    },
+    {
+        "name": "afrobeat"
+    },
+    {
+        "name": "alt-rock"
+    },
+    {
+        "name": "alternative"
+    },
+    {
+        "name": "ambient"
+    },
+    {
+        "name": "anime"
+    },
+    {
+        "name": "black-metal"
+    },
+    {
+        "name": "bluegrass"
+    },
+    {
+        "name": "blues"
+    },
+    {
+        "name": "bossanova"
+    },
+    {
+        "name": "brazil"
+    },
+    {
+        "name": "breakbeat"
+    },
+    {
+        "name": "british"
+    },
+    {
+        "name": "cantopop"
+    },
+    {
+        "name": "chicago-house"
+    },
+    {
+        "name": "children"
+    },
+    {
+        "name": "chill"
+    },
+    {
+        "name": "classical"
+    },
+    {
+        "name": "club"
+    },
+    {
+        "name": "comedy"
+    },
+    {
+        "name": "country"
+    },
+    {
+        "name": "dance"
+    },
+    {
+        "name": "dancehall"
+    },
+    {
+        "name": "death-metal"
+    },
+    {
+        "name": "deep-house"
+    },
+    {
+        "name": "detroit-techno"
+    },
+    {
+        "name": "disco"
+    },
+    {
+        "name": "disney"
+    },
+    {
+        "name": "drum-and-bass"
+    },
+    {
+        "name": "dub"
+    },
+    {
+        "name": "dubstep"
+    },
+    {
+        "name": "edm"
+    },
+    {
+        "name": "electro"
+    },
+    {
+        "name": "electronic"
+    },
+    {
+        "name": "emo"
+    },
+    {
+        "name": "folk"
+    },
+    {
+        "name": "forro"
+    },
+    {
+        "name": "french"
+    },
+    {
+        "name": "funk"
+    },
+    {
+        "name": "garage"
+    },
+    {
+        "name": "german"
+    },
+    {
+        "name": "gospel"
+    },
+    {
+        "name": "goth"
+    },
+    {
+        "name": "grindcore"
+    },
+    {
+        "name": "groove"
+    },
+    {
+        "name": "grunge"
+    },
+    {
+        "name": "guitar"
+    },
+    {
+        "name": "happy"
+    },
+    {
+        "name": "hard-rock"
+    },
+    {
+        "name": "hardcore"
+    },
+    {
+        "name": "hardstyle"
+    },
+    {
+        "name": "heavy-metal"
+    },
+    {
+        "name": "hip-hop"
+    },
+    {
+        "name": "holidays"
+    },
+    {
+        "name": "honky-tonk"
+    },
+    {
+        "name": "house"
+    },
+    {
+        "name": "idm"
+    },
+    {
+        "name": "indian"
+    },
+    {
+        "name": "indie"
+    },
+    {
+        "name": "indie-pop"
+    },
+    {
+        "name": "industrial"
+    },
+    {
+        "name": "iranian"
+    },
+    {
+        "name": "j-dance"
+    },
+    {
+        "name": "j-idol"
+    },
+    {
+        "name": "j-pop"
+    },
+    {
+        "name": "j-rock"
+    },
+    {
+        "name": "jazz"
+    },
+    {
+        "name": "k-pop"
+    },
+    {
+        "name": "kids"
+    },
+    {
+        "name": "latin"
+    },
+    {
+        "name": "latino"
+    },
+    {
+        "name": "malay"
+    },
+    {
+        "name": "mandopop"
+    },
+    {
+        "name": "metal"
+    },
+    {
+        "name": "metal-misc"
+    },
+    {
+        "name": "metalcore"
+    },
+    {
+        "name": "minimal-techno"
+    },
+    {
+        "name": "movies"
+    },
+    {
+        "name": "mpb"
+    },
+    {
+        "name": "new-age"
+    },
+    {
+        "name": "new-release"
+    },
+    {
+        "name": "opera"
+    },
+    {
+        "name": "pagode"
+    },
+    {
+        "name": "party"
+    },
+    {
+        "name": "philippines-opm"
+    },
+    {
+        "name": "piano"
+    },
+    {
+        "name": "pop"
+    },
+    {
+        "name": "pop-film"
+    },
+    {
+        "name": "post-dubstep"
+    },
+    {
+        "name": "power-pop"
+    },
+    {
+        "name": "progressive-house"
+    },
+    {
+        "name": "psych-rock"
+    },
+    {
+        "name": "punk"
+    },
+    {
+        "name": "punk-rock"
+    },
+    {
+        "name": "r-n-b"
+    },
+    {
+        "name": "rainy-day"
+    },
+    {
+        "name": "reggae"
+    },
+    {
+        "name": "reggaeton"
+    },
+    {
+        "name": "road-trip"
+    },
+    {
+        "name": "rock"
+    },
+    {
+        "name": "rock-n-roll"
+    },
+    {
+        "name": "rockabilly"
+    },
+    {
+        "name": "romance"
+    },
+    {
+        "name": "sad"
+    },
+    {
+        "name": "salsa"
+    },
+    {
+        "name": "samba"
+    },
+    {
+        "name": "sertanejo"
+    },
+    {
+        "name": "show-tunes"
+    },
+    {
+        "name": "singer-songwriter"
+    },
+    {
+        "name": "ska"
+    },
+    {
+        "name": "sleep"
+    },
+    {
+        "name": "songwriter"
+    },
+    {
+        "name": "soul"
+    },
+    {
+        "name": "soundtracks"
+    },
+    {
+        "name": "spanish"
+    },
+    {
+        "name": "study"
+    },
+    {
+        "name": "summer"
+    },
+    {
+        "name": "swedish"
+    },
+    {
+        "name": "synth-pop"
+    },
+    {
+        "name": "tango"
+    },
+    {
+        "name": "techno"
+    },
+    {
+        "name": "trance"
+    },
+    {
+        "name": "trip-hop"
+    },
+    {
+        "name": "turkish"
+    },
+    {
+        "name": "work-out"
+    },
+    {
+        "name": "world-music"
+    },
+    {
+        "name": "belgian black metal"
+    },
+    {
+        "name": "belgian metal"
+    },
+    {
+        "name": "blackened hardcore"
+    },
+    {
+        "name": "chaotic hardcore"
+    },
+    {
+        "name": "drone metal"
+    },
+    {
+        "name": "emotional black metal"
+    },
+    {
+        "name": "gaian doom"
+    },
+    {
+        "name": "neo-crust"
+    },
+    {
+        "name": "post-black metal"
+    },
+    {
+        "name": "post-metal"
+    },
+    {
+        "name": "nu-metalcore"
+    },
+    {
+        "name": "symphonic deathcore"
+    },
+    {
+        "name": "slamming deathcore"
+    },
+    {
+        "name": "australian metalcore"
+    },
+    {
+        "name": "blackened deathcore"
+    },
+    {
+        "name": "brutal deathcore"
+    },
+    {
+        "name": "deathcore"
+    },
+    {
+        "name": "melodic deathcore"
+    },
+    {
+        "name": "melodic metalcore"
+    },
+    {
+        "name": "canadian post-hardcore"
+    },
+    {
+        "name": "hel"
+    },
+    {
+        "name": "moan metalcore"
+    },
+    {
+        "name": "viral rap"
+    },
+    {
+        "name": "pov: indie"
+    },
+    {
+        "name": "gymcore"
+    },
+    {
+        "name": "alternative metal"
+    },
+    {
+        "name": "modern rock"
+    },
+    {
+        "name": "post-grunge"
+    },
+    {
+        "name": "rap metal"
+    },
+    {
+        "name": "rap rock"
+    },
+    {
+        "name": "christian alternative rock"
+    },
+    {
+        "name": "christian music"
+    },
+    {
+        "name": "christian rock"
+    },
+    {
+        "name": "nu metal"
+    },
+    {
+        "name": "atlanta metal"
+    },
+    {
+        "name": "prog metal"
+    },
+    {
+        "name": "instrumental rock"
+    },
+    {
+        "name": "mathcore"
+    },
+    {
+        "name": "progressive metalcore"
+    },
+    {
+        "name": "uk metalcore"
+    },
+    {
+        "name": "future rock"
+    },
+    {
+        "name": "hard rock"
+    },
+    {
+        "name": "old school thrash"
+    },
+    {
+        "name": "thrash metal"
+    },
+    {
+        "name": "nwobhm"
+    },
+    {
+        "name": "neo mellow"
+    },
+    {
+        "name": "pop rock"
+    },
+    {
+        "name": "permanent wave"
+    },
+    {
+        "name": "canadian metalcore"
+    },
+    {
+        "name": "slayer"
+    },
+    {
+        "name": "welsh metal"
+    },
+    {
+        "name": "british power metal"
+    },
+    {
+        "name": "comic metal"
+    },
+    {
+        "name": "pirate"
+    },
+    {
+        "name": "power metal"
+    },
+    {
+        "name": "scottish metal"
+    },
+    {
+        "name": "australian post-hardcore"
+    },
+    {
+        "name": "american metalcore"
+    },
+    {
+        "name": "musical advocacy"
+    },
+    {
+        "name": "swedish alternative rock"
+    },
+    {
+        "name": "pop punk"
+    },
+    {
+        "name": "trancecore"
+    },
+    {
+        "name": "german metal"
+    },
+    {
+        "name": "german power metal"
+    },
+    {
+        "name": "french rock"
+    },
+    {
+        "name": "neo metal"
+    },
+    {
+        "name": "french punk"
+    },
+    {
+        "name": "album rock"
+    },
+    {
+        "name": "german hard rock"
+    },
+    {
+        "name": "german rock"
+    },
+    {
+        "name": "beatlesque"
+    },
+    {
+        "name": "britpop"
+    },
+    {
+        "name": "madchester"
+    },
+    {
+        "name": "french death metal"
+    },
+    {
+        "name": "french metal"
+    },
+    {
+        "name": "groove metal"
+    },
+    {
+        "name": "progressive groove metal"
+    },
+    {
+        "name": "russian metal"
+    },
+    {
+        "name": "russian metalcore"
+    },
+    {
+        "name": "german metalcore"
+    },
+    {
+        "name": "neon pop punk"
+    },
+    {
+        "name": "pop emo"
+    },
+    {
+        "name": "post-hardcore"
+    },
+    {
+        "name": "screamo"
+    },
+    {
+        "name": "kentucky metal"
+    },
+    {
+        "name": "kentucky punk"
+    },
+    {
+        "name": "cyberpunk"
+    },
+    {
+        "name": "djent"
+    },
+    {
+        "name": "electronic djent"
+    },
+    {
+        "name": "instrumental djent"
+    },
+    {
+        "name": "chanson humoristique"
+    },
+    {
+        "name": "rap conscient"
+    },
+    {
+        "name": "finnish melodeath"
+    },
+    {
+        "name": "folk metal"
+    },
+    {
+        "name": "melodic death metal"
+    },
+    {
+        "name": "symphonic death metal"
+    },
+    {
+        "name": "symphonic melodic death metal"
+    },
+    {
+        "name": "progressive death metal"
+    }
 ]

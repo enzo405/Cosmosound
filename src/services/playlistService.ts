@@ -10,6 +10,10 @@ function getMyPlaylist(): Playlist[] {
 }
 
 function searchPlaylistByTitle(value: string): Playlist[] {
+  if (value == "") {
+    return [];
+  }
+
   const searchTerm = value.toLowerCase().trim();
 
   const playlistsTitleMatch = playlistsData
