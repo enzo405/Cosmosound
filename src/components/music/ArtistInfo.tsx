@@ -20,7 +20,7 @@ export default function ArtistInfo({ artist, className }: ArtistInfoProps): Reac
         className="mm-size-5 rounded-full flex-shrink-0"
         alt={`${artist.artist_name}`}
       />
-      <span className="truncate">{artist.artist_name}</span>
+      <span className="truncate select-none">{artist.artist_name}</span>
     </span>
   );
 }

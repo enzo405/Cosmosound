@@ -33,6 +33,7 @@ export default {
         "sidebar-category-font": "var(--color-sidebar-category-font)",
         "primary-orange": "var(--color-primary-orange)",
         "secondary-orange": "var(--color-secondary-orange)",
+        "white-orange": "var(--color-white-orange)",
         "searchbar-white": "var(--color-searchbar-white)",
         "settings-divider": "var(--color-settings-divider)",
         "dark-grey": "var(--color-dark-grey)",

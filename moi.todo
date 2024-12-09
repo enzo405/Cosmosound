@@ -7,6 +7,5 @@ Good to have:
 - filtres dans explore, faire des pages pour chaque filtres au lieu de cacher les composants (e.g => /explore/artists, /explore/musics)
 - Artist page make top part sticky
 - popup music label (change color?)
-- better size for Card responsive
 - enqueueSnackbar make constants for user messages (add toString to the CatalogType)
 - add assets for explore page empty, 404 page, 500 page & error page, 401 page (when not logged in)

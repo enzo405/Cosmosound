@@ -42,7 +42,7 @@ export default function Card({
       onMouseEnter={() => setDisplayLikeBtn(true)}
       onMouseLeave={() => setDisplayLikeBtn(false)}
       onClick={(e) => handleOnClick(e)}
-      className={`relative flex flex-col items-center group cursor-pointer min-w-36 max-w-36 sm:min-w-40 sm:max-w-40 min-h-44 max-h-44 sm:min-h-52 sm:max-h-52 border border-dark-glassy rounded-2xl p-2 gap-2 ${className}`}>
+      className={`relative flex flex-col items-center group cursor-pointer min-w-28 max-w-28 sm:min-w-32 sm:max-w-32 md:min-w-40 md:max-w-40 min-h-36 max-h-36 sm:min-h-44 sm:max-h-44 md:min-h-52 md:max-h-52 border border-dark-glassy rounded-2xl p-2 gap-2 ${className}`}>
       <div className="w-full flex flex-row justify-center">
         <img
           className="h-full w-[95%] rounded-lg object-contain"
@@ -50,7 +50,7 @@ export default function Card({
           alt={`${title} ${description}`}
         />
       </div>
-      <div className="h-2/6 flex flex-col cursor-pointer w-full ml-4">
+      <div className="h-2/6 flex flex-col cursor-pointer w-full px-1">
         <div className="text-sm font-medium truncate">{title}</div>
         <div className="text-xs text-gray-500 truncate">{description}</div>
       </div>

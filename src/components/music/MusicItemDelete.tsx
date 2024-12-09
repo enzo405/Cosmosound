@@ -42,7 +42,7 @@ export default function MusicItemDelete({
   return (
     <div className="relative w-full" ref={musicItemRef}>
       <div
-        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[64px] lg:h-18 ${playingMusic.id == music.id ? "bg-slate-200" : "hover:bg-slate-100"} rounded-xl`}>
+        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[64px] lg:h-18 ${playingMusic.id == music.id ? "bg-white-orange" : "hover:bg-dark-custom"} rounded-xl`}>
         <div className="flex flex-row w-full flex-grow min-w-0 justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer">
           <div className="flex flex-row items-center w-full sm:max-w-80 sm:min-w-80 lg:min-w-[28rem] lg:max-w-[28rem] gap-1">
             <div className="relative p-0.5 h-5/6 xsm:h-full">
@@ -58,7 +58,7 @@ export default function MusicItemDelete({
             </div>
             <div className="flex flex-col xsm:gap-1 h-full max-w-full overflow-hidden items-start justify-center">
               <span className="text-base text-dark-custom flex gap-1 xsm:gap-2 items-center w-full">
-                <span className="font-semibold text-sm xsm:font-normal xsm:text-base truncate">
+                <span className="font-semibold select-none text-sm xsm:font-normal xsm:text-base truncate">
                   {music.title}
                 </span>
                 <span
@@ -75,10 +75,10 @@ export default function MusicItemDelete({
               </span>
             </div>
           </div>
-          <div className="hidden xl:flex items-center max-w-36 min-w-36 justify-center font-light text-sm">
+          <div className="hidden xl:flex items-center select-none max-w-36 min-w-36 justify-center font-light text-sm">
             {formatTime(music.date_creation)}
           </div>
-          <div className="hidden lg:flex items-center w-10 justify-center font-light text-sm">
+          <div className="hidden lg:flex items-center select-none w-10 justify-center font-light text-sm">
             {formatDuration(music.duration)}
           </div>
         </div>
