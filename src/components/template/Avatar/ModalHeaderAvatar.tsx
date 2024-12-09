@@ -53,11 +53,11 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
   return (
     <div
       ref={modalRef}
-      className="fixed top-0 right-0 z-50 transform-gpu rounded-xl translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px] shadow-xl"
+      className="fixed top-0 right-0 z-50 transform-gpu rounded-xl translate-x-[-10px] translate-y-[10px] sm:translate-y-[80px] shadow-xl font-bs"
       style={{
         display: isModalOpen ? "block" : "none",
       }}>
-      <div className="bg-white block py-1 text-gray-900 rounded-xl w-44 xsm:w-52 sm:w-60 border border-settings-divider">
+      <div className="bg-white block py-1 rounded-xl w-44 xsm:w-52 sm:w-60 border border-settings-divider">
         {/* Profile Section */}
         <SettingsOptions>
           <img
@@ -67,31 +67,31 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
           />
           <span className="ml-2">
             <p>{connectedUser.name}</p>
-            <p className="text-dark-grey">{connectedUser.email}</p>
+            <p className="text-dark-grey text-base">{connectedUser.email}</p>
           </span>
         </SettingsOptions>
         <Divider />
         {/* Settings Section */}
         <SettingsOptions
-          className="cursor-pointer gap-2"
+          className="cursor-pointer gap-2 text-dark-grey text-base"
           onClick={() => navigate(routesConfig.account.path)}>
           <Icon iconName="account" className="mr-1 w-5 h-5" />
           Account
         </SettingsOptions>
         <SettingsOptions
-          className="cursor-pointer gap-2"
+          className="cursor-pointer gap-2 text-dark-grey text-base"
           onClick={() => navigate(routesConfig.artistPanel.path)}>
           <Icon iconName="artistPanel" className="mr-1 w-5 h-5" />
           Artist Panel
         </SettingsOptions>
         <SettingsOptions
-          className="cursor-pointer gap-2"
+          className="cursor-pointer gap-2 text-dark-grey text-base"
           onClick={() => navigate(routesConfig.legal.path)}>
           <Icon iconName="legal" className="mr-1 w-5 h-5" />
           Legal
         </SettingsOptions>
         <SettingsOptions
-          className="cursor-pointer gap-2"
+          className="cursor-pointer gap-2 text-dark-grey text-base"
           onClick={() => navigate(routesConfig.aboutUs.path)}>
           <Icon iconName="aboutus" className="mr-1 w-5 h-5" />
           About us
@@ -99,7 +99,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
         <Divider />
         <SettingsOptions className="gap-2">
           <span
-            className="flex flex-row gap-2 justify-start items-center cursor-pointer w-full"
+            className="flex flex-row gap-2 justify-start items-center cursor-pointer w-full text-dark-grey text-base"
             onClick={() => setChecked(!checked)}>
             <Icon iconName="darkmode" className="mr-1 w-5 h-5" />
             Dark Mode
@@ -108,7 +108,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
         </SettingsOptions>
         <Divider />
         {/* Footer Section */}
-        <SettingsOptions className="cursor-pointer gap-2">
+        <SettingsOptions className="cursor-pointer gap-2 text-dark-grey text-base">
           <Icon iconName="logout" className="mr-1 w-5 h-5" />
           Logout
         </SettingsOptions>

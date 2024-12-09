@@ -42,7 +42,7 @@ export default function MusicItemDelete({
   return (
     <div className="relative w-full" ref={musicItemRef}>
       <div
-        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[64px] lg:h-18 ${playingMusic.id == music.id ? "bg-white-orange" : "hover:bg-secondary-orange"} rounded-xl`}>
+        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[64px] lg:h-18 ${playingMusic.id == music.id ? "bg-music-activ" : "hover:bg-music-hover"} rounded-xl`}>
         <div className="flex flex-row w-full select-none flex-grow min-w-0 justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer">
           <div className="flex flex-row items-center w-full sm:max-w-80 sm:min-w-80 lg:min-w-[28rem] lg:max-w-[28rem] gap-1">
             <div className="relative p-0.5 h-5/6 xsm:h-full">

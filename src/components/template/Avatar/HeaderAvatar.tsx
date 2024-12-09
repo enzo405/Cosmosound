@@ -2,7 +2,7 @@ import { HTMLAttributes, type ReactElement } from "react";
 import { Icon } from "components/icons/Icon";
 import { useOpenAvatarModal } from "hooks/useOpenAvatarModal";
 
-function HeaderAvatar({ className, id }: HTMLAttributes<HTMLHRElement>): ReactElement {
+function HeaderAvatar({ className = "", id }: HTMLAttributes<HTMLHRElement>): ReactElement {
   const { isModalOpen, toggleModal } = useOpenAvatarModal();
 
   return (

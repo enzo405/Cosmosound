@@ -11,3 +11,4 @@ Good to have:
 - enqueueSnackbar make constants for user messages (add toString to the CatalogType)
 - add assets for explore page empty, 404 page, 500 page & error page, 401 page (when not logged in)
 - refacto form input
+- add expand/resize button on sidebar

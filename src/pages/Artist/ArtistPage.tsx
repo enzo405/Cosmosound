@@ -8,7 +8,7 @@ import { useMusic } from "hooks/useMusic";
 import { Media } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ArtistService from "services/artistService";
 import { formatTime } from "utils/date";
@@ -41,7 +41,7 @@ export default function ArtistPage(): ReactElement {
 
   const [isArtistLiked, setIsArtistLiked] = useState<boolean>(false);
   const [displaySettings, setDisplaySettings] = useState(false);
-  const [content, setContent] = useState<Catalog[] | Music[]>(artist.musics);
+  const [content, setContent] = useState<Catalog[] | Music[]>([]);
   const [activeTab, setActiveTab] = useState(ArtistTabs.MUSIC);
 
   const getMediaIcon = (media: Media): ReactElement => {
@@ -60,6 +60,8 @@ export default function ArtistPage(): ReactElement {
   };
 
   const handlePlaying = () => {
+    setActiveTab(ArtistTabs.MUSIC);
+    loadContent(ArtistTabs.MUSIC);
     if (!isPlayingSongCurrentPage && artist != undefined) {
       const firstMusicCatalog = artist.musics.find((m) => m.id == artist.musics[0].id)?.catalog;
       setPlayingMusic({ ...artist.musics[0], artist, catalog: firstMusicCatalog! });
@@ -82,8 +84,16 @@ export default function ArtistPage(): ReactElement {
     setIsArtistLiked(!isArtistLiked);
   };
 
+  useEffect(() => {
+    loadContent(activeTab);
+  }, []);
+
   const handleTabChange = (selectedTab: ArtistTabs) => {
+    loadContent(selectedTab);
     setActiveTab(selectedTab);
+  };
+
+  const loadContent = (selectedTab: ArtistTabs) => {
     switch (selectedTab) {
       case ArtistTabs.ALBUM:
         setContent(artist.catalogs.filter((c) => c.type == TypeCatalog.ALBUM));
@@ -159,7 +169,8 @@ export default function ArtistPage(): ReactElement {
       content={
         <div className="flex flex-col gap-3">
           <CategoryTabs tabs={ArtistTabs} activeTab={activeTab} onTabSelect={handleTabChange} />
-          <div className={`flex ${activeTab == ArtistTabs.MUSIC ? "flex-col" : "flex-wrap gap-2"}`}>
+          <div
+            className={`flex ${activeTab == ArtistTabs.MUSIC ? "flex-col gap-1" : "flex-wrap gap-2"}`}>
             {content.length != 0 ? (
               activeTab == ArtistTabs.MUSIC ? (
                 content.map((item) => {

@@ -19,6 +19,8 @@ export default {
       colors: {
         "music-player-border": "var(--color-music-player-border)",
         "music-player-bg": "var(--color-music-player-bg)",
+        "music-hover": "var(--color-music-hover)",
+        "music-activ": "var(--color-music-activ)",
         "label-music-verif": "var(--label-music-verif)",
         "dark-custom": "var(--color-dark)",
         "dark-glassy": "var(--color-darkglassy)",
@@ -33,6 +35,7 @@ export default {
         "sidebar-category-font": "var(--color-sidebar-category-font)",
         "primary-orange": "var(--color-primary-orange)",
         "secondary-orange": "var(--color-secondary-orange)",
+        "tertio-orange": "var(--color-tertio-orange)",
         "white-orange": "var(--color-white-orange)",
         "searchbar-white": "var(--color-searchbar-white)",
         "settings-divider": "var(--color-settings-divider)",
