@@ -62,9 +62,12 @@ export default function MusicItemDelete({
                   {music.title}
                 </span>
                 <span
-                  className="flex-shrink-0 flex justify-center items-center rounded-lg size-[14px] xsm:size-[18px] bg-label-music-verif"
+                  className="flex-shrink-0 flex justify-center items-center rounded-lg mm-size-3.5 xsm:mm-size-4 bg-label-music-verif"
                   title={music.is_ai ? "AI Generated" : "Official Music"}>
-                  <Icon iconName={music.is_ai ? "ai-label" : "verified-label"} className="size-3" />
+                  <Icon
+                    iconName={music.is_ai ? "ai-label" : "verified-label"}
+                    className="mm-size-3"
+                  />
                 </span>
               </span>
               <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
@@ -83,7 +86,7 @@ export default function MusicItemDelete({
           <Icon
             onClick={() => handleClickDelete(music)}
             iconName="trash-red"
-            className="fill-dark-custom cursor-pointer size-6 sm:size-[30px]"
+            className="fill-dark-custom cursor-pointer mm-size-6 sm:mm-size-7"
           />
         </div>
       </div>

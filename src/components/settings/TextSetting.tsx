@@ -17,7 +17,7 @@ export default function TextSetting({
 }: TextSettingProps): ReactElement {
   return (
     <span onClick={onClick} className="inline-flex w-full items-center cursor-pointer">
-      <Icon className={`size-5 mr-2 ${className}`} iconName={iconName} />
+      <Icon className={`mm-size-5 mr-2 ${className}`} iconName={iconName} />
       <span className="w-max text-dark-grey">{text}</span>
     </span>
   );

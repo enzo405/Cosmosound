@@ -1,7 +1,6 @@
 Must Have:
 - gérer quel settings on affiche en fonction de la page où on se trouve et de nos droits
 - faire les errors page
-- min size for album thumbnail in MusicItem
 - responsive scroll arrows icon ScrollableBox
 - media link off screen and description too
 - requirement for password input

@@ -83,14 +83,14 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
       headerActions={
         <>
           <Icon
-            className="lg:size-16 md:size-14 size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
             iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
             onClick={handlePlaying}
           />
           <HeartIcon
             isLiked={isCatalogLiked}
             handleClickHeart={handleClickHeart}
-            className="lg:size-16 md:size-14 size-12 "
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12 "
           />
         </>
       }

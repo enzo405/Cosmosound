@@ -68,11 +68,13 @@ export default {
           maxWidth: value,
           maxHeight: value,
         };
-        acc[`.size-${e(key)}`] = {
+        acc[`.mm-size-${e(key)}`] = {
           minWidth: value,
           minHeight: value,
           maxWidth: value,
           maxHeight: value,
+          width: value,
+          height: value,
         };
         return acc;
       }, {});

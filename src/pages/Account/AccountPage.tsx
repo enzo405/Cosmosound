@@ -81,7 +81,7 @@ function AccountPage(): ReactElement {
                 </label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-3 flex items-center">
-                    <Icon className="size-5 fill-dark-custom" iconName="lock" />
+                    <Icon className="mm-size-5 fill-dark-custom" iconName="lock" />
                   </span>
                   <Controller
                     name="password"
@@ -103,7 +103,7 @@ function AccountPage(): ReactElement {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute top-0 h-full inset-y-0 right-3 flex items-center text-gray-500">
                     <Icon
-                      className="size-5 fill-dark-custom"
+                      className="mm-size-5 fill-dark-custom"
                       iconName={showPassword ? "eye" : "eye-blocked"}
                     />
                   </button>
@@ -126,7 +126,7 @@ function AccountPage(): ReactElement {
                   </label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-3 flex items-center">
-                      <Icon className="size-5 fill-dark-custom" iconName="lock" />
+                      <Icon className="mm-size-5 fill-dark-custom" iconName="lock" />
                     </span>
                     <Controller
                       name="confirmPassword"
@@ -195,12 +195,12 @@ function AccountPage(): ReactElement {
                       <img
                         src="/src/assets/img/form/edit-background.png"
                         alt="Edit background"
-                        className="absolute top-0 right-0 size-20 md:size-32 opacity-60"
+                        className="absolute top-0 right-0 mm-size-20 md:mm-size-32 opacity-60"
                       />
                       <img
                         src={preview}
                         alt="Profile"
-                        className="size-20 md:size-32 rounded-full border border-gray-300"
+                        className="mm-size-20 md:mm-size-32 rounded-full border border-gray-300"
                       />
                     </label>
                   </>

@@ -65,7 +65,7 @@ export default function SelectPlaylist({
             onClick={() => handleClickPlaylist(p)}
             className="flex flex-row gap-2 p-0.5 items-center hover:bg-gray-200 cursor-pointer">
             <img
-              className="size-7 rounded-md"
+              className="mm-size-7 rounded-md"
               src={p.musics[0]?.catalog.thumbnail}
               alt={`${p.title} thumbnail`}
             />

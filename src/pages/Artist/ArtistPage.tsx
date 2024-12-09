@@ -133,7 +133,7 @@ export default function ArtistPage(): ReactElement {
                 key={media}
                 href={link}
                 target="_blank"
-                className="lg:size-8 size-7 items-center h-full flex">
+                className="lg:mm-size-8 mm-size-7 items-center h-full flex">
                 {getMediaIcon(media)}
               </a>
             ))}
@@ -144,14 +144,14 @@ export default function ArtistPage(): ReactElement {
       headerActions={
         <>
           <Icon
-            className="lg:size-16 md:size-14 size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
             iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
             onClick={handlePlaying}
           />
           <HeartIcon
             isLiked={isArtistLiked}
             handleClickHeart={handleClickHeart}
-            className="lg:size-16 md:size-14 size-12"
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12"
           />
         </>
       }

@@ -107,7 +107,7 @@ export default function MusicItem({
             <div
               onMouseEnter={() => setDisplayPlay(true)}
               onMouseLeave={() => setDisplayPlay(false)}
-              className="relative p-0.5 h-5/6 xsm:h-full">
+              className="relative p-0.5 mm-size-16">
               {showCatalogThumbnail && (
                 <img
                   className="rounded-xl object-contain h-full"
@@ -145,7 +145,10 @@ export default function MusicItem({
                 <span
                   className="flex-shrink-0 flex justify-center items-center rounded-lg size-[14px] xsm:size-[18px] bg-label-music-verif"
                   title={music.is_ai ? "AI Generated" : "Official Music"}>
-                  <Icon iconName={music.is_ai ? "ai-label" : "verified-label"} className="size-3" />
+                  <Icon
+                    iconName={music.is_ai ? "ai-label" : "verified-label"}
+                    className="mm-size-3"
+                  />
                 </span>
               </span>
               <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
@@ -174,14 +177,14 @@ export default function MusicItem({
           id={`music-item-actions-${music.id}`}
           className="relative flex flex-row items-center justify-center h-full w-auto gap-2 xsm:gap-3 pr-1 xsm:pr-2">
           <HeartIcon
-            className="size-6 sm:size-[30px]"
+            className="mm-size-6 sm:mm-size-7"
             isLiked={isLiked}
             handleClickHeart={handleClickHeart}
           />
           <Icon
             onClick={handleClickSettings}
             iconName="ellipsis"
-            className="fill-dark-custom cursor-pointer size-6 sm:size-[30px]"
+            className="fill-dark-custom cursor-pointer mm-size-6 sm:mm-size-7"
           />
           {displaySettings && (
             <MusicSettings
