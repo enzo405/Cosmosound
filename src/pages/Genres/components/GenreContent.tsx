@@ -8,6 +8,8 @@ import { routesConfig } from "config/app-config";
 import { MusicDetails } from "models/Music";
 import MusicItem from "components/music/MusicItem";
 import { Playlist } from "models/Playlist";
+import UserService from "services/userService";
+import { enqueueSnackbar } from "notistack";
 
 interface GenreContentProps {
   content: Catalog[] | MusicDetails[] | Playlist[] | Artist[];
@@ -18,6 +20,34 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
   if (!content.length) {
     return <span className="text-dark-custom">This genre seems empty</span>;
   }
+
+  const onLikeCatalog = (like: boolean, catalog: Catalog) => {
+    if (like) {
+      UserService.removeLike(catalog);
+      enqueueSnackbar(`${catalog.title} removed from your favourite`, {
+        variant: "success",
+      });
+    } else {
+      UserService.like(catalog);
+      enqueueSnackbar(`${catalog.title} added to your favourite`, {
+        variant: "success",
+      });
+    }
+  };
+
+  const onLikePlaylist = (like: boolean, playlist: Playlist) => {
+    if (like) {
+      UserService.removeLike(playlist);
+      enqueueSnackbar(`${playlist.title} removed from your favourite playlist`, {
+        variant: "success",
+      });
+    } else {
+      UserService.like(playlist);
+      enqueueSnackbar(`${playlist.title} added to your favourite playlist `, {
+        variant: "success",
+      });
+    }
+  };
 
   const renderContent = () => {
     switch (activeTab) {
@@ -44,6 +74,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
               link={routesConfig.playlist.getParameter(playlist.id)}
               thumbnail={playlist.musics[0].catalog.thumbnail}
               description={`${playlist.title} - ${playlist.owner.name}`}
+              onLike={(like) => onLikePlaylist(like, playlist)}
             />
           );
         });
@@ -61,6 +92,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
               description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
               link={`/catalog/${catalog.id}`}
               thumbnail={catalog.thumbnail}
+              onLike={(like) => onLikeCatalog(like, catalog)}
             />
           );
         });

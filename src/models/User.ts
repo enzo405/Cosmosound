@@ -11,6 +11,14 @@ export interface User {
   followings: Array<Artist>;
 }
 
+export interface UserDetails extends User {
+  likedArtists: string[];
+  likedMusics: string[];
+  likedCatalogs: string[];
+  likedGenres: string[];
+  likedPlaylists: string[];
+}
+
 export interface Artist extends User {
   social_media: SocialMediaLink[];
   genre: Genre;

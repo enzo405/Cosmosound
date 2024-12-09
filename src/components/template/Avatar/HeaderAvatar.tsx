@@ -15,7 +15,7 @@ function HeaderAvatar({ className, id }: HTMLAttributes<HTMLHRElement>): ReactEl
         src="/src/assets/img/header/default_avatar.png"
         alt="profile picture"
       />
-      <span className="hidden md:block p-4 cursor-pointer rounded-xl group-hover:bg-gray-200">
+      <span className="hidden md:block p-3.5 cursor-pointer rounded-xl group-hover:bg-gray-200">
         <Icon
           iconName="arrow-right"
           className={`transition-transform duration-150 stroke-black h-3 w-3 min-w-3 min-h-3 ${isModalOpen ? "-rotate-90" : "rotate-90"}`}

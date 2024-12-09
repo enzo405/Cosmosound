@@ -12,6 +12,7 @@ import { formatDurationWithLabel, formatTime } from "utils/date";
 import PageLayout from "components/PageLayout";
 import ArtistInfo from "components/music/ArtistInfo";
 import UserService from "services/userService";
+import HeartIcon from "components/icons/HeartIcon";
 
 interface CatalogPageProps {}
 
@@ -27,7 +28,6 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
 
   const [isCatalogLiked, setIsCatalogLiked] = useState<boolean>(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [displaySettings, setDisplaySettings] = useState(false);
 
   const handlePlaying = () => {
@@ -38,16 +38,14 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   };
 
   const handleClickHeart = () => {
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 300);
     if (isCatalogLiked) {
       UserService.removeLike(catalog);
-      enqueueSnackbar(`${catalog.type.valueOf()} removed from your favourite`, {
+      enqueueSnackbar(`${catalog.title} removed from your favourite`, {
         variant: "success",
       });
     } else {
       UserService.like(catalog);
-      enqueueSnackbar(`${catalog.type.valueOf()} added to your favourite`, {
+      enqueueSnackbar(`${catalog.title} added to your favourite`, {
         variant: "success",
       });
     }
@@ -89,10 +87,10 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
             iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
             onClick={handlePlaying}
           />
-          <Icon
-            onClick={handleClickHeart}
-            iconName={isCatalogLiked ? "heart-orange" : "heart-orange-empty"}
-            className={`lg:size-16 md:size-14 size-12 cursor-pointer ${isAnimating ? "animate-pop" : ""}`}
+          <HeartIcon
+            isLiked={isCatalogLiked}
+            handleClickHeart={handleClickHeart}
+            className="lg:size-16 md:size-14 size-12 "
           />
         </>
       }

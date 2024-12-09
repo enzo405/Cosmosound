@@ -17,6 +17,8 @@ import ArtistCard from "components/cards/ArtistCard";
 import GenresService from "services/genresService";
 import SmallCard from "components/cards/SmallCard";
 import { routesConfig } from "config/app-config";
+import UserService from "services/userService";
+import { enqueueSnackbar } from "notistack";
 
 export enum Filters {
   ALL = "All",
@@ -69,6 +71,48 @@ function ExplorePage(): ReactElement {
     fetchData();
   }, [debouncedValue]);
 
+  const onLikeGenre = (like: boolean, genre: Genre) => {
+    if (like) {
+      UserService.removeLike(genre);
+      enqueueSnackbar(`${genre.name} removed from your favourite genres`, {
+        variant: "success",
+      });
+    } else {
+      UserService.like(genre);
+      enqueueSnackbar(`${genre.name} added to your favourite genres`, {
+        variant: "success",
+      });
+    }
+  };
+
+  const onLikeCatalog = (like: boolean, catalog: Catalog) => {
+    if (like) {
+      UserService.removeLike(catalog);
+      enqueueSnackbar(`${catalog.title} removed from your favourite`, {
+        variant: "success",
+      });
+    } else {
+      UserService.like(catalog);
+      enqueueSnackbar(`${catalog.title} added to your favourite`, {
+        variant: "success",
+      });
+    }
+  };
+
+  const onLikePlaylist = (like: boolean, playlist: Playlist) => {
+    if (like) {
+      UserService.removeLike(playlist);
+      enqueueSnackbar(`${playlist.title} removed from your favourite playlists`, {
+        variant: "success",
+      });
+    } else {
+      UserService.like(playlist);
+      enqueueSnackbar(`${playlist.title} added to your favourite playlists`, {
+        variant: "success",
+      });
+    }
+  };
+
   return (
     <div className="flex flex-col gap-10 w-full">
       <FilterBox onFilterClick={(f) => setActiveFilter(f)} activeFilter={activeFilter} />
@@ -102,6 +146,7 @@ function ExplorePage(): ReactElement {
                       description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
                       link={`/catalog/${catalog.id}`}
                       thumbnail={catalog.thumbnail}
+                      onLike={(like) => onLikeCatalog(like, catalog)}
                     />
                   );
                 })}
@@ -121,6 +166,7 @@ function ExplorePage(): ReactElement {
                     description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
                     link={`/catalog/${catalog.id}`}
                     thumbnail={catalog.thumbnail}
+                    onLike={(like) => onLikeCatalog(like, catalog)}
                   />
                 );
               })}
@@ -140,6 +186,7 @@ function ExplorePage(): ReactElement {
                       description={`${playlist.title} - ${playlist.owner.name}`}
                       link={`/playlist/${playlist.id}`}
                       thumbnail={playlist.musics[0].catalog.thumbnail}
+                      onLike={(like) => onLikePlaylist(like, playlist)}
                     />
                   );
                 })}
@@ -157,6 +204,7 @@ function ExplorePage(): ReactElement {
                       key={genre.name}
                       title={genre.name}
                       link={routesConfig.genres.getParameter(genre.name)}
+                      onLike={(like) => onLikeGenre(like, genre)}
                     />
                   );
                 })}

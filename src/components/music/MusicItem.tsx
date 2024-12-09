@@ -11,6 +11,7 @@ import { enqueueSnackbar } from "notistack";
 import { Artist } from "models/User";
 import { Catalog } from "models/Catalog";
 import UserService from "services/userService";
+import HeartIcon from "components/icons/HeartIcon";
 
 interface MusicItemProps {
   music: Music;
@@ -37,7 +38,6 @@ export default function MusicItem({
   const [displaySettings, setDisplaySettings] = useState<boolean>(false);
   const [displayPlay, setDisplayPlay] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
   const musicItemRef = useRef<HTMLInputElement>(null);
@@ -46,8 +46,6 @@ export default function MusicItem({
     musicItemRef?.current?.getBoundingClientRect()?.bottom! > window.innerHeight / 2; // Divided by 2 since the header + music player takes a lot of space
 
   const handleClickHeart = () => {
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 300);
     if (isLiked) {
       UserService.removeLike(music);
       enqueueSnackbar(`Song removed to your favourite songs`, {
@@ -175,10 +173,10 @@ export default function MusicItem({
         <div
           id={`music-item-actions-${music.id}`}
           className="relative flex flex-row items-center justify-center h-full w-auto gap-2 xsm:gap-3 pr-1 xsm:pr-2">
-          <Icon
-            onClick={handleClickHeart}
-            iconName={isLiked ? "heart-orange" : "heart-orange-empty"}
-            className={`size-6 sm:size-[30px] cursor-pointer ${isAnimating ? "animate-pop" : ""}`}
+          <HeartIcon
+            className="size-6 sm:size-[30px]"
+            isLiked={isLiked}
+            handleClickHeart={handleClickHeart}
           />
           <Icon
             onClick={handleClickSettings}

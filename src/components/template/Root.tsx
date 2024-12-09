@@ -8,7 +8,7 @@ import DropdownHeaderAvatar from "./Avatar/ModalHeaderAvatar";
 
 const DEFAULT_SIDEBAR_WIDTH = 224;
 const MIN_SIDEBAR_WIDTH = 180;
-const MAX_SIDEBAR_WIDTH = 260;
+const MAX_SIDEBAR_WIDTH = 240;
 const SMALL_SIDEBAR_WIDTH = 65;
 
 function Root(): ReactElement {
@@ -61,7 +61,9 @@ function Root(): ReactElement {
       onMouseUp={stopResizing}>
       <div className="font-bs h-full w-full flex flex-row bg-body-bg">
         {!isMobile && (
-          <div className="fixed left-0 h-full flex flex-row" style={{ width: `${sidebarWidth}px` }}>
+          <div
+            className="fixed z-50 left-0 h-full flex flex-row"
+            style={{ width: `${sidebarWidth}px` }}>
             <Sidebar
               className="hidden sm:flex flex-col gap-10 h-full w-full"
               isSidebarSmall={sidebarWidth === SMALL_SIDEBAR_WIDTH}
@@ -86,7 +88,7 @@ function Root(): ReactElement {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 w-full z-20 flex flex-col bg-music-player-bg backdrop-blur-3xl">
+      <div className="fixed bottom-0 w-full z-50 flex flex-col bg-music-player-bg backdrop-blur-3xl">
         <MusicPlayer />
         {isMobile && <Sidebar className="sm:hidden flex flex-row gap-6" showHeaderAvatar={true} />}
       </div>
