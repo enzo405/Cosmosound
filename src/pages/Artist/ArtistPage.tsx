@@ -18,7 +18,7 @@ import { Music } from "models/Music";
 import MusicItem from "components/music/MusicItem";
 import Card from "components/cards/Card";
 import { routesConfig } from "config/app-config";
-import ArtistSettings from "./components/ArtistSettings";
+import ArtistSettings from "components/settings/ArtistSettings";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";

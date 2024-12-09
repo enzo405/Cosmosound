@@ -8,7 +8,7 @@ import { ReactElement, useState } from "react";
 import { useParams } from "react-router-dom";
 import PlaylistService from "services/playlistService";
 import { formatDurationWithLabel, formatTime } from "utils/date";
-import PlaylistSettings from "./components/PlaylistSettings";
+import PlaylistSettings from "components/settings/PlaylistSettings";
 import PlaylistOwnerBadge from "./components/PlaylistOwnerBadge";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";

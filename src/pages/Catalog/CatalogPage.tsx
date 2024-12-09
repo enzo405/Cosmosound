@@ -6,7 +6,7 @@ import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
 import { ReactElement, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import CatalogService from "services/catalogService";
-import CatalogSettings from "./components/CatalogSettings";
+import CatalogSettings from "components/settings/CatalogSettings";
 import { MusicDetails } from "models/Music";
 import { formatDurationWithLabel, formatTime } from "utils/date";
 import PageLayout from "components/PageLayout";
