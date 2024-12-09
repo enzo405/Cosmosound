@@ -1,4 +1,4 @@
-import { Icon } from "components/icons/Icon";
+import HeartIcon from "components/icons/HeartIcon";
 import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,9 +6,15 @@ interface SmallCardProps {
   title: string;
   link: string;
   className?: string;
+  onLike: (like: boolean) => void;
 }
 
-export default function SmallCard({ title, link, className = "" }: SmallCardProps): ReactElement {
+export default function SmallCard({
+  title,
+  link,
+  className = "",
+  onLike,
+}: SmallCardProps): ReactElement {
   const navigate = useNavigate();
   const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
@@ -22,6 +28,11 @@ export default function SmallCard({ title, link, className = "" }: SmallCardProp
     }
   };
 
+  const handleClickHeart = () => {
+    onLike(isLiked);
+    setIsLiked(!isLiked);
+  };
+
   return (
     <div
       onMouseEnter={() => setDisplayLikeBtn(true)}
@@ -33,11 +44,7 @@ export default function SmallCard({ title, link, className = "" }: SmallCardProp
       </div>
       {displayLikeBtn && (
         <div id="likeBtn" className="z-10 absolute -bottom-2 -right-1">
-          <Icon
-            className="size-6"
-            iconName={isLiked ? "heart-orange-empty" : "heart-orange"}
-            onClick={() => setIsLiked(!isLiked)}
-          />
+          <HeartIcon isLiked={isLiked} handleClickHeart={handleClickHeart} className="size-6" />
         </div>
       )}
     </div>

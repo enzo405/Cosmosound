@@ -7,11 +7,12 @@ import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
 import { ReactElement, useState } from "react";
 import { useParams } from "react-router-dom";
 import PlaylistService from "services/playlistService";
-import { formatTime } from "utils/date";
+import { formatDurationWithLabel, formatTime } from "utils/date";
 import PlaylistSettings from "./components/PlaylistSettings";
 import PlaylistOwnerBadge from "./components/PlaylistOwnerBadge";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
+import HeartIcon from "components/icons/HeartIcon";
 
 interface PlaylistPageProps {}
 
@@ -31,7 +32,6 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
 
   const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [displaySettings, setDisplaySettings] = useState(false);
 
   const handlePlaying = () => {
@@ -42,8 +42,6 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   };
 
   const handleClickHeart = () => {
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 300);
     if (isPlaylistLiked) {
       UserService.removeLike(playlist);
       enqueueSnackbar(`${playlist.title} removed from your favourite playlist`, {
@@ -74,11 +72,20 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
       }
       title={playlist.title}
       subtitle={
-        <span className="font-light flex flex-wrap gap-1">
-          <p>Made by </p>
-          <PlaylistOwnerBadge owner={playlist.owner} />
-          <span>on {formatTime(playlist.date_creation)}</span>
-        </span>
+        <div className="flex flex-col gap-1">
+          <span className="font-light flex flex-wrap gap-1">
+            <p>Made by </p>
+            <PlaylistOwnerBadge owner={playlist.owner} />
+            <span>on {formatTime(playlist.date_creation)}</span>
+          </span>
+          <span>
+            {playlist.musics.length} songs (
+            {formatDurationWithLabel(
+              playlist.musics.reduce((total, music) => total + music.duration, 0),
+            )}
+            )
+          </span>
+        </div>
       }
       displaySettings={displaySettings}
       headerActions={
@@ -88,10 +95,10 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
             iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
             onClick={handlePlaying}
           />
-          <Icon
-            onClick={handleClickHeart}
-            iconName={isPlaylistLiked ? "heart-orange" : "heart-orange-empty"}
-            className={`lg:size-16 md:size-14 size-12 cursor-pointer ${isAnimating ? "animate-pop" : ""}`}
+          <HeartIcon
+            isLiked={isPlaylistLiked}
+            handleClickHeart={handleClickHeart}
+            className="lg:size-16 md:size-14 size-12"
           />
         </>
       }

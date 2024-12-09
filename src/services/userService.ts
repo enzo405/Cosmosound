@@ -8,7 +8,7 @@ const defaultUser: UserDetails = {
   id: 1,
   name: "John",
   email: "john.doe@gmail.com",
-  picture_profile: "src/assets/img/header/default_avatar.png",
+  picture_profile: "/src/assets/img/header/default_avatar.png",
   date_creation: "08-10-2024",
   followings: [],
   followers: 0,

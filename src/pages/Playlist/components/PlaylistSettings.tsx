@@ -57,7 +57,7 @@ export default function PlaylistSettings({
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>
       <SettingsOptions onClick={handleDeletePlaylist}>
-        <TextSetting className="fill-red-700" iconName="trash-red" text="Delete Playlist" />
+        <TextSetting iconName="trash-red" text="Delete Playlist" />
       </SettingsOptions>
     </div>
   );

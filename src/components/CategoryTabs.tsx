@@ -42,7 +42,7 @@ export default function CategoryTabs<T extends string>({
             key={key}
             data-tab={tab}
             onClick={() => handleTabClick(tab)}
-            className={`px-4 py-2 text-sm font-medium truncate ${
+            className={`px-2 md:px-4 py-2 text-sm font-medium truncate ${
               activeTab === tab ? "text-orange-500" : "text-gray-500 hover:text-orange-500"
             }`}>
             {tab}

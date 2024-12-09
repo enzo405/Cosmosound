@@ -21,6 +21,7 @@ import { routesConfig } from "config/app-config";
 import ArtistSettings from "./components/ArtistSettings";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
+import HeartIcon from "components/icons/HeartIcon";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -39,7 +40,6 @@ export default function ArtistPage(): ReactElement {
   }
 
   const [isArtistLiked, setIsArtistLiked] = useState<boolean>(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [content, setContent] = useState<Catalog[] | Music[]>(artist.musics);
   const [activeTab, setActiveTab] = useState(ArtistTabs.MUSIC);
@@ -68,8 +68,6 @@ export default function ArtistPage(): ReactElement {
   };
 
   const handleClickHeart = () => {
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 300);
     if (isArtistLiked) {
       UserService.removeLike(artist);
       enqueueSnackbar(`Artist removed from your favourite artist`, {
@@ -104,6 +102,20 @@ export default function ArtistPage(): ReactElement {
 
   const isPlayingSongCurrentPage = artist?.musics.find((m) => m.id == playingMusic.id) != undefined;
 
+  const onLikeCatalog = (like: boolean, catalog: Catalog) => {
+    if (like) {
+      UserService.removeLike(catalog);
+      enqueueSnackbar(`${catalog.title} removed from your favourite`, {
+        variant: "success",
+      });
+    } else {
+      UserService.like(catalog);
+      enqueueSnackbar(`${catalog.title} added to your favourite`, {
+        variant: "success",
+      });
+    }
+  };
+
   return (
     <PageLayout
       thumbnail={artist.picture_profile}
@@ -136,10 +148,10 @@ export default function ArtistPage(): ReactElement {
             iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
             onClick={handlePlaying}
           />
-          <Icon
-            onClick={handleClickHeart}
-            iconName={isArtistLiked ? "heart-orange" : "heart-orange-empty"}
-            className={`lg:size-16 md:size-14 size-12 cursor-pointer ${isAnimating ? "animate-pop" : ""}`}
+          <HeartIcon
+            isLiked={isArtistLiked}
+            handleClickHeart={handleClickHeart}
+            className="lg:size-16 md:size-14 size-12"
           />
         </>
       }
@@ -171,6 +183,7 @@ export default function ArtistPage(): ReactElement {
                       description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
                       thumbnail={catalog.thumbnail}
                       link={routesConfig.catalog.getParameter(catalog.id)}
+                      onLike={(like) => onLikeCatalog(like, catalog)}
                     />
                   );
                 })

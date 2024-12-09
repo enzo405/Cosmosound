@@ -8,6 +8,7 @@ interface CardProps {
   description: string;
   link: string;
   className?: string;
+  onLike: (like: boolean) => void;
 }
 
 export default function Card({
@@ -16,6 +17,7 @@ export default function Card({
   description,
   link,
   className = "",
+  onLike,
 }: CardProps): ReactElement {
   const navigate = useNavigate();
   const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
@@ -28,6 +30,11 @@ export default function Card({
     if (!likeBtn?.contains(target)) {
       navigate(link);
     }
+  };
+
+  const handleClickHeart = () => {
+    onLike(isLiked);
+    setIsLiked(!isLiked);
   };
 
   return (
@@ -52,7 +59,7 @@ export default function Card({
           <Icon
             className="size-6"
             iconName={isLiked ? "heart-orange-empty" : "heart-orange"}
-            onClick={() => setIsLiked(!isLiked)}
+            onClick={handleClickHeart}
           />
         </div>
       )}

@@ -6,9 +6,9 @@
 - Artist page make top part sticky
 - popup music label (change color?)
 - some musics with long name go off screen
-- playlist & catalog add time duration and number of tracks
 - better size for Card responsive
-- afficher les filtres de explore quand y'a du contenue
-- refactor heart icon with the animation
-- responsive scroll icon ScrollableBox
+- afficher les filtres de explore quand y'a du contenu
+- responsive scroll arrows icon ScrollableBox
 - media link off screen and description too
+- requirement for password input
+- enqueueSnackbar make constants for user messages (add toString to the CatalogType)

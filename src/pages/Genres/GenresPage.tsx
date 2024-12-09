@@ -14,6 +14,7 @@ import GenresService from "services/genresService";
 import GenreContent from "./components/GenreContent";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
+import HeartIcon from "components/icons/HeartIcon";
 
 interface GenresPageProps {}
 
@@ -37,7 +38,6 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
 
   const [isGenreLiked, setIsGenreLiked] = useState<boolean>(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [content, setContent] = useState<Catalog[] | MusicDetails[] | Playlist[] | Artist[]>([]);
   const [activeTab, setActiveTab] = useState(GenreTabs.ARTISTS);
 
@@ -62,8 +62,6 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
   };
 
   const handleClickHeart = () => {
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 300);
     if (isGenreLiked) {
       UserService.removeLike({ name: nameGenre });
       enqueueSnackbar(`${nameGenre} removed from your favourite genres`, {
@@ -131,10 +129,10 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
               iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
               onClick={handlePlaying}
             />
-            <Icon
-              onClick={handleClickHeart}
-              iconName={isGenreLiked ? "heart-orange" : "heart-orange-empty"}
-              className={`lg:size-16 md:size-14 size-12 cursor-pointer ${isAnimating ? "animate-pop" : ""}`}
+            <HeartIcon
+              isLiked={isGenreLiked}
+              handleClickHeart={handleClickHeart}
+              className="lg:size-16 md:size-14 size-12"
             />
           </>
         }

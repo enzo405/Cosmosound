@@ -1,8 +1,10 @@
-import { Icon } from "components/icons/Icon";
+import HeartIcon from "components/icons/HeartIcon";
 import { routesConfig } from "config/app-config";
 import { Artist } from "models/User";
+import { enqueueSnackbar } from "notistack";
 import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import UserService from "services/userService";
 
 interface ArtistCardProps {
   artist: Artist;
@@ -21,6 +23,21 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
     if (!likeBtn?.contains(target)) {
       navigate(routesConfig.artist.getParameter(artist.id.toString()));
     }
+  };
+
+  const handleClickHeart = () => {
+    if (isLiked) {
+      UserService.removeLike(artist);
+      enqueueSnackbar(`Artist removed from your favourite artist`, {
+        variant: "success",
+      });
+    } else {
+      UserService.like(artist);
+      enqueueSnackbar(`Artist added to your favourite artists`, {
+        variant: "success",
+      });
+    }
+    setIsLiked(!isLiked);
   };
 
   return (
@@ -43,11 +60,7 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
       </div>
       {displayLikeBtn && (
         <div id="likeBtn" className="z-10 absolute bottom-1 right-1">
-          <Icon
-            className="size-6"
-            iconName={isLiked ? "heart-orange-empty" : "heart-orange"}
-            onClick={() => setIsLiked(!isLiked)}
-          />
+          <HeartIcon isLiked={isLiked} handleClickHeart={handleClickHeart} className="size-6" />
         </div>
       )}
     </div>
