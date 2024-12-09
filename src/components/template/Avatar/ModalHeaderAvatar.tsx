@@ -30,7 +30,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
       const target = event.target as Node;
       const clickIsOnModal = avatarButton?.contains(target) || modalRef.current?.contains(target);
 
-      if (!clickIsOnModal) {
+      if (!clickIsOnModal || (isMobile && !avatarButton?.contains(target))) {
         closeModal();
       }
     };

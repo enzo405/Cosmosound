@@ -6,7 +6,7 @@ import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
 import { ReactElement, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import CatalogService from "services/catalogService";
-import CatalogSettings from "./components/CatalogSettings";
+import CatalogSettings from "components/settings/CatalogSettings";
 import { MusicDetails } from "models/Music";
 import { formatDurationWithLabel, formatTime } from "utils/date";
 import PageLayout from "components/PageLayout";
@@ -83,14 +83,14 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
       headerActions={
         <>
           <Icon
-            className="lg:size-16 md:size-14 size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
             iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
             onClick={handlePlaying}
           />
           <HeartIcon
             isLiked={isCatalogLiked}
             handleClickHeart={handleClickHeart}
-            className="lg:size-16 md:size-14 size-12 "
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12 "
           />
         </>
       }

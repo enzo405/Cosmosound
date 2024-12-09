@@ -2,20 +2,23 @@ import { ReactElement } from "react";
 import { Filters } from "../ExplorePage";
 
 interface FilterBoxProps {
+  filters: [string, Filters][];
   onFilterClick: (filter: Filters) => void;
   activeFilter: Filters;
 }
 
-export default function FilterBox({ onFilterClick, activeFilter }: FilterBoxProps): ReactElement {
-  const filterEntries = Object.entries(Filters);
-
+export default function FilterBox({
+  onFilterClick,
+  activeFilter,
+  filters,
+}: FilterBoxProps): ReactElement {
   const handleOnClick = (filter: Filters) => {
     onFilterClick?.(filter);
   };
 
   return (
     <div className="flex gap-2 flex-wrap">
-      {filterEntries.map(([key, value]) => (
+      {filters.map(([key, value]) => (
         <span
           key={key}
           className={`px-4 py-2 rounded-full cursor-pointer text-gray-800 select-none ${

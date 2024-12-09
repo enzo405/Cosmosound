@@ -71,7 +71,7 @@ export default function ScrollableBox({ title, children }: ScrollableBoxProps): 
     <div className="bg-box-bg rounded-3xl h-full w-full flex flex-col pb-4">
       <div className="w-full h-min flex py-6 pl-4">
         <span className={titleStyle}>{title}</span>
-        <span className="flex flex-row gap-3 mr-4">
+        <span className="flex flex-row gap-1 xsm:gap-2 sm:gap-3 mr-4">
           <span
             onClick={scrollLeft}
             className={`rounded-full flex justify-center items-center w-7 h-7 ${canScrollLeft ? "cursor-pointer hover:bg-gray-200" : ""} `}>

@@ -8,7 +8,7 @@ import { ReactElement, useState } from "react";
 import { useParams } from "react-router-dom";
 import PlaylistService from "services/playlistService";
 import { formatDurationWithLabel, formatTime } from "utils/date";
-import PlaylistSettings from "./components/PlaylistSettings";
+import PlaylistSettings from "components/settings/PlaylistSettings";
 import PlaylistOwnerBadge from "./components/PlaylistOwnerBadge";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
@@ -91,14 +91,14 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
       headerActions={
         <>
           <Icon
-            className="lg:size-16 md:size-14 size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
             iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
             onClick={handlePlaying}
           />
           <HeartIcon
             isLiked={isPlaylistLiked}
             handleClickHeart={handleClickHeart}
-            className="lg:size-16 md:size-14 size-12"
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12"
           />
         </>
       }

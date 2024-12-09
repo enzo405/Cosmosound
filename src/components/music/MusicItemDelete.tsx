@@ -40,10 +40,10 @@ export default function MusicItemDelete({
   );
 
   return (
-    <div className="relative" ref={musicItemRef}>
+    <div className="relative w-full" ref={musicItemRef}>
       <div
-        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[64px] lg:h-18 ${playingMusic.id == music.id ? "bg-slate-200" : "hover:bg-slate-100"} rounded-xl`}>
-        <div className="flex flex-row w-full justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer">
+        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[64px] lg:h-18 ${playingMusic.id == music.id ? "bg-white-orange" : "hover:bg-dark-custom"} rounded-xl`}>
+        <div className="flex flex-row w-full select-none flex-grow min-w-0 justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer">
           <div className="flex flex-row items-center w-full sm:max-w-80 sm:min-w-80 lg:min-w-[28rem] lg:max-w-[28rem] gap-1">
             <div className="relative p-0.5 h-5/6 xsm:h-full">
               <div
@@ -58,13 +58,16 @@ export default function MusicItemDelete({
             </div>
             <div className="flex flex-col xsm:gap-1 h-full max-w-full overflow-hidden items-start justify-center">
               <span className="text-base text-dark-custom flex gap-1 xsm:gap-2 items-center w-full">
-                <span className="font-semibold text-sm xsm:font-normal xsm:text-base truncate">
+                <span className="font-semibold select-none text-sm xsm:font-normal xsm:text-base truncate">
                   {music.title}
                 </span>
                 <span
-                  className="flex-shrink-0 flex justify-center items-center rounded-lg size-[14px] xsm:size-[18px] bg-label-music-verif"
+                  className="flex-shrink-0 flex justify-center items-center rounded-lg mm-size-3.5 xsm:mm-size-4 bg-label-music-verif"
                   title={music.is_ai ? "AI Generated" : "Official Music"}>
-                  <Icon iconName={music.is_ai ? "ai-label" : "verified-label"} className="size-3" />
+                  <Icon
+                    iconName={music.is_ai ? "ai-label" : "verified-label"}
+                    className="mm-size-3"
+                  />
                 </span>
               </span>
               <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
@@ -79,11 +82,11 @@ export default function MusicItemDelete({
             {formatDuration(music.duration)}
           </div>
         </div>
-        <div className="relative flex flex-row items-center justify-center h-full w-auto gap-2 xsm:gap-3 pr-1 xsm:pr-2">
+        <div className="relative flex flex-row flex-shrink-0 items-center justify-center h-full w-auto gap-2 xsm:gap-3 pr-1 xsm:pr-2">
           <Icon
             onClick={() => handleClickDelete(music)}
             iconName="trash-red"
-            className="fill-dark-custom cursor-pointer size-6 sm:size-[30px]"
+            className="fill-dark-custom cursor-pointer mm-size-6 sm:mm-size-7"
           />
         </div>
       </div>

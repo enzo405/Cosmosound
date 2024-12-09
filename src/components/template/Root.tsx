@@ -88,7 +88,7 @@ function Root(): ReactElement {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 w-full z-50 flex flex-col bg-music-player-bg backdrop-blur-3xl">
+      <div className="font-bs fixed bottom-0 w-full z-50 flex flex-col bg-music-player-bg backdrop-blur-3xl">
         <MusicPlayer />
         {isMobile && <Sidebar className="sm:hidden flex flex-row gap-6" showHeaderAvatar={true} />}
       </div>

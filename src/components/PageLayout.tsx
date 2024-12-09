@@ -30,7 +30,7 @@ export default function PageLayout({
       <div className="flex flex-col sm:flex-row w-full lg:gap-10 md:gap-6 gap-4">
         {thumbnail && (
           <img
-            className="rounded-full lg:size-64 md:size-52 size-40 shadow-2xl"
+            className="rounded-full lg:mm-size-64 md:mm-size-52 mm-size-40 shadow-2xl"
             src={thumbnail}
             alt={title}
           />
@@ -51,7 +51,7 @@ export default function PageLayout({
             <Icon
               onClick={onPageActionClick}
               iconName={actionIconName}
-              className="absolute top-6 right-4 fill-dark-custom cursor-pointer md:size-8 size-6"
+              className="absolute top-6 right-4 fill-dark-custom cursor-pointer md:mm-size-8 mm-size-6"
             />
           </span>
         )}

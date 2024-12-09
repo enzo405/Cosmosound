@@ -18,7 +18,7 @@ import { Music } from "models/Music";
 import MusicItem from "components/music/MusicItem";
 import Card from "components/cards/Card";
 import { routesConfig } from "config/app-config";
-import ArtistSettings from "./components/ArtistSettings";
+import ArtistSettings from "components/settings/ArtistSettings";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
@@ -127,13 +127,13 @@ export default function ArtistPage(): ReactElement {
         <div className="flex flex-col gap-1">
           <span className="font-light">Member since {formatTime(artist.date_creation)}</span>
           <span className="font-light">{artist.followers} followers</span>
-          <span className="flex flex-row gap-3 items-center">
+          <span className="flex flex-wrap gap-2 xsm:gap-3 items-center">
             {artist.social_media.map(({ link, media }) => (
               <a
                 key={media}
                 href={link}
                 target="_blank"
-                className="lg:size-8 size-7 items-center h-full flex">
+                className="lg:mm-size-8 mm-size-7 items-center h-full flex">
                 {getMediaIcon(media)}
               </a>
             ))}
@@ -144,14 +144,14 @@ export default function ArtistPage(): ReactElement {
       headerActions={
         <>
           <Icon
-            className="lg:size-16 md:size-14 size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12 cursor-pointer fill-primary-orange hover:fill-brown-music-player-dot"
             iconName={isPlayingSongCurrentPage && isPlaying ? "pauseButton" : "playButton"}
             onClick={handlePlaying}
           />
           <HeartIcon
             isLiked={isArtistLiked}
             handleClickHeart={handleClickHeart}
-            className="lg:size-16 md:size-14 size-12"
+            className="lg:mm-size-16 md:mm-size-14 mm-size-12"
           />
         </>
       }

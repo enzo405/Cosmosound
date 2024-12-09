@@ -81,11 +81,22 @@ function AccountPage(): ReactElement {
                 </label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-3 flex items-center">
-                    <Icon className="size-5 fill-dark-custom" iconName="lock" />
+                    <Icon className="mm-size-5 fill-dark-custom" iconName="lock" />
                   </span>
                   <Controller
                     name="password"
                     control={control}
+                    rules={{
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters long.",
+                      },
+                      pattern: {
+                        value: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+                        message:
+                          "Password must contain at least one uppercase letter, one number, and one special character.",
+                      },
+                    }}
                     render={({ field }) => (
                       <input
                         {...field}
@@ -103,7 +114,7 @@ function AccountPage(): ReactElement {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute top-0 h-full inset-y-0 right-3 flex items-center text-gray-500">
                     <Icon
-                      className="size-5 fill-dark-custom"
+                      className="mm-size-5 fill-dark-custom"
                       iconName={showPassword ? "eye" : "eye-blocked"}
                     />
                   </button>
@@ -126,7 +137,7 @@ function AccountPage(): ReactElement {
                   </label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-3 flex items-center">
-                      <Icon className="size-5 fill-dark-custom" iconName="lock" />
+                      <Icon className="mm-size-5 fill-dark-custom" iconName="lock" />
                     </span>
                     <Controller
                       name="confirmPassword"
@@ -195,12 +206,12 @@ function AccountPage(): ReactElement {
                       <img
                         src="/src/assets/img/form/edit-background.png"
                         alt="Edit background"
-                        className="absolute top-0 right-0 size-20 md:size-32 opacity-60"
+                        className="absolute z-10 top-0 right-0 mm-size-20 md:mm-size-32 opacity-90"
                       />
                       <img
                         src={preview}
                         alt="Profile"
-                        className="size-20 md:size-32 rounded-full border border-gray-300"
+                        className="mm-size-20 md:mm-size-32 rounded-full border border-gray-300"
                       />
                     </label>
                   </>

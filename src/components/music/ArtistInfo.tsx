@@ -17,10 +17,10 @@ export default function ArtistInfo({ artist, className }: ArtistInfoProps): Reac
       onClick={() => navigate(routesConfig.artist.getParameter(artist.id.toString()))}>
       <img
         src={artist.picture_profile}
-        className="size-5 rounded-full flex-shrink-0"
+        className="mm-size-5 rounded-full flex-shrink-0"
         alt={`${artist.artist_name}`}
       />
-      <span className="truncate">{artist.artist_name}</span>
+      <span className="truncate select-none">{artist.artist_name}</span>
     </span>
   );
 }

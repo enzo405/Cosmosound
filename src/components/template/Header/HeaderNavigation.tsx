@@ -12,11 +12,11 @@ function HeaderNavigation(): ReactElement {
     <span className="flex gap-1 items-center mr-2">
       <span
         onClick={goBackHandler}
-        className={`${defaultStyleArrows} size-8 ${canGoBack ? "cursor-pointer hover:bg-gray-200" : ""}`}>
+        className={`${defaultStyleArrows} mm-size-8 ${canGoBack ? "cursor-pointer hover:bg-gray-200" : ""}`}>
         <ArrowLeft isActiv={canGoBack} />
       </span>
       <span
-        className={`${defaultStyleArrows} size-8 ${canGoForward ? "cursor-pointer hover:bg-gray-200" : ""}`}
+        className={`${defaultStyleArrows} mm-size-8 ${canGoForward ? "cursor-pointer hover:bg-gray-200" : ""}`}
         onClick={goForwardHandler}>
         <ArrowRight isActiv={canGoForward} />
       </span>

@@ -113,9 +113,35 @@ function ExplorePage(): ReactElement {
     }
   };
 
+  const displayFilter = (f: Filters): boolean => {
+    switch (f) {
+      case Filters.ALBUMS:
+        return albums.length !== 0;
+      case Filters.ARTISTS:
+        return artists.length !== 0;
+      case Filters.MUSICS:
+        return musics.length !== 0;
+      case Filters.PLAYLISTS:
+        return playlists.length !== 0;
+      case Filters.EPS_SINGLES:
+        return [...eps, ...singles].length !== 0;
+      case Filters.GENRES:
+        return genres.length !== 0;
+      default:
+        return true;
+    }
+  };
+
+  const isPageEmpty =
+    [...albums, ...artists, ...musics, ...genres, ...playlists, ...eps, ...singles].length === 0;
+
   return (
     <div className="flex flex-col gap-10 w-full">
-      <FilterBox onFilterClick={(f) => setActiveFilter(f)} activeFilter={activeFilter} />
+      <FilterBox
+        filters={Object.entries(Filters).filter(([_, f]) => displayFilter(f))}
+        onFilterClick={(f) => setActiveFilter(f)}
+        activeFilter={activeFilter}
+      />
       {(activeFilter === Filters.ALL || activeFilter === Filters.ARTISTS) &&
         artists.length != 0 && (
           <ScrollableBox title="Artists">
@@ -211,6 +237,11 @@ function ExplorePage(): ReactElement {
               </Box>
             </div>
           )}
+        {isPageEmpty && (
+          <>
+            <h1>There's nothing here</h1>
+          </>
+        )}
       </div>
     </div>
   );

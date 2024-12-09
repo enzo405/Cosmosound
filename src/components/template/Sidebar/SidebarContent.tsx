@@ -38,7 +38,7 @@ function SidebarContent({ showHeaderAvatar, isSidebarSmall }: SidebarContentProp
   return (
     <div className="flex flex-row justify-start sm:flex-col gap-2 w-full h-full">
       {!isSidebarSmall && (
-        <span className="z-10 hidden sm:block sm:px-4 text-sidebar-category-font font-medium sm:font-semibold text-lg sm:text-2xl font-mono">
+        <span className="z-10 hidden sm:block sm:px-4 text-sidebar-category-font font-medium sm:font-semibold text-lg sm:text-2xl">
           Menu
         </span>
       )}
