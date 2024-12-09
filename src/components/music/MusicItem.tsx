@@ -102,7 +102,7 @@ export default function MusicItem({
         className={`group flex flex-row w-full p-1 justify-between h-16 ${showCatalogThumbnail ? "md:h-[72px] lg:h-20" : "md:h-[64px] lg:h-18"} ${playingMusic.id == music.id ? "bg-white-orange" : "hover:bg-secondary-orange"} rounded-xl`}>
         <div
           onDoubleClick={() => handleDoubleClickPlay(music)}
-          className="flex flex-row flex-grow justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer min-w-0">
+          className="flex flex-row flex-grow select-none justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer min-w-0">
           <div className="flex flex-row items-center w-full sm:max-w-80 sm:min-w-80 lg:min-w-[28rem] lg:max-w-[28rem] gap-1">
             <div
               onMouseEnter={() => setDisplayPlay(true)}
@@ -139,7 +139,7 @@ export default function MusicItem({
             </div>
             <div className="flex flex-col xsm:gap-1 h-full max-w-full overflow-hidden items-start justify-center">
               <span className="text-base text-dark-custom flex gap-1 xsm:gap-2 items-center w-full">
-                <span className="font-semibold select-none text-sm xsm:font-normal xsm:text-base truncate">
+                <span className="font-semibold text-sm xsm:font-normal xsm:text-base truncate">
                   {music.title}
                 </span>
                 <span
@@ -151,7 +151,7 @@ export default function MusicItem({
                   />
                 </span>
               </span>
-              <span className="w-full text-sm select-none text-dark-grey font-semibold flex flex-row gap-1">
+              <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
                 {showArtist && <ArtistInfo artist={artist} className="min-w-fit" />}
                 {showArtist && showCatalog && (
                   <span className="hidden lg:block flex-shrink-0">-</span>
