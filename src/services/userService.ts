@@ -3,6 +3,7 @@ import { Genre, Music } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { Artist, UserDetails } from "models/User";
 import { AccountFormData } from "pages/Account/AccountPage";
+import { ArtistPanelFormData } from "pages/ArtistPanel/ArtistPanelPage";
 
 const defaultUser: UserDetails = {
   id: 1,
@@ -35,11 +36,16 @@ function saveData(data: AccountFormData): void {
   console.log("submit form data", data);
 }
 
+function saveArtistData(data: ArtistPanelFormData): void {
+  console.log("submit form data", data);
+}
+
 const UserService = {
   getUser,
   like,
   removeLike,
   saveData,
+  saveArtistData,
 };
 
 export default UserService;

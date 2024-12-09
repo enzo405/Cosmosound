@@ -22,6 +22,7 @@ function AccountPage(): ReactElement {
     handleSubmit,
     watch,
     getValues,
+    reset,
     setValue,
     formState: { errors, isDirty },
   } = useForm<AccountFormData>({
@@ -52,7 +53,7 @@ function AccountPage(): ReactElement {
   return (
     <div className="flex flex-col items-center sm:items-start mt-4 w-full">
       <span className="text-4xl font-bs font-bold text-dark-custom ml-2">Account</span>
-      <Container className="w-5/6 sm:w-min sm:min-w-96">
+      <Container className="h-full w-5/6 sm:w-min sm:min-w-96 p-6 md:p-8">
         <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-14 lg:gap-24 xl:gap-32">
             <div className="flex flex-col gap-6">
@@ -69,104 +70,113 @@ function AccountPage(): ReactElement {
                       type="text"
                       id="username"
                       placeholder="Enter username"
-                      className="mt-1 text-dark-custom px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:outline-none"
+                      className="mt-1 text-dark-custom px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-tertio-orange focus:outline-none"
                     />
                   )}
                 />
               </div>
-
-              <div className="flex flex-col">
-                <label htmlFor="password" className="text-sm font-medium text-gray-700">
-                  Password
-                </label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-3 flex items-center">
-                    <Icon className="mm-size-5 fill-dark-custom" iconName="lock" />
-                  </span>
-                  <Controller
-                    name="password"
-                    control={control}
-                    rules={{
-                      minLength: {
-                        value: 8,
-                        message: "Password must be at least 8 characters long.",
-                      },
-                      pattern: {
-                        value: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
-                        message:
-                          "Password must contain at least one uppercase letter, one number, and one special character.",
-                      },
-                    }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type={showPassword ? "text" : "password"}
-                        id="password"
-                        placeholder="Enter new password"
-                        className={`px-10 text-dark-custom py-3 border ${
-                          errors.password ? "border-red-500" : "border-gray-300"
-                        } rounded-lg w-full focus:ring-2 focus:ring-primary-orange focus:outline-none`}
-                      />
-                    )}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute top-0 h-full inset-y-0 right-3 flex items-center text-gray-500">
-                    <Icon
-                      className="mm-size-5 fill-dark-custom"
-                      iconName={showPassword ? "eye" : "eye-blocked"}
-                    />
-                  </button>
-                </div>
-                <span className="text-xs text-gray-500 mt-1">
-                  Password must be at least <b className="text-gray-600">8 Characters</b> and must
-                  contain at least a <b className="text-gray-600">Capital Letter</b>, a{" "}
-                  <b className="text-gray-600">Number</b>, and a{" "}
-                  <b className="text-gray-600">Special Character</b>.
-                </span>
-                {errors.password && (
-                  <span className="text-xs text-red-500 mt-1">{errors.password.message}</span>
-                )}
-              </div>
-
-              {password && (
+              <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
-                  <label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
-                    Confirm Password
+                  <label htmlFor="password" className="text-sm font-medium text-gray-700">
+                    Password
                   </label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-3 flex items-center">
                       <Icon className="mm-size-5 fill-dark-custom" iconName="lock" />
                     </span>
                     <Controller
-                      name="confirmPassword"
+                      name="password"
                       control={control}
                       rules={{
-                        required: "Confirm Password is required.",
-                        validate: (value) =>
-                          value === getValues("password") || "Passwords do not match.",
+                        minLength: {
+                          value: 8,
+                          message: "Password must be at least 8 characters long.",
+                        },
+                        pattern: {
+                          value: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+                          message:
+                            "Password must contain at least one uppercase letter, one number, and one special character.",
+                        },
                       }}
                       render={({ field }) => (
                         <input
                           {...field}
-                          type="password"
-                          id="confirmPassword"
-                          placeholder="Confirm password"
+                          type={showPassword ? "text" : "password"}
+                          id="password"
+                          placeholder="Enter new password"
                           className={`px-10 text-dark-custom py-3 border ${
-                            errors.confirmPassword ? "border-red-500" : "border-gray-300"
-                          } rounded-lg w-full focus:ring-2 focus:ring-primary-orange focus:outline-none`}
+                            errors.password ? "border-red-500" : "border-gray-300"
+                          } rounded-lg w-full focus:ring-2 focus:ring-tertio-orange focus:outline-none`}
                         />
                       )}
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute top-0 h-full inset-y-0 right-3 flex items-center text-gray-500">
+                      <Icon
+                        className="mm-size-5 fill-dark-custom"
+                        iconName={showPassword ? "eye" : "eye-blocked"}
+                      />
+                    </button>
                   </div>
-                  {errors.confirmPassword && (
-                    <span className="text-xs text-red-500 mt-1">
-                      {errors.confirmPassword.message}
+                  {!password && (
+                    <span className="text-xs text-gray-500 mt-1">
+                      Password must be at least <b className="text-gray-600">8 Characters</b> and
+                      must contain at least a <b className="text-gray-600">Capital Letter</b>, a{" "}
+                      <b className="text-gray-600">Number</b>, and a{" "}
+                      <b className="text-gray-600">Special Character</b>.
                     </span>
                   )}
+                  {errors.password && (
+                    <span className="text-xs text-red-500 mt-1">{errors.password.message}</span>
+                  )}
                 </div>
-              )}
+
+                {password && (
+                  <div className="flex flex-col">
+                    <label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
+                      Confirm Password
+                    </label>
+                    <div className="relative">
+                      <span className="absolute inset-y-0 left-3 flex items-center">
+                        <Icon className="mm-size-5 fill-dark-custom" iconName="lock" />
+                      </span>
+                      <Controller
+                        name="confirmPassword"
+                        control={control}
+                        rules={{
+                          required: "Confirm Password is required.",
+                          validate: (value) =>
+                            value === getValues("password") || "Passwords do not match.",
+                        }}
+                        render={({ field }) => (
+                          <input
+                            {...field}
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm password"
+                            className={`px-10 text-dark-custom py-3 border ${
+                              errors.confirmPassword ? "border-red-500" : "border-gray-300"
+                            } rounded-lg w-full focus:ring-2 focus:ring-tertio-orange focus:outline-none`}
+                          />
+                        )}
+                      />
+                    </div>
+                    <span className="text-xs text-gray-500 mt-1">
+                      Password must be at least <b className="text-gray-600">8 Characters</b> and
+                      must contain at least a <b className="text-gray-600">Capital Letter</b>, a{" "}
+                      <b className="text-gray-600">Number</b>, and a{" "}
+                      <b className="text-gray-600">Special Character</b>.
+                    </span>
+                    {errors.confirmPassword && (
+                      <span className="text-xs text-red-500 mt-1">
+                        {errors.confirmPassword.message}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
 
               <div className="flex flex-col">
                 <label htmlFor="email" className="text-sm font-medium text-gray-700">
@@ -181,7 +191,7 @@ function AccountPage(): ReactElement {
                       type="email"
                       id="email"
                       placeholder="Enter email"
-                      className="mt-1 px-5 text-dark-custom py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:outline-none"
+                      className="mt-1 px-5 text-dark-custom py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-tertio-orange focus:outline-none"
                     />
                   )}
                 />
@@ -221,8 +231,9 @@ function AccountPage(): ReactElement {
           </div>
           <div className="flex gap-4 mt-6 justify-end sm:justify-start">
             <button
+              onClick={() => reset()}
               type="button"
-              className="px-4 py-2 text-primary-orange border border-primary-orange rounded-lg hover:bg-secondary-orange">
+              className="px-4 py-2 text-tertio-orange border-2 border-tertio-orange rounded-lg hover:bg-secondary-orange">
               Cancel
             </button>
             <button
@@ -230,7 +241,7 @@ function AccountPage(): ReactElement {
               disabled={!isDirty}
               className={`px-5 py-3 rounded-lg text-white ${
                 isDirty
-                  ? "bg-primary-orange hover:bg-primary-orange"
+                  ? "bg-tertio-orange hover:bg-primary-orange"
                   : "bg-gray-300 cursor-not-allowed"
               }`}>
               Save

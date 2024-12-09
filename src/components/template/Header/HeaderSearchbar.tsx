@@ -30,8 +30,8 @@ function HeaderSearchbar(): ReactElement {
           <Icon iconName="magnifyingglass" className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
         </div>
         <span
-          className={`flex flex-row items-center justify-between bg-white w-full p-1 sm:p-2 rounded-full border-[3px] 
-            ${isFocused ? "border-soft-beige" : "border-transparent"}`}>
+          className={`flex flex-row items-center justify-between bg-white w-full p-1 sm:p-2 rounded-full border-[2px] 
+            ${isFocused ? "border-tertio-orange" : "border-transparent"}`}>
           <label htmlFor="searchbar" className="sr-only">
             Searchbar input
           </label>

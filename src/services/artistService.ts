@@ -14,8 +14,8 @@ function getMyFavouriteArtist(): Artist[] {
   );
 }
 
-function getArtistById(id: number): DetailedArtistInfo | undefined {
-  if (isNaN(id)) return undefined;
+function getArtistById(id: number | undefined): DetailedArtistInfo | undefined {
+  if (id == undefined || isNaN(id)) return undefined;
 
   const artist = dataArtist.find((artist) => artist.id == id);
   if (!artist) return undefined;

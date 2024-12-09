@@ -65,7 +65,7 @@ export default function MusicItem({
   };
 
   const handlePlayMusic = (music: Music) => {
-    if (isCurrentMusicPlaying) {
+    if (isPlaying && isCurrentMusicPlaying) {
       setIsPlaying(false);
     } else {
       setPlayingMusic({ ...music, artist, catalog });
@@ -94,12 +94,12 @@ export default function MusicItem({
     handlePlayMusic(music);
   };
 
-  const isCurrentMusicPlaying = isPlaying && music.id == playingMusic.id;
+  const isCurrentMusicPlaying = music.id == playingMusic.id;
 
   return (
     <div className="relative w-full" ref={musicItemRef}>
       <div
-        className={`group flex flex-row w-full p-1 justify-between h-16 ${showCatalogThumbnail ? "md:h-[72px] lg:h-20" : "md:h-[64px] lg:h-18"} ${playingMusic.id == music.id ? "bg-white-orange" : "hover:bg-secondary-orange"} rounded-xl`}>
+        className={`group flex flex-row w-full p-1 justify-between h-16 ${showCatalogThumbnail ? "md:h-[72px] lg:h-20" : "md:h-[64px] lg:h-18"} ${isCurrentMusicPlaying ? "bg-music-activ" : "hover:bg-music-hover"} rounded-xl`}>
         <div
           onDoubleClick={() => handleDoubleClickPlay(music)}
           className="flex flex-row flex-grow select-none justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer min-w-0">
@@ -121,7 +121,7 @@ export default function MusicItem({
                   onClick={() => handleClickPlay(music)}>
                   <span className="group-hover:hidden flex">{index}</span>
                   <Icon
-                    iconName={isCurrentMusicPlaying ? "pauseButton" : "playButton"}
+                    iconName={isPlaying && isCurrentMusicPlaying ? "pauseButton" : "playButton"}
                     className="w-4/5 group-hover:block hidden rounded-full fill-primary-orange"
                   />
                 </div>
@@ -131,7 +131,9 @@ export default function MusicItem({
                   onClick={() => handleClickPlay(music)}
                   className="flex justify-center items-center h-full w-full absolute top-0 left-0 p-3">
                   <Icon
-                    iconName={isCurrentMusicPlaying ? "pauseButton-opek" : "playButton-opek"}
+                    iconName={
+                      isPlaying && isCurrentMusicPlaying ? "pauseButton-opek" : "playButton-opek"
+                    }
                     className="z-10 rounded-full h-full w-full fill-white/80"
                   />
                 </span>

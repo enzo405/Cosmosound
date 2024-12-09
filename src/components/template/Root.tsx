@@ -70,10 +70,10 @@ function Root(): ReactElement {
             />
             <div
               onMouseDown={startResizing}
-              className={`${
-                drag.active ? "bg-red-400" : "bg-soft-beige"
-              } w-[3px] z-20 hover:cursor-col-resize h-full`}
-            />
+              className="w-2 z-20 hover:cursor-col-resize h-full flex justify-center">
+              <div
+                className={`${drag.active ? "bg-red-400 w-[2px]" : "bg-dark-glassy w-[1px]"} z-20 h-full`}></div>
+            </div>
           </div>
         )}
         <div
