@@ -86,6 +86,17 @@ function AccountPage(): ReactElement {
                   <Controller
                     name="password"
                     control={control}
+                    rules={{
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters long.",
+                      },
+                      pattern: {
+                        value: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+                        message:
+                          "Password must contain at least one uppercase letter, one number, and one special character.",
+                      },
+                    }}
                     render={({ field }) => (
                       <input
                         {...field}
@@ -195,7 +206,7 @@ function AccountPage(): ReactElement {
                       <img
                         src="/src/assets/img/form/edit-background.png"
                         alt="Edit background"
-                        className="absolute top-0 right-0 mm-size-20 md:mm-size-32 opacity-60"
+                        className="absolute z-10 top-0 right-0 mm-size-20 md:mm-size-32 opacity-90"
                       />
                       <img
                         src={preview}

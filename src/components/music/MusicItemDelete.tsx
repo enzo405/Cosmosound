@@ -40,10 +40,10 @@ export default function MusicItemDelete({
   );
 
   return (
-    <div className="relative" ref={musicItemRef}>
+    <div className="relative w-full" ref={musicItemRef}>
       <div
         className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[64px] lg:h-18 ${playingMusic.id == music.id ? "bg-slate-200" : "hover:bg-slate-100"} rounded-xl`}>
-        <div className="flex flex-row w-full justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer">
+        <div className="flex flex-row w-full flex-grow min-w-0 justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer">
           <div className="flex flex-row items-center w-full sm:max-w-80 sm:min-w-80 lg:min-w-[28rem] lg:max-w-[28rem] gap-1">
             <div className="relative p-0.5 h-5/6 xsm:h-full">
               <div
@@ -82,7 +82,7 @@ export default function MusicItemDelete({
             {formatDuration(music.duration)}
           </div>
         </div>
-        <div className="relative flex flex-row items-center justify-center h-full w-auto gap-2 xsm:gap-3 pr-1 xsm:pr-2">
+        <div className="relative flex flex-row flex-shrink-0 items-center justify-center h-full w-auto gap-2 xsm:gap-3 pr-1 xsm:pr-2">
           <Icon
             onClick={() => handleClickDelete(music)}
             iconName="trash-red"
