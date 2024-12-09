@@ -1,6 +1,7 @@
 Must Have:
 - gérer quel settings on affiche en fonction de la page où on se trouve et de nos droits
 - faire les errors page
+- faire les default value pour les isLiked (en utilisant les valeurs renseigné dans User)
 
 Good to have:
 - ajouter une ref sur MusicItem pour tracker la taille et pouvoir ajuster son contenu par rapport a la taille qui a au lieu de la taille de l'écran
@@ -9,3 +10,4 @@ Good to have:
 - popup music label (change color?)
 - enqueueSnackbar make constants for user messages (add toString to the CatalogType)
 - add assets for explore page empty, 404 page, 500 page & error page, 401 page (when not logged in)
+- refacto form input
