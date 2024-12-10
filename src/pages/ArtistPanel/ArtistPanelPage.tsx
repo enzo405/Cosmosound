@@ -214,8 +214,8 @@ export default function ArtistPanelPage(): ReactElement {
             className="flex flex-row items-center justify-center gap-1 pl-3 pr-4 py-1 text-tertio-orange border-tertio-orange border-2 rounded-xl font-medium hover:bg-orange-50"
             type="button"
             role="button"
-            onClick={() => navigate(routesConfig.createMusic.path)}>
-            <Icon iconName="cloud-upload" className="mm-size-7" />
+            onClick={() => navigate(routesConfig.createCatalog.path)}>
+            <Icon iconName="cloud-upload" className="mm-size-7 fill-tertio-orange" />
             Create
           </button>
         </Container>

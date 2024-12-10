@@ -53,9 +53,16 @@ export default {
           "50%": { transform: "scale(1.1)" },
           "100%": { transform: "scale(1)" },
         },
+        "scroll-text": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
       },
       animation: {
         pop: "pop 0.3s ease-in-out",
+      },
+      animation: {
+        "scroll-text": "scroll-text 7s linear infinite",
       },
     },
   },

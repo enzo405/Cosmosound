@@ -36,6 +36,7 @@ export type IconName =
   | "eye"
   | "eye-blocked"
   | "ellipsis"
+  | "music"
   | "cloud-upload"
   | "trash-red"
   | "trash";

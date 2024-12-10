@@ -42,6 +42,10 @@ function addMusic(playlist: Playlist, music: Music) {
   console.log("playlist, music", playlist, music);
 }
 
+function createPlaylist(title: string): void {
+  console.log("playlist create ", title);
+}
+
 const PlaylistService = {
   getMyPlaylist,
   searchPlaylistByTitle,
@@ -49,6 +53,7 @@ const PlaylistService = {
   deletePlaylist,
   deleteMusic,
   addMusic,
+  createPlaylist,
 };
 
 export default PlaylistService;

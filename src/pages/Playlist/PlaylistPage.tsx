@@ -57,8 +57,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   };
 
   const handleDeleteFromPlaylist = (music: Music) => {
-    PlaylistService.deleteMusic(playlist, music);
-    console.log("playlist", playlist); // TODO add a modal
+    PlaylistService.deleteMusic(playlist, music); // TODO Add a modal confirmation
   };
 
   const isPlayingSongCurrentPage =

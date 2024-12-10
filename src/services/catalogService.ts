@@ -1,5 +1,6 @@
 import data from "assets/json/catalogs.json";
 import { Catalog, CatalogWithMusic } from "models/Catalog";
+import { CreateCatalogFormData } from "pages/CreateCatalog/CreateCatalogPage";
 
 const catalogData = data as CatalogWithMusic[];
 
@@ -27,7 +28,11 @@ function searchCatalogByTitle(value: string): Catalog[] {
 }
 
 function deleteCatalog(catalog: Catalog): void {
-  console.log("catalog", catalog);
+  console.log("catalog delete", catalog);
+}
+
+function createCatalog(catalog: CreateCatalogFormData): void {
+  console.log("catalog create", catalog);
 }
 
 const CatalogService = {
@@ -35,6 +40,7 @@ const CatalogService = {
   getCatalogById,
   searchCatalogByTitle,
   deleteCatalog,
+  createCatalog,
 };
 
 export default CatalogService;
