@@ -78,7 +78,7 @@ export default function CreateCatalogPage(): ReactElement {
     const updatedMusics = getValues("musics").map((music, i) =>
       i === index ? { ...music, genres: selectedGenres } : music,
     );
-    setValue("musics", updatedMusics, { shouldDirty: true });
+    setValue("musics", updatedMusics, { shouldValidate: true });
   };
 
   const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
@@ -104,10 +104,10 @@ export default function CreateCatalogPage(): ReactElement {
   };
 
   return (
-    <div className="flex flex-col items-center sm:items-start mt-4 w-full h-full">
+    <div className="flex flex-col items-center sm:items-start mt-4 gap-1 w-full h-full">
       <span className="text-4xl font-bs font-bold text-dark-custom ml-2">Create your Catalog</span>
-      <div className="w-4/6 flex flex-col-reverse lg:flex-row lg:items-stretch gap-2">
-        <Container className="w-2/3 p-4 md:p-6 lg:p-8">
+      <div className="w-full lg:w-4/6 flex flex-col lg:flex-row lg:items-stretch gap-2">
+        <Container className="w-full lg:w-2/3 p-4 md:p-6 lg:p-8">
           <form
             onSubmit={handleSubmit(onSubmitForm)}
             className="flex flex-col gap-4 md:gap-8 h-full w-full p-3 md:p-0 lg:p-1 items-center md:items-stretch">
@@ -185,7 +185,7 @@ export default function CreateCatalogPage(): ReactElement {
             </div>
           </form>
         </Container>
-        <Container className="flex-col w-1/3 md:min-w-80 items-start p-2 md:p-4 lg:pt-6">
+        <Container className="w-full flex-col lg:w-1/3 md:min-w-80 items-start p-2 md:p-4 lg:pt-6">
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -195,7 +195,6 @@ export default function CreateCatalogPage(): ReactElement {
             }`}>
             <Icon iconName="cloud-upload" className="mm-size-12 fill-dark-custom" />
             <p>Drag and Drop here</p>
-            <p>(only mp4)</p>
             <p>or</p>
             <input
               type="file"
@@ -215,6 +214,11 @@ export default function CreateCatalogPage(): ReactElement {
             <Controller
               rules={{
                 required: "You need to have at least one music",
+                validate: {
+                  atLeastOneGenre: (musics) =>
+                    musics.every((music) => music.genres.length > 0) ||
+                    "Each music must have at least one genre.",
+                },
               }}
               name="musics"
               control={control}
