@@ -9,9 +9,9 @@ interface NotFoundErrorPageProps {
 function NotFoundErrorPage({ message = "PAGE NOT FOUND" }: NotFoundErrorPageProps): ReactElement {
   const navigate = useNavigate();
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <div className="h-full w-full lg:w-5/6 lg:h-5/6 xl:w-1/2 xl:h-1/2">
-        <svg version="1.1" viewBox="0 0 500 500">
+    <div className="w-full h-full flex justify-center items-start">
+      <div className="flex items-start w-full lg:w-5/6 xl:w-1/2">
+        <svg version="1.1" viewBox="0 100 500 350">
           <g id="OBJECTS">
             <ellipse
               opacity="0.42"

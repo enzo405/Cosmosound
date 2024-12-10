@@ -40,7 +40,7 @@ export default function MediaLinkInput({
               : undefined,
           }}
           render={({ field, fieldState: { error } }) => (
-            <>
+            <div className="flex flex-col">
               <input
                 {...field}
                 type="text"
@@ -50,8 +50,8 @@ export default function MediaLinkInput({
                   error ? "border-red-500" : "border-gray-300"
                 }`}
               />
-              {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
-            </>
+              {error && <p className="text-red-500 text-xs mt-1 inline-block">{error.message}</p>}
+            </div>
           )}
         />
       </div>
