@@ -21,7 +21,7 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   const catalog = CatalogService.getCatalogById(idCatalog);
 
   if (catalog == undefined) {
-    return <NotFoundErrorPage />;
+    return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
   }
   const musicDetails: MusicDetails = { ...catalog.musics[0], artist: catalog.owner, catalog };
 

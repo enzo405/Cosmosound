@@ -21,7 +21,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   const playlist = PlaylistService.getPlaylistById(idPlaylist);
 
   if (playlist == undefined) {
-    return <NotFoundErrorPage />;
+    return <NotFoundErrorPage message="PLAYLIST NOT FOUND" />;
   }
   const musicDetails: MusicDetails = {
     ...playlist.musics[0],

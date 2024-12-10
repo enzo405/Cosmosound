@@ -15,7 +15,7 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
   const { idCatalog } = useParams();
   const catalog = CatalogService.getCatalogById(idCatalog);
   if (catalog == undefined) {
-    return <NotFoundErrorPage />;
+    return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
   }
 
   const handleClickDelete = (music: Music) => {
