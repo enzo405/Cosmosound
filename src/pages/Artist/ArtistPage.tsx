@@ -36,7 +36,7 @@ export default function ArtistPage(): ReactElement {
   const artist = ArtistService.getArtistById(Number(idArtist));
 
   if (artist == undefined) {
-    return <NotFoundErrorPage />;
+    return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
   }
 
   const [isArtistLiked, setIsArtistLiked] = useState<boolean>(false);

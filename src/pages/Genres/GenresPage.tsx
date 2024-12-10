@@ -30,7 +30,7 @@ export enum GenreTabs {
 export default function GenresPage({}: GenresPageProps): ReactElement {
   const { nameGenre } = useParams();
   if (nameGenre == undefined) {
-    return <NotFoundErrorPage />;
+    return <NotFoundErrorPage message="GENRE NOT FOUND" />;
   }
 
   const genreContent = useMemo(() => GenresService.getGenreContent(nameGenre), []);
