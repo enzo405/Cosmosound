@@ -8,6 +8,7 @@ import ArtistService from "services/artistService";
 import GenresService from "services/genresService";
 import NewMusic from "./components/NewMusic";
 import CatalogService from "services/catalogService";
+import { useConfirmDialog } from "hooks/useConfirm";
 
 export interface CreateCatalogFormData {
   titleCatalog: string;
@@ -23,6 +24,8 @@ export interface CreateMusicFormData {
 
 export default function CreateCatalogPage(): ReactElement {
   const { user } = useUser();
+  const { openDialog } = useConfirmDialog();
+
   const artist = useMemo(() => ArtistService.getArtistById(user?.id), []);
   if (artist == undefined) return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
 
@@ -34,7 +37,7 @@ export default function CreateCatalogPage(): ReactElement {
     reset,
     setValue,
     getValues,
-    formState: { isDirty },
+    formState: { isDirty, errors },
   } = useForm<CreateCatalogFormData>({
     defaultValues: {
       titleCatalog: `${artist.artist_name}-${artist.catalogs.length}`,
@@ -47,8 +50,42 @@ export default function CreateCatalogPage(): ReactElement {
   const [isDragging, setIsDragging] = useState(false);
 
   const onSubmitForm = (data: CreateCatalogFormData) => {
-    CatalogService.createCatalog(data);
-    // TODO: Confirmation box
+    const description = (
+      <ul className="list-disc pl-5">
+        <li>
+          <strong>Title:</strong> {data.titleCatalog}
+        </li>
+        <li>
+          <strong>Thumbnail:</strong>
+          {typeof data.thumbnailCatalog === "string" ? (
+            <img src={data.thumbnailCatalog} alt="Thumbnail" className="w-16 h-16 object-cover" />
+          ) : (
+            data.thumbnailCatalog.name
+          )}
+        </li>
+        {data.musics.length > 0 ? (
+          <li>
+            <strong>Musics:</strong>
+            <ul className="list-decimal pl-5">
+              {data.musics.map((music, index) => (
+                <li key={index}>
+                  <strong>Title:</strong> {music.title}, <strong>Genres:</strong>{" "}
+                  {music.genres.join(", ")}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ) : (
+          <li>No musics added.</li>
+        )}
+      </ul>
+    );
+
+    openDialog({
+      title: "Are you sure you want to create this?",
+      description,
+      onConfirm: () => CatalogService.createCatalog(data),
+    });
   };
 
   const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +104,7 @@ export default function CreateCatalogPage(): ReactElement {
   const handleMusicUpload = (files: FileList) => {
     const newMusic = Array.from(files).map((file) => ({
       title: file.name,
-      duration: 0, // Placeholder, you can calculate duration if needed.
+      duration: 0,
       genres: [],
     }));
 
@@ -120,6 +157,7 @@ export default function CreateCatalogPage(): ReactElement {
                   <Controller
                     name="titleCatalog"
                     control={control}
+                    rules={{ required: "Catalog title is required." }}
                     render={({ field }) => (
                       <input
                         {...field}
@@ -130,12 +168,16 @@ export default function CreateCatalogPage(): ReactElement {
                       />
                     )}
                   />
+                  {errors.titleCatalog && (
+                    <span className="text-red-500 text-sm mt-1">{errors.titleCatalog.message}</span>
+                  )}
                 </div>
                 <div className="flex flex-col gap-1">
                   <span className="font-medium text-dark-custom">Thumbnail</span>
                   <Controller
                     name="thumbnailCatalog"
                     control={control}
+                    rules={{ required: "Thumbnail is required." }}
                     render={() => (
                       <>
                         <input
@@ -162,6 +204,11 @@ export default function CreateCatalogPage(): ReactElement {
                       </>
                     )}
                   />
+                  {errors.thumbnailCatalog && (
+                    <span className="text-red-500 text-sm mt-1">
+                      {errors.thumbnailCatalog.message}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -211,6 +258,9 @@ export default function CreateCatalogPage(): ReactElement {
             </label>
           </div>
           <div className="flex flex-col flex-grow w-full gap-4 mt-4">
+            {errors.musics && (
+              <span className="text-red-500 text-sm mt-1">{errors.musics.message}</span>
+            )}
             <Controller
               rules={{
                 required: "You need to have at least one music",

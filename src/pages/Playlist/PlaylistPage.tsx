@@ -13,6 +13,7 @@ import PlaylistOwnerBadge from "./components/PlaylistOwnerBadge";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
+import { useConfirmDialog } from "hooks/useConfirm";
 
 interface PlaylistPageProps {}
 
@@ -30,6 +31,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   };
 
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
+  const { openDialog } = useConfirmDialog();
 
   const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(false);
   const [displaySettings, setDisplaySettings] = useState(false);
@@ -57,7 +59,11 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   };
 
   const handleDeleteFromPlaylist = (music: Music) => {
-    PlaylistService.deleteMusic(playlist, music); // TODO Add a modal confirmation
+    openDialog({
+      title: `Do you really want to delete ${music.title} from the playlist ?`,
+      description: "",
+      onConfirm: () => PlaylistService.deleteMusic(playlist, music),
+    });
   };
 
   const isPlayingSongCurrentPage =

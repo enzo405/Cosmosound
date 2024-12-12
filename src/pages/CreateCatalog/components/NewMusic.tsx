@@ -1,5 +1,5 @@
 import { Genre } from "models/Music";
-import { ReactElement, useState } from "react";
+import { ReactElement, useRef, useState } from "react";
 import { CreateMusicFormData } from "../CreateCatalogPage";
 import { Icon } from "components/icons/Icon";
 import { BiXCircle } from "react-icons/bi";
@@ -22,6 +22,10 @@ export default function NewMusic({
 }: NewMusicProps): ReactElement {
   const [openGenreDropdown, setOpenGenreDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const musicFieldRef = useRef<HTMLInputElement>(null);
+
+  const dropdownSettingPosition =
+    musicFieldRef?.current?.getBoundingClientRect()?.bottom! > window.innerHeight / 2;
 
   const filteredGenres = genres.filter((genre) =>
     genre.name.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -37,8 +41,11 @@ export default function NewMusic({
     handleGenreChange(index, updatedGenres);
   };
 
+  const isGenreEmpty = musicData.genres.length == 0;
+
   return (
     <div
+      ref={musicFieldRef}
       key={index}
       className="relative w-full flex flex-col sm:flex-row items-center justify-between border gap-2 p-2 bg-tertio-orange rounded-md">
       <div className="flex flex-row w-min max-w-[45%] gap-3 lg:gap-1 items-center">
@@ -58,12 +65,13 @@ export default function NewMusic({
           <button
             type="button"
             onClick={() => setOpenGenreDropdown((prev) => !prev)}
-            className="w-full text-sm text-dark-custom p-1.5 border rounded-md bg-white">
-            {musicData.genres.length > 0 ? musicData.genres.join(", ") : "Select Genres"}
+            className="w-full text-sm p-1.5 bg-white text-dark-custom border rounded-md">
+            {isGenreEmpty ? "Select Genres" : musicData.genres.join(", ")}
           </button>
 
           {openGenreDropdown && (
-            <div className="absolute z-10 top-full right-0 bg-white border rounded-sm shadow-lg w-full max-h-60 overflow-y-auto overflow-x-hidden">
+            <div
+              className={`absolute z-10 ${dropdownSettingPosition ? "bottom-full" : "top-full"} right-0 bg-white border rounded-sm shadow-lg w-full max-h-60 overflow-y-auto overflow-x-hidden`}>
               <div className="p-1">
                 <input
                   type="text"

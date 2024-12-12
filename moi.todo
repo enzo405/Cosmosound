@@ -6,7 +6,7 @@ Todo:
 - Error page & no content (/explore)
 - Default values for isLiked items
 - Settings display options depending on the role of the user
-- Remove ai label and just make Verified music or not
+- switch is_ai on the account instead of music
 
 Good to have:
 - Add ref on MusicItem to track it size and adjust the item depending on its size instead of the media query

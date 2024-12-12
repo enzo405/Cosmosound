@@ -1,5 +1,6 @@
 import Divider from "components/Divider";
 import { Icon } from "components/icons/Icon";
+import { useConfirmDialog } from "hooks/useConfirm";
 import { Playlist } from "models/Playlist";
 import { ReactElement, useMemo, useRef, useState } from "react";
 import PlaylistService from "services/playlistService";
@@ -14,6 +15,7 @@ export default function SelectPlaylist({
   closeSettings,
 }: SelectPlaylistProps): ReactElement {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const { openDialog } = useConfirmDialog();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
@@ -28,9 +30,17 @@ export default function SelectPlaylist({
   };
 
   const handleCreatePlaylist = () => {
-    // TODO handle input empty & display error
     if (searchTerm != "") {
-      PlaylistService.createPlaylist(searchTerm);
+      openDialog({
+        title: "Do you really want to create this playlist ?",
+        description: (
+          <>
+            <span>Name: {searchTerm}</span>
+            <span>No music yet.</span>
+          </>
+        ),
+        onConfirm: () => PlaylistService.createPlaylist(searchTerm),
+      });
     }
   };
 
