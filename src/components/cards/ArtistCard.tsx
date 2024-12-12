@@ -49,13 +49,13 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
       <div className="w-full flex flex-row justify-center">
         <img
           className="h-24 w-24 md:h-28 md:w-28 rounded-full object-cover pt-1"
-          src={artist.picture_profile}
-          alt={artist.artist_name}
+          src={artist.pictureProfile}
+          alt={artist.artistName}
         />
       </div>
       <div className="flex flex-col cursor-pointer w-full items-center">
         <div className="group-hover:underline underline-offset-2 text-sm font-medium truncate pb-6">
-          {artist.artist_name}
+          {artist.artistName}
         </div>
       </div>
       {displayLikeBtn && (

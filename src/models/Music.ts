@@ -4,9 +4,8 @@ import { Artist } from "./User";
 export interface Music {
   id: string;
   title: string;
-  date_creation: string; // Date in UTC of the creation of the music
+  dateCreation: string; // Date in UTC of the creation of the music
   duration: number;
-  is_ai: boolean;
   genres: Array<Genre>;
 }
 

@@ -31,7 +31,7 @@ export default function Suggestions({ catalogs }: SuggestionsProps): ReactElemen
           <Card
             key={catalog.id}
             title={catalog.title}
-            description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
+            description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
             link={`/catalog/${catalog.id}`}
             thumbnail={catalog.thumbnail}
             onLike={(like) => onLikeCatalog(like, catalog)}

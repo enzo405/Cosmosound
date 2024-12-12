@@ -31,7 +31,6 @@ export type IconName =
   | "playlistadd"
   | "plus"
   | "verified-label"
-  | "ai-label"
   | "lock"
   | "eye"
   | "eye-blocked"

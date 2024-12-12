@@ -47,7 +47,7 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
           <span className="flex flex-row gap-1">
             By <ArtistInfo artist={catalog.owner} />
           </span>
-          <span>Made on {formatTime(catalog.date_creation)}</span>
+          <span>Made on {formatTime(catalog.dateCreation)}</span>
           <span>
             {catalog.musics.length} songs (
             {formatDurationWithLabel(
@@ -78,7 +78,7 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
             })
           ) : (
             <span className="text-dark-custom">
-              {catalog.owner.artist_name} haven't made any {catalog.type.valueOf()} yet
+              {catalog.owner.artistName} haven't made any {catalog.type.valueOf()} yet
             </span>
           )}
         </div>

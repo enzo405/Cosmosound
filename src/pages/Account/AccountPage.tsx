@@ -18,7 +18,7 @@ function AccountPage(): ReactElement {
   const { openDialog } = useConfirmDialog();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [preview, setPreview] = useState(user.picture_profile);
+  const [preview, setPreview] = useState(user.pictureProfile);
 
   const {
     control,

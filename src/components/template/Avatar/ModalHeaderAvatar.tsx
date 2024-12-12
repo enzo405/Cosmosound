@@ -62,7 +62,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
         <SettingsOptions>
           <img
             className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300"
-            src={connectedUser.picture_profile}
+            src={connectedUser.pictureProfile}
             alt="profile picture"
           />
           <span className="ml-2">

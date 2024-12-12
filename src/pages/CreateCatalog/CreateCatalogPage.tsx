@@ -40,13 +40,13 @@ export default function CreateCatalogPage(): ReactElement {
     formState: { isDirty, errors },
   } = useForm<CreateCatalogFormData>({
     defaultValues: {
-      titleCatalog: `${artist.artist_name}-${artist.catalogs.length}`,
-      thumbnailCatalog: artist.picture_profile,
+      titleCatalog: `${artist.artistName}-${artist.catalogs.length}`,
+      thumbnailCatalog: artist.pictureProfile,
       musics: [],
     },
   });
 
-  const [preview, setPreview] = useState(artist.picture_profile);
+  const [preview, setPreview] = useState(artist.pictureProfile);
   const [isDragging, setIsDragging] = useState(false);
 
   const onSubmitForm = (data: CreateCatalogFormData) => {

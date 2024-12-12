@@ -43,12 +43,12 @@ export default function ArtistPanelPage(): ReactElement {
     formState: { isDirty },
   } = useForm<ArtistPanelFormData>({
     defaultValues: {
-      artistName: artist.artist_name,
-      spotifyLink: artist.social_media.find((m) => m.media == Media.SPOTIFY)?.link ?? "",
-      youtubeLink: artist.social_media.find((m) => m.media == Media.YTB_MUSIC)?.link ?? "",
-      appleMusicLink: artist.social_media.find((m) => m.media == Media.APPLE_MUSIC)?.link ?? "",
-      xLink: artist.social_media.find((m) => m.media == Media.X)?.link ?? "",
-      instagramLink: artist.social_media.find((m) => m.media == Media.INSTAGRAM)?.link ?? "",
+      artistName: artist.artistName,
+      spotifyLink: artist.socialMedia.find((m) => m.media == Media.SPOTIFY)?.link ?? "",
+      youtubeLink: artist.socialMedia.find((m) => m.media == Media.YTB_MUSIC)?.link ?? "",
+      appleMusicLink: artist.socialMedia.find((m) => m.media == Media.APPLE_MUSIC)?.link ?? "",
+      xLink: artist.socialMedia.find((m) => m.media == Media.X)?.link ?? "",
+      instagramLink: artist.socialMedia.find((m) => m.media == Media.INSTAGRAM)?.link ?? "",
       genre: artist.genre,
     },
   });

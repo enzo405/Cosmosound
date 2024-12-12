@@ -53,7 +53,7 @@ async def fetch_artist_catalogs(session, artist_id):
             {
                 "id": album["id"],
                 "title": album["name"],
-                "date_creation": datetime.now().isoformat() + "Z",
+                "dateCreation": datetime.now().isoformat() + "Z",
                 "thumbnail": album["images"][0]["url"] if album["images"] else None,
                 "type": album_type_to_enum(album["album_type"]),
             }
@@ -73,10 +73,9 @@ async def fetch_album_tracks(session, album, all_genres):
             {
                 "id": track["id"],
                 "title": track["name"],
-                "date_creation": albumApi["release_date"],
+                "dateCreation": albumApi["release_date"],
                 "duration": track["duration_ms"] // 1000,  # Convert ms to seconds
-                "catalog_id": album["id"],
-                "is_ai": random.random() < 0.5,
+                "catalogId": album["id"],
                 "genres": [
                     {"name": genre}
                     for genre in random.sample(all_genres, random.randint(1, 3))
@@ -106,14 +105,15 @@ async def process_artist(session, artist_name, all_genres, artist_index):
         "id": int(artist_index),
         "name": artist_name,
         "email": f"{artist_name.lower().replace(' ', '_')}@example.com",
-        "date_creation": datetime.now().isoformat() + "Z",
-        "picture_profile": picture_profile
+        "dateCreation": datetime.now().isoformat() + "Z",
+        "pictureProfile": picture_profile
         or f"https://picsum.photos/seed/{artist_index}/200",
         "followers": random.randint(10, 100000),
         "followings": [],
-        "social_media": [{"media": 1, "link": spotify_link}],
+        "socialMedia": [{"media": 1, "link": spotify_link}],
         "genre": {"name": random.choice(artist_genres)},
-        "artist_name": artist_name,
+        "artistName": artist_name,
+        "isVerified": random.random() < 0.5,
     }
 
     artist_catalogs = await fetch_artist_catalogs(session, artist_id)
@@ -131,9 +131,8 @@ async def process_artist(session, artist_name, all_genres, artist_index):
                 {
                     "id": track["id"],
                     "title": track["title"],
-                    "date_creation": track["date_creation"],
+                    "dateCreation": track["dateCreation"],
                     "duration": track["duration"],
-                    "is_ai": False,
                     "artist": artist_data,
                     "genres": [{"name": g} for g in artist_genres],
                     "catalog": catalog,
