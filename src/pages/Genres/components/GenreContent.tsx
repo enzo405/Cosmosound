@@ -10,6 +10,7 @@ import MusicItem from "components/music/MusicItem";
 import { Playlist } from "models/Playlist";
 import UserService from "services/userService";
 import { enqueueSnackbar } from "notistack";
+import { useUser } from "hooks/useUser";
 
 interface GenreContentProps {
   content: Catalog[] | MusicDetails[] | Playlist[] | Artist[];
@@ -17,6 +18,8 @@ interface GenreContentProps {
 }
 
 export default function GenreContent({ content, activeTab }: GenreContentProps): ReactElement {
+  const { user } = useUser();
+
   if (!content.length) {
     return <span className="text-dark-custom">This genre seems empty</span>;
   }
@@ -74,6 +77,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
               link={routesConfig.playlist.getParameter(playlist.id)}
               thumbnail={playlist.musics[0].catalog.thumbnail}
               description={`${playlist.title} - ${playlist.owner.name}`}
+              defaultLiked={user.likedPlaylists.find((id) => id == playlist.id) !== undefined}
               onLike={(like) => onLikePlaylist(like, playlist)}
             />
           );
@@ -92,6 +96,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
               description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
               link={`/catalog/${catalog.id}`}
               thumbnail={catalog.thumbnail}
+              defaultLiked={user.likedCatalogs.find((id) => id == catalog.id) !== undefined}
               onLike={(like) => onLikeCatalog(like, catalog)}
             />
           );

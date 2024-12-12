@@ -4,6 +4,7 @@ import ArtistCard from "components/cards/ArtistCard";
 import Card from "components/cards/Card";
 import SmallCard from "components/cards/SmallCard";
 import { routesConfig } from "config/app-config";
+import { useUser } from "hooks/useUser";
 import { Genre } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { enqueueSnackbar } from "notistack";
@@ -14,6 +15,7 @@ import PlaylistService from "services/playlistService";
 import UserService from "services/userService";
 
 function LibraryPage(): ReactElement {
+  const { user } = useUser();
   const onLikeGenre = (like: boolean, genre: Genre) => {
     if (like) {
       UserService.removeLike(genre);
@@ -50,7 +52,7 @@ function LibraryPage(): ReactElement {
         })}
       </ScrollableBox>
       <ScrollableBox title="Liked Playlist">
-        {PlaylistService.getMyPlaylist().map((playlist) => {
+        {PlaylistService.getMyPlaylist(user).map((playlist) => {
           return (
             <Card
               key={playlist.id}
@@ -58,18 +60,20 @@ function LibraryPage(): ReactElement {
               thumbnail={playlist.musics[0].catalog.thumbnail}
               title={playlist.title}
               link={routesConfig.playlist.getParameter(playlist.id)}
+              defaultLiked={user.likedPlaylists.find((id) => id == playlist.id) != undefined}
               onLike={(like) => onLikePlaylist(like, playlist)}
             />
           );
         })}
       </ScrollableBox>
       <Box title="Liked Genres" className="flex-wrap">
-        {GenresService.getMyFavouriteGenres().map((genre) => {
+        {GenresService.getMyFavouriteGenres(user).map((genre) => {
           return (
             <SmallCard
               key={genre.name}
               title={genre.name}
               link={routesConfig.genres.getParameter(genre.name)}
+              defaultLiked={user.likedGenres.find((id) => id == genre.name) != undefined}
               onLike={(like) => onLikeGenre(like, genre)}
             />
           );

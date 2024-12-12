@@ -1,5 +1,6 @@
 import ScrollableBox from "components/box/ScrollableBox";
 import Card from "components/cards/Card";
+import { useUser } from "hooks/useUser";
 import { Catalog, TypeCatalog } from "models/Catalog";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement } from "react";
@@ -10,6 +11,8 @@ interface SuggestionsProps {
 }
 
 export default function Suggestions({ catalogs }: SuggestionsProps): ReactElement {
+  const { user } = useUser();
+
   const onLikeCatalog = (like: boolean, catalog: Catalog) => {
     if (like) {
       UserService.removeLike(catalog);
@@ -34,6 +37,9 @@ export default function Suggestions({ catalogs }: SuggestionsProps): ReactElemen
             description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
             link={`/catalog/${catalog.id}`}
             thumbnail={catalog.thumbnail}
+            defaultLiked={
+              user.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined
+            }
             onLike={(like) => onLikeCatalog(like, catalog)}
           />
         );

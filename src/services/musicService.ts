@@ -8,7 +8,7 @@ function getAllMusic(): MusicDetails[] {
 }
 
 function getMusicById(id: string): MusicDetails | undefined {
-  return musicData.find((music) => music.id === id);
+  return musicData.find((music) => music.id == id);
 }
 
 function searchMusicByTitle(value: string): MusicDetails[] {

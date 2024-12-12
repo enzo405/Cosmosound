@@ -1,5 +1,6 @@
 import HeartIcon from "components/icons/HeartIcon";
 import { routesConfig } from "config/app-config";
+import { useUser } from "hooks/useUser";
 import { Artist } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import { MouseEvent, ReactElement, useState } from "react";
@@ -13,8 +14,11 @@ interface ArtistCardProps {
 
 export default function ArtistCard({ artist, className = "" }: ArtistCardProps): ReactElement {
   const navigate = useNavigate();
+  const { user } = useUser();
   const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(
+    user.likedArtists.find((id) => id == artist.id.toString()) !== undefined,
+  );
 
   const handleOnClick = (event: MouseEvent) => {
     let likeBtn = document.getElementById("likeBtn");

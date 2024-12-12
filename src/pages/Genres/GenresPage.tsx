@@ -15,6 +15,7 @@ import GenreContent from "./components/GenreContent";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
+import { useUser } from "hooks/useUser";
 
 interface GenresPageProps {}
 
@@ -36,8 +37,11 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
   const genreContent = useMemo(() => GenresService.getGenreContent(nameGenre), []);
 
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
+  const { user } = useUser();
 
-  const [isGenreLiked, setIsGenreLiked] = useState<boolean>(false);
+  const [isGenreLiked, setIsGenreLiked] = useState<boolean>(
+    user.likedGenres.find((name) => name === nameGenre) !== undefined,
+  );
   const [content, setContent] = useState<Catalog[] | MusicDetails[] | Playlist[] | Artist[]>([]);
   const [activeTab, setActiveTab] = useState(GenreTabs.ARTISTS);
 

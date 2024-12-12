@@ -1,13 +1,12 @@
 import { Playlist } from "models/Playlist";
 import data from "assets/json/playlists.json";
 import { Music } from "models/Music";
+import { UserDetails } from "models/User";
 
 const playlistsData = data as Playlist[];
 
-function getMyPlaylist(): Playlist[] {
-  return playlistsData.filter((playlist) =>
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(Number(playlist.id)),
-  );
+function getMyPlaylist(user: UserDetails): Playlist[] {
+  return playlistsData.filter((playlist) => user.likedPlaylists.find((id) => id == playlist.id));
 }
 
 function searchPlaylistByTitle(value: string): Playlist[] {

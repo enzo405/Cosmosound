@@ -26,7 +26,7 @@ export default function CreateCatalogPage(): ReactElement {
   const { user } = useUser();
   const { openDialog } = useConfirmDialog();
 
-  const artist = useMemo(() => ArtistService.getArtistById(user?.id), []);
+  const artist = useMemo(() => ArtistService.getArtistById(user.id), []);
   if (artist == undefined) return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
 
   const availableGenres = useMemo(() => GenresService.getAllGenres(), []);

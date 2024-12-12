@@ -14,6 +14,7 @@ import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useConfirmDialog } from "hooks/useConfirm";
+import { useUser } from "hooks/useUser";
 
 interface PlaylistPageProps {}
 
@@ -32,8 +33,11 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
 
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const { openDialog } = useConfirmDialog();
+  const { user } = useUser();
 
-  const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(false);
+  const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(
+    user.likedPlaylists.find((id) => id == playlist.id) !== undefined,
+  );
   const [displaySettings, setDisplaySettings] = useState(false);
 
   const handlePlaying = () => {

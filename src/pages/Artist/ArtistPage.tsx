@@ -22,6 +22,7 @@ import ArtistSettings from "components/settings/ArtistSettings";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
+import { useUser } from "hooks/useUser";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -32,6 +33,7 @@ export enum ArtistTabs {
 
 export default function ArtistPage(): ReactElement {
   const { idArtist } = useParams();
+  const { user } = useUser();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const artist = ArtistService.getArtistById(Number(idArtist));
 
@@ -39,7 +41,9 @@ export default function ArtistPage(): ReactElement {
     return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
   }
 
-  const [isArtistLiked, setIsArtistLiked] = useState<boolean>(false);
+  const [isArtistLiked, setIsArtistLiked] = useState<boolean>(
+    user.likedArtists.find((id) => id == artist.id.toString()) !== undefined,
+  );
   const [displaySettings, setDisplaySettings] = useState(false);
   const [content, setContent] = useState<Catalog[] | Music[]>([]);
   const [activeTab, setActiveTab] = useState(ArtistTabs.MUSIC);
@@ -194,6 +198,9 @@ export default function ArtistPage(): ReactElement {
                       description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
                       thumbnail={catalog.thumbnail}
                       link={routesConfig.catalog.getParameter(catalog.id)}
+                      defaultLiked={
+                        user.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined
+                      }
                       onLike={(like) => onLikeCatalog(like, catalog)}
                     />
                   );

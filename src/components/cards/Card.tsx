@@ -7,6 +7,7 @@ interface CardProps {
   title: string;
   description: string;
   link: string;
+  defaultLiked: boolean;
   className?: string;
   onLike: (like: boolean) => void;
 }
@@ -16,12 +17,13 @@ export default function Card({
   title,
   description,
   link,
+  defaultLiked,
   className = "",
   onLike,
 }: CardProps): ReactElement {
   const navigate = useNavigate();
   const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(defaultLiked);
 
   const handleOnClick = (event: MouseEvent) => {
     let likeBtn = document.getElementById("likeBtn");
@@ -58,7 +60,7 @@ export default function Card({
         <div id="likeBtn" className="z-10 absolute bottom-1 right-1">
           <Icon
             className="size-6"
-            iconName={isLiked ? "heart-orange-empty" : "heart-orange"}
+            iconName={isLiked ? "heart-orange" : "heart-orange-empty"}
             onClick={handleClickHeart}
           />
         </div>

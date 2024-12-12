@@ -20,8 +20,8 @@ function getArtistById(id: number | undefined): DetailedArtistInfo | undefined {
   const artist = dataArtist.find((artist) => artist.id == id);
   if (!artist) return undefined;
 
-  const musics = musicData.filter((music) => music.artist.id === id);
-  const catalogs = dataCatalogs.filter((catalog) => catalog.owner.id === id);
+  const musics = musicData.filter((music) => music.artist.id == id);
+  const catalogs = dataCatalogs.filter((catalog) => catalog.owner.id == id);
 
   return {
     ...artist,

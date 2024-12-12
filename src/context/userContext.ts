@@ -1,9 +1,9 @@
-import { User } from "models/User";
+import { UserDetails } from "models/User";
 import { createContext } from "react";
 
 interface UserContextProps {
-  user: User | undefined;
-  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  user: UserDetails;
+  setUser: React.Dispatch<React.SetStateAction<UserDetails>>;
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined);

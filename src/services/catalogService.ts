@@ -10,7 +10,7 @@ function getAllCatalog(): CatalogWithMusic[] {
 
 function getCatalogById(id?: string): CatalogWithMusic | undefined {
   if (!id) return undefined;
-  return catalogData.find((music) => music.id === id);
+  return catalogData.find((music) => music.id == id);
 }
 
 function searchCatalogByTitle(value: string): Catalog[] {

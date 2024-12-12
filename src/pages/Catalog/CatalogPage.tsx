@@ -13,6 +13,7 @@ import PageLayout from "components/PageLayout";
 import ArtistInfo from "components/music/ArtistInfo";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
+import { useUser } from "hooks/useUser";
 
 interface CatalogPageProps {}
 
@@ -26,8 +27,11 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   const musicDetails: MusicDetails = { ...catalog.musics[0], artist: catalog.owner, catalog };
 
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
+  const { user } = useUser();
 
-  const [isCatalogLiked, setIsCatalogLiked] = useState<boolean>(false);
+  const [isCatalogLiked, setIsCatalogLiked] = useState<boolean>(
+    user.likedCatalogs.find((id) => id == catalog.id) !== undefined,
+  );
   const [displaySettings, setDisplaySettings] = useState(false);
 
   const handlePlaying = () => {

@@ -12,6 +12,7 @@ import { Artist } from "models/User";
 import { Catalog } from "models/Catalog";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
+import { useUser } from "hooks/useUser";
 
 interface MusicItemProps {
   music: Music;
@@ -34,10 +35,13 @@ export default function MusicItem({
   index,
   handleDeleteFromPlaylist,
 }: MusicItemProps): ReactElement {
+  const { user } = useUser();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const [displaySettings, setDisplaySettings] = useState<boolean>(false);
   const [displayPlay, setDisplayPlay] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(
+    user.likedMusics.find((id) => id == music.id.toString()) !== undefined,
+  );
   const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
   const musicItemRef = useRef<HTMLInputElement>(null);
