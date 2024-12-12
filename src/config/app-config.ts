@@ -60,9 +60,9 @@ const routesConfig: RoutesConfig = {
     getParameter: (idArtist: string) => `/artist/${idArtist}`,
     title: "Artist",
   },
-  createMusic: {
-    path: "/create-music",
-    getParameter: (_) => "/create-music",
+  createCatalog: {
+    path: "/create-catalog",
+    getParameter: (_) => "/create-catalog",
     title: "Create Music",
   },
   legal: { path: "/legal", getParameter: (_) => "/legal", title: "Legal Terms" },

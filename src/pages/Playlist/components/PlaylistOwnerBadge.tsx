@@ -9,7 +9,7 @@ export default function PlaylistOwnerBadge({ owner }: PlaylistOwnerBadgeProps): 
   return (
     <span className={`cursor-pointer flex flex-row gap-1`}>
       <img
-        src={owner.picture_profile}
+        src={owner.pictureProfile}
         className="mm-size-5 rounded-full object-contain"
         alt={owner.name}
       />

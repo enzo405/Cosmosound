@@ -17,6 +17,7 @@ import AppleMusicIcon from "components/icons/media/AppleMusicIcon";
 import { Icon } from "components/icons/Icon";
 import { useNavigate } from "react-router-dom";
 import { routesConfig } from "config/app-config";
+import { useConfirmDialog } from "hooks/useConfirm";
 
 export interface ArtistPanelFormData {
   artistName?: string;
@@ -30,7 +31,8 @@ export interface ArtistPanelFormData {
 
 export default function ArtistPanelPage(): ReactElement {
   const { user } = useUser();
-  const artist = useMemo(() => ArtistService.getArtistById(user?.id), []);
+  const { openDialog } = useConfirmDialog();
+  const artist = useMemo(() => ArtistService.getArtistById(user.id), []);
   if (artist == undefined) return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
 
   const {
@@ -41,12 +43,12 @@ export default function ArtistPanelPage(): ReactElement {
     formState: { isDirty },
   } = useForm<ArtistPanelFormData>({
     defaultValues: {
-      artistName: artist.artist_name,
-      spotifyLink: artist.social_media.find((m) => m.media == Media.SPOTIFY)?.link ?? "",
-      youtubeLink: artist.social_media.find((m) => m.media == Media.YTB_MUSIC)?.link ?? "",
-      appleMusicLink: artist.social_media.find((m) => m.media == Media.APPLE_MUSIC)?.link ?? "",
-      xLink: artist.social_media.find((m) => m.media == Media.X)?.link ?? "",
-      instagramLink: artist.social_media.find((m) => m.media == Media.INSTAGRAM)?.link ?? "",
+      artistName: artist.artistName,
+      spotifyLink: artist.socialMedia.find((m) => m.media == Media.SPOTIFY)?.link ?? "",
+      youtubeLink: artist.socialMedia.find((m) => m.media == Media.YTB_MUSIC)?.link ?? "",
+      appleMusicLink: artist.socialMedia.find((m) => m.media == Media.APPLE_MUSIC)?.link ?? "",
+      xLink: artist.socialMedia.find((m) => m.media == Media.X)?.link ?? "",
+      instagramLink: artist.socialMedia.find((m) => m.media == Media.INSTAGRAM)?.link ?? "",
       genre: artist.genre,
     },
   });
@@ -68,8 +70,47 @@ export default function ArtistPanelPage(): ReactElement {
   }, [artist.genre, availableGenres]);
 
   const onSubmitForm = (data: ArtistPanelFormData) => {
-    // TODO: Confirmation box
-    UserService.saveArtistData(data);
+    const description = (
+      <div className="flex flex-col gap-1">
+        <p>Artist Name: {data.artistName}</p>
+        <p>Genre: {data.genre?.name}</p>
+
+        <span className="flex flex-row gap-1 items-center">
+          <p>Updated links:</p>
+          {data.spotifyLink != "" && (
+            <a href={data.spotifyLink}>
+              <SpotifyIcon />
+            </a>
+          )}
+          {data.youtubeLink != "" && (
+            <a href={data.youtubeLink}>
+              <YoutubeMusicIcon />
+            </a>
+          )}
+          {data.xLink != "" && (
+            <a href={data.xLink}>
+              <XIcon />
+            </a>
+          )}
+          {data.appleMusicLink != "" && (
+            <a href={data.appleMusicLink}>
+              <AppleMusicIcon />
+            </a>
+          )}
+          {data.instagramLink != "" && (
+            <a href={data.instagramLink}>
+              <InstagramIcon />
+            </a>
+          )}
+        </span>
+      </div>
+    );
+
+    openDialog({
+      title: "Are you sure ?",
+      description: description,
+      onConfirm: () => UserService.saveArtistData(data),
+    });
   };
 
   const handleOnChangeGenreInput = (e: string) => {
@@ -214,8 +255,8 @@ export default function ArtistPanelPage(): ReactElement {
             className="flex flex-row items-center justify-center gap-1 pl-3 pr-4 py-1 text-tertio-orange border-tertio-orange border-2 rounded-xl font-medium hover:bg-orange-50"
             type="button"
             role="button"
-            onClick={() => navigate(routesConfig.createMusic.path)}>
-            <Icon iconName="cloud-upload" className="mm-size-7" />
+            onClick={() => navigate(routesConfig.createCatalog.path)}>
+            <Icon iconName="cloud-upload" className="mm-size-7 fill-tertio-orange" />
             Create
           </button>
         </Container>

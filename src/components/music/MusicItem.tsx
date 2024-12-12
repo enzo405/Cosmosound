@@ -12,6 +12,7 @@ import { Artist } from "models/User";
 import { Catalog } from "models/Catalog";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
+import { useUser } from "hooks/useUser";
 
 interface MusicItemProps {
   music: Music;
@@ -34,10 +35,13 @@ export default function MusicItem({
   index,
   handleDeleteFromPlaylist,
 }: MusicItemProps): ReactElement {
+  const { user } = useUser();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const [displaySettings, setDisplaySettings] = useState<boolean>(false);
   const [displayPlay, setDisplayPlay] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(
+    user.likedMusics.find((id) => id == music.id.toString()) !== undefined,
+  );
   const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
   const musicItemRef = useRef<HTMLInputElement>(null);
@@ -107,15 +111,14 @@ export default function MusicItem({
             <div
               onMouseEnter={() => setDisplayPlay(true)}
               onMouseLeave={() => setDisplayPlay(false)}
-              className="relative p-0.5 mm-size-16">
-              {showCatalogThumbnail && (
+              className={`relative p-0.5 ${showCatalogThumbnail ? "mm-size-16" : "mm-size-10"}`}>
+              {showCatalogThumbnail ? (
                 <img
                   className="rounded-xl object-contain h-full"
                   src={catalog.thumbnail}
-                  alt={`${music.title} ${catalog.title} ${artist.artist_name}`}
+                  alt={`${music.title} ${catalog.title} ${artist.artistName}`}
                 />
-              )}
-              {!showCatalogThumbnail && (
+              ) : (
                 <div
                   className="flex justify-center items-center h-full w-8"
                   onClick={() => handleClickPlay(music)}>
@@ -144,14 +147,13 @@ export default function MusicItem({
                 <span className="font-semibold text-sm xsm:font-normal xsm:text-base truncate">
                   {music.title}
                 </span>
-                <span
-                  className="flex-shrink-0 flex justify-center items-center rounded-lg size-[14px] xsm:size-[18px] bg-label-music-verif"
-                  title={music.is_ai ? "AI Generated" : "Official Music"}>
-                  <Icon
-                    iconName={music.is_ai ? "ai-label" : "verified-label"}
-                    className="mm-size-3"
-                  />
-                </span>
+                {artist.isVerified && (
+                  <span
+                    className="flex-shrink-0 flex justify-center items-center rounded-lg size-[14px] xsm:size-[18px] bg-label-music-verif"
+                    title="Official Music">
+                    <Icon iconName="verified-label" className="mm-size-3" />
+                  </span>
+                )}
               </span>
               <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
                 {showArtist && <ArtistInfo artist={artist} className="min-w-fit" />}
@@ -169,7 +171,7 @@ export default function MusicItem({
             </div>
           </div>
           <div className="hidden xl:flex items-center max-w-36 min-w-36 justify-center font-light text-sm">
-            {formatTime(music.date_creation)}
+            {formatTime(music.dateCreation)}
           </div>
           <div className="hidden lg:flex items-center w-10 justify-center font-light text-sm">
             {formatDuration(music.duration)}

@@ -22,6 +22,7 @@ import ArtistSettings from "components/settings/ArtistSettings";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
+import { useUser } from "hooks/useUser";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -32,6 +33,7 @@ export enum ArtistTabs {
 
 export default function ArtistPage(): ReactElement {
   const { idArtist } = useParams();
+  const { user } = useUser();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const artist = ArtistService.getArtistById(Number(idArtist));
 
@@ -39,7 +41,9 @@ export default function ArtistPage(): ReactElement {
     return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
   }
 
-  const [isArtistLiked, setIsArtistLiked] = useState<boolean>(false);
+  const [isArtistLiked, setIsArtistLiked] = useState<boolean>(
+    user.likedArtists.find((id) => id == artist.id.toString()) !== undefined,
+  );
   const [displaySettings, setDisplaySettings] = useState(false);
   const [content, setContent] = useState<Catalog[] | Music[]>([]);
   const [activeTab, setActiveTab] = useState(ArtistTabs.MUSIC);
@@ -128,17 +132,17 @@ export default function ArtistPage(): ReactElement {
 
   return (
     <PageLayout
-      thumbnail={artist.picture_profile}
+      thumbnail={artist.pictureProfile}
       settingsComponent={
         <ArtistSettings artist={artist} onCloseSetting={() => setDisplaySettings(false)} />
       }
-      title={artist.artist_name}
+      title={artist.artistName}
       subtitle={
         <div className="flex flex-col gap-1">
-          <span className="font-light">Member since {formatTime(artist.date_creation)}</span>
+          <span className="font-light">Member since {formatTime(artist.dateCreation)}</span>
           <span className="font-light">{artist.followers} followers</span>
           <span className="flex flex-wrap gap-2 xsm:gap-3 items-center">
-            {artist.social_media.map(({ link, media }) => (
+            {artist.socialMedia.map(({ link, media }) => (
               <a
                 key={media}
                 href={link}
@@ -191,9 +195,12 @@ export default function ArtistPage(): ReactElement {
                     <Card
                       key={catalog.id}
                       title={catalog.title}
-                      description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
+                      description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
                       thumbnail={catalog.thumbnail}
                       link={routesConfig.catalog.getParameter(catalog.id)}
+                      defaultLiked={
+                        user.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined
+                      }
                       onLike={(like) => onLikeCatalog(like, catalog)}
                     />
                   );
@@ -201,7 +208,7 @@ export default function ArtistPage(): ReactElement {
               )
             ) : (
               <span className="text-dark-custom">
-                {artist.artist_name} haven't made any {activeTab.valueOf()} yet
+                {artist.artistName} haven't made any {activeTab.valueOf()} yet
               </span>
             )}
           </div>

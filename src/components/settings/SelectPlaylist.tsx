@@ -1,5 +1,6 @@
 import Divider from "components/Divider";
 import { Icon } from "components/icons/Icon";
+import { useConfirmDialog } from "hooks/useConfirm";
 import { Playlist } from "models/Playlist";
 import { ReactElement, useMemo, useRef, useState } from "react";
 import PlaylistService from "services/playlistService";
@@ -14,6 +15,7 @@ export default function SelectPlaylist({
   closeSettings,
 }: SelectPlaylistProps): ReactElement {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const { openDialog } = useConfirmDialog();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
@@ -25,6 +27,21 @@ export default function SelectPlaylist({
   const handleClickPlaylist = (playlist: Playlist) => {
     handleAddToPlaylist(playlist);
     closeSettings();
+  };
+
+  const handleCreatePlaylist = () => {
+    if (searchTerm != "") {
+      openDialog({
+        title: "Do you really want to create this playlist ?",
+        description: (
+          <>
+            <span>Name: {searchTerm}</span>
+            <span>No music yet.</span>
+          </>
+        ),
+        onConfirm: () => PlaylistService.createPlaylist(searchTerm),
+      });
+    }
   };
 
   const playlists = useMemo(() => PlaylistService.getMyPlaylist(), []);
@@ -59,11 +76,18 @@ export default function SelectPlaylist({
       </div>
       <Divider className="my-1" />
       <div className="flex flex-col max-h-60 overflow-y-auto">
+        <span
+          onClick={() => handleCreatePlaylist()}
+          className="flex flex-row gap-2 p-1 rounded-lg items-center hover:bg-gray-200 cursor-pointer">
+          <Icon iconName="plus" className="mm-size-6" />
+          <span className="truncate">Create Playlist</span>
+        </span>
+        <Divider className="mb-1" />
         {filteredPlaylists.map((p) => (
           <span
             key={p.id}
             onClick={() => handleClickPlaylist(p)}
-            className="flex flex-row gap-2 p-0.5 items-center hover:bg-gray-200 cursor-pointer">
+            className="flex flex-row gap-2 p-0.5 rounded-lg items-center hover:bg-gray-200 cursor-pointer">
             <img
               className="mm-size-7 rounded-md"
               src={p.musics[0]?.catalog.thumbnail}

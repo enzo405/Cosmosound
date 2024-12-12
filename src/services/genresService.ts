@@ -6,14 +6,14 @@ import dataPlaylist from "assets/json/playlists.json";
 import dataArtist from "assets/json/artists.json";
 import { Playlist } from "models/Playlist";
 import { Catalog } from "models/Catalog";
-import { Artist } from "models/User";
+import { Artist, UserDetails } from "models/User";
 
 function getAllGenres(): Genre[] {
   return dataGenre;
 }
 
-function getMyFavouriteGenres(): Genre[] {
-  return getAllGenres().slice(1, 20);
+function getMyFavouriteGenres(user: UserDetails): Genre[] {
+  return dataGenre.filter((g) => user.likedGenres.find((name) => name === g.name));
 }
 
 interface GenreContent {

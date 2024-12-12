@@ -5,6 +5,7 @@ import { UserProvider } from "providers/UserProvider";
 import { SnackbarProvider } from "notistack";
 import RouterWrapper from "routes/RouterWrapper";
 import { SearchProvider } from "providers/SearchProvider";
+import { ConfirmDialogProvider } from "providers/DialogConfirmProvider";
 
 function App() {
   return (
@@ -14,15 +15,17 @@ function App() {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         autoHideDuration={3000}>
         <ThemeProvider>
-          <UserProvider>
-            <SearchProvider>
-              <MusicProvider>
-                <OpenAvatarModalProvider>
-                  <RouterWrapper />
-                </OpenAvatarModalProvider>
-              </MusicProvider>
-            </SearchProvider>
-          </UserProvider>
+          <ConfirmDialogProvider>
+            <UserProvider>
+              <SearchProvider>
+                <MusicProvider>
+                  <OpenAvatarModalProvider>
+                    <RouterWrapper />
+                  </OpenAvatarModalProvider>
+                </MusicProvider>
+              </SearchProvider>
+            </UserProvider>
+          </ConfirmDialogProvider>
         </ThemeProvider>
       </SnackbarProvider>
     </>

@@ -13,6 +13,8 @@ import PlaylistOwnerBadge from "./components/PlaylistOwnerBadge";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
+import { useConfirmDialog } from "hooks/useConfirm";
+import { useUser } from "hooks/useUser";
 
 interface PlaylistPageProps {}
 
@@ -30,8 +32,12 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   };
 
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
+  const { openDialog } = useConfirmDialog();
+  const { user } = useUser();
 
-  const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(false);
+  const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(
+    user.likedPlaylists.find((id) => id == playlist.id) !== undefined,
+  );
   const [displaySettings, setDisplaySettings] = useState(false);
 
   const handlePlaying = () => {
@@ -57,8 +63,11 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   };
 
   const handleDeleteFromPlaylist = (music: Music) => {
-    PlaylistService.deleteMusic(playlist, music);
-    console.log("playlist", playlist); // TODO add a modal
+    openDialog({
+      title: `Do you really want to delete ${music.title} from the playlist ?`,
+      description: "",
+      onConfirm: () => PlaylistService.deleteMusic(playlist, music),
+    });
   };
 
   const isPlayingSongCurrentPage =
@@ -76,7 +85,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
           <span className="font-light flex flex-wrap gap-1">
             <p>Made by </p>
             <PlaylistOwnerBadge owner={playlist.owner} />
-            <span>on {formatTime(playlist.date_creation)}</span>
+            <span>on {formatTime(playlist.dateCreation)}</span>
           </span>
           <span>
             {playlist.musics.length} songs (

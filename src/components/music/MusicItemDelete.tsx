@@ -61,14 +61,13 @@ export default function MusicItemDelete({
                 <span className="font-semibold select-none text-sm xsm:font-normal xsm:text-base truncate">
                   {music.title}
                 </span>
-                <span
-                  className="flex-shrink-0 flex justify-center items-center rounded-lg mm-size-3.5 xsm:mm-size-4 bg-label-music-verif"
-                  title={music.is_ai ? "AI Generated" : "Official Music"}>
-                  <Icon
-                    iconName={music.is_ai ? "ai-label" : "verified-label"}
-                    className="mm-size-3"
-                  />
-                </span>
+                {artist.isVerified && (
+                  <span
+                    className="flex-shrink-0 flex justify-center items-center rounded-lg mm-size-3.5 xsm:mm-size-4 bg-label-music-verif"
+                    title="Official Music">
+                    <Icon iconName="verified-label" className="mm-size-3" />
+                  </span>
+                )}
               </span>
               <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
                 <ArtistInfo artist={artist} className="min-w-fit" />
@@ -76,7 +75,7 @@ export default function MusicItemDelete({
             </div>
           </div>
           <div className="hidden xl:flex items-center max-w-36 min-w-36 justify-center font-light text-sm">
-            {formatTime(music.date_creation)}
+            {formatTime(music.dateCreation)}
           </div>
           <div className="hidden lg:flex items-center w-10 justify-center font-light text-sm">
             {formatDuration(music.duration)}

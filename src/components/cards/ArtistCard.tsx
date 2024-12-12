@@ -1,5 +1,6 @@
 import HeartIcon from "components/icons/HeartIcon";
 import { routesConfig } from "config/app-config";
+import { useUser } from "hooks/useUser";
 import { Artist } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import { MouseEvent, ReactElement, useState } from "react";
@@ -13,8 +14,11 @@ interface ArtistCardProps {
 
 export default function ArtistCard({ artist, className = "" }: ArtistCardProps): ReactElement {
   const navigate = useNavigate();
+  const { user } = useUser();
   const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(
+    user.likedArtists.find((id) => id == artist.id.toString()) !== undefined,
+  );
 
   const handleOnClick = (event: MouseEvent) => {
     let likeBtn = document.getElementById("likeBtn");
@@ -49,13 +53,13 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
       <div className="w-full flex flex-row justify-center">
         <img
           className="h-24 w-24 md:h-28 md:w-28 rounded-full object-cover pt-1"
-          src={artist.picture_profile}
-          alt={artist.artist_name}
+          src={artist.pictureProfile}
+          alt={artist.artistName}
         />
       </div>
       <div className="flex flex-col cursor-pointer w-full items-center">
         <div className="group-hover:underline underline-offset-2 text-sm font-medium truncate pb-6">
-          {artist.artist_name}
+          {artist.artistName}
         </div>
       </div>
       {displayLikeBtn && (

@@ -12,7 +12,7 @@ export default function MusicInfo({ music }: MusicInfoProps): ReactElement {
       <img
         className="rounded-xl w-12 h-12 min-w-12 min-h-12 sm:w-14 sm:h-14 sm:min-w-14 sm:min-h-14"
         src={music.catalog.thumbnail}
-        alt={`${music.title} ${music?.artist.artist_name}`}
+        alt={`${music.title} ${music?.artist.artistName}`}
       />
       <span className="flex flex-col items-start w-full overflow-hidden lg:gap-1">
         <p className="font-bold text-dark-custom text-sm xsm:text-base w-full truncate">

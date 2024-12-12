@@ -20,8 +20,8 @@ function getArtistById(id: number | undefined): DetailedArtistInfo | undefined {
   const artist = dataArtist.find((artist) => artist.id == id);
   if (!artist) return undefined;
 
-  const musics = musicData.filter((music) => music.artist.id === id);
-  const catalogs = dataCatalogs.filter((catalog) => catalog.owner.id === id);
+  const musics = musicData.filter((music) => music.artist.id == id);
+  const catalogs = dataCatalogs.filter((catalog) => catalog.owner.id == id);
 
   return {
     ...artist,
@@ -38,7 +38,7 @@ function searchArtistByName(value: string): Artist[] {
   const searchTerm = value.toLowerCase().trim();
 
   const artistNameMatch = dataArtist
-    .filter((artist) => (artist.artist_name || artist.name).toLowerCase().includes(searchTerm))
+    .filter((artist) => (artist.artistName || artist.name).toLowerCase().includes(searchTerm))
     .slice(0, 10);
 
   return [...new Set(artistNameMatch)];

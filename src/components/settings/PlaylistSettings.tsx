@@ -1,6 +1,7 @@
 import SettingsOptions from "components/settings/SettingsOptions";
 import TextSetting from "components/settings/TextSetting";
 import { routesConfig } from "config/app-config";
+import { useConfirmDialog } from "hooks/useConfirm";
 import { Playlist } from "models/Playlist";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
@@ -15,6 +16,8 @@ export default function PlaylistSettings({
   playlist,
   onCloseSetting,
 }: PlaylistSettingsProps): ReactElement {
+  const { openDialog } = useConfirmDialog();
+
   useEffect(() => {
     const handleClickAway = (event: MouseEvent) => {
       let id = `settings`;
@@ -47,8 +50,11 @@ export default function PlaylistSettings({
   };
 
   const handleDeletePlaylist = () => {
-    // TODO add modal
-    PlaylistService.deletePlaylist(playlist);
+    openDialog({
+      title: `Are you sure you want to delete this playlist ?`,
+      description: "",
+      onConfirm: () => PlaylistService.deletePlaylist(playlist),
+    });
   };
 
   return (

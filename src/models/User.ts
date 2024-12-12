@@ -5,10 +5,10 @@ export interface User {
   id: number;
   name: string; // name of the user
   email: string; // email of the user
-  date_creation: string; // Date in UTC of the creation of the account
-  picture_profile: string;
+  dateCreation: string; // Date in UTC of the creation of the account
+  pictureProfile: string;
   followers: number;
-  followings: Array<Artist>;
+  followings: string[];
 }
 
 export interface UserDetails extends User {
@@ -20,9 +20,10 @@ export interface UserDetails extends User {
 }
 
 export interface Artist extends User {
-  social_media: SocialMediaLink[];
+  isVerified: boolean;
+  socialMedia: SocialMediaLink[];
   genre: Genre;
-  artist_name: string;
+  artistName: string;
 }
 
 export interface DetailedArtistInfo extends Artist {

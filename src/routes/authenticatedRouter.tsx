@@ -16,6 +16,7 @@ import GenresPage from "pages/Genres/GenresPage";
 import PlaylistPage from "pages/Playlist/PlaylistPage";
 import CatalogPage from "pages/Catalog/CatalogPage";
 import ArtistPanelPage from "pages/ArtistPanel/ArtistPanelPage";
+import CreateCatalog from "pages/CreateCatalog/CreateCatalogPage";
 
 const authenticatedRouter = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const authenticatedRouter = createBrowserRouter([
       {
         path: routesConfig.legal.path,
         element: <LegalPage />,
+      },
+      {
+        path: routesConfig.createCatalog.path,
+        element: <CreateCatalog />,
       },
       {
         path: routesConfig.any.path,

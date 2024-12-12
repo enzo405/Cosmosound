@@ -19,6 +19,7 @@ import SmallCard from "components/cards/SmallCard";
 import { routesConfig } from "config/app-config";
 import UserService from "services/userService";
 import { enqueueSnackbar } from "notistack";
+import { useUser } from "hooks/useUser";
 
 export enum Filters {
   ALL = "All",
@@ -32,6 +33,7 @@ export enum Filters {
 
 function ExplorePage(): ReactElement {
   const { search, debouncedValue } = useSearch();
+  const { user } = useUser();
 
   const [activeFilter, setActiveFilter] = useState<Filters>(Filters.ALL);
   const [musics, setMusics] = useState<MusicDetails[]>([]);
@@ -169,9 +171,10 @@ function ExplorePage(): ReactElement {
                     <Card
                       key={catalog.id}
                       title={catalog.title}
-                      description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
+                      description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
                       link={`/catalog/${catalog.id}`}
                       thumbnail={catalog.thumbnail}
+                      defaultLiked={user.likedCatalogs.find((id) => id == catalog.id) !== undefined}
                       onLike={(like) => onLikeCatalog(like, catalog)}
                     />
                   );
@@ -189,9 +192,10 @@ function ExplorePage(): ReactElement {
                   <Card
                     key={catalog.id}
                     title={catalog.title}
-                    description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artist_name}`}
+                    description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
                     link={`/catalog/${catalog.id}`}
                     thumbnail={catalog.thumbnail}
+                    defaultLiked={user.likedCatalogs.find((id) => id == catalog.id) !== undefined}
                     onLike={(like) => onLikeCatalog(like, catalog)}
                   />
                 );
@@ -212,6 +216,9 @@ function ExplorePage(): ReactElement {
                       description={`${playlist.title} - ${playlist.owner.name}`}
                       link={`/playlist/${playlist.id}`}
                       thumbnail={playlist.musics[0].catalog.thumbnail}
+                      defaultLiked={
+                        user.likedPlaylists.find((id) => id == playlist.id) !== undefined
+                      }
                       onLike={(like) => onLikePlaylist(like, playlist)}
                     />
                   );
@@ -229,6 +236,9 @@ function ExplorePage(): ReactElement {
                     <SmallCard
                       key={genre.name}
                       title={genre.name}
+                      defaultLiked={
+                        user.likedGenres.find((name) => name == genre.name) !== undefined
+                      }
                       link={routesConfig.genres.getParameter(genre.name)}
                       onLike={(like) => onLikeGenre(like, genre)}
                     />

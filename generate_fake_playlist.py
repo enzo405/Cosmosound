@@ -26,13 +26,13 @@ async def main():
             playlist = {
                 "id": i,
                 "title": f"Playlist {random.randint(1, 1000)}",
-                "date_creation": datetime.now().isoformat(),
+                "dateCreation": datetime.now().isoformat(),
                 "owner": {
                     "id": 1,
                     "name": "Me",
                     "email": "bleo.smile@gmail.com",
-                    "date_creation": datetime.now().isoformat(),
-                    "picture_profile": f"https://picsum.photos/seed/{random.randint(1, 1000)}/200",
+                    "dateCreation": datetime.now().isoformat(),
+                    "pictureProfile": f"https://picsum.photos/seed/{random.randint(1, 1000)}/200",
                     "followers": random.randint(0, 500),
                     "followings": random.sample(
                         [artist["id"] for artist in artists],
@@ -191,7 +191,9 @@ async def main_fix_genre():
 
         for music in musics:
             for genre in music["genres"]:
-                if genre["name"] not in [genreName["name"] for genreName in genres_data]:
+                if genre["name"] not in [
+                    genreName["name"] for genreName in genres_data
+                ]:
                     genres_data.append({"name": genre["name"]})
 
         with open(genres_output_path, "w") as genres_file:
@@ -200,4 +202,4 @@ async def main_fix_genre():
         print(f"Generated {genres_output_path} successfully.")
 
 
-asyncio.run(main_fix_genre())
+asyncio.run(main())

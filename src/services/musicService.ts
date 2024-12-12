@@ -8,7 +8,7 @@ function getAllMusic(): MusicDetails[] {
 }
 
 function getMusicById(id: string): MusicDetails | undefined {
-  return musicData.find((music) => music.id === id);
+  return musicData.find((music) => music.id == id);
 }
 
 function searchMusicByTitle(value: string): MusicDetails[] {
@@ -23,7 +23,7 @@ function searchMusicByTitle(value: string): MusicDetails[] {
     .slice(0, 7);
 
   const musicArtistMatch = musicData
-    .filter((music) => music.artist.artist_name.toLowerCase().includes(searchTerm))
+    .filter((music) => music.artist.artistName.toLowerCase().includes(searchTerm))
     .slice(0, 3);
 
   const result = [...musicNameMatch, ...musicArtistMatch];

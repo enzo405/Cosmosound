@@ -31,11 +31,11 @@ export type IconName =
   | "playlistadd"
   | "plus"
   | "verified-label"
-  | "ai-label"
   | "lock"
   | "eye"
   | "eye-blocked"
   | "ellipsis"
+  | "music"
   | "cloud-upload"
   | "trash-red"
   | "trash";
