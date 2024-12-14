@@ -12,6 +12,4 @@ Good to have:
 - Add ref on MusicItem to track it size and adjust the item depending on its size instead of the media query
 - Add ref on Body content to track it size and adjust the rest depending on its size instead of the media query
 - /explore => make pages for each filters instead of filtering content (e.g => /explore/artists, /explore/musics)
-- enqueueSnackbar make constants message (add toString to the CatalogType)
 - Add assets for explore page empty, 500 page & error page
-- Refactor form input
