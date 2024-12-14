@@ -18,3 +18,56 @@
 - S'inspirer de la page d'accueil de YouTube Music pour la page `/feed`.
 - La recherche avancée comporte: "Artiste", "Genre de musique"
 - Pour la liste de genres: https://www.musicgenreslist.com/
+
+
+## 2. **API Endpoints :**
+
+Tous les endpoints de l'API seront préfixés par `/api`.
+
+### **Playlist**
+| Verbe  | Endpoint                        | Request                 | Response                                                          | Response Code |
+| ------ | ------------------------------- | ----------------------- | ----------------------------------------------------------------- | ------------- |
+| GET    | `/playlists/:id`                | -                       | `{ "id": "string", "title": "string", "musics": [MusicDetails] }` | 200           |
+| GET    | `/playlists/search`             | `?name=playlistName`    | `[ { "id": "string", "title": "string" } ]`                       | 200           |
+| POST   | `/playlists`                    | `{ "title": "string" }` | `{ "message": "Created", "id": "string" }`                        | 201           |
+| POST   | `/playlists/:id/music`          | `{ MusicDetails }`      | `{ "message": "Created", "id": "string" }`                        | 201           |
+| DELETE | `/playlists/:id`                | -                       | `{ "message": "Deleted" }`                                        | 200           |
+| DELETE | `/playlists/:id/music/:musicId` | -                       | `{ "message": "Music removed" }`                                  | 200           |
+
+---
+
+### **Catalogs**
+| Verbe  | Endpoint                       | Request                                                       | Response                                                                          | Response Code |
+| ------ | ------------------------------ | ------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| POST   | `/catalogs`                    | `{ title, thumbnail, musics: [{ title, duration, genres }] }` | `{ "message": "Created", "id": "string" }`                                        | 201           |
+| GET    | `/catalogs/:id`                | -                                                             | `{ "id": "string", "title": "string", "type": "enum", "musics": [MusicDetails] }` | 200           |
+| DELETE | `/catalogs/:id`                | -                                                             | `{ "message": "Deleted" }`                                                        | 200           |
+| DELETE | `/catalogs/:id/music/:musicId` | -                                                             | `{ "message": "Music removed" }`                                                  | 200           |
+| GET    | `/catalogs/search`             | `?name=catalogName`                                           | `[ { "id": "string", "title": "string" } ]`                                       | 200           |
+| GET    | `/catalogs/musics/search`      | `?name=musicName`                                             | `[ { "id": "string", "title": "string" } ]`                                       | 200           |
+
+---
+
+### **Users**
+| Verbe | Endpoint          | Request                          | Response                                          | Response Code |
+| ----- | ----------------- | -------------------------------- | ------------------------------------------------- | ------------- |
+| PATCH | `/users/:id`      | `name, email, pictureProfile`    | `{ "message": "Updated" }`                        | 200           |
+| PATCH | `/artists/:id`    | `socialMedia, genre, artistName` | `{ "message": "Updated" }`                        | 200           |
+| GET   | `/artists/:id`    | -                                | `{ "id": "string", "artistName": "string", ... }` | 200           |
+| GET   | `/artists/search` | `?name=artistName`               | `[ { "id": "string", "artistName": "string" } ]`  | 200           |
+
+---
+
+### **Authentification**
+| Verbe | Endpoint         | Request                                                         | Response                        | Response Code |
+| ----- | ---------------- | --------------------------------------------------------------- | ------------------------------- | ------------- |
+| POST  | `/auth/login`    | `{ "email": "string", "password": "string" }`                   | `{ "token": "jwtToken" }`       | 200           |
+| POST  | `/auth/register` | `{ "name": "string", "email": "string", "password": "string" }` | `{ "message": "User created" }` | 201           |
+
+---
+
+### **Genre**
+| Verbe | Endpoint         | Request           | Response  | Response Code |
+| ----- | ---------------- | ----------------- | --------- | ------------- |
+| GET   | `/genres`        | -                 | `Genre[]` | 200           |
+| GET   | `/genres/search` | `?name=genreName` | `Genre[]` | 200           |
