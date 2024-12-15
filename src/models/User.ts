@@ -8,7 +8,6 @@ export interface User {
   dateCreation: string; // Date in UTC of the creation of the account
   pictureProfile: string;
   followers: number;
-  followings: string[];
 }
 
 export interface UserDetails extends User {
@@ -19,7 +18,7 @@ export interface UserDetails extends User {
   likedPlaylists: string[];
 }
 
-export interface Artist extends User {
+export interface Artist extends UserDetails {
   isVerified: boolean;
   socialMedia: SocialMediaLink[];
   genre: Genre;

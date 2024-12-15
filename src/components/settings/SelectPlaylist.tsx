@@ -1,6 +1,7 @@
 import Divider from "components/Divider";
 import { Icon } from "components/icons/Icon";
 import { useConfirmDialog } from "hooks/useConfirm";
+import { useUser } from "hooks/useUser";
 import { Playlist } from "models/Playlist";
 import { ReactElement, useMemo, useRef, useState } from "react";
 import PlaylistService from "services/playlistService";
@@ -14,6 +15,7 @@ export default function SelectPlaylist({
   handleAddToPlaylist,
   closeSettings,
 }: SelectPlaylistProps): ReactElement {
+  const { user } = useUser();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const { openDialog } = useConfirmDialog();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -44,7 +46,7 @@ export default function SelectPlaylist({
     }
   };
 
-  const playlists = useMemo(() => PlaylistService.getMyPlaylist(), []);
+  const playlists = useMemo(() => PlaylistService.getMyPlaylist(user), []);
 
   const filteredPlaylists = playlists.filter((playlist) =>
     playlist.title.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -90,7 +92,7 @@ export default function SelectPlaylist({
             className="flex flex-row gap-2 p-0.5 rounded-lg items-center hover:bg-gray-200 cursor-pointer">
             <img
               className="mm-size-7 rounded-md"
-              src={p.musics[0]?.catalog.thumbnail}
+              src={p.musics[0].playlistThumbnail}
               alt={`${p.title} thumbnail`}
             />
             <span className="truncate">{p.title}</span>

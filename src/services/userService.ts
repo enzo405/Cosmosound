@@ -10,7 +10,6 @@ export const defaultUser: UserDetails = {
   email: "john.doe@gmail.com",
   pictureProfile: "/src/assets/img/header/default_avatar.png",
   dateCreation: "08-10-2024",
-  followings: [],
   followers: 0,
   likedArtists: [
     "1",
