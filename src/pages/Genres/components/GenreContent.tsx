@@ -75,7 +75,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
               key={playlist.id}
               title={playlist.title}
               link={routesConfig.playlist.getParameter(playlist.id)}
-              thumbnail={playlist.musics[0].catalog.thumbnail}
+              thumbnail={playlist.musics[0].playlistThumbnail}
               description={`${playlist.title} - ${playlist.owner.name}`}
               defaultLiked={user.likedPlaylists.find((id) => id == playlist.id) !== undefined}
               onLike={(like) => onLikePlaylist(like, playlist)}

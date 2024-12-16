@@ -3,7 +3,6 @@ import { Genre, Music } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { Artist, UserDetails } from "models/User";
 import { AccountFormData } from "pages/Account/AccountPage";
-import { ArtistPanelFormData } from "pages/ArtistPanel/ArtistPanelPage";
 
 export const defaultUser: UserDetails = {
   id: 1,
@@ -11,7 +10,6 @@ export const defaultUser: UserDetails = {
   email: "john.doe@gmail.com",
   pictureProfile: "/src/assets/img/header/default_avatar.png",
   dateCreation: "08-10-2024",
-  followings: [],
   followers: 0,
   likedArtists: [
     "1",
@@ -89,16 +87,11 @@ function saveData(data: AccountFormData): void {
   console.log("submit form data", data);
 }
 
-function saveArtistData(data: ArtistPanelFormData): void {
-  console.log("submit form data", data);
-}
-
 const UserService = {
   getUser,
   like,
   removeLike,
   saveData,
-  saveArtistData,
 };
 
 export default UserService;

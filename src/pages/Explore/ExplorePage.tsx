@@ -215,7 +215,7 @@ function ExplorePage(): ReactElement {
                       title={playlist.title}
                       description={`${playlist.title} - ${playlist.owner.name}`}
                       link={`/playlist/${playlist.id}`}
-                      thumbnail={playlist.musics[0].catalog.thumbnail}
+                      thumbnail={playlist.musics[0].playlistThumbnail}
                       defaultLiked={
                         user.likedPlaylists.find((id) => id == playlist.id) !== undefined
                       }

@@ -108,8 +108,12 @@ async def process_artist(session, artist_name, all_genres, artist_index):
         "dateCreation": datetime.now().isoformat() + "Z",
         "pictureProfile": picture_profile
         or f"https://picsum.photos/seed/{artist_index}/200",
+        "likedArtists": [],
+        "likedMusics": [],
+        "likedCatalogs": [],
+        "likedGenres": [],
+        "likedPlaylists": [],
         "followers": random.randint(10, 100000),
-        "followings": [],
         "socialMedia": [{"media": 1, "link": spotify_link}],
         "genre": {"name": random.choice(artist_genres)},
         "artistName": artist_name,

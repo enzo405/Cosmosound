@@ -19,9 +19,6 @@ async def main():
         with open(musics_data_path, "r") as musics_file:
             musics = json.load(musics_file)
 
-        with open(artists_data_path, "r") as artist_file:
-            artists = json.load(artist_file)
-
         for i in range(0, 100):
             playlist = {
                 "id": i,
@@ -34,10 +31,6 @@ async def main():
                     "dateCreation": datetime.now().isoformat(),
                     "pictureProfile": f"https://picsum.photos/seed/{random.randint(1, 1000)}/200",
                     "followers": random.randint(0, 500),
-                    "followings": random.sample(
-                        [artist["id"] for artist in artists],
-                        k=min(len(artists), random.randint(1, 10)),
-                    ),
                 },
                 "musics": random.sample(musics, k=random.randint(1, 20)),
             }
@@ -202,4 +195,4 @@ async def main_fix_genre():
         print(f"Generated {genres_output_path} successfully.")
 
 
-asyncio.run(main())
+asyncio.run(main_fix_genre())

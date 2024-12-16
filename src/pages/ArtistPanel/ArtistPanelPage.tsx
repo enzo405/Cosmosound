@@ -8,7 +8,6 @@ import { ReactElement, useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import ArtistService from "services/artistService";
 import GenresService from "services/genresService";
-import UserService from "services/userService";
 import MediaLinkInput from "./components/MediaLinkInput";
 import YoutubeMusicIcon from "components/icons/media/YoutubeMusicIcon";
 import InstagramIcon from "components/icons/media/InstagramIcon";
@@ -109,7 +108,7 @@ export default function ArtistPanelPage(): ReactElement {
     openDialog({
       title: "Are you sure ?",
       description: description,
-      onConfirm: () => UserService.saveArtistData(data),
+      onConfirm: () => ArtistService.saveArtistData(data),
     });
   };
 

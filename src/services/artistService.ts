@@ -3,6 +3,7 @@ import data from "assets/json/musics.json";
 import dataCatalogs from "assets/json/catalogs.json";
 import { Artist, DetailedArtistInfo } from "models/User";
 import { MusicDetails } from "models/Music";
+import { ArtistPanelFormData } from "pages/ArtistPanel/ArtistPanelPage";
 
 const musicData: MusicDetails[] = data as MusicDetails[];
 
@@ -44,10 +45,15 @@ function searchArtistByName(value: string): Artist[] {
   return [...new Set(artistNameMatch)];
 }
 
+function saveArtistData(data: ArtistPanelFormData): void {
+  console.log("submit form data", data);
+}
+
 const ArtistService = {
   getMyFavouriteArtist,
   searchArtistByName,
   getArtistById,
+  saveArtistData,
 };
 
 export default ArtistService;
