@@ -187,41 +187,43 @@ interface PatchArtistData {
 
 
 
-## MongoDB Structure :
+## UML
+
+
+<img src="./modelisation/Untitled design.png">
+
+
+## MLD
 
 ### Schéma de Catalog
-| **Field Name**             | **Type**                           | **Description**                                  | **Required** | **Index** |
-| -------------------------- | ---------------------------------- | ------------------------------------------------ | ------------ | --------- |
-| `id`                       | `ObjectId`                         | Identifiant unique du catalogue                  | Oui          | Non       |
-| `title`                    | `String`                           | Le titre du catalogue.                           | Oui          | Oui       |
-| `owner`                    | `ObjectId` (ref: Artist)           | L'artiste propriétaire du catalogue.             | Oui          | Non       |
-| `dateCreation`             | `Date`                             | La date de création du catalogue.                | Non          | Non       |
-| `thumbnail`                | `String`                           | L'URL de la miniature du catalogue.              | Oui          | Non       |
-| `type`                     | `String` (`SINGLE`, `ALBUM`, `EP`) | Le type de catalogue.                            | Oui          | Non       |
-| `musics`                   | `Objects[]`                        | La liste des morceaux de musique du catalogue.   | Oui          | Non       |
-| `musics.id`                | `ObjectId`                         | Identifiant unique du morceau de musique.        | Oui          | Non       |
-| `musics.title`             | `String`                           | Titre du morceau de musique.                     | Oui          | Non       |
-| `musics.playlistThumbnail` | `String`                           | URL de la miniature du morceau dans la playlist. | Oui          | Non       |
-| `musics.dateCreation`      | `Date`                             | Date de création du morceau de musique.          | Oui          | Non       |
-| `musics.duration`          | `Number`                           | Durée du morceau de musique (en secondes).       | Oui          | Non       |
-| `musics.genres`            | `String[]`                         | Liste des genres associés au morceau.            | Oui          | Non       |
-| `musics.artist`            | `ObjectId` (ref: Artist)           | Artiste associé au morceau.                      | Oui          | Non       |
-| `musics.catalog`           | `ObjectId` (ref: Catalog)          | Catalogue auquel appartient le morceau.          | Oui          | Non       |
+| **Field Name**        | **Type**                           | **Description**                                | **Required** | **Index** |
+| --------------------- | ---------------------------------- | ---------------------------------------------- | ------------ | --------- |
+| `id [PRIMARY KEY]`    | `ObjectId`                         | Identifiant unique du catalogue                | Oui          | Non       |
+| `title`               | `String`                           | Le titre du catalogue.                         | Oui          | Oui       |
+| `owner`               | `ObjectId` (ref: Artist)           | L'artiste propriétaire du catalogue.           | Oui          | Non       |
+| `dateCreation`        | `Date`                             | La date de création du catalogue.              | Non          | Non       |
+| `thumbnail`           | `String`                           | L'URL de la miniature du catalogue.            | Oui          | Non       |
+| `type`                | `String` (`SINGLE`, `ALBUM`, `EP`) | Le type de catalogue.                          | Oui          | Non       |
+| `musics`              | `Objects[]`                        | La liste des morceaux de musique du catalogue. | Oui          | Non       |
+| `musics.id`           | `ObjectId`                         | Identifiant unique du morceau de musique.      | Oui          | Non       |
+| `musics.title`        | `String`                           | Titre du morceau de musique.                   | Oui          | Non       |
+| `musics.dateCreation` | `Date`                             | Date de création du morceau de musique.        | Oui          | Non       |
+| `musics.duration`     | `Number`                           | Durée du morceau de musique (en secondes).     | Oui          | Non       |
+| `musics.genres`       | `String[]`                         | Liste des genres associés au morceau.          | Oui          | Non       |
 
 ---
 
 ### Schéma de Playlist
-| **Field Name**     | **Type**               | **Description**                                  | **Required** | **Index** |
-| ------------------ | ---------------------- | ------------------------------------------------ | ------------ | --------- |
-| `id`               | `ObjectId`             | Identifiant unique de la playlist                | Oui          | Non       |
-| `title`            | `String`               | Le titre de la playlist.                         | Oui          | Oui       |
-| `owner`            | `ObjectId` (ref: User) | L'utilisateur qui a créé la playlist.            | Oui          | Non       |
-| `dateCreation`     | `Date`                 | La date de création de la playlist.              | Non          | Non       |
-| `musics`           | `Objects[]`            | La liste des morceaux de musique de la playlist. | Oui          | Non       |
-| `musics.id`        | `ObjectId`             |                                                  | Oui          | Non       |
-| `musics.title`     | `ObjectId`             |                                                  | Oui          | Non       |
-| `musics.`          | `ObjectId`             |                                                  | Oui          | Non       |
-| `musics.catalogId` | `ObjectId`             | L'ID du catalogue auquel appartient la musique.  | Oui          | Non       |
+| **Field Name**      | **Type**               | **Description**                                  | **Required** | **Index** |
+| ------------------- | ---------------------- | ------------------------------------------------ | ------------ | --------- |
+| `id [PRIMARY KEY]`  | `ObjectId`             | Identifiant unique de la playlist                | Oui          | Non       |
+| `title`             | `String`               | Le titre de la playlist.                         | Oui          | Oui       |
+| `owner`             | `ObjectId` (ref: User) | L'utilisateur qui a créé la playlist.            | Oui          | Non       |
+| `dateCreation`      | `Date`                 | La date de création de la playlist.              | Non          | Non       |
+| `playlistThumbnail` | `String`               | URL de la miniature du morceau dans la playlist. | Oui          | Non       |
+| `musics`            | `Objects[]`            | La liste des morceaux de musique de la playlist. | Oui          | Non       |
+| `musics.musicId`    | `ObjectId`             | L'ID de la musique.                              | Oui          | Non       |
+| `musics.catalogId`  | `ObjectId`             | L'ID du catalogue auquel appartient la musique.  | Oui          | Non       |
 
 ---
 
@@ -229,7 +231,7 @@ interface PatchArtistData {
 
 | **Field Name**      | **Type**                     | **Description**                               | **Required** | **Index** |
 | ------------------- | ---------------------------- | --------------------------------------------- | ------------ | --------- |
-| `id`                | `ObjectId`                   | Identifiant unique de l'user.                 | Oui          | Non       |
+| `id [PRIMARY KEY]`  | `ObjectId`                   | Identifiant unique de l'user.                 | Oui          | Non       |
 | `name`              | `String`                     | Nom de l'utilisateur                          | Oui          | Non       |
 | `email`             | `String`                     | Email de l'utilisateur                        | Oui          | Unique    |
 | `dateCreation`      | `Date`                       | Date de création                              | Non          | Non       |
