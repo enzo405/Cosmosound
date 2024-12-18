@@ -8,7 +8,7 @@ export const defaultUser: UserDetails = {
   id: 1,
   name: "John",
   email: "john.doe@gmail.com",
-  pictureProfile: "/src/assets/img/header/default_avatar.png",
+  pictureProfile: "/img/header/default_avatar.png",
   dateCreation: "08-10-2024",
   followers: 0,
   likedArtists: [
