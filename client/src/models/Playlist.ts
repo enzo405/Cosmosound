@@ -8,12 +8,12 @@ export interface Playlist {
   dateCreation: string; // Date in UTC of the creation of the account
   owner: User; // User that created the playlist
   musics: Array<PlaylistMusic>;
+  playlistThumbnail: string;
 }
 
 export interface PlaylistMusic {
   id: string;
   title: string;
-  playlistThumbnail: string;
   dateCreation: string;
   duration: number;
   genres: Array<Genre>;

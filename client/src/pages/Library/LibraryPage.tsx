@@ -57,7 +57,7 @@ function LibraryPage(): ReactElement {
             <Card
               key={playlist.id}
               description={playlist.owner.name}
-              thumbnail={playlist.musics[0].playlistThumbnail}
+              thumbnail={playlist.playlistThumbnail}
               title={playlist.title}
               link={routesConfig.playlist.getParameter(playlist.id)}
               defaultLiked={user.likedPlaylists.find((id) => id == playlist.id) != undefined}

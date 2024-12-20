@@ -75,7 +75,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
 
   return (
     <PageLayout
-      thumbnail={playlist.musics[0].playlistThumbnail}
+      thumbnail={playlist.playlistThumbnail}
       settingsComponent={
         <PlaylistSettings playlist={playlist} onCloseSetting={() => setDisplaySettings(false)} />
       }

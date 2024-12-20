@@ -92,7 +92,7 @@ export default function SelectPlaylist({
             className="flex flex-row gap-2 p-0.5 rounded-lg items-center hover:bg-gray-200 cursor-pointer">
             <img
               className="mm-size-7 rounded-md"
-              src={p.musics[0].playlistThumbnail}
+              src={p.playlistThumbnail}
               alt={`${p.title} thumbnail`}
             />
             <span className="truncate">{p.title}</span>
