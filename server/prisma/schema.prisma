@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Playlist {
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
+  title             String
+  owner             String            @db.ObjectId
+  playlistThumbnail String
+  musics            MusicInPlaylist[]
+  createdAt         DateTime          @default(now()) @map("created_at") @db.Timestamp
+  updatedAt         DateTime          @updatedAt @map("updated_at") @db.Timestamp
+}
+
+model MusicInPlaylist {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  musicId    String   @db.ObjectId
+  catalogId  String   @db.ObjectId
+  playlistId String   @db.ObjectId
+  Playlist   Playlist @relation(fields: [playlistId], references: [id])
+}
+
+model Catalog {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  owner        String      @db.ObjectId
+  dateCreation DateTime    @default(now())
+  thumbnail    String
+  type         CatalogType
+  musics       Music[]
+  createdAt    DateTime    @default(now()) @map("created_at") @db.Timestamp
+  updatedAt    DateTime    @updatedAt @map("updated_at") @db.Timestamp
+}
+
+model Music {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  dateCreation DateTime
+  duration     Int
+  genres       String[]
+  catalogId    String   @db.ObjectId
+  Catalog      Catalog  @relation(fields: [catalogId], references: [id])
+}
+
+model User {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String        @unique
+  pictureProfile String?
+  followers      Int           @default(0)
+  likedArtists   String[]      @db.ObjectId
+  likedMusics    String[]      @db.ObjectId
+  likedCatalogs  String[]      @db.ObjectId
+  likedGenres    String[]
+  likedPlaylists String[]      @db.ObjectId
+  role           UserRole      @default(USER)
+  isVerified     Boolean       @default(false)
+  socialMedia    SocialMedia[]
+  genre          String?
+  artistName     String?
+  createdAt      DateTime      @default(now()) @map("created_at") @db.Timestamp
+  updatedAt      DateTime      @updatedAt @map("updated_at") @db.Timestamp
+}
+
+model SocialMedia {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  media  String?
+  link   String?
+  userId String  @db.ObjectId
+  User   User    @relation(fields: [userId], references: [id])
+}
+
+enum CatalogType {
+  SINGLE
+  ALBUM
+  EP
+}
+
+enum UserRole {
+  USER
+  ARTIST
+}

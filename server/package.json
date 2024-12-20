@@ -1,20 +1,23 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "main": "app.ts",
   "scripts": {
-    "dev": "nodemon app.ts"
+    "dev": "nodemon --watch src -e js,ts,json --exec ts-node -r tsconfig-paths/register ./app.ts"
   },
-  "keywords": [],
-  "author": "",
   "dependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.10.2",
-    "express": "^4.21.2",
+    "@prisma/client": "^6.1.0",
     "dotenv": "^16.4.7",
-    "mongoose": "^8.9.1"
+    "express": "^4.21.2",
+    "prisma": "^6.1.0",
+    "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   }
 }
