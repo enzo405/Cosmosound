@@ -1,17 +1,19 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
+import morgan from "morgan";
+import authRouter from "./routes/auth.route";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
-const ADDRESS = process.env.HOSTNAME || "localhost";
+const PORT = process.env.PORT || 4000;
 
-// Initialize Prisma Client
 const prisma = new PrismaClient();
 
 const app = express();
 app.use(express.json());
+app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
+app.use("/auth", authRouter);
 
 async function connectDatabase() {
   try {
@@ -24,7 +26,7 @@ async function connectDatabase() {
 }
 
 app.listen(PORT, () => {
-  console.log(`Server running on ${ADDRESS}:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
 
 connectDatabase();

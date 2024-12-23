@@ -1,0 +1,54 @@
+services:
+  express:
+    build: 
+      context: .
+      dockerfile: express.Dockerfile
+    container_name: express_api
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app:cached
+      - /app/node_modules
+    depends_on:
+      mongodb-setup:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+
+  mongodb:
+    container_name: mongodb
+    build: 
+      context: mongodb_rs/
+      dockerfile: mongodb.Dockerfile
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok | mongosh localhost:27017/test --quiet'
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  mongodb-setup:
+    image: mongo:8.0
+    container_name: mongodb-setup
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: "no"
+    command: >
+      mongosh --username root --password root --host mongodb --port 27017 --eval '
+        config = {
+          "_id": "rs0",
+          "members": [
+            { "_id": 0, "host": "mongodb:27017", "priority": 1 }
+          ]
+        },
+        rs.initiate(config);'
+
+volumes:
+  mongodb_data:
+    driver: local

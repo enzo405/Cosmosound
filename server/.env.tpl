@@ -1,6 +1,4 @@
-PORT = ""
-HOSTNAME = ""
-DB_HOST = ""
-DB_NAME = ""
-DB_USER = ""
-DB_PASSWORD = ""
+PORT = 4000
+HOSTNAME = localhost
+DATABASE_URL = mongodb://<username>:<password>@<host>:<port>/<db>?replicaSet=rs0
+JWT_SECRET = ***

@@ -7,51 +7,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Playlist {
+model Playlists {
   id                String            @id @default(auto()) @map("_id") @db.ObjectId
   title             String
   owner             String            @db.ObjectId
   playlistThumbnail String
   musics            MusicInPlaylist[]
-  createdAt         DateTime          @default(now()) @map("created_at") @db.Timestamp
-  updatedAt         DateTime          @updatedAt @map("updated_at") @db.Timestamp
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 }
 
-model MusicInPlaylist {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  musicId    String   @db.ObjectId
-  catalogId  String   @db.ObjectId
-  playlistId String   @db.ObjectId
-  Playlist   Playlist @relation(fields: [playlistId], references: [id])
+type MusicInPlaylist {
+  musicId   String @db.ObjectId
+  catalogId String @db.ObjectId
 }
 
-model Catalog {
+model Catalogs {
   id           String      @id @default(auto()) @map("_id") @db.ObjectId
   title        String
   owner        String      @db.ObjectId
   dateCreation DateTime    @default(now())
   thumbnail    String
-  type         CatalogType
+  type         TypeCatalog
   musics       Music[]
-  createdAt    DateTime    @default(now()) @map("created_at") @db.Timestamp
-  updatedAt    DateTime    @updatedAt @map("updated_at") @db.Timestamp
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
-model Music {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+enum TypeCatalog {
+  SINGLE
+  ALBUM
+  EP
+}
+
+type Music {
+  id           String   @db.ObjectId
   title        String
   dateCreation DateTime
   duration     Int
   genres       String[]
-  catalogId    String   @db.ObjectId
-  Catalog      Catalog  @relation(fields: [catalogId], references: [id])
 }
 
-model User {
+model Users {
   id             String        @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   email          String        @unique
-  pictureProfile String?
+  password       String
+  pictureProfile String
   followers      Int           @default(0)
   likedArtists   String[]      @db.ObjectId
   likedMusics    String[]      @db.ObjectId
@@ -61,27 +63,18 @@ model User {
   role           UserRole      @default(USER)
   isVerified     Boolean       @default(false)
   socialMedia    SocialMedia[]
-  genre          String?
   artistName     String?
-  createdAt      DateTime      @default(now()) @map("created_at") @db.Timestamp
-  updatedAt      DateTime      @updatedAt @map("updated_at") @db.Timestamp
-}
-
-model SocialMedia {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
-  media  String?
-  link   String?
-  userId String  @db.ObjectId
-  User   User    @relation(fields: [userId], references: [id])
-}
-
-enum CatalogType {
-  SINGLE
-  ALBUM
-  EP
+  genre          String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 }
 
 enum UserRole {
   USER
-  ARTIST
+  ARTISTS
+}
+
+type SocialMedia {
+  media String?
+  link  String?
 }
