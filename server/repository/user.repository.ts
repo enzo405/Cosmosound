@@ -1,7 +1,7 @@
 import { Prisma, PrismaClient, Users } from "@prisma/client"; // Import the User model type
 const prisma = new PrismaClient();
 
-const saveUser = async (userData: Prisma.UsersCreateInput): Promise<Users> => {
+const createUser = async (userData: Prisma.UsersCreateInput): Promise<Users> => {
   const newUser = await prisma.users.create({
     data: userData,
   });
@@ -33,4 +33,15 @@ const getUserById = async (id: string): Promise<Users | null> => {
   }
 };
 
-export default { saveUser, getUserByEmail, getUserById };
+const saveRefreshToken = async (refreshToken: string, id: string) => {
+  await prisma.users.update({
+    where: {
+      id: id,
+    },
+    data: {
+      refreshToken: refreshToken,
+    },
+  });
+};
+
+export default { createUser, getUserByEmail, getUserById, saveRefreshToken };
