@@ -1,16 +1,16 @@
 import { Response, Request, NextFunction } from "express";
 import { UserRequest } from "./auth.middleware";
-import userService from "@/services/user.service";
+import { JwtPayload } from "jsonwebtoken";
+import { UserRole } from "@prisma/client";
 require("dotenv").config();
 
 const artist = (req: UserRequest, res: Response, next: NextFunction) => {
   try {
-    const user = req.user!;
+    const userRole = (req.user as JwtPayload).userRole as UserRole;
 
-    console.log("user", user);
-
-    // const artist = userService.getUserById(user)
-    // if (req.user["s"] != null)
+    if (userRole != UserRole.ARTISTS) {
+      throw "You are not allowed to access this resource";
+    }
 
     next();
   } catch (error) {

@@ -1,14 +1,11 @@
 import userService from "@/services/user.service";
-import { Response, Request, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { UserRequest } from "./auth.middleware";
 require("dotenv").config();
 
-export interface RefreshRequest extends Request {
-  refreshPayload?: JwtPayload | string;
-}
-
-const refreshToken = async (req: RefreshRequest, res: Response, next: NextFunction) => {
+const refreshToken = async (req: UserRequest, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
@@ -22,7 +19,7 @@ const refreshToken = async (req: RefreshRequest, res: Response, next: NextFuncti
       throw "Unauthorized access.";
     }
 
-    req.refreshPayload = payload;
+    req.user = payload;
 
     next();
   } catch (error) {

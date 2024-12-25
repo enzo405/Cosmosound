@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Response, Request } from "express";
 import { UserRequest } from "@/middlewares/auth.middleware";
-import { RefreshRequest } from "@/middlewares/refresh.middleware";
 require("dotenv").config();
 
 const EXPIRED_TOKEN = "10m";
@@ -32,13 +31,16 @@ const signIn = async (req: Request, res: Response) => {
 
     if (userExist == null) throw errorMessage;
 
+    const userRole = userExist.role;
     const isVerif = await bcrypt.compare(password, userExist.password);
 
     if (!isVerif) throw errorMessage;
 
     const sub = userExist.id;
-    const token = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: EXPIRED_TOKEN });
-    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET_REFRESH!, {
+    const token = jwt.sign({ sub, userRole }, process.env.JWT_SECRET!, {
+      expiresIn: EXPIRED_TOKEN,
+    });
+    const refreshToken = jwt.sign({ sub, userRole }, process.env.JWT_SECRET_REFRESH!, {
       expiresIn: EXPIRED_REFRESH_TOKEN,
     });
 
@@ -62,14 +64,17 @@ const getProfile = async (req: UserRequest, res: Response) => {
   }
 };
 
-const getRefreshToken = async (req: RefreshRequest, res: Response) => {
+const getRefreshToken = async (req: UserRequest, res: Response) => {
   try {
-    const userId = (req.refreshPayload as JwtPayload).sub;
-    if (!userId) throw "Error parsing content from the payload";
+    const id = (req.user as JwtPayload).sub;
+    const userRole = (req.user as JwtPayload).userRole;
+    if (!id) throw "Error parsing content from the payload";
 
-    const sub = userId;
-    const token = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: EXPIRED_TOKEN });
-    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET_REFRESH!, {
+    const sub = id;
+    const token = jwt.sign({ sub, userRole }, process.env.JWT_SECRET!, {
+      expiresIn: EXPIRED_TOKEN,
+    });
+    const refreshToken = jwt.sign({ sub, userRole }, process.env.JWT_SECRET_REFRESH!, {
       expiresIn: EXPIRED_REFRESH_TOKEN,
     });
 
