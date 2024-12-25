@@ -7,6 +7,9 @@ import { UserRequest } from "@/middlewares/auth.middleware";
 import { RefreshRequest } from "@/middlewares/refresh.middleware";
 require("dotenv").config();
 
+const EXPIRED_TOKEN = "10m";
+const EXPIRED_REFRESH_TOKEN = "7d";
+
 const signUp = async (req: Request, res: Response) => {
   const { name, email, password, pictureProfile } = req.body;
 
@@ -22,25 +25,25 @@ const signUp = async (req: Request, res: Response) => {
 
 const signIn = async (req: Request, res: Response) => {
   const { email, password } = req.body;
+  const errorMessage = "Invalid credentials.";
 
   try {
     const userExist = await userService.getUserByEmail(email);
 
-    if (userExist == null) {
-      throw "User doesn't exist.";
-    }
+    if (userExist == null) throw errorMessage;
 
     const isVerif = await bcrypt.compare(password, userExist.password);
 
-    if (!isVerif) {
-      throw "Connection refused.";
-    }
+    if (!isVerif) throw errorMessage;
 
     const sub = userExist.id;
-    const token = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: "10m" });
-    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: "7d" });
+    const token = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: EXPIRED_TOKEN });
+    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET!, {
+      expiresIn: EXPIRED_REFRESH_TOKEN,
+    });
 
-    await authService.saveRefreshToken(refreshToken, sub);
+    const encryptedRefreshToken = await bcrypt.hash(refreshToken, 10);
+    await authService.saveRefreshToken(encryptedRefreshToken, sub);
 
     res.status(200).json({ token, refreshToken });
   } catch (error) {
@@ -62,12 +65,16 @@ const getProfile = async (req: UserRequest, res: Response) => {
 const getRefreshToken = async (req: RefreshRequest, res: Response) => {
   try {
     const userId = (req.refreshPayload as JwtPayload).sub;
+    if (!userId) throw "Error parsing content from the payload";
 
     const sub = userId;
-    const token = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: "10m" });
-    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: "7d" });
+    const token = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: EXPIRED_TOKEN });
+    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET!, {
+      expiresIn: EXPIRED_REFRESH_TOKEN,
+    });
 
-    await authService.saveRefreshToken(refreshToken, sub as string);
+    const encryptedRefreshToken = await bcrypt.hash(refreshToken, 10);
+    await authService.saveRefreshToken(encryptedRefreshToken, sub);
     res.status(200).json({ token, refreshToken });
   } catch (error) {
     res.status(401).json({ message: "An error occured while trying to refresh the access token." });

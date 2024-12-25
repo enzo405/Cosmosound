@@ -3,15 +3,22 @@ import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import authRouter from "./routes/auth.route";
+import cors from "cors";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
+const corsOptions = {
+  origin: process.env.ALLOWED_ORIGINS!.split(","),
+  methods: process.env.ALLOWED_METHODS!.split(","),
+  allowedHeaders: ["Authorization", "Content-Type"],
+};
 
 const prisma = new PrismaClient();
 
 const app = express();
 app.use(express.json());
+app.use(cors(corsOptions));
 app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
 app.use("/auth", authRouter);
 

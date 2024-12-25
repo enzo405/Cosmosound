@@ -9,12 +9,12 @@ export interface UserRequest extends Request {
 const auth = (req: UserRequest, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
-    if (!token) throw "Authorization token is missing. Please provide a valid token in the 'Authorization' header.";
+    if (!token) throw "Unauthorized access.";
 
     const payload = jwt.verify(token, process.env.JWT_SECRET!);
 
     if (!payload) {
-      throw "You do not have access to this route";
+      throw "Unauthorized access.";
     }
 
     req.user = payload;
