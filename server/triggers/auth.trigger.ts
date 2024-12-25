@@ -38,7 +38,7 @@ const signIn = async (req: Request, res: Response) => {
 
     const sub = userExist.id;
     const token = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: EXPIRED_TOKEN });
-    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET!, {
+    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET_REFRESH!, {
       expiresIn: EXPIRED_REFRESH_TOKEN,
     });
 
@@ -69,7 +69,7 @@ const getRefreshToken = async (req: RefreshRequest, res: Response) => {
 
     const sub = userId;
     const token = jwt.sign({ sub }, process.env.JWT_SECRET!, { expiresIn: EXPIRED_TOKEN });
-    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET!, {
+    const refreshToken = jwt.sign({ sub }, process.env.JWT_SECRET_REFRESH!, {
       expiresIn: EXPIRED_REFRESH_TOKEN,
     });
 

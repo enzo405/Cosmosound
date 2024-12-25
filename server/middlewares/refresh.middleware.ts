@@ -15,7 +15,7 @@ const refreshToken = async (req: RefreshRequest, res: Response, next: NextFuncti
       throw "Unauthorized access.";
     }
 
-    const payload = jwt.verify(token, process.env.JWT_SECRET!);
+    const payload = jwt.verify(token, process.env.JWT_SECRET_REFRESH!);
     const user = await userService.getUserById(payload.sub as string);
 
     if (!user || !user.refreshToken || !(await bcrypt.compare(token, user.refreshToken))) {
