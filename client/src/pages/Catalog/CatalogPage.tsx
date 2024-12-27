@@ -30,7 +30,7 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   const { user } = useUser();
 
   const [isCatalogLiked, setIsCatalogLiked] = useState<boolean>(
-    user.likedCatalogs.find((id) => id == catalog.id) !== undefined,
+    user?.likedCatalogs.find((id) => id == catalog.id) !== undefined,
   );
   const [displaySettings, setDisplaySettings] = useState(false);
 

@@ -36,7 +36,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   const { user } = useUser();
 
   const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(
-    user.likedPlaylists.find((id) => id == playlist.id) !== undefined,
+    user?.likedPlaylists.find((id) => id == playlist.id) !== undefined,
   );
   const [displaySettings, setDisplaySettings] = useState(false);
 

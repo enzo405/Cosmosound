@@ -8,20 +8,18 @@ export interface UserRequest extends Request {
 
 const auth = (req: UserRequest, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.cookies.token;
     if (!token) throw "Unauthorized access.";
 
     const payload = jwt.verify(token, process.env.JWT_SECRET!);
 
-    if (!payload) {
-      throw "Unauthorized access.";
-    }
+    if (!payload) throw "Unauthorized access.";
 
     req.user = payload;
 
     next();
   } catch (error) {
-    res.status(401).json(error);
+    res.status(401).json("Unauthorized access.");
   }
 };
 

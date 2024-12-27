@@ -40,7 +40,7 @@ export default function MusicItem({
   const [displaySettings, setDisplaySettings] = useState<boolean>(false);
   const [displayPlay, setDisplayPlay] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(
-    user.likedMusics.find((id) => id == music.id.toString()) !== undefined,
+    user?.likedMusics.find((id) => id == music.id.toString()) !== undefined,
   );
   const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();

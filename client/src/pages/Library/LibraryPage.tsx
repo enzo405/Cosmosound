@@ -44,6 +44,9 @@ function LibraryPage(): ReactElement {
     }
   };
 
+  const myPlaylists = user ? PlaylistService.getMyPlaylist(user) : [];
+  const myGenres = user ? GenresService.getMyFavouriteGenres(user) : [];
+
   return (
     <div className="flex flex-col gap-10">
       <ScrollableBox title="Favourite Artists">
@@ -52,7 +55,7 @@ function LibraryPage(): ReactElement {
         })}
       </ScrollableBox>
       <ScrollableBox title="Liked Playlist">
-        {PlaylistService.getMyPlaylist(user).map((playlist) => {
+        {myPlaylists.map((playlist) => {
           return (
             <Card
               key={playlist.id}
@@ -60,20 +63,20 @@ function LibraryPage(): ReactElement {
               thumbnail={playlist.playlistThumbnail}
               title={playlist.title}
               link={routesConfig.playlist.getParameter(playlist.id)}
-              defaultLiked={user.likedPlaylists.find((id) => id == playlist.id) != undefined}
+              defaultLiked={user?.likedPlaylists.find((id) => id == playlist.id) != undefined}
               onLike={(like) => onLikePlaylist(like, playlist)}
             />
           );
         })}
       </ScrollableBox>
       <Box title="Liked Genres" className="flex-wrap">
-        {GenresService.getMyFavouriteGenres(user).map((genre) => {
+        {myGenres.map((genre) => {
           return (
             <SmallCard
               key={genre.name}
               title={genre.name}
               link={routesConfig.genres.getParameter(genre.name)}
-              defaultLiked={user.likedGenres.find((id) => id == genre.name) != undefined}
+              defaultLiked={user?.likedGenres.find((id) => id == genre.name) != undefined}
               onLike={(like) => onLikeGenre(like, genre)}
             />
           );

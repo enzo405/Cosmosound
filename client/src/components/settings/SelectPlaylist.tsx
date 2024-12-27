@@ -46,7 +46,10 @@ export default function SelectPlaylist({
     }
   };
 
-  const playlists = useMemo(() => PlaylistService.getMyPlaylist(user), []);
+  const playlists = useMemo(() => {
+    if (!user) return [];
+    return PlaylistService.getMyPlaylist(user);
+  }, []);
 
   const filteredPlaylists = playlists.filter((playlist) =>
     playlist.title.toLowerCase().includes(searchTerm.toLowerCase()),

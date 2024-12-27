@@ -38,7 +38,7 @@ export default function Suggestions({ catalogs }: SuggestionsProps): ReactElemen
             link={`/catalog/${catalog.id}`}
             thumbnail={catalog.thumbnail}
             defaultLiked={
-              user.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined
+              user?.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined
             }
             onLike={(like) => onLikeCatalog(like, catalog)}
           />

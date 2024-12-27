@@ -174,7 +174,9 @@ function ExplorePage(): ReactElement {
                       description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
                       link={`/catalog/${catalog.id}`}
                       thumbnail={catalog.thumbnail}
-                      defaultLiked={user.likedCatalogs.find((id) => id == catalog.id) !== undefined}
+                      defaultLiked={
+                        user?.likedCatalogs.find((id) => id == catalog.id) !== undefined
+                      }
                       onLike={(like) => onLikeCatalog(like, catalog)}
                     />
                   );
@@ -195,7 +197,7 @@ function ExplorePage(): ReactElement {
                     description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
                     link={`/catalog/${catalog.id}`}
                     thumbnail={catalog.thumbnail}
-                    defaultLiked={user.likedCatalogs.find((id) => id == catalog.id) !== undefined}
+                    defaultLiked={user?.likedCatalogs.find((id) => id == catalog.id) !== undefined}
                     onLike={(like) => onLikeCatalog(like, catalog)}
                   />
                 );
@@ -217,7 +219,7 @@ function ExplorePage(): ReactElement {
                       link={`/playlist/${playlist.id}`}
                       thumbnail={playlist.playlistThumbnail}
                       defaultLiked={
-                        user.likedPlaylists.find((id) => id == playlist.id) !== undefined
+                        user?.likedPlaylists.find((id) => id == playlist.id) !== undefined
                       }
                       onLike={(like) => onLikePlaylist(like, playlist)}
                     />
@@ -237,7 +239,7 @@ function ExplorePage(): ReactElement {
                       key={genre.name}
                       title={genre.name}
                       defaultLiked={
-                        user.likedGenres.find((name) => name == genre.name) !== undefined
+                        user?.likedGenres.find((name) => name == genre.name) !== undefined
                       }
                       link={routesConfig.genres.getParameter(genre.name)}
                       onLike={(like) => onLikeGenre(like, genre)}

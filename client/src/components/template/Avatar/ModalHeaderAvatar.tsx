@@ -1,6 +1,6 @@
 import Divider from "components/Divider";
 import { routesConfig } from "config/app-config";
-import { useEffect, useMemo, useRef, useState, type ReactElement } from "react";
+import { useEffect, useRef, useState, type ReactElement } from "react";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { Icon } from "components/icons/Icon";
 import SettingsOptions from "components/settings/SettingsOptions";
@@ -8,14 +8,12 @@ import { useTheme } from "hooks/useTheme";
 import { useNavigate } from "react-router-dom";
 import { useOpenAvatarModal } from "hooks/useOpenAvatarModal";
 import { useScreenSize } from "hooks/useScreenSize";
-import UserService from "services/userService";
+import { useUser } from "hooks/useUser";
 
 interface DropdownHeaderAvatar {}
 
 export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactElement {
-  const connectedUser = useMemo(() => {
-    return UserService.getUser();
-  }, []);
+  const { user } = useUser();
   const { theme, setTheme } = useTheme();
   const [checked, setChecked] = useState(theme === "dark");
   const { isModalOpen, closeModal } = useOpenAvatarModal();
@@ -62,12 +60,12 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
         <SettingsOptions>
           <img
             className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300"
-            src={connectedUser.pictureProfile}
+            src={user?.pictureProfile}
             alt="profile picture"
           />
           <span className="ml-2">
-            <p>{connectedUser.name}</p>
-            <p className="text-dark-grey text-base">{connectedUser.email}</p>
+            <p>{user?.name}</p>
+            <p className="text-dark-grey text-base">{user?.email}</p>
           </span>
         </SettingsOptions>
         <Divider />

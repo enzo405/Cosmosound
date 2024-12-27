@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const refreshToken = async (req: UserRequest, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.cookies.refreshToken;
     if (!token) {
       throw "Unauthorized access.";
     }

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "dev": "pnpm i && nodemon -e js,ts,json --exec ts-node -r tsconfig-paths/register ./app.ts"
+    "dev": "pnpm i && tsx watch ./app.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",

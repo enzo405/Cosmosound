@@ -5,6 +5,7 @@ import UnauthenticatedRoot from "components/template/UnauthenticatedRoot";
 import RegisterPage from "pages/Register/RegisterPage";
 import LoginPage from "pages/Login/LoginPage";
 import AboutUsPage from "pages/AboutUs/AboutUsPage";
+import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
 
 const unAuthenticatedRouter = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const unAuthenticatedRouter = createBrowserRouter([
       {
         path: routesConfig.login.path,
         element: <LoginPage />,
+      },
+      {
+        path: routesConfig.any.path,
+        element: <NotFoundErrorPage />,
       },
     ],
   },

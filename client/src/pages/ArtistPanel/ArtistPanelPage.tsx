@@ -31,7 +31,7 @@ export interface ArtistPanelFormData {
 export default function ArtistPanelPage(): ReactElement {
   const { user } = useUser();
   const { openDialog } = useConfirmDialog();
-  const artist = useMemo(() => ArtistService.getArtistById(user.id), []);
+  const artist = useMemo(() => ArtistService.getArtistById(user?.id), []);
   if (artist == undefined) return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
 
   const {
