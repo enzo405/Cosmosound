@@ -70,16 +70,16 @@ const getProfile = async (req: UserRequest, res: Response) => {
   const userId = (req.user as JwtPayload).sub;
 
   if (!userId) {
-    return res
+    res
       .status(401)
       .json({ message: "An error occurred while trying to retrieve the current user." });
-  }
-
-  try {
-    const user = await userService.getUserById(userId);
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json({ message: "An error occurred while retrieving the user profile." });
+  } else {
+    try {
+      const user = await userService.getUserById(userId);
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ message: "An error occurred while retrieving the user profile." });
+    }
   }
 };
 
@@ -120,4 +120,34 @@ const getRefreshToken = async (req: UserRequest, res: Response) => {
   }
 };
 
-export default { getProfile, signUp, signIn, getRefreshToken };
+const logout = async (req: Request, res: Response) => {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (refreshToken) {
+      const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET_REFRESH!);
+      const userId = (decoded as jwt.JwtPayload).sub;
+
+      if (userId) {
+        await authService.deleteRefreshToken(userId);
+      }
+    }
+
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
+    res.status(200).json({ message: "Logged out successfully." });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred during logout." });
+  }
+};
+
+export default { getProfile, signUp, signIn, getRefreshToken, logout };

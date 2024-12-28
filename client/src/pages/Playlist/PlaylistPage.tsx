@@ -85,7 +85,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
           <span className="font-light flex flex-wrap gap-1">
             <p>Made by </p>
             <PlaylistOwnerBadge owner={playlist.owner} />
-            <span>on {formatTime(playlist.dateCreation)}</span>
+            <span>on {formatTime(playlist.createdAt)}</span>
           </span>
           <span>
             {playlist.musics.length} songs (

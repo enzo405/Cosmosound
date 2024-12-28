@@ -4,4 +4,8 @@ const saveRefreshToken = async (refreshToken: string, id: string) => {
   return await userRepository.saveRefreshToken(refreshToken, id);
 };
 
-export default { saveRefreshToken };
+const deleteRefreshToken = async (userId: string) => {
+  return await userRepository.deleteRefreshToken(userId);
+};
+
+export default { saveRefreshToken, deleteRefreshToken };

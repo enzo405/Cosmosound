@@ -9,11 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { useOpenAvatarModal } from "hooks/useOpenAvatarModal";
 import { useScreenSize } from "hooks/useScreenSize";
 import { useUser } from "hooks/useUser";
+import UserService from "services/userService";
 
 interface DropdownHeaderAvatar {}
 
 export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactElement {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const { theme, setTheme } = useTheme();
   const [checked, setChecked] = useState(theme === "dark");
   const { isModalOpen, closeModal } = useOpenAvatarModal();
@@ -47,6 +48,17 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
       setTheme("light");
     }
   }, [checked]);
+
+  const logout = async () => {
+    await UserService.logout()
+      .then(() => {
+        setUser(undefined);
+        navigate(routesConfig.home.path);
+      })
+      .catch(() => {
+        throw new Error("An error occured while trying to logout");
+      });
+  };
 
   return (
     <div
@@ -106,7 +118,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
         </SettingsOptions>
         <Divider />
         {/* Footer Section */}
-        <SettingsOptions className="cursor-pointer gap-2 text-dark-grey text-base">
+        <SettingsOptions className="cursor-pointer gap-2 text-dark-grey text-base" onClick={logout}>
           <Icon iconName="logout" className="mr-1 w-5 h-5" />
           Logout
         </SettingsOptions>

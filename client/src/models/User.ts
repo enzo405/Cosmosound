@@ -8,6 +8,9 @@ export interface User {
   dateCreation: string; // Date in UTC of the creation of the account
   pictureProfile: string;
   followers: number;
+  role: "ARTISTS" | "USER";
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface UserDetails extends User {

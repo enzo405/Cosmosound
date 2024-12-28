@@ -5,7 +5,6 @@ import HomePage from "pages/Home/HomePage";
 import ErrorPage from "pages/errors/ErrorPage";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
 import AccountPage from "pages/Account/AccountPage";
-import RegisterPage from "pages/Register/RegisterPage";
 import LibraryPage from "pages/Library/LibraryPage";
 import ExplorePage from "pages/Explore/ExplorePage";
 import AboutUsPage from "pages/AboutUs/AboutUsPage";
@@ -30,10 +29,6 @@ const authenticatedRouter = createBrowserRouter([
       {
         path: routesConfig.account.path,
         element: <AccountPage />,
-      },
-      {
-        path: routesConfig.register.path,
-        element: <RegisterPage />,
       },
       {
         path: routesConfig.explore.path,

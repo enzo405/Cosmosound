@@ -44,4 +44,15 @@ const saveRefreshToken = async (refreshToken: string, id: string) => {
   });
 };
 
-export default { createUser, getUserByEmail, getUserById, saveRefreshToken };
+const deleteRefreshToken = async (userId: string) => {
+  await prisma.users.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      refreshToken: null,
+    },
+  });
+};
+
+export default { createUser, getUserByEmail, getUserById, saveRefreshToken, deleteRefreshToken };

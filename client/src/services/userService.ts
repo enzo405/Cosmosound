@@ -35,6 +35,10 @@ async function register(
   });
 }
 
+async function logout() {
+  return apiClient.post("/auth/logout");
+}
+
 function like(item: Artist | Genre | Playlist | Catalog | Music): void {
   console.log("like item", item);
 }
@@ -51,6 +55,7 @@ const UserService = {
   getMe,
   login,
   register,
+  logout,
   like,
   removeLike,
   saveData,

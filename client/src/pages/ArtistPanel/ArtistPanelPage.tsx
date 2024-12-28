@@ -17,6 +17,7 @@ import { Icon } from "components/icons/Icon";
 import { useNavigate } from "react-router-dom";
 import { routesConfig } from "config/app-config";
 import { useConfirmDialog } from "hooks/useConfirm";
+import ArtistRestrictedPage from "pages/errors/ArtistRestrictedPage";
 
 export interface ArtistPanelFormData {
   artistName?: string;
@@ -30,6 +31,9 @@ export interface ArtistPanelFormData {
 
 export default function ArtistPanelPage(): ReactElement {
   const { user } = useUser();
+
+  if (user?.role === "USER") return <ArtistRestrictedPage />;
+
   const { openDialog } = useConfirmDialog();
   const artist = useMemo(() => ArtistService.getArtistById(user?.id), []);
   if (artist == undefined) return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
