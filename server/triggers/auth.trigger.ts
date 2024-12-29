@@ -4,18 +4,31 @@ import bcrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Response, Request } from "express";
 import { UserRequest } from "@/middlewares/auth.middleware";
+import nextcloudService from "@/services/nextcloud.service";
 require("dotenv").config();
 
 const EXPIRED_TOKEN = "10m";
 const EXPIRED_REFRESH_TOKEN = "7d";
 
 const signUp = async (req: Request, res: Response) => {
-  const { name, email, password, pictureProfile } = req.body;
+  const { name, email, password } = req.body;
 
   const hash = await bcrypt.hash(password, 10);
 
   try {
-    await userService.createUser({ name, email, password: hash, pictureProfile });
+    let fileUrl;
+    if (req.file) {
+      if (await userService.getUserByEmail(email)) {
+        throw new Error("Email already exists");
+      } else {
+        fileUrl = await nextcloudService.uploadPicture(req.file, "PFP");
+      }
+    } else {
+      // User is using the default picture profile
+      fileUrl = req.body.pictureProfile;
+    }
+
+    await userService.createUser({ name, email, password: hash, pictureProfile: fileUrl });
     res.status(201).json({ message: "User created successfully" });
   } catch (e) {
     res.status(500).json({ message: "An error occurred while creating the user." });

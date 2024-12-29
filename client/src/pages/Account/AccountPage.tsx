@@ -5,6 +5,7 @@ import { Icon } from "components/icons/Icon";
 import UserService from "services/userService";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { useUser } from "hooks/useUser";
+import { displayPictureProfile } from "utils/user";
 
 export interface AccountFormData {
   username?: string;
@@ -19,7 +20,7 @@ function AccountPage(): ReactElement {
   const { openDialog } = useConfirmDialog();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [preview, setPreview] = useState(user?.pictureProfile);
+  const [preview, setPreview] = useState(displayPictureProfile(user?.pictureProfile));
 
   const {
     control,

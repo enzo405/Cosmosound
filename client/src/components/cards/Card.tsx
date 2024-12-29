@@ -1,4 +1,4 @@
-import { Icon } from "components/icons/Icon";
+import HeartIcon from "components/icons/HeartIcon";
 import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -58,11 +58,7 @@ export default function Card({
       </div>
       {displayLikeBtn && (
         <div id="likeBtn" className="z-10 absolute bottom-1 right-1">
-          <Icon
-            className="size-6"
-            iconName={isLiked ? "heart-orange" : "heart-orange-empty"}
-            onClick={handleClickHeart}
-          />
+          <HeartIcon className="size-6" isLiked={isLiked} handleClickHeart={handleClickHeart} />
         </div>
       )}
     </div>

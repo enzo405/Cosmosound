@@ -24,15 +24,29 @@ async function register(
   email: string,
   password: string,
   passwordConfirm: string,
-  pictureProfile: string,
+  pictureProfile: File | string,
+  genre: string,
 ) {
-  return apiClient.post("/auth/register", {
-    name,
-    email,
-    password,
-    passwordConfirm,
-    pictureProfile,
-  });
+  if (pictureProfile instanceof File) {
+    const formData = new FormData();
+    formData.append("file", pictureProfile);
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("passwordConfirm", passwordConfirm);
+    formData.append("genre", genre);
+
+    return await apiClient.post("/auth/register", formData);
+  } else {
+    return await apiClient.post("/auth/register", {
+      name,
+      email,
+      password,
+      passwordConfirm,
+      pictureProfile,
+      genre,
+    });
+  }
 }
 
 async function logout() {

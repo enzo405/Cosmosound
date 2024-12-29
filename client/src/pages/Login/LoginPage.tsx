@@ -138,7 +138,7 @@ function LoginPage(): ReactElement {
               {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
               <button
                 type="submit"
-                className="bg-blue-500 text-white font-medium rounded-md py-2 hover:bg-blue-400 focus:outline-none">
+                className="bg-blue-500 text-white font-medium rounded-md py-2 hover:bg-blue-400 focus:outline-1">
                 Sign In
               </button>
             </div>

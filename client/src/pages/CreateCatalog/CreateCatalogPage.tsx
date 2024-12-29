@@ -9,6 +9,7 @@ import GenresService from "services/genresService";
 import NewMusic from "./components/NewMusic";
 import CatalogService from "services/catalogService";
 import { useConfirmDialog } from "hooks/useConfirm";
+import { displayPictureProfile } from "utils/user";
 
 export interface CreateCatalogFormData {
   titleCatalog: string;
@@ -41,12 +42,12 @@ export default function CreateCatalogPage(): ReactElement {
   } = useForm<CreateCatalogFormData>({
     defaultValues: {
       titleCatalog: `${artist.artistName}-${artist.catalogs.length}`,
-      thumbnailCatalog: artist.pictureProfile,
+      thumbnailCatalog: displayPictureProfile(artist.pictureProfile),
       musics: [],
     },
   });
 
-  const [preview, setPreview] = useState(artist.pictureProfile);
+  const [preview, setPreview] = useState(displayPictureProfile(artist.pictureProfile));
   const [isDragging, setIsDragging] = useState(false);
 
   const onSubmitForm = (data: CreateCatalogFormData) => {

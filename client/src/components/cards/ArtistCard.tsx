@@ -6,6 +6,7 @@ import { enqueueSnackbar } from "notistack";
 import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserService from "services/userService";
+import { displayPictureProfile } from "utils/user";
 
 interface ArtistCardProps {
   artist: Artist;
@@ -53,7 +54,7 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
       <div className="w-full flex flex-row justify-center">
         <img
           className="h-24 w-24 md:h-28 md:w-28 rounded-full object-cover pt-1"
-          src={artist.pictureProfile}
+          src={displayPictureProfile(artist.pictureProfile)}
           alt={artist.artistName}
         />
       </div>

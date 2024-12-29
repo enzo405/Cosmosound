@@ -23,6 +23,7 @@ import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
+import { displayPictureProfile } from "utils/user";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -132,7 +133,7 @@ export default function ArtistPage(): ReactElement {
 
   return (
     <PageLayout
-      thumbnail={artist.pictureProfile}
+      thumbnail={displayPictureProfile(artist.pictureProfile)}
       settingsComponent={
         <ArtistSettings artist={artist} onCloseSetting={() => setDisplaySettings(false)} />
       }

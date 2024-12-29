@@ -1,5 +1,6 @@
 import { User } from "models/User";
 import { ReactElement } from "react";
+import { displayPictureProfile } from "utils/user";
 
 interface PlaylistOwnerBadgeProps {
   owner: User;
@@ -9,7 +10,7 @@ export default function PlaylistOwnerBadge({ owner }: PlaylistOwnerBadgeProps): 
   return (
     <span className={`cursor-pointer flex flex-row gap-1`}>
       <img
-        src={owner.pictureProfile}
+        src={displayPictureProfile(owner.pictureProfile)}
         className="mm-size-5 rounded-full object-contain"
         alt={owner.name}
       />

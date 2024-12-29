@@ -10,6 +10,7 @@ import { useOpenAvatarModal } from "hooks/useOpenAvatarModal";
 import { useScreenSize } from "hooks/useScreenSize";
 import { useUser } from "hooks/useUser";
 import UserService from "services/userService";
+import { displayPictureProfile } from "utils/user";
 
 interface DropdownHeaderAvatar {}
 
@@ -72,7 +73,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
         <SettingsOptions>
           <img
             className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300"
-            src={user?.pictureProfile}
+            src={displayPictureProfile(user?.pictureProfile)}
             alt="profile picture"
           />
           <span className="ml-2">

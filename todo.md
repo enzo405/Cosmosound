@@ -9,8 +9,6 @@ Must have:
 Page prévues:
 - / : __Quand on est pas login__: Landing page avec une belle image et une description courte qui donne envie d'utiliser le service, ainsi qu'un bouton menant à la page des musiques. Plus bas dans la page, y mettre des informations plus détaillé sur le site (détail du nom, date création, but de l'app, qui suis-je). __Quand on est est loggé__: on affiche une page avec des suggestions de playlists et d'artistes basées sur les abonnements et les genres préférés de l'utilisateur (inspiration : page d'accueil de YouTube Music). Si pas d'abonnement alors on affiche des artistes random.
 - /account : Possibilité d’accéder à la gestion de nos musiques.
-- /login : Page de connexion à l'application.
-- /register : Page de création de compte utilisateurs. L'utilisateur doit ensuite choisir au moins un artiste à suivre.
 - /about-us : Copie de la landing page quand on est pas login (sans le bouton qui mene à la page des musiques).
 - /legal
 
