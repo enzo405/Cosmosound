@@ -4,7 +4,7 @@ import path from "path";
 const NEXTCLOUD_BASE_URL = process.env.NEXTCLOUD_BASE_URL!;
 const NEXTCLOUD_USERNAME = process.env.NEXTCLOUD_USERNAME!;
 const NEXTCLOUD_PASSWORD = process.env.NEXTCLOUD_PASSWORD!;
-const MAX_FILE_SIZE = 512 * 512;
+const MAX_FILE_SIZE = 100 * 100;
 
 const server: Server = new Server({
   basicAuth: { username: NEXTCLOUD_USERNAME, password: NEXTCLOUD_PASSWORD },

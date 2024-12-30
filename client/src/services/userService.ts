@@ -26,6 +26,7 @@ async function register(
   passwordConfirm: string,
   pictureProfile: File | string,
   genre: string,
+  signal?: AbortSignal,
 ) {
   if (pictureProfile instanceof File) {
     const formData = new FormData();
@@ -36,16 +37,20 @@ async function register(
     formData.append("passwordConfirm", passwordConfirm);
     formData.append("genre", genre);
 
-    return await apiClient.post("/auth/register", formData);
+    return await apiClient.post("/auth/register", formData, { signal });
   } else {
-    return await apiClient.post("/auth/register", {
-      name,
-      email,
-      password,
-      passwordConfirm,
-      pictureProfile,
-      genre,
-    });
+    return await apiClient.post(
+      "/auth/register",
+      {
+        name,
+        email,
+        password,
+        passwordConfirm,
+        pictureProfile,
+        genre,
+      },
+      { signal },
+    );
   }
 }
 

@@ -11,7 +11,7 @@ export default function PlaylistOwnerBadge({ owner }: PlaylistOwnerBadgeProps): 
     <span className={`cursor-pointer flex flex-row gap-1`}>
       <img
         src={displayPictureProfile(owner.pictureProfile)}
-        className="mm-size-5 rounded-full object-contain"
+        className="mm-size-5 rounded-full object-cover"
         alt={owner.name}
       />
       <span>{owner.name}</span>

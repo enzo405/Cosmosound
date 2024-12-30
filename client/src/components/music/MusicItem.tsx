@@ -114,7 +114,7 @@ export default function MusicItem({
               className={`relative p-0.5 ${showCatalogThumbnail ? "mm-size-16" : "mm-size-10"}`}>
               {showCatalogThumbnail ? (
                 <img
-                  className="rounded-xl object-contain h-full"
+                  className="rounded-xl object-cover h-full"
                   src={catalog.thumbnail}
                   alt={`${music.title} ${catalog.title} ${artist.artistName}`}
                 />

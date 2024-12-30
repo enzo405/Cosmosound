@@ -17,6 +17,7 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
     fetchUser();
   }, []);
+
   const value = useMemo(() => ({ user, setUser }), [user]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
