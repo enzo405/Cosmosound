@@ -14,7 +14,7 @@ const client = new Client(server);
 
 const uploadPicture = async (file: Express.Multer.File, type: "MUSIC" | "PFP"): Promise<string> => {
   if (file.size > MAX_FILE_SIZE) {
-    throw new Error("File size exceeds the 5MB limit");
+    throw new Error("File size exceeds the 100MB limit");
   }
 
   const dirPath = `/dev-CosmoSound/uploads/${type === "MUSIC" ? "music-thumbnail" : "picture-profiles"}`;

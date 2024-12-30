@@ -135,7 +135,7 @@ function RegisterPage(): ReactElement {
         />
       </div>
       <div className="w-auto min-w-0 flex flex-col flex-grow justify-center items-center gap-2 p-2">
-        <span className="font-semibold text-2xl p-4">{title()}</span>
+        <span className="flex text-center font-semibold text-2xl p-4">{title()}</span>
         <div className="flex flex-col xsm:w-4/5 sm:w-2/3 max-w-72">
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             {currentStep === 1 && (
@@ -267,7 +267,7 @@ function RegisterPage(): ReactElement {
                           const file = e.target.files?.[0];
                           if (file) {
                             if (file.size > 100 * 100) {
-                              setError("File size must be less than 5MB");
+                              setError("File size must be less than 100MB");
                               setValue("pictureProfile", defaultPictureProfile);
                             } else {
                               setError(null);

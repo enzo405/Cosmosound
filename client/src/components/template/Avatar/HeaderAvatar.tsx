@@ -14,7 +14,7 @@ function HeaderAvatar({ className = "", id }: HTMLAttributes<HTMLHRElement>): Re
       className={`${className} group cursor-pointer flex flex-row items-center`}
       onClick={toggleModal}>
       <img
-        className="size-12 p-1 rounded-xl ring-gray-300 cursor-pointer aspect-square object-cover"
+        className="mm-size-11 p-1 rounded-xl ring-gray-300 cursor-pointer aspect-square object-cover"
         src={displayPictureProfile(user?.pictureProfile)}
         alt="profile picture"
       />
