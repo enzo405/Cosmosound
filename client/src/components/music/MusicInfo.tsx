@@ -10,7 +10,7 @@ export default function MusicInfo({ music }: MusicInfoProps): ReactElement {
   return (
     <div className="flex flex-shrink overflow-hidden gap-1 xsm:gap-3 sm:gap-2">
       <img
-        className="rounded-xl w-12 h-12 min-w-12 min-h-12 sm:w-14 sm:h-14 sm:min-w-14 sm:min-h-14"
+        className="rounded-xl mm-size-12 sm:mm-size-14"
         src={music.catalog.thumbnail}
         alt={`${music.title} ${music?.artist.artistName}`}
       />

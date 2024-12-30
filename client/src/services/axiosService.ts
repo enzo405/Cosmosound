@@ -12,15 +12,13 @@ apiClient.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401) {
       if (originalRequest.url === "/auth/refresh") {
         return Promise.reject(error);
       }
       try {
         await apiClient.post("/auth/refresh");
-        originalRequest._retry = true;
-        window.location.href = "/";
-        return Promise.resolve();
+        return apiClient(originalRequest);
       } catch (refreshError) {
         return Promise.reject(refreshError);
       }

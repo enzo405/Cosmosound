@@ -241,7 +241,7 @@ function AccountPage(): ReactElement {
                       <img
                         src={preview}
                         alt="Profile"
-                        className="mm-size-20 md:mm-size-32 rounded-full border border-gray-300"
+                        className="mm-size-20 md:mm-size-32 rounded-full border border-gray-300 object-cover"
                       />
                     </label>
                   </>
