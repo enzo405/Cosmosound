@@ -70,9 +70,9 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
       }}>
       <div className="bg-white block py-1 rounded-xl w-44 xsm:w-52 sm:w-60 border border-settings-divider">
         {/* Profile Section */}
-        <SettingsOptions>
+        <SettingsOptions hoverable={false}>
           <img
-            className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300"
+            className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300 object-cover"
             src={displayPictureProfile(user?.pictureProfile)}
             alt="profile picture"
           />

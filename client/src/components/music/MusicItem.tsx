@@ -103,7 +103,7 @@ export default function MusicItem({
   return (
     <div className="relative w-full" ref={musicItemRef}>
       <div
-        className={`group flex flex-row w-full p-1 justify-between h-16 ${showCatalogThumbnail ? "md:h-[72px] lg:h-20" : "md:h-[64px] lg:h-18"} ${isCurrentMusicPlaying ? "bg-music-activ" : "hover:bg-music-hover"} rounded-xl`}>
+        className={`group flex flex-row w-full justify-between h-16 ${showCatalogThumbnail ? "md:h-[68px] lg:h-18" : "lg:h-18"} ${isCurrentMusicPlaying ? "bg-music-activ" : "hover:bg-music-hover"} rounded-xl`}>
         <div
           onDoubleClick={() => handleDoubleClickPlay(music)}
           className="flex flex-row flex-grow select-none justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer min-w-0">
@@ -111,7 +111,7 @@ export default function MusicItem({
             <div
               onMouseEnter={() => setDisplayPlay(true)}
               onMouseLeave={() => setDisplayPlay(false)}
-              className={`relative p-0.5 ${showCatalogThumbnail ? "mm-size-16" : "mm-size-10"}`}>
+              className={`relative ml-1 p-0.5 ${showCatalogThumbnail ? "mm-size-14" : "mm-size-10"}`}>
               {showCatalogThumbnail ? (
                 <img
                   className="rounded-xl object-cover h-full"
@@ -120,7 +120,7 @@ export default function MusicItem({
                 />
               ) : (
                 <div
-                  className="flex justify-center items-center h-full w-8"
+                  className="flex justify-center items-center h-full w-10"
                   onClick={() => handleClickPlay(music)}>
                   <span className="group-hover:hidden flex">{index}</span>
                   <Icon
