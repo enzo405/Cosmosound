@@ -19,7 +19,8 @@ apiClient.interceptors.response.use(
       try {
         await apiClient.post("/auth/refresh");
         originalRequest._retry = true;
-        return apiClient(originalRequest);
+        window.location.href = "/";
+        return Promise.resolve();
       } catch (refreshError) {
         return Promise.reject(refreshError);
       }
