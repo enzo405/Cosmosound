@@ -43,7 +43,7 @@ function ForbiddenErrorPage(): ReactElement {
 
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <div className="w-1/2 h-1/2 mt-10 flex flex-col justify-center items-center">
+      <div className="w-1/3 h-1/3 mt-10 flex flex-col justify-center items-center">
         <svg id="robot-error" viewBox="0 0 210 120" role="img">
           <defs>
             <clipPath id="white-clip">

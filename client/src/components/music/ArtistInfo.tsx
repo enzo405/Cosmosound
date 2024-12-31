@@ -2,6 +2,7 @@ import { routesConfig } from "config/app-config";
 import { Artist } from "models/User";
 import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
+import { displayPictureProfile } from "utils/user";
 
 interface ArtistInfoProps {
   artist: Artist;
@@ -16,7 +17,7 @@ export default function ArtistInfo({ artist, className }: ArtistInfoProps): Reac
       className={`${className} cursor-pointer hover:underline flex flex-row gap-1 min-w-0 truncate`}
       onClick={() => navigate(routesConfig.artist.getParameter(artist.id.toString()))}>
       <img
-        src={artist.pictureProfile}
+        src={displayPictureProfile(artist.pictureProfile)}
         className="mm-size-5 rounded-full flex-shrink-0"
         alt={`${artist.artistName}`}
       />

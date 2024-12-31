@@ -9,12 +9,12 @@ interface Playlist {
   dateCreation: string;
   owner: User;
   musics: Array<MusicDetails>;
+  playlistThumbnail: string;
 }
 
 export interface PlaylistMusic {
   id: string;
   title: string;
-  playlistThumbnail: string;
   dateCreation: string;
   duration: number;
   genres: Array<Genre>;

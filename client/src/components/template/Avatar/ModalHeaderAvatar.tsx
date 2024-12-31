@@ -1,6 +1,6 @@
 import Divider from "components/Divider";
 import { routesConfig } from "config/app-config";
-import { useEffect, useMemo, useRef, useState, type ReactElement } from "react";
+import { useEffect, useRef, useState, type ReactElement } from "react";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { Icon } from "components/icons/Icon";
 import SettingsOptions from "components/settings/SettingsOptions";
@@ -8,14 +8,14 @@ import { useTheme } from "hooks/useTheme";
 import { useNavigate } from "react-router-dom";
 import { useOpenAvatarModal } from "hooks/useOpenAvatarModal";
 import { useScreenSize } from "hooks/useScreenSize";
+import { useUser } from "hooks/useUser";
 import UserService from "services/userService";
+import { displayPictureProfile } from "utils/user";
 
 interface DropdownHeaderAvatar {}
 
 export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactElement {
-  const connectedUser = useMemo(() => {
-    return UserService.getUser();
-  }, []);
+  const { user, setUser } = useUser();
   const { theme, setTheme } = useTheme();
   const [checked, setChecked] = useState(theme === "dark");
   const { isModalOpen, closeModal } = useOpenAvatarModal();
@@ -50,6 +50,17 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
     }
   }, [checked]);
 
+  const logout = async () => {
+    await UserService.logout()
+      .then(() => {
+        setUser(undefined);
+        navigate(routesConfig.home.path);
+      })
+      .catch(() => {
+        throw new Error("An error occured while trying to logout");
+      });
+  };
+
   return (
     <div
       ref={modalRef}
@@ -59,15 +70,15 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
       }}>
       <div className="bg-white block py-1 rounded-xl w-44 xsm:w-52 sm:w-60 border border-settings-divider">
         {/* Profile Section */}
-        <SettingsOptions>
+        <SettingsOptions hoverable={false}>
           <img
-            className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300"
-            src={connectedUser.pictureProfile}
+            className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300 object-cover"
+            src={displayPictureProfile(user?.pictureProfile)}
             alt="profile picture"
           />
           <span className="ml-2">
-            <p>{connectedUser.name}</p>
-            <p className="text-dark-grey text-base">{connectedUser.email}</p>
+            <p>{user?.name}</p>
+            <p className="text-dark-grey text-base">{user?.email}</p>
           </span>
         </SettingsOptions>
         <Divider />
@@ -108,7 +119,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
         </SettingsOptions>
         <Divider />
         {/* Footer Section */}
-        <SettingsOptions className="cursor-pointer gap-2 text-dark-grey text-base">
+        <SettingsOptions className="cursor-pointer gap-2 text-dark-grey text-base" onClick={logout}>
           <Icon iconName="logout" className="mr-1 w-5 h-5" />
           Logout
         </SettingsOptions>

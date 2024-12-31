@@ -40,7 +40,7 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
   const { user } = useUser();
 
   const [isGenreLiked, setIsGenreLiked] = useState<boolean>(
-    user.likedGenres.find((name) => name === nameGenre) !== undefined,
+    user?.likedGenres.find((name) => name === nameGenre) !== undefined,
   );
   const [content, setContent] = useState<Catalog[] | MusicDetails[] | Playlist[] | Artist[]>([]);
   const [activeTab, setActiveTab] = useState(GenreTabs.ARTISTS);

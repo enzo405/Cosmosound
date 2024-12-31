@@ -36,7 +36,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   const { user } = useUser();
 
   const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(
-    user.likedPlaylists.find((id) => id == playlist.id) !== undefined,
+    user?.likedPlaylists.find((id) => id == playlist.id) !== undefined,
   );
   const [displaySettings, setDisplaySettings] = useState(false);
 
@@ -75,7 +75,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
 
   return (
     <PageLayout
-      thumbnail={playlist.musics[0].playlistThumbnail}
+      thumbnail={playlist.playlistThumbnail}
       settingsComponent={
         <PlaylistSettings playlist={playlist} onCloseSetting={() => setDisplaySettings(false)} />
       }
@@ -85,7 +85,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
           <span className="font-light flex flex-wrap gap-1">
             <p>Made by </p>
             <PlaylistOwnerBadge owner={playlist.owner} />
-            <span>on {formatTime(playlist.dateCreation)}</span>
+            <span>on {formatTime(playlist.createdAt)}</span>
           </span>
           <span>
             {playlist.musics.length} songs (

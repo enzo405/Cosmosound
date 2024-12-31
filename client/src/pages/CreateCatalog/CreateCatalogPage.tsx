@@ -9,6 +9,7 @@ import GenresService from "services/genresService";
 import NewMusic from "./components/NewMusic";
 import CatalogService from "services/catalogService";
 import { useConfirmDialog } from "hooks/useConfirm";
+import { displayPictureProfile } from "utils/user";
 
 export interface CreateCatalogFormData {
   titleCatalog: string;
@@ -26,7 +27,7 @@ export default function CreateCatalogPage(): ReactElement {
   const { user } = useUser();
   const { openDialog } = useConfirmDialog();
 
-  const artist = useMemo(() => ArtistService.getArtistById(user.id), []);
+  const artist = useMemo(() => ArtistService.getArtistById(user?.id), []);
   if (artist == undefined) return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
 
   const availableGenres = useMemo(() => GenresService.getAllGenres(), []);
@@ -41,12 +42,12 @@ export default function CreateCatalogPage(): ReactElement {
   } = useForm<CreateCatalogFormData>({
     defaultValues: {
       titleCatalog: `${artist.artistName}-${artist.catalogs.length}`,
-      thumbnailCatalog: artist.pictureProfile,
+      thumbnailCatalog: displayPictureProfile(artist.pictureProfile),
       musics: [],
     },
   });
 
-  const [preview, setPreview] = useState(artist.pictureProfile);
+  const [preview, setPreview] = useState(displayPictureProfile(artist.pictureProfile));
   const [isDragging, setIsDragging] = useState(false);
 
   const onSubmitForm = (data: CreateCatalogFormData) => {
@@ -191,7 +192,7 @@ export default function CreateCatalogPage(): ReactElement {
                           htmlFor="thumbnailCatalog"
                           className="relative w-min h-min cursor-pointer hover:opacity-90 flex justify-end">
                           <img
-                            src="/src/assets/img/form/edit-background.png"
+                            src="/img/form/edit-background.png"
                             alt="Edit thumbnail"
                             className="absolute z-10 top-0 right-0 mm-size-24 md:mm-size-36 opacity-90"
                           />

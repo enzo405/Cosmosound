@@ -23,6 +23,7 @@ import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
+import { displayPictureProfile } from "utils/user";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -42,7 +43,7 @@ export default function ArtistPage(): ReactElement {
   }
 
   const [isArtistLiked, setIsArtistLiked] = useState<boolean>(
-    user.likedArtists.find((id) => id == artist.id.toString()) !== undefined,
+    user?.likedArtists.find((id) => id == artist.id.toString()) !== undefined,
   );
   const [displaySettings, setDisplaySettings] = useState(false);
   const [content, setContent] = useState<Catalog[] | Music[]>([]);
@@ -132,7 +133,7 @@ export default function ArtistPage(): ReactElement {
 
   return (
     <PageLayout
-      thumbnail={artist.pictureProfile}
+      thumbnail={displayPictureProfile(artist.pictureProfile)}
       settingsComponent={
         <ArtistSettings artist={artist} onCloseSetting={() => setDisplaySettings(false)} />
       }
@@ -199,7 +200,7 @@ export default function ArtistPage(): ReactElement {
                       thumbnail={catalog.thumbnail}
                       link={routesConfig.catalog.getParameter(catalog.id)}
                       defaultLiked={
-                        user.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined
+                        user?.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined
                       }
                       onLike={(like) => onLikeCatalog(like, catalog)}
                     />

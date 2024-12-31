@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Playlists {
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
+  title             String
+  owner             String            @db.ObjectId
+  playlistThumbnail String
+  musics            MusicInPlaylist[]
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+}
+
+type MusicInPlaylist {
+  musicId   String @db.ObjectId
+  catalogId String @db.ObjectId
+}
+
+model Catalogs {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  owner        String      @db.ObjectId
+  dateCreation DateTime    @default(now())
+  thumbnail    String
+  type         TypeCatalog
+  musics       Music[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+enum TypeCatalog {
+  SINGLE
+  ALBUM
+  EP
+}
+
+type Music {
+  id           String   @db.ObjectId
+  title        String
+  dateCreation DateTime
+  duration     Int
+  genres       String[]
+}
+
+model Users {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String        @unique
+  password       String
+  pictureProfile String
+  followers      Int           @default(0)
+  likedArtists   String[]      @db.ObjectId
+  likedMusics    String[]      @db.ObjectId
+  likedCatalogs  String[]      @db.ObjectId
+  likedGenres    String[]
+  likedPlaylists String[]      @db.ObjectId
+  role           UserRole      @default(USER)
+  isVerified     Boolean       @default(false)
+  socialMedia    SocialMedia[]
+  artistName     String?
+  genre          String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  refreshToken   String?
+}
+
+enum UserRole {
+  USER
+  ARTISTS
+}
+
+type SocialMedia {
+  media String?
+  link  String?
+}

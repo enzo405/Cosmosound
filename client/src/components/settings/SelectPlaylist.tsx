@@ -46,7 +46,10 @@ export default function SelectPlaylist({
     }
   };
 
-  const playlists = useMemo(() => PlaylistService.getMyPlaylist(user), []);
+  const playlists = useMemo(() => {
+    if (!user) return [];
+    return PlaylistService.getMyPlaylist(user);
+  }, []);
 
   const filteredPlaylists = playlists.filter((playlist) =>
     playlist.title.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -92,7 +95,7 @@ export default function SelectPlaylist({
             className="flex flex-row gap-2 p-0.5 rounded-lg items-center hover:bg-gray-200 cursor-pointer">
             <img
               className="mm-size-7 rounded-md"
-              src={p.musics[0].playlistThumbnail}
+              src={p.playlistThumbnail}
               alt={`${p.title} thumbnail`}
             />
             <span className="truncate">{p.title}</span>

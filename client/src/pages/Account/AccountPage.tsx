@@ -1,9 +1,11 @@
-import { ReactElement, useMemo, useState } from "react";
+import { ReactElement, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Container from "components/box/Container";
 import { Icon } from "components/icons/Icon";
 import UserService from "services/userService";
 import { useConfirmDialog } from "hooks/useConfirm";
+import { useUser } from "hooks/useUser";
+import { displayPictureProfile } from "utils/user";
 
 export interface AccountFormData {
   username?: string;
@@ -14,11 +16,11 @@ export interface AccountFormData {
 }
 
 function AccountPage(): ReactElement {
-  const user = useMemo(() => UserService.getUser(), []);
+  const { user } = useUser();
   const { openDialog } = useConfirmDialog();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [preview, setPreview] = useState(user.pictureProfile);
+  const [preview, setPreview] = useState(displayPictureProfile(user?.pictureProfile));
 
   const {
     control,
@@ -30,8 +32,8 @@ function AccountPage(): ReactElement {
     formState: { errors, isDirty },
   } = useForm<AccountFormData>({
     defaultValues: {
-      username: user.name,
-      email: user.email,
+      username: user?.name,
+      email: user?.email,
       password: "",
       confirmPassword: "",
       image: undefined,
@@ -53,8 +55,8 @@ function AccountPage(): ReactElement {
 
     const description = (
       <div className="flex flex-col">
-        {username != user.name && <p>New Username: {username}</p>}
-        {email != user.email && <p>New Email: {email}</p>}
+        {username != user?.name && <p>New Username: {username}</p>}
+        {email != user?.email && <p>New Email: {email}</p>}
         {password && <p>Password: Updated</p>}
         {image && <p>Profile Picture: {typeof image === "string" ? image : image.name}</p>}
         {!email && !password && !username && !image && <p>No changes were made.</p>}
@@ -232,14 +234,14 @@ function AccountPage(): ReactElement {
                       htmlFor="profileImage"
                       className="relative w-min h-min cursor-pointer hover:opacity-90 flex justify-end">
                       <img
-                        src="/src/assets/img/form/edit-background.png"
+                        src="/img/form/edit-background.png"
                         alt="Edit background"
                         className="absolute z-10 top-0 right-0 mm-size-20 md:mm-size-32 opacity-90"
                       />
                       <img
                         src={preview}
                         alt="Profile"
-                        className="mm-size-20 md:mm-size-32 rounded-full border border-gray-300"
+                        className="mm-size-20 md:mm-size-32 rounded-full border border-gray-300 object-cover"
                       />
                     </label>
                   </>

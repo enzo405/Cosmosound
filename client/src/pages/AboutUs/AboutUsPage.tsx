@@ -13,7 +13,10 @@ function AboutUsPage({ isAuthenticated = true }: AbousUsPageProps): ReactElement
     <>
       <div>ABOUT US PAGE !!!</div>
       {!isAuthenticated ? (
-        <span onClick={() => navigate(routesConfig.login.path)}>Login Button</span>
+        <>
+          <span onClick={() => navigate(routesConfig.login.path)}>Login Button</span>
+          <span onClick={() => navigate(routesConfig.register.path)}>Register Button</span>
+        </>
       ) : null}
     </>
   );

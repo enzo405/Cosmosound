@@ -1,13 +1,27 @@
 import { UserContext } from "context/userContext";
 import { UserDetails } from "models/User";
-import React, { PropsWithChildren, useMemo } from "react";
+import React, { PropsWithChildren, useEffect, useMemo } from "react";
 import { useState } from "react";
 import UserService from "services/userService";
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [user, setUser] = useState<UserDetails>(UserService.getUser());
+  const [user, setUser] = useState<UserDetails | undefined>();
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const value = useMemo(() => ({ user, setUser }), [user]);
+  useEffect(() => {
+    const fetchUser = async () => {
+      setLoading(true);
+      const fetchedUser = await UserService.getMe();
+      if (fetchedUser) {
+        setUser(fetchedUser);
+      }
+      setLoading(false);
+    };
+
+    fetchUser();
+  }, []);
+
+  const value = useMemo(() => ({ user, setUser, loading }), [user]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

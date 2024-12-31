@@ -60,8 +60,6 @@ export default {
       },
       animation: {
         pop: "pop 0.3s ease-in-out",
-      },
-      animation: {
         "scroll-text": "scroll-text 7s linear infinite",
       },
     },
