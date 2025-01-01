@@ -37,6 +37,7 @@ const signUp = async (req: Request, res: Response) => {
     });
     res.status(201).json({ message: "User created successfully" });
   } catch (e) {
+    console.error(e);
     res.status(500).json({ message: "An error occurred while creating the user." });
   }
 };
@@ -79,7 +80,8 @@ const signIn = async (req: Request, res: Response) => {
     });
 
     res.status(200).json({ message: "Login successful" });
-  } catch (error) {
+  } catch (e) {
+    console.error(e);
     res.status(401).json({ message: errorMessage });
   }
 };
@@ -95,7 +97,8 @@ const getProfile = async (req: UserRequest, res: Response) => {
     try {
       const user = await userService.getUserById(userId);
       res.status(200).json(user);
-    } catch (error) {
+    } catch (e) {
+      console.error(e);
       res.status(500).json({ message: "An error occurred while retrieving the user profile." });
     }
   }
@@ -131,7 +134,8 @@ const getRefreshToken = async (req: UserRequest, res: Response) => {
     });
 
     res.status(200).json({ message: "Token refreshed successfully." });
-  } catch (error) {
+  } catch (e) {
+    console.error(e);
     res
       .status(401)
       .json({ message: "An error occurred while trying to refresh the access token." });
@@ -163,7 +167,8 @@ const logout = async (req: Request, res: Response) => {
     });
 
     res.status(200).json({ message: "Logged out successfully." });
-  } catch (error) {
+  } catch (e) {
+    console.error(e);
     res.status(500).json({ message: "An error occurred during logout." });
   }
 };

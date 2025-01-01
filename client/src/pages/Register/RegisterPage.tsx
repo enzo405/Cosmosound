@@ -157,7 +157,7 @@ function RegisterPage(): ReactElement {
         <span className="flex flex-col items-center text-center font-semibold text-2xl p-4">
           {title()}
           {currentStep === 3 && (
-            <span className="flex text-center font-extralight text-xs p-0.5 text-slate-500">
+            <span className="flex text-center font-extralight text-sm p-0.5 text-slate-600">
               (at least one)
             </span>
           )}
@@ -292,8 +292,8 @@ function RegisterPage(): ReactElement {
                         onChange={(e) => {
                           const file = e.target.files?.[0];
                           if (file) {
-                            if (file.size > 100 * 100) {
-                              setError("File size must be less than 100MB");
+                            if (file.size > 10000000) {
+                              setError("File size must be less than 10MB");
                               setValue("pictureProfile", defaultPictureProfile);
                             } else {
                               setError(null);
@@ -306,7 +306,7 @@ function RegisterPage(): ReactElement {
                         className="hidden"
                       />
                     </label>
-                    <span className="font-bold">Max. file size: 100 MB</span>
+                    <span className="font-bold">Max. file size: 10 MB</span>
                   </div>
                 </div>
 

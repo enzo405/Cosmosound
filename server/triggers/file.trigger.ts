@@ -16,8 +16,8 @@ const uploadPicture = async (req: Request, res: Response): Promise<void> => {
 
     const fileUrl = await nextcloudService.uploadPicture(req.file, type);
     res.status(200).json({ fileUrl });
-  } catch (error) {
-    console.error("Error uploading file to Nextcloud:", error);
+  } catch (e) {
+    console.error(e);
     res.status(500).json({ message: "Error uploading file" });
   }
 };

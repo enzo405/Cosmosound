@@ -5,44 +5,49 @@ import { Prisma } from "@prisma/client";
 import { Response } from "express";
 
 const updateUser = async (req: UserRequest, res: Response) => {
-  const { username, password, confirmPassword, email } = req.body;
-  const profilePicture = req.file;
+  try {
+    const { username, password, confirmPassword, email } = req.body;
+    const profilePicture = req.file;
 
-  const data: Prisma.UsersUpdateInput = {};
+    const data: Prisma.UsersUpdateInput = {};
 
-  if (profilePicture) {
-    const fileUrl = await nextcloudService.uploadPicture(profilePicture, "PFP");
-    data.pictureProfile = fileUrl;
-  }
-  if (password) {
-    if (!confirmPassword) {
-      res.status(400).json({ message: "Confirm password is required" });
+    if (profilePicture) {
+      const fileUrl = await nextcloudService.uploadPicture(profilePicture, "PFP");
+      data.pictureProfile = fileUrl;
+    }
+    if (password) {
+      if (!confirmPassword) {
+        res.status(400).json({ message: "Confirm password is required" });
+        return;
+      }
+      if (password !== confirmPassword) {
+        res.status(400).json({ message: "Confirm password and password aren't similar" });
+        return;
+      }
+      const hash = await userService.encryptPassword(password);
+      data.password = hash;
+    }
+
+    if (username) {
+      data.name = username;
+    }
+
+    if (email) {
+      data.email = email;
+    }
+
+    if (Object.entries(data).length === 0) {
+      res.status(400).json({ message: "Nothing to update" });
       return;
     }
-    if (password !== confirmPassword) {
-      res.status(400).json({ message: "Confirm password and password aren't similar" });
-      return;
-    }
-    const hash = await userService.encryptPassword(password);
-    data.password = hash;
+
+    const user = await userService.updateUser(data, req.userId);
+
+    res.status(200).json(user);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json("An error occured while trying to update the user.");
   }
-
-  if (username) {
-    data.name = username;
-  }
-
-  if (email) {
-    data.email = email;
-  }
-
-  if (Object.entries(data).length === 0) {
-    res.status(400).json({ message: "Nothing to update" });
-    return;
-  }
-
-  const user = await userService.updateUser(data, req.userId);
-
-  res.status(200).json(user);
 };
 
 export default {
