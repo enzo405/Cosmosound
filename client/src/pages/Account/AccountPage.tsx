@@ -6,21 +6,28 @@ import UserService from "services/userService";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { useUser } from "hooks/useUser";
 import { displayPictureProfile } from "utils/user";
+import { enqueueSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
 
 export interface AccountFormData {
-  username?: string;
-  password?: string;
-  confirmPassword?: string;
-  email?: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
   image?: File;
 }
 
 function AccountPage(): ReactElement {
   const { user } = useUser();
+  const navigate = useNavigate();
+  if (!user) navigate("/");
+
   const { openDialog } = useConfirmDialog();
 
   const [showPassword, setShowPassword] = useState(false);
   const [preview, setPreview] = useState(displayPictureProfile(user?.pictureProfile));
+  const [error, setError] = useState<string | null>(null);
 
   const {
     control,
@@ -66,7 +73,22 @@ function AccountPage(): ReactElement {
     openDialog({
       title: "Are you sure?",
       description: description,
-      onConfirm: () => UserService.saveData(data),
+      onConfirm: async () =>
+        await UserService.saveData(data, user!)
+          .then(() => {
+            enqueueSnackbar("Account updated", { variant: "success" });
+          })
+          .catch((err) => {
+            const defaultErrMessage = "An error occured while trying to update your account";
+            if (err instanceof AxiosError) {
+              setError(err.response?.data?.message || defaultErrMessage);
+            } else {
+              setError(defaultErrMessage);
+            }
+            enqueueSnackbar(defaultErrMessage, {
+              variant: "error",
+            });
+          }),
     });
   };
 
@@ -250,6 +272,7 @@ function AccountPage(): ReactElement {
             </div>
           </div>
           <div className="flex gap-4 mt-6 justify-end sm:justify-start">
+            {error && <span className="text-red-500 font-normal tracking-tight">{error}</span>}
             <button
               onClick={() => reset()}
               type="button"

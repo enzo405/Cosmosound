@@ -15,7 +15,7 @@ interface RegisterDataForm {
   password: string;
   passwordConfirm: string;
   pictureProfile: File | string;
-  genre: string;
+  genres: string[];
 }
 
 const defaultPictureProfile = "/img/header/default_avatar.png";
@@ -24,7 +24,7 @@ function RegisterPage(): ReactElement {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [error, setError] = useState<string | null>(null);
-  const [genres, setGenres] = useState<Genre[]>([]);
+  const [displayedGenres, setDisplayedGenres] = useState<Genre[]>([]);
   const [search, setSearch] = useState("");
   const [isLoading, setLoading] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -43,23 +43,25 @@ function RegisterPage(): ReactElement {
       password: "",
       passwordConfirm: "",
       pictureProfile: defaultPictureProfile,
-      genre: "",
+      genres: [],
     },
     mode: "onChange",
   });
 
   const pictureProfile = watch("pictureProfile");
-  const genre = watch("genre");
+  const genres = watch("genres");
 
   useEffect(() => {
-    setGenres(genresService.getAllGenres());
+    setDisplayedGenres(genresService.getAllGenres());
   }, []);
 
   useEffect(() => {
     setError(null);
   }, [currentStep]);
 
-  const filteredGenres = genres.filter((g) => g.name.toLowerCase().includes(search.toLowerCase()));
+  const filteredGenres = displayedGenres.filter((g) =>
+    g.name.toLowerCase().includes(search.toLowerCase()),
+  );
 
   const handleNextStep = async () => {
     const valid = await trigger(
@@ -81,7 +83,7 @@ function RegisterPage(): ReactElement {
       const abortController = new AbortController();
       abortControllerRef.current = abortController;
 
-      const { name, email, password, passwordConfirm, genre, pictureProfile } = data;
+      const { name, email, password, passwordConfirm, genres, pictureProfile } = data;
 
       await UserService.register(
         name,
@@ -89,7 +91,7 @@ function RegisterPage(): ReactElement {
         password,
         passwordConfirm,
         pictureProfile,
-        genre,
+        genres,
         abortController.signal,
       )
         .then(() => {
@@ -121,8 +123,25 @@ function RegisterPage(): ReactElement {
       case 2:
         return "Select a profile picture (optional):";
       case 3:
-        return "Select your favorite genre:";
+        return "Select your favorite genres (Max. 5):";
     }
+  };
+
+  const handleClickGenreList = (genre: Genre) => {
+    if (genres.find((g) => g === genre.name)) {
+      const newGenres = genres.filter((name) => genre.name !== name);
+      setValue("genres", newGenres);
+      return;
+    }
+    if (genres.length < 5) {
+      const newList = [...genres, genre.name];
+      setValue("genres", newList);
+    }
+  };
+
+  const onGenreClick = (genreName: string) => {
+    const newGenres = genres.filter((name) => genreName !== name);
+    setValue("genres", newGenres);
   };
 
   return (
@@ -135,7 +154,14 @@ function RegisterPage(): ReactElement {
         />
       </div>
       <div className="w-auto min-w-0 flex flex-col flex-grow justify-center items-center gap-2 p-2">
-        <span className="flex text-center font-semibold text-2xl p-4">{title()}</span>
+        <span className="flex flex-col items-center text-center font-semibold text-2xl p-4">
+          {title()}
+          {currentStep === 3 && (
+            <span className="flex text-center font-extralight text-xs p-0.5 text-slate-500">
+              (at least one)
+            </span>
+          )}
+        </span>
         <div className="flex flex-col xsm:w-4/5 sm:w-2/3 max-w-72">
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             {currentStep === 1 && (
@@ -309,11 +335,22 @@ function RegisterPage(): ReactElement {
               <>
                 <div className="flex flex-col gap-4">
                   <div className="flex justify-start items-center gap-1">
-                    {genre !== "" && (
-                      <>
-                        <span>Selected genre:</span>
-                        <span className="rounded-md bg-slate-200 p-1">{genre}</span>
-                      </>
+                    {genres.length !== 0 && (
+                      <div className="flex flex-col justify-start">
+                        <span>Selected genres:</span>
+                        <div className="flex flex-wrap gap-1">
+                          {genres.map((name) => {
+                            return (
+                              <span
+                                key={name}
+                                onClick={() => onGenreClick(name)}
+                                className="rounded-md bg-slate-200 p-1 cursor-pointer hover:bg-slate-300">
+                                {name}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      </div>
                     )}
                   </div>
                   <input
@@ -327,9 +364,9 @@ function RegisterPage(): ReactElement {
                     {filteredGenres.map((g) => (
                       <li
                         key={g.name}
-                        onClick={() => setValue("genre", g.name)}
+                        onClick={() => handleClickGenreList(g)}
                         className={`p-2 hover:bg-gray-200 cursor-pointer ${
-                          genre === g.name ? "bg-gray-300 font-bold" : ""
+                          genres.find((name) => name === g.name) ? "bg-gray-300 font-bold" : ""
                         }`}>
                         {g.name}
                       </li>

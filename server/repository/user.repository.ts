@@ -44,6 +44,15 @@ const saveRefreshToken = async (refreshToken: string, id: string) => {
   });
 };
 
+const updateUser = async (userData: Prisma.UsersUpdateInput, userId: string): Promise<Users> => {
+  return await prisma.users.update({
+    where: {
+      id: userId,
+    },
+    data: userData,
+  });
+};
+
 const deleteRefreshToken = async (userId: string) => {
   await prisma.users.update({
     where: {
@@ -55,4 +64,11 @@ const deleteRefreshToken = async (userId: string) => {
   });
 };
 
-export default { createUser, getUserByEmail, getUserById, saveRefreshToken, deleteRefreshToken };
+export default {
+  createUser,
+  getUserByEmail,
+  getUserById,
+  saveRefreshToken,
+  deleteRefreshToken,
+  updateUser,
+};

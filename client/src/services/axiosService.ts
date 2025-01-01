@@ -1,4 +1,5 @@
 import axios from "axios";
+import UserService from "./userService";
 
 axios.defaults.withCredentials = true;
 
@@ -13,12 +14,11 @@ apiClient.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     if (error.response?.status === 401) {
-      if (originalRequest.url === "/auth/refresh") {
+      if (originalRequest.url === "/auth/refresh" || originalRequest.url === "/auth/me") {
         return Promise.reject(error);
       }
       try {
-        await apiClient.post("/auth/refresh");
-        return apiClient(originalRequest);
+        return apiClient(await UserService.refreshToken());
       } catch (refreshError) {
         return Promise.reject(refreshError);
       }

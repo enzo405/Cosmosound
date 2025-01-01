@@ -11,9 +11,9 @@ const EXPIRED_TOKEN = "10m";
 const EXPIRED_REFRESH_TOKEN = "7d";
 
 const signUp = async (req: Request, res: Response) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, likedGenres } = req.body;
 
-  const hash = await bcrypt.hash(password, 10);
+  const hash = await userService.encryptPassword(password);
 
   try {
     let fileUrl;
@@ -28,7 +28,13 @@ const signUp = async (req: Request, res: Response) => {
       fileUrl = req.body.pictureProfile;
     }
 
-    await userService.createUser({ name, email, password: hash, pictureProfile: fileUrl });
+    await userService.createUser({
+      name,
+      email,
+      password: hash,
+      pictureProfile: fileUrl,
+      likedGenres,
+    });
     res.status(201).json({ message: "User created successfully" });
   } catch (e) {
     res.status(500).json({ message: "An error occurred while creating the user." });
@@ -56,8 +62,7 @@ const signIn = async (req: Request, res: Response) => {
     const refreshToken = jwt.sign({ sub, userRole }, process.env.JWT_SECRET_REFRESH!, {
       expiresIn: EXPIRED_REFRESH_TOKEN,
     });
-
-    const encryptedRefreshToken = await bcrypt.hash(refreshToken, 10);
+    const encryptedRefreshToken = await userService.encryptPassword(refreshToken);
     await authService.saveRefreshToken(encryptedRefreshToken, sub);
 
     res.cookie("token", token, {
@@ -109,7 +114,7 @@ const getRefreshToken = async (req: UserRequest, res: Response) => {
       expiresIn: EXPIRED_REFRESH_TOKEN,
     });
 
-    const encryptedRefreshToken = await bcrypt.hash(refreshToken, 10);
+    const encryptedRefreshToken = await userService.encryptPassword(refreshToken);
     await authService.saveRefreshToken(encryptedRefreshToken, id);
 
     res.cookie("token", token, {
