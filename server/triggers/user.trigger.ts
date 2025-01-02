@@ -7,7 +7,6 @@ import { Response } from "express";
 const updateUser = async (req: UserRequest, res: Response) => {
   try {
     const { username, password, confirmPassword, email } = req.body;
-    console.log("req.body", req.body);
 
     const profilePicture = req.file;
 

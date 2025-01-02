@@ -1,5 +1,5 @@
 import { Client, Server } from "nextcloud-node-client";
-import path from "path";
+import sharp from "sharp";
 
 const NEXTCLOUD_BASE_URL = process.env.NEXTCLOUD_BASE_URL!;
 const NEXTCLOUD_USERNAME = process.env.NEXTCLOUD_USERNAME!;
@@ -36,8 +36,11 @@ const uploadPicture = async (
     throw new Error("Failed to access or create directory");
   }
 
-  const fileName = `${userId}${path.extname(file.originalname)}`;
-  const uploadedFile = await targetDir.createFile(fileName, file.buffer);
+  const webpBuffer = await sharp(file.buffer).webp().toBuffer();
+
+  // To ensure there's one image per user
+  const fileName = `${userId}.webp`;
+  const uploadedFile = await targetDir.createFile(fileName, webpBuffer);
   const shareFile = await client.createShare({ fileSystemElement: uploadedFile });
 
   return shareFile.url;

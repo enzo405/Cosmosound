@@ -3,10 +3,8 @@ Must have:
 - Artist page make top part sticky
 - Add expand/resize button on sidebar
 - <a> tag for links
-- Pour la liste de genres: https://www.musicgenreslist.com/
 - workflow pour user -> artist (banderole pour avertir l'artiste qu'il peut choisir 3 genres sur l'artist panel)
 - loading icon and check server response if alive every 5sec
-- rename users.genre => users.artist_genre
 
 Page prévues:
 - / : __Quand on est pas login__: Landing page avec une belle image et une description courte qui donne envie d'utiliser le service, ainsi qu'un bouton menant à la page des musiques. Plus bas dans la page, y mettre des informations plus détaillé sur le site (détail du nom, date création, but de l'app, qui suis-je). __Quand on est est loggé__: on affiche une page avec des suggestions de playlists et d'artistes basées sur les abonnements et les genres préférés de l'utilisateur (inspiration : page d'accueil de YouTube Music). Si pas d'abonnement alors on affiche des artistes random.
