@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Container from "components/box/Container";
 import { Icon } from "components/icons/Icon";
@@ -19,7 +19,7 @@ export interface AccountFormData {
 }
 
 function AccountPage(): ReactElement {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const navigate = useNavigate();
   if (!user) navigate("/");
 
@@ -46,6 +46,16 @@ function AccountPage(): ReactElement {
       image: undefined,
     },
   });
+
+  useEffect(() => {
+    reset({
+      username: user?.name,
+      email: user?.email,
+      password: "",
+      confirmPassword: "",
+      image: undefined,
+    });
+  }, [user]);
 
   const password = watch("password");
 
@@ -75,8 +85,9 @@ function AccountPage(): ReactElement {
       description: description,
       onConfirm: async () =>
         await UserService.saveData(data, user!)
-          .then(() => {
+          .then((user) => {
             enqueueSnackbar("Account updated", { variant: "success" });
+            setUser(user);
           })
           .catch((err) => {
             const defaultErrMessage = "An error occured while trying to update your account";
@@ -271,24 +282,26 @@ function AccountPage(): ReactElement {
               />
             </div>
           </div>
-          <div className="flex gap-4 mt-6 justify-end sm:justify-start">
+          <div className="flex flex-col">
             {error && <span className="text-red-500 font-normal tracking-tight">{error}</span>}
-            <button
-              onClick={() => reset()}
-              type="button"
-              className="px-4 py-2 text-tertio-orange border-2 border-tertio-orange rounded-lg hover:bg-secondary-orange">
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={!isDirty}
-              className={`px-5 py-3 rounded-lg text-white ${
-                isDirty
-                  ? "bg-tertio-orange hover:bg-primary-orange"
-                  : "bg-gray-300 cursor-not-allowed"
-              }`}>
-              Save
-            </button>
+            <div className="flex gap-4 mt-6 justify-end sm:justify-start">
+              <button
+                onClick={() => reset()}
+                type="button"
+                className="px-4 py-2 text-tertio-orange border-2 border-tertio-orange rounded-lg hover:bg-secondary-orange">
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={!isDirty}
+                className={`px-5 py-3 rounded-lg text-white ${
+                  isDirty
+                    ? "bg-tertio-orange hover:bg-primary-orange"
+                    : "bg-gray-300 cursor-not-allowed"
+                }`}>
+                Save
+              </button>
+            </div>
           </div>
         </form>
       </Container>

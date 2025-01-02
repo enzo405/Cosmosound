@@ -5,6 +5,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { Response, Request } from "express";
 import { UserRequest } from "@/middlewares/auth.middleware";
 import nextcloudService from "@/services/nextcloud.service";
+import { ObjectId } from "mongodb";
 require("dotenv").config();
 
 const EXPIRED_TOKEN = "10m";
@@ -13,27 +14,33 @@ const EXPIRED_REFRESH_TOKEN = "7d";
 const signUp = async (req: Request, res: Response) => {
   const { name, email, password, likedGenres } = req.body;
 
+  let parsedLikedGenres;
   const hash = await userService.encryptPassword(password);
 
   try {
     let fileUrl;
+    const userId = new ObjectId().toString();
+
     if (req.file) {
+      parsedLikedGenres = JSON.parse(likedGenres); // if the req.file is present, the frontend sent likedGenre using JSON.stringify
       if (await userService.getUserByEmail(email)) {
         throw new Error("Email already exists");
       } else {
-        fileUrl = await nextcloudService.uploadPicture(req.file, "PFP");
+        fileUrl = await nextcloudService.uploadPicture(req.file, "PFP", userId);
       }
     } else {
       // User is using the default picture profile
+      parsedLikedGenres = likedGenres;
       fileUrl = req.body.pictureProfile;
     }
 
     await userService.createUser({
+      id: userId,
       name,
       email,
       password: hash,
       pictureProfile: fileUrl,
-      likedGenres,
+      likedGenres: parsedLikedGenres,
     });
     res.status(201).json({ message: "User created successfully" });
   } catch (e) {

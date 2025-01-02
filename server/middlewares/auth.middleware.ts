@@ -4,7 +4,7 @@ require("dotenv").config();
 
 export interface UserRequest extends Request {
   user?: JwtPayload | string;
-  userId: string;
+  userId?: string;
 }
 
 const auth = (req: UserRequest, res: Response, next: NextFunction) => {

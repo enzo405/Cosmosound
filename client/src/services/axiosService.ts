@@ -20,7 +20,8 @@ apiClient.interceptors.response.use(
       }
       try {
         // Attempt to refresh the token and retry the original request
-        return apiClient(await UserService.refreshToken());
+        await UserService.refreshToken();
+        return apiClient(originalRequest);
       } catch (refreshError) {
         return Promise.reject(refreshError); // Reject if token refresh fails
       }

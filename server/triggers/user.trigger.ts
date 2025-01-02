@@ -7,12 +7,14 @@ import { Response } from "express";
 const updateUser = async (req: UserRequest, res: Response) => {
   try {
     const { username, password, confirmPassword, email } = req.body;
+    console.log("req.body", req.body);
+
     const profilePicture = req.file;
 
     const data: Prisma.UsersUpdateInput = {};
 
     if (profilePicture) {
-      const fileUrl = await nextcloudService.uploadPicture(profilePicture, "PFP");
+      const fileUrl = await nextcloudService.uploadPicture(profilePicture, "PFP", req.userId!);
       data.pictureProfile = fileUrl;
     }
     if (password) {
@@ -41,7 +43,7 @@ const updateUser = async (req: UserRequest, res: Response) => {
       return;
     }
 
-    const user = await userService.updateUser(data, req.userId);
+    const user = await userService.updateUser(data, req.userId!);
 
     res.status(200).json(user);
   } catch (e) {

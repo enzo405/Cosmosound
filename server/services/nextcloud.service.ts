@@ -12,7 +12,11 @@ const server: Server = new Server({
 });
 const client = new Client(server);
 
-const uploadPicture = async (file: Express.Multer.File, type: "MUSIC" | "PFP"): Promise<string> => {
+const uploadPicture = async (
+  file: Express.Multer.File,
+  type: "MUSIC" | "PFP",
+  userId: string
+): Promise<string> => {
   if (file.size > MAX_FILE_SIZE) {
     throw new Error("File size exceeds the 10MB limit");
   }
@@ -32,9 +36,7 @@ const uploadPicture = async (file: Express.Multer.File, type: "MUSIC" | "PFP"): 
     throw new Error("Failed to access or create directory");
   }
 
-  const fileName = `${new Date().getTime()}-${path.parse(file.originalname).name}${path.extname(
-    file.originalname
-  )}`;
+  const fileName = `${userId}${path.extname(file.originalname)}`;
   const uploadedFile = await targetDir.createFile(fileName, file.buffer);
   const shareFile = await client.createShare({ fileSystemElement: uploadedFile });
 

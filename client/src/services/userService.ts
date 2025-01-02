@@ -71,18 +71,15 @@ function removeLike(item: Artist | Genre | Playlist | Catalog | Music): void {
   console.log("removeLike item", item);
 }
 
-async function saveData(data: AccountFormData, user: User): Promise<void> {
-  if (!data.image) {
-    return apiClient.put("/api/me", data);
-  } else {
-    const formData = new FormData();
-    data.username !== user.name && formData.append("username", data.username);
-    data.email !== user.email && formData.append("email", data.email);
-    data.password !== "" && formData.append("password", data.password);
-    data.confirmPassword !== "" && formData.append("confirmPassword", data.confirmPassword);
+async function saveData(data: AccountFormData, user: User): Promise<UserDetails> {
+  const formData = new FormData();
+  data.username !== user.name && formData.append("username", data.username);
+  data.email !== user.email && formData.append("email", data.email);
+  data.password !== "" && formData.append("password", data.password);
+  data.confirmPassword !== "" && formData.append("confirmPassword", data.confirmPassword);
+  data.image && formData.append("file", data.image);
 
-    return apiClient.put("/api/me", formData);
-  }
+  return await apiClient.patch("/api/me", formData).then((res) => res.data);
 }
 
 const UserService = {
