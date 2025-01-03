@@ -4,12 +4,12 @@ import { useUser } from "hooks/useUser";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
 import React, { ChangeEvent, DragEvent, ReactElement, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import ArtistService from "services/artistService";
 import GenresService from "services/genresService";
 import NewMusic from "./components/NewMusic";
 import CatalogService from "services/catalogService";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { displayPictureProfile } from "utils/user";
+import { PartialArtist } from "models/User";
 
 export interface CreateCatalogFormData {
   titleCatalog: string;
@@ -27,7 +27,7 @@ export default function CreateCatalogPage(): ReactElement {
   const { user } = useUser();
   const { openDialog } = useConfirmDialog();
 
-  const artist = useMemo(() => ArtistService.getArtistById(user?.id), []);
+  const artist = useMemo(() => user as PartialArtist, [user]);
   if (artist == undefined) return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
 
   const availableGenres = useMemo(() => GenresService.getAllGenres(), []);
@@ -41,7 +41,7 @@ export default function CreateCatalogPage(): ReactElement {
     formState: { isDirty, errors },
   } = useForm<CreateCatalogFormData>({
     defaultValues: {
-      titleCatalog: `${artist.artistName}-${artist.catalogs.length}`,
+      titleCatalog: `${artist.artistName}`,
       thumbnailCatalog: displayPictureProfile(artist.pictureProfile),
       musics: [],
     },

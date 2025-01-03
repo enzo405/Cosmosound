@@ -140,7 +140,7 @@ export default function ArtistPage(): ReactElement {
       title={artist.artistName}
       subtitle={
         <div className="flex flex-col gap-1">
-          <span className="font-light">Member since {formatTime(artist.dateCreation)}</span>
+          <span className="font-light">Member since {formatTime(artist.createdAt)}</span>
           <span className="font-light">{artist.followers} followers</span>
           <span className="flex flex-wrap gap-2 xsm:gap-3 items-center">
             {artist.socialMedia.map(({ link, media }) => (

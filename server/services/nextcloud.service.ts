@@ -1,10 +1,10 @@
 import { Client, Server } from "nextcloud-node-client";
-import path from "path";
+import sharp from "sharp";
 
 const NEXTCLOUD_BASE_URL = process.env.NEXTCLOUD_BASE_URL!;
 const NEXTCLOUD_USERNAME = process.env.NEXTCLOUD_USERNAME!;
 const NEXTCLOUD_PASSWORD = process.env.NEXTCLOUD_PASSWORD!;
-const MAX_FILE_SIZE = 100 * 100;
+const MAX_FILE_SIZE = 10000000;
 
 const server: Server = new Server({
   basicAuth: { username: NEXTCLOUD_USERNAME, password: NEXTCLOUD_PASSWORD },
@@ -12,12 +12,18 @@ const server: Server = new Server({
 });
 const client = new Client(server);
 
-const uploadPicture = async (file: Express.Multer.File, type: "MUSIC" | "PFP"): Promise<string> => {
+const uploadPicture = async (
+  file: Express.Multer.File,
+  type: "MUSIC" | "PFP",
+  userId: string
+): Promise<string> => {
   if (file.size > MAX_FILE_SIZE) {
-    throw new Error("File size exceeds the 100MB limit");
+    throw new Error("File size exceeds the 10MB limit");
   }
 
-  const dirPath = `/dev-CosmoSound/uploads/${type === "MUSIC" ? "music-thumbnail" : "picture-profiles"}`;
+  const dirPath = `/dev-CosmoSound/uploads/${
+    type === "MUSIC" ? "music-thumbnail" : "picture-profiles"
+  }`;
 
   let targetDir;
   try {
@@ -30,8 +36,11 @@ const uploadPicture = async (file: Express.Multer.File, type: "MUSIC" | "PFP"): 
     throw new Error("Failed to access or create directory");
   }
 
-  const fileName = `${new Date().getTime()}-${path.parse(file.originalname).name}${path.extname(file.originalname)}`;
-  const uploadedFile = await targetDir.createFile(fileName, file.buffer);
+  const webpBuffer = await sharp(file.buffer).webp().toBuffer();
+
+  // To ensure there's one image per user
+  const fileName = `${userId}.webp`;
+  const uploadedFile = await targetDir.createFile(fileName, webpBuffer);
   const shareFile = await client.createShare({ fileSystemElement: uploadedFile });
 
   return shareFile.url;

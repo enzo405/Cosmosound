@@ -10,18 +10,25 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      setLoading(true);
-      const fetchedUser = await UserService.getMe();
-      if (fetchedUser) {
-        setUser(fetchedUser);
+      try {
+        setLoading(true);
+        let user = await UserService.getMe();
+        if (!user) {
+          await UserService.refreshToken();
+          user = await UserService.getMe();
+        }
+        setUser(user);
+      } catch (error) {
+        console.error("Error fetching user");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchUser();
   }, []);
 
-  const value = useMemo(() => ({ user, setUser, loading }), [user]);
+  const value = useMemo(() => ({ user, setUser, loading }), [user, loading]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

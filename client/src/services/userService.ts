@@ -1,11 +1,17 @@
 import { Catalog } from "models/Catalog";
 import { Genre, Music } from "models/Music";
 import { Playlist } from "models/Playlist";
-import { Artist, UserDetails } from "models/User";
+import { Artist, PartialArtist } from "models/User";
 import { AccountFormData } from "pages/Account/AccountPage";
 import { apiClient } from "./axiosService";
+import { AxiosResponse } from "axios";
+import { ArtistPanelFormData } from "pages/ArtistPanel/ArtistPanelPage";
 
-async function getMe(): Promise<UserDetails> {
+async function refreshToken(): Promise<AxiosResponse<any, any>> {
+  return apiClient.post("/auth/refresh");
+}
+
+async function getMe(): Promise<PartialArtist> {
   return apiClient
     .get("/auth/me")
     .then((res) => res.data)
@@ -25,7 +31,7 @@ async function register(
   password: string,
   passwordConfirm: string,
   pictureProfile: File | string,
-  genre: string,
+  likedGenres: string[],
   signal?: AbortSignal,
 ) {
   if (pictureProfile instanceof File) {
@@ -35,7 +41,7 @@ async function register(
     formData.append("email", email);
     formData.append("password", password);
     formData.append("passwordConfirm", passwordConfirm);
-    formData.append("genre", genre);
+    formData.append("likedGenres", JSON.stringify(likedGenres));
 
     return await apiClient.post("/auth/register", formData, { signal });
   } else {
@@ -47,7 +53,7 @@ async function register(
         password,
         passwordConfirm,
         pictureProfile,
-        genre,
+        likedGenres,
       },
       { signal },
     );
@@ -66,18 +72,31 @@ function removeLike(item: Artist | Genre | Playlist | Catalog | Music): void {
   console.log("removeLike item", item);
 }
 
-function saveData(data: AccountFormData): void {
-  console.log("submit form data", data);
+async function updateAccount(dataForm: Partial<AccountFormData>): Promise<PartialArtist> {
+  const formData = new FormData();
+  dataForm.username && formData.append("username", dataForm.username);
+  dataForm.email && formData.append("email", dataForm.email);
+  dataForm.password && formData.append("password", dataForm.password);
+  dataForm.confirmPassword && formData.append("confirmPassword", dataForm.confirmPassword);
+  dataForm.image && formData.append("file", dataForm.image);
+
+  return await apiClient.patch("/api/me", formData).then((res) => res.data);
+}
+
+async function updateArtist(dataForm: Partial<ArtistPanelFormData>): Promise<PartialArtist> {
+  return await apiClient.patch("/api/me/artist", dataForm).then((res) => res.data);
 }
 
 const UserService = {
   getMe,
+  refreshToken,
   login,
   register,
   logout,
   like,
   removeLike,
-  saveData,
+  updateAccount,
+  updateArtist,
 };
 
 export default UserService;

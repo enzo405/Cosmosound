@@ -37,5 +37,6 @@ export type IconName =
   | "ellipsis"
   | "music"
   | "cloud-upload"
+  | "pencil"
   | "trash-red"
   | "trash";

@@ -5,32 +5,46 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { Response, Request } from "express";
 import { UserRequest } from "@/middlewares/auth.middleware";
 import nextcloudService from "@/services/nextcloud.service";
+import { ObjectId } from "mongodb";
 require("dotenv").config();
 
 const EXPIRED_TOKEN = "10m";
 const EXPIRED_REFRESH_TOKEN = "7d";
 
 const signUp = async (req: Request, res: Response) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, likedGenres } = req.body;
 
-  const hash = await bcrypt.hash(password, 10);
+  let parsedLikedGenres;
+  const hash = await userService.encryptPassword(password);
 
   try {
     let fileUrl;
+    const userId = new ObjectId().toString();
+
     if (req.file) {
+      parsedLikedGenres = JSON.parse(likedGenres); // if the req.file is present, the frontend sent likedGenre using JSON.stringify
       if (await userService.getUserByEmail(email)) {
         throw new Error("Email already exists");
       } else {
-        fileUrl = await nextcloudService.uploadPicture(req.file, "PFP");
+        fileUrl = await nextcloudService.uploadPicture(req.file, "PFP", userId);
       }
     } else {
       // User is using the default picture profile
+      parsedLikedGenres = likedGenres;
       fileUrl = req.body.pictureProfile;
     }
 
-    await userService.createUser({ name, email, password: hash, pictureProfile: fileUrl });
+    await userService.createUser({
+      id: userId,
+      name,
+      email,
+      password: hash,
+      pictureProfile: fileUrl,
+      likedGenres: parsedLikedGenres,
+    });
     res.status(201).json({ message: "User created successfully" });
   } catch (e) {
+    console.error(e);
     res.status(500).json({ message: "An error occurred while creating the user." });
   }
 };
@@ -56,8 +70,7 @@ const signIn = async (req: Request, res: Response) => {
     const refreshToken = jwt.sign({ sub, userRole }, process.env.JWT_SECRET_REFRESH!, {
       expiresIn: EXPIRED_REFRESH_TOKEN,
     });
-
-    const encryptedRefreshToken = await bcrypt.hash(refreshToken, 10);
+    const encryptedRefreshToken = await userService.encryptPassword(refreshToken);
     await authService.saveRefreshToken(encryptedRefreshToken, sub);
 
     res.cookie("token", token, {
@@ -74,7 +87,8 @@ const signIn = async (req: Request, res: Response) => {
     });
 
     res.status(200).json({ message: "Login successful" });
-  } catch (error) {
+  } catch (e) {
+    console.error(e);
     res.status(401).json({ message: errorMessage });
   }
 };
@@ -90,7 +104,8 @@ const getProfile = async (req: UserRequest, res: Response) => {
     try {
       const user = await userService.getUserById(userId);
       res.status(200).json(user);
-    } catch (error) {
+    } catch (e) {
+      console.error(e);
       res.status(500).json({ message: "An error occurred while retrieving the user profile." });
     }
   }
@@ -109,7 +124,7 @@ const getRefreshToken = async (req: UserRequest, res: Response) => {
       expiresIn: EXPIRED_REFRESH_TOKEN,
     });
 
-    const encryptedRefreshToken = await bcrypt.hash(refreshToken, 10);
+    const encryptedRefreshToken = await userService.encryptPassword(refreshToken);
     await authService.saveRefreshToken(encryptedRefreshToken, id);
 
     res.cookie("token", token, {
@@ -126,7 +141,8 @@ const getRefreshToken = async (req: UserRequest, res: Response) => {
     });
 
     res.status(200).json({ message: "Token refreshed successfully." });
-  } catch (error) {
+  } catch (e) {
+    console.error(e);
     res
       .status(401)
       .json({ message: "An error occurred while trying to refresh the access token." });
@@ -158,7 +174,8 @@ const logout = async (req: Request, res: Response) => {
     });
 
     res.status(200).json({ message: "Logged out successfully." });
-  } catch (error) {
+  } catch (e) {
+    console.error(e);
     res.status(500).json({ message: "An error occurred during logout." });
   }
 };

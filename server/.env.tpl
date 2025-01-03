@@ -1,6 +1,6 @@
-ENV = dev
+NODE_ENV = dev
 PORT = 4000
-ALLOWED_ORIGINS = http://localhost
+ALLOWED_ORIGINS = http://localhost:3000
 ALLOWED_METHODS = GET,POST,PATCH,DELETE
 
 DATABASE_URL = mongodb://root:root@mongodb:27017/cosmosound?replicaSet=rs0

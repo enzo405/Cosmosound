@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import authRouter from "./routes/auth.route";
 import fileRouter from "./routes/file.route";
+import userRouter from "./routes/user.route";
 import cors from "cors";
 import cookieParser from "./middlewares/cookie-parser.middleware";
 
@@ -26,6 +27,7 @@ app.use(cookieParser);
 app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
 app.use("/auth", authRouter);
 app.use("/api", fileRouter);
+app.use("/api", userRouter);
 
 async function connectDatabase() {
   try {

@@ -4,6 +4,7 @@ require("dotenv").config();
 
 export interface UserRequest extends Request {
   user?: JwtPayload | string;
+  userId?: string;
 }
 
 const auth = (req: UserRequest, res: Response, next: NextFunction) => {
@@ -16,6 +17,7 @@ const auth = (req: UserRequest, res: Response, next: NextFunction) => {
     if (!payload) throw "Unauthorized access.";
 
     req.user = payload;
+    req.userId = payload.sub as string;
 
     next();
   } catch (error) {
