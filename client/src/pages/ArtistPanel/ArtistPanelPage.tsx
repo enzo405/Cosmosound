@@ -2,11 +2,9 @@ import Container from "components/box/Container";
 import SpotifyIcon from "components/icons/media/SpotifyIcon";
 import { useUser } from "hooks/useUser";
 import { Genre } from "models/Music";
-import { Media } from "models/User";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import { PartialArtist, Media } from "models/User";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import ArtistService from "services/artistService";
 import GenresService from "services/genresService";
 import MediaLinkInput from "./components/MediaLinkInput";
 import YoutubeMusicIcon from "components/icons/media/YoutubeMusicIcon";
@@ -17,7 +15,10 @@ import { Icon } from "components/icons/Icon";
 import { useNavigate } from "react-router-dom";
 import { routesConfig } from "config/app-config";
 import { useConfirmDialog } from "hooks/useConfirm";
-import ArtistRestrictedPage from "pages/errors/ArtistRestrictedPage";
+import UserService from "services/userService";
+import { enqueueSnackbar } from "notistack";
+import { AxiosError } from "axios";
+import { getDirtyFieldsValue } from "utils/form";
 
 export interface ArtistPanelFormData {
   artistName?: string;
@@ -30,28 +31,25 @@ export interface ArtistPanelFormData {
 }
 
 export default function ArtistPanelPage(): ReactElement {
-  const { user } = useUser();
-
-  if (user?.role === "USER") return <ArtistRestrictedPage />;
+  const { user, setUser } = useUser();
 
   const { openDialog } = useConfirmDialog();
-  const artist = useMemo(() => ArtistService.getArtistById(user?.id), []);
-  if (artist == undefined) return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
+  const artist = useMemo(() => user as PartialArtist, [user]);
 
   const {
     handleSubmit,
     control,
     watch,
     reset,
-    formState: { isDirty },
+    formState: { isDirty, errors, dirtyFields },
   } = useForm<ArtistPanelFormData>({
     defaultValues: {
-      artistName: artist.artistName,
-      spotifyLink: artist.socialMedia.find((m) => m.media == Media.SPOTIFY)?.link ?? "",
-      youtubeLink: artist.socialMedia.find((m) => m.media == Media.YTB_MUSIC)?.link ?? "",
-      appleMusicLink: artist.socialMedia.find((m) => m.media == Media.APPLE_MUSIC)?.link ?? "",
-      xLink: artist.socialMedia.find((m) => m.media == Media.X)?.link ?? "",
-      instagramLink: artist.socialMedia.find((m) => m.media == Media.INSTAGRAM)?.link ?? "",
+      artistName: artist.artistName ?? "",
+      spotifyLink: artist.socialMedia?.find((m) => m.media == Media.SPOTIFY)?.link,
+      youtubeLink: artist.socialMedia?.find((m) => m.media == Media.YTB_MUSIC)?.link,
+      appleMusicLink: artist.socialMedia?.find((m) => m.media == Media.APPLE_MUSIC)?.link,
+      xLink: artist.socialMedia?.find((m) => m.media == Media.X)?.link,
+      instagramLink: artist.socialMedia?.find((m) => m.media == Media.INSTAGRAM)?.link,
       genre: artist.genre,
     },
   });
@@ -59,49 +57,68 @@ export default function ArtistPanelPage(): ReactElement {
   const selectedGenre = watch("genre");
 
   const sortGenres = (genres: Genre[]): Genre[] => {
-    const genre = selectedGenre ?? artist.genre;
-    const result = genres.filter((g) => genre.name !== g.name);
-    return [genre, ...result]; // to have selected genre in first
+    if (!selectedGenre && !artist?.genre) {
+      return genres;
+    }
+
+    const genre = selectedGenre ?? artist?.genre;
+    const result = genres.filter((g) => genre!.name !== g.name);
+    return [genre!, ...result]; // to have selected genre in first
   };
 
   const availableGenres = useMemo(() => GenresService.getAllGenres(), []);
   const [displayGenres, setDisplayGenres] = useState<Genre[]>([]);
+  const [error, setError] = useState<string | undefined>();
   const navigate = useNavigate();
 
   useEffect(() => {
     setDisplayGenres(sortGenres(availableGenres));
-  }, [artist.genre, availableGenres]);
+  }, [artist?.genre, availableGenres]);
+
+  useEffect(() => {
+    reset({
+      artistName: artist.artistName ?? "",
+      spotifyLink: artist.socialMedia?.find((m) => m.media == Media.SPOTIFY)?.link,
+      youtubeLink: artist.socialMedia?.find((m) => m.media == Media.YTB_MUSIC)?.link,
+      appleMusicLink: artist.socialMedia?.find((m) => m.media == Media.APPLE_MUSIC)?.link,
+      xLink: artist.socialMedia?.find((m) => m.media == Media.X)?.link,
+      instagramLink: artist.socialMedia?.find((m) => m.media == Media.INSTAGRAM)?.link,
+      genre: artist.genre,
+    });
+  }, [user]);
 
   const onSubmitForm = (data: ArtistPanelFormData) => {
+    const dirtyFieldsValue = getDirtyFieldsValue(dirtyFields, data);
+
     const description = (
       <div className="flex flex-col gap-1">
-        <p>Artist Name: {data.artistName}</p>
-        <p>Genre: {data.genre?.name}</p>
+        <p>Artist Name: {dirtyFieldsValue.artistName}</p>
+        <p>Genre: {dirtyFieldsValue.genre?.name}</p>
 
         <span className="flex flex-row gap-1 items-center">
           <p>Updated links:</p>
-          {data.spotifyLink != "" && (
-            <a href={data.spotifyLink}>
+          {dirtyFieldsValue.spotifyLink && (
+            <a href={dirtyFieldsValue.spotifyLink}>
               <SpotifyIcon />
             </a>
           )}
-          {data.youtubeLink != "" && (
-            <a href={data.youtubeLink}>
+          {dirtyFieldsValue.youtubeLink && (
+            <a href={dirtyFieldsValue.youtubeLink}>
               <YoutubeMusicIcon />
             </a>
           )}
-          {data.xLink != "" && (
-            <a href={data.xLink}>
+          {dirtyFieldsValue.xLink && (
+            <a href={dirtyFieldsValue.xLink}>
               <XIcon />
             </a>
           )}
-          {data.appleMusicLink != "" && (
-            <a href={data.appleMusicLink}>
+          {dirtyFieldsValue.appleMusicLink && (
+            <a href={dirtyFieldsValue.appleMusicLink}>
               <AppleMusicIcon />
             </a>
           )}
-          {data.instagramLink != "" && (
-            <a href={data.instagramLink}>
+          {dirtyFieldsValue.instagramLink && (
+            <a href={dirtyFieldsValue.instagramLink}>
               <InstagramIcon />
             </a>
           )}
@@ -112,13 +129,33 @@ export default function ArtistPanelPage(): ReactElement {
     openDialog({
       title: "Are you sure ?",
       description: description,
-      onConfirm: () => ArtistService.saveArtistData(data),
+      onConfirm: async () =>
+        await UserService.updateArtist(dirtyFieldsValue)
+          .then((user) => {
+            if (artist.role === "USER") {
+              enqueueSnackbar("Artist account created", { variant: "success" });
+            } else {
+              enqueueSnackbar("Artist info updated", { variant: "success" });
+            }
+            setUser(user);
+          })
+          .catch((err) => {
+            const defaultErrMessage = "An error occured";
+            if (err instanceof AxiosError) {
+              setError(err.response?.data?.message || defaultErrMessage);
+            } else {
+              setError(defaultErrMessage);
+            }
+            enqueueSnackbar(defaultErrMessage, {
+              variant: "error",
+            });
+          }),
     });
   };
 
   const handleOnChangeGenreInput = (e: string) => {
     const filteredGenres = sortGenres(availableGenres).filter((genre) => genre.name.includes(e));
-    const uniqueGenres = [selectedGenre ?? artist.genre, ...filteredGenres].filter(
+    let uniqueGenres = [selectedGenre!, ...filteredGenres].filter(
       (genre, index, self) => self.indexOf(genre) === index,
     );
     setDisplayGenres(uniqueGenres);
@@ -141,14 +178,28 @@ export default function ArtistPanelPage(): ReactElement {
                   <Controller
                     name="artistName"
                     control={control}
+                    rules={{
+                      required: artist?.artistName === null ? "Artist name is required" : false,
+                    }}
                     render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="artistName"
-                        placeholder="Enter your artist name"
-                        className="mt-1 text-dark-custom px-2 lg:px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-tertio-orange focus:outline-none"
-                      />
+                      <>
+                        <input
+                          {...field}
+                          type="text"
+                          id="artistName"
+                          placeholder="Enter your artist name"
+                          className={`mt-1 text-dark-custom px-2 lg:px-5 py-3 border ${
+                            errors.artistName
+                              ? "border-red-500"
+                              : "border-gray-300 focus:ring-2 focus:ring-tertio-orange"
+                          } rounded-lg focus:outline-none`}
+                        />
+                        {errors.artistName && (
+                          <span className="text-red-500 text-sm mt-1">
+                            {errors.artistName.message}
+                          </span>
+                        )}
+                      </>
                     )}
                   />
                 </div>
@@ -195,7 +246,10 @@ export default function ArtistPanelPage(): ReactElement {
                 <label htmlFor="genre" className="font-medium text-dark-custom">
                   Choose your Genre
                 </label>
-                <div className="flex flex-col h-[90%] border border-gray-300 rounded-lg p-4">
+                <div
+                  className={`flex flex-col h-[90%] border ${
+                    errors.genre ? "border-red-500" : "border-gray-300"
+                  } rounded-lg p-4`}>
                   <input
                     type="text"
                     onChange={(e) => handleOnChangeGenreInput(e.target.value)}
@@ -204,6 +258,9 @@ export default function ArtistPanelPage(): ReactElement {
                   />
                   <Controller
                     name="genre"
+                    rules={{
+                      required: "Please select a genre.",
+                    }}
                     control={control}
                     render={({ field }) => (
                       <div className="flex flex-col max-h-[25rem] h-full mt-2 scrollbar-thin overflow-y-auto p-2">
@@ -231,38 +288,46 @@ export default function ArtistPanelPage(): ReactElement {
                     )}
                   />
                 </div>
+                {errors.genre && (
+                  <span className="text-red-500 text-sm mt-1">{errors.genre.message}</span>
+                )}
               </div>
             </div>
-            <div className="flex gap-4 mt-6 justify-end sm:justify-start">
-              <button
-                onClick={() => reset()}
-                type="button"
-                className="px-4 py-2 text-tertio-orange border-2 border-tertio-orange rounded-lg hover:bg-secondary-orange">
-                Cancel
-              </button>
-              <button
-                type="submit"
-                disabled={!isDirty}
-                className={`px-5 py-3 rounded-lg text-white ${
-                  isDirty
-                    ? "bg-tertio-orange hover:bg-primary-orange"
-                    : "bg-gray-300 cursor-not-allowed"
-                }`}>
-                Save
-              </button>
+            <div className="flex flex-col">
+              {error && <span className="text-red-500 font-normal tracking-tight">{error}</span>}
+              <div className="flex gap-4 mt-6 justify-end sm:justify-start">
+                <button
+                  onClick={() => reset()}
+                  type="button"
+                  className="px-4 py-2 text-tertio-orange border-2 border-tertio-orange rounded-lg hover:bg-secondary-orange">
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={!isDirty}
+                  className={`px-5 py-3 rounded-lg text-white ${
+                    isDirty
+                      ? "bg-tertio-orange hover:bg-primary-orange"
+                      : "bg-gray-300 cursor-not-allowed"
+                  }`}>
+                  Save
+                </button>
+              </div>
             </div>
           </form>
         </Container>
-        <Container className="w-full items-start p-2 md:p-4 lg:pt-6">
-          <button
-            className="flex flex-row items-center justify-center gap-1 pl-3 pr-4 py-1 text-tertio-orange border-tertio-orange border-2 rounded-xl font-medium hover:bg-orange-50"
-            type="button"
-            role="button"
-            onClick={() => navigate(routesConfig.createCatalog.path)}>
-            <Icon iconName="cloud-upload" className="mm-size-7 fill-tertio-orange" />
-            Create
-          </button>
-        </Container>
+        {user?.role === "ARTISTS" && (
+          <Container className="w-full items-start p-2 md:p-4 lg:pt-6">
+            <button
+              className="flex flex-row items-center justify-center gap-1 pl-3 pr-4 py-1 text-tertio-orange border-tertio-orange border-2 rounded-xl font-medium hover:bg-orange-50"
+              type="button"
+              role="button"
+              onClick={() => navigate(routesConfig.createCatalog.path)}>
+              <Icon iconName="cloud-upload" className="mm-size-7 fill-tertio-orange" />
+              Create
+            </button>
+          </Container>
+        )}
       </div>
     </div>
   );

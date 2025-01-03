@@ -5,7 +5,6 @@ export interface User {
   id: number;
   name: string; // name of the user
   email: string; // email of the user
-  dateCreation: string; // Date in UTC of the creation of the account
   pictureProfile: string;
   followers: number;
   role: "ARTISTS" | "USER";
@@ -31,6 +30,28 @@ export interface Artist extends UserDetails {
 export interface DetailedArtistInfo extends Artist {
   musics: MusicWithCatalog[];
   catalogs: Catalog[];
+}
+
+export interface PartialArtist {
+  id: number;
+  name: string; // name of the user
+  email: string; // email of the user
+  pictureProfile: string;
+  followers: number;
+  role: "ARTISTS" | "USER";
+  createdAt: string;
+  updatedAt: string;
+  likedArtists: string[];
+  likedMusics: string[];
+  likedCatalogs: string[];
+  likedGenres: string[];
+  likedPlaylists: string[];
+  isVerified?: boolean;
+  socialMedia?: SocialMediaLink[];
+  genre?: Genre;
+  artistName?: string;
+  musics?: MusicWithCatalog[];
+  catalogs?: Catalog[];
 }
 
 export interface SocialMediaLink {

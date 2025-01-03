@@ -6,5 +6,6 @@ import { multerMiddleware } from "@/middlewares/multer.middlware";
 const router = express.Router();
 
 router.patch("/me", auth, multerMiddleware, userTrigger.updateUser);
+router.patch("/me/artist", auth, userTrigger.updateArtist);
 
 export default router;

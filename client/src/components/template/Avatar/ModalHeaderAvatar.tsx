@@ -89,12 +89,14 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
           <Icon iconName="account" className="mr-1 w-5 h-5" />
           Account
         </SettingsOptions>
-        <SettingsOptions
-          className="cursor-pointer gap-2 text-dark-grey text-base"
-          onClick={() => navigate(routesConfig.artistPanel.path)}>
-          <Icon iconName="artistPanel" className="mr-1 w-5 h-5" />
-          Artist Panel
-        </SettingsOptions>
+        {user?.role !== "USER" && (
+          <SettingsOptions
+            className="cursor-pointer gap-2 text-dark-grey text-base"
+            onClick={() => navigate(routesConfig.artistPanel.path)}>
+            <Icon iconName="artistPanel" className="mr-1 w-5 h-5" />
+            Artist Panel
+          </SettingsOptions>
+        )}
         <SettingsOptions
           className="cursor-pointer gap-2 text-dark-grey text-base"
           onClick={() => navigate(routesConfig.legal.path)}>

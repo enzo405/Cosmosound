@@ -64,7 +64,7 @@ model Users {
   isVerified     Boolean       @default(false)
   socialMedia    SocialMedia[]
   artistName     String?
-  genre          String?
+  genre          Genre?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   refreshToken   String?
@@ -75,7 +75,19 @@ enum UserRole {
   ARTISTS
 }
 
+enum Media {
+  X
+  SPOTIFY
+  APPLE_MUSIC
+  YTB_MUSIC
+  INSTAGRAM
+}
+
 type SocialMedia {
-  media String?
+  media Media
   link  String?
+}
+
+type Genre {
+  name String
 }

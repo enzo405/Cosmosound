@@ -1,16 +1,17 @@
 import { Catalog } from "models/Catalog";
 import { Genre, Music } from "models/Music";
 import { Playlist } from "models/Playlist";
-import { Artist, User, UserDetails } from "models/User";
+import { Artist, PartialArtist } from "models/User";
 import { AccountFormData } from "pages/Account/AccountPage";
 import { apiClient } from "./axiosService";
 import { AxiosResponse } from "axios";
+import { ArtistPanelFormData } from "pages/ArtistPanel/ArtistPanelPage";
 
 async function refreshToken(): Promise<AxiosResponse<any, any>> {
   return apiClient.post("/auth/refresh");
 }
 
-async function getMe(): Promise<UserDetails> {
+async function getMe(): Promise<PartialArtist> {
   return apiClient
     .get("/auth/me")
     .then((res) => res.data)
@@ -71,15 +72,19 @@ function removeLike(item: Artist | Genre | Playlist | Catalog | Music): void {
   console.log("removeLike item", item);
 }
 
-async function saveData(data: AccountFormData, user: User): Promise<UserDetails> {
+async function updateAccount(dataForm: Partial<AccountFormData>): Promise<PartialArtist> {
   const formData = new FormData();
-  data.username !== user.name && formData.append("username", data.username);
-  data.email !== user.email && formData.append("email", data.email);
-  data.password !== "" && formData.append("password", data.password);
-  data.confirmPassword !== "" && formData.append("confirmPassword", data.confirmPassword);
-  data.image && formData.append("file", data.image);
+  dataForm.username && formData.append("username", dataForm.username);
+  dataForm.email && formData.append("email", dataForm.email);
+  dataForm.password && formData.append("password", dataForm.password);
+  dataForm.confirmPassword && formData.append("confirmPassword", dataForm.confirmPassword);
+  dataForm.image && formData.append("file", dataForm.image);
 
   return await apiClient.patch("/api/me", formData).then((res) => res.data);
+}
+
+async function updateArtist(dataForm: Partial<ArtistPanelFormData>): Promise<PartialArtist> {
+  return await apiClient.patch("/api/me/artist", dataForm).then((res) => res.data);
 }
 
 const UserService = {
@@ -90,7 +95,8 @@ const UserService = {
   logout,
   like,
   removeLike,
-  saveData,
+  updateAccount,
+  updateArtist,
 };
 
 export default UserService;
