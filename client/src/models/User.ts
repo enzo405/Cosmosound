@@ -60,9 +60,9 @@ export interface SocialMediaLink {
 }
 
 export enum Media {
-  X,
-  SPOTIFY,
-  APPLE_MUSIC,
-  YTB_MUSIC,
-  INSTAGRAM,
+  X = "X",
+  SPOTIFY = "SPOTIFY",
+  APPLE_MUSIC = "APPLE_MUSIC",
+  YTB_MUSIC = "YTB_MUSIC",
+  INSTAGRAM = "INSTAGRAM",
 }

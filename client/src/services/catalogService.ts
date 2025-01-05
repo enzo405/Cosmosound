@@ -1,6 +1,7 @@
 import data from "assets/json/catalogs.json";
 import { Catalog, CatalogWithMusic } from "models/Catalog";
 import { CreateCatalogFormData } from "pages/CreateCatalog/CreateCatalogPage";
+import { apiClient } from "./axiosService";
 
 const catalogData = data as CatalogWithMusic[];
 
@@ -31,8 +32,28 @@ function deleteCatalog(catalog: Catalog): void {
   console.log("catalog delete", catalog);
 }
 
-function createCatalog(catalog: CreateCatalogFormData): void {
-  console.log("catalog create", catalog);
+async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<CatalogWithMusic> {
+  const formData = new FormData();
+
+  dataForm.titleCatalog && formData.append("title", dataForm.titleCatalog);
+  dataForm.thumbnailCatalog instanceof File &&
+    formData.append("thumbnailFile", dataForm.thumbnailCatalog);
+  typeof dataForm.thumbnailCatalog === "string" &&
+    formData.append("defaultThumbnail", dataForm.thumbnailCatalog);
+
+  if (dataForm.musics) {
+    const genres: string[][] = [];
+    const durations: number[] = [];
+    dataForm.musics.forEach((music) => {
+      formData.append("musics", music.file);
+      genres.push(music.genres);
+      durations.push(music.duration);
+    });
+    formData.append(`genres`, JSON.stringify(genres));
+    formData.append(`durations`, JSON.stringify(durations));
+  }
+
+  return await apiClient.post("/api/catalog", formData).then((res) => res.data);
 }
 
 const CatalogService = {

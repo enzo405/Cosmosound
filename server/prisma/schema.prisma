@@ -23,15 +23,14 @@ type MusicInPlaylist {
 }
 
 model Catalogs {
-  id           String      @id @default(auto()) @map("_id") @db.ObjectId
-  title        String
-  owner        String      @db.ObjectId
-  dateCreation DateTime    @default(now())
-  thumbnail    String
-  type         TypeCatalog
-  musics       Music[]
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  owner     String      @db.ObjectId
+  thumbnail String
+  type      TypeCatalog
+  musics    Music[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 }
 
 enum TypeCatalog {
@@ -41,11 +40,12 @@ enum TypeCatalog {
 }
 
 type Music {
-  id           String   @db.ObjectId
-  title        String
-  dateCreation DateTime
-  duration     Int
-  genres       String[]
+  id        String   @db.ObjectId
+  title     String
+  createdAt DateTime @default(now())
+  url       String
+  duration  Int
+  genres    String[]
 }
 
 model Users {

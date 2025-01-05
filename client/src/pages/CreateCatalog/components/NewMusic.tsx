@@ -53,8 +53,8 @@ export default function NewMusic({
         <div className="flex flex-col w-full min-w-0">
           <span className="font-medium text-sm inline-flex text-dark-custom truncate overflow-hidden whitespace-nowrap">
             <span
-              className={`${musicData.title.length > 10 ? "lg:animate-scroll-text" : ""} inline-block whitespace-nowrap`}>
-              {musicData.title}
+              className={`${musicData.file.name.length > 10 ? "lg:animate-scroll-text" : ""} inline-block whitespace-nowrap`}>
+              {musicData.file.name}
             </span>
           </span>
         </div>
@@ -75,6 +75,7 @@ export default function NewMusic({
               <div className="p-1">
                 <input
                   type="text"
+                  autoFocus
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search genres..."
@@ -104,7 +105,10 @@ export default function NewMusic({
         </div>
         <BiXCircle
           className="mm-size-6 fill-dark-custom cursor-pointer"
-          onClick={handleRemoveMusic}
+          onClick={() => {
+            setOpenGenreDropdown(false);
+            handleRemoveMusic();
+          }}
         />
       </div>
     </div>

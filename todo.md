@@ -4,6 +4,7 @@
 - Backend => Upload catalog (with loading in the frontend)
 - Frontend => Add section with your own catalog in Artist panel
 - Backend => Edit/Delete Music from Catalog & Delete Catalog
+- Make user from Provider UserPartial type to be able to add info of artist inside (own catalog, own playlist etc...)
 
 2. Playlist
 - Backend => Create playlist
@@ -44,3 +45,7 @@
 - Artist page make top part sticky
 - <a> tag for links (accessibility) instead of onClick
 - Add expand/resize button on sidebar
+
+# Bugs:
+- Upload picture can have more than 1 share link
+- 

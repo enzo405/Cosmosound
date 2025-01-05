@@ -5,6 +5,7 @@ import morgan from "morgan";
 import authRouter from "./routes/auth.route";
 import fileRouter from "./routes/file.route";
 import userRouter from "./routes/user.route";
+import catalogRouter from "./routes/catalog.route";
 import cors from "cors";
 import cookieParser from "./middlewares/cookie-parser.middleware";
 
@@ -18,7 +19,9 @@ const corsOptions = {
   credentials: true,
 };
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient({
+  log: ["query"],
+});
 
 const app = express();
 app.use(express.json());
@@ -28,6 +31,7 @@ app.use(morgan(":method :url :status :res[content-length] - :response-time ms"))
 app.use("/auth", authRouter);
 app.use("/api", fileRouter);
 app.use("/api", userRouter);
+app.use("/api", catalogRouter);
 
 async function connectDatabase() {
   try {

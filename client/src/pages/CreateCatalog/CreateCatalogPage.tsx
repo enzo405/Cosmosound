@@ -10,6 +10,8 @@ import CatalogService from "services/catalogService";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { displayPictureProfile } from "utils/user";
 import { PartialArtist } from "models/User";
+import { enqueueSnackbar } from "notistack";
+import Loading from "components/icons/Loading";
 
 export interface CreateCatalogFormData {
   titleCatalog: string;
@@ -18,9 +20,9 @@ export interface CreateCatalogFormData {
 }
 
 export interface CreateMusicFormData {
-  title: string;
-  duration: number;
+  file: File;
   genres: string[];
+  duration: number;
 }
 
 export default function CreateCatalogPage(): ReactElement {
@@ -49,43 +51,66 @@ export default function CreateCatalogPage(): ReactElement {
 
   const [preview, setPreview] = useState(displayPictureProfile(artist.pictureProfile));
   const [isDragging, setIsDragging] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const onSubmitForm = (data: CreateCatalogFormData) => {
-    const description = (
-      <ul className="list-disc pl-5">
-        <li>
-          <strong>Title:</strong> {data.titleCatalog}
-        </li>
-        <li>
-          <strong>Thumbnail:</strong>
-          {typeof data.thumbnailCatalog === "string" ? (
-            <img src={data.thumbnailCatalog} alt="Thumbnail" className="w-16 h-16 object-cover" />
-          ) : (
-            data.thumbnailCatalog.name
-          )}
-        </li>
+  const CatalogCard = (data: CreateCatalogFormData) => {
+    return (
+      <div className="flex gap-2 border rounded-lg p-4 shadow-md max-w-lg">
+        <img
+          src={preview}
+          alt="Catalog Thumbnail"
+          className="mm-size-16 md:mm-size-24 rounded-full border border-gray-300"
+        />
         {data.musics.length > 0 ? (
-          <li>
-            <strong>Musics:</strong>
-            <ul className="list-decimal pl-5">
+          <div className="h-1/2 max-h-72 overflow-y-auto">
+            <strong>Songs:</strong>
+            <ul className="list-disc pl-5">
               {data.musics.map((music, index) => (
                 <li key={index}>
-                  <strong>Title:</strong> {music.title}, <strong>Genres:</strong>{" "}
+                  <strong>Title:</strong> {music.file.name}, <strong>Genres:</strong>{" "}
                   {music.genres.join(", ")}
                 </li>
               ))}
             </ul>
-          </li>
+          </div>
         ) : (
-          <li>No musics added.</li>
+          <p>No songs added.</p>
         )}
-      </ul>
+      </div>
     );
+  };
 
+  const onSubmitForm = (data: CreateCatalogFormData) => {
     openDialog({
-      title: "Are you sure you want to create this?",
-      description,
-      onConfirm: () => CatalogService.createCatalog(data),
+      title: data.titleCatalog,
+      description: (
+        <CatalogCard
+          musics={data.musics}
+          thumbnailCatalog={data.thumbnailCatalog}
+          titleCatalog={data.titleCatalog}
+        />
+      ),
+      onCancel: () => setLoading(false),
+      onConfirm: async () => {
+        setLoading(true);
+        await CatalogService.createCatalog(data)
+          .then((data) => {
+            setLoading(false);
+            reset();
+            setPreview(displayPictureProfile(artist.pictureProfile));
+            enqueueSnackbar({
+              message: `${data.type} successfully created with ${data.musics.length} songs.`,
+              variant: "success",
+            });
+          })
+          .catch((e) => {
+            setLoading(false);
+            enqueueSnackbar({
+              message: e.response.data.message,
+              variant: "error",
+            });
+          });
+      },
     });
   };
 
@@ -102,12 +127,32 @@ export default function CreateCatalogPage(): ReactElement {
     if (files) handleMusicUpload(files);
   };
 
-  const handleMusicUpload = (files: FileList) => {
-    const newMusic = Array.from(files).map((file) => ({
-      title: file.name,
-      duration: 0,
-      genres: [],
-    }));
+  const handleMusicUpload = async (files: FileList) => {
+    const calculateDuration = (file: File): Promise<number> => {
+      return new Promise((resolve, reject) => {
+        const audio = document.createElement("audio");
+        audio.src = URL.createObjectURL(file);
+
+        audio.addEventListener("loadedmetadata", () => {
+          resolve(audio.duration);
+        });
+
+        audio.addEventListener("error", () => {
+          reject(new Error("Failed to load audio file"));
+        });
+      });
+    };
+
+    const newMusic = await Promise.all(
+      Array.from(files).map(async (file) => {
+        const duration = await calculateDuration(file);
+        return {
+          file,
+          genres: [],
+          duration,
+        };
+      }),
+    );
 
     setValue("musics", [...(getValues("musics") || []), ...newMusic], { shouldDirty: true });
   };
@@ -215,20 +260,24 @@ export default function CreateCatalogPage(): ReactElement {
             </div>
             <div className="flex gap-4 mt-6 justify-end sm:justify-start">
               <button
-                onClick={() => reset()}
+                onClick={() => {
+                  reset();
+                  setPreview(displayPictureProfile(artist.pictureProfile));
+                }}
+                disabled={loading}
                 type="button"
-                className="px-4 py-2 text-tertio-orange border-2 border-tertio-orange rounded-lg hover:bg-secondary-orange">
+                className={`px-4 py-2 border-2 ${loading ? "border-0 cursor-not-allowed bg-gray-300 text-white" : "border-tertio-orange text-tertio-orange hover:bg-secondary-orange"} rounded-lg`}>
                 Cancel
               </button>
               <button
                 type="submit"
-                disabled={!isDirty}
+                disabled={!isDirty || loading}
                 className={`px-5 py-3 rounded-lg text-white ${
-                  isDirty
-                    ? "bg-tertio-orange hover:bg-primary-orange"
-                    : "bg-gray-300 cursor-not-allowed"
+                  !isDirty || loading
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-tertio-orange hover:bg-primary-orange"
                 }`}>
-                Save
+                {loading ? <Loading /> : "Save"}
               </button>
             </div>
           </form>
@@ -262,13 +311,16 @@ export default function CreateCatalogPage(): ReactElement {
             {errors.musics && (
               <span className="text-red-500 text-sm mt-1">{errors.musics.message}</span>
             )}
+            <span className="text-dark-glassy text-sm -mt-2">
+              Songs title is defined by the file name
+            </span>
             <Controller
               rules={{
                 required: "You need to have at least one music",
                 validate: {
                   atLeastOneGenre: (musics) =>
                     musics.every((music) => music.genres.length > 0) ||
-                    "Each music must have at least one genre.",
+                    "Each songs must have at least one genre.",
                 },
               }}
               name="musics"
