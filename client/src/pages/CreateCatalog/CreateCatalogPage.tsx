@@ -12,6 +12,7 @@ import { displayPictureProfile } from "utils/user";
 import { PartialArtist } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import Loading from "components/icons/Loading";
+import CatalogCard from "./components/CatalogCard";
 
 export interface CreateCatalogFormData {
   titleCatalog: string;
@@ -53,43 +54,10 @@ export default function CreateCatalogPage(): ReactElement {
   const [isDragging, setIsDragging] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const CatalogCard = (data: CreateCatalogFormData) => {
-    return (
-      <div className="flex gap-2 border rounded-lg p-4 shadow-md max-w-lg">
-        <img
-          src={preview}
-          alt="Catalog Thumbnail"
-          className="mm-size-16 md:mm-size-24 rounded-full border border-gray-300"
-        />
-        {data.musics.length > 0 ? (
-          <div className="h-1/2 max-h-72 overflow-y-auto">
-            <strong>Songs:</strong>
-            <ul className="list-disc pl-5">
-              {data.musics.map((music, index) => (
-                <li key={index}>
-                  <strong>Title:</strong> {music.file.name}, <strong>Genres:</strong>{" "}
-                  {music.genres.join(", ")}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <p>No songs added.</p>
-        )}
-      </div>
-    );
-  };
-
   const onSubmitForm = (data: CreateCatalogFormData) => {
     openDialog({
       title: data.titleCatalog,
-      description: (
-        <CatalogCard
-          musics={data.musics}
-          thumbnailCatalog={data.thumbnailCatalog}
-          titleCatalog={data.titleCatalog}
-        />
-      ),
+      description: <CatalogCard data={data} preview={preview} />,
       onCancel: () => setLoading(false),
       onConfirm: async () => {
         setLoading(true);
@@ -307,7 +275,7 @@ export default function CreateCatalogPage(): ReactElement {
               Select file
             </label>
           </div>
-          <div className="flex flex-col flex-grow w-full gap-4 mt-4">
+          <div className="flex flex-col flex-grow w-full gap-4 mt-4" id="dropdown-genre">
             {errors.musics && (
               <span className="text-red-500 text-sm mt-1">{errors.musics.message}</span>
             )}

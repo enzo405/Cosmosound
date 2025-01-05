@@ -1,5 +1,5 @@
 import { Genre } from "models/Music";
-import { ReactElement, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { CreateMusicFormData } from "../CreateCatalogPage";
 import { Icon } from "components/icons/Icon";
 import { BiXCircle } from "react-icons/bi";
@@ -40,6 +40,26 @@ export default function NewMusic({
 
     handleGenreChange(index, updatedGenres);
   };
+
+  useEffect(() => {
+    const handleClickAway = (event: MouseEvent) => {
+      let id = `dropdown-genre`;
+      const settings = document.getElementById(id);
+      const target = event.target as Node;
+
+      if (settings && !settings.contains(target)) {
+        setOpenGenreDropdown(false);
+      }
+    };
+
+    if (openGenreDropdown) {
+      window.addEventListener("click", handleClickAway);
+      document.body.classList.add("overflow-hidden");
+    } else {
+      window.removeEventListener("click", handleClickAway);
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [openGenreDropdown]);
 
   const isGenreEmpty = musicData.genres.length == 0;
 
