@@ -36,6 +36,9 @@
 - Frontend => About-us page : Copy of the Landing page without the register button.
 - Frontend => Legal page: ask gpt
 - Frontend => Home Page *when not logged in*: Landing page with great looking image and nice & short description, with a button that leads to the register page. At the bottom, there'll be all necessary informations about the site (name details, creation date, goal of the app, who am i etc...).
+- Backend & Frontend => Add previous password if the user want to change password
+- Backend & Frontend => Add forgot password feature
+
 
 # Good to have:
 - Make a page to create playlist and add music more easier
