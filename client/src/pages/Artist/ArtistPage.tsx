@@ -101,16 +101,16 @@ export default function ArtistPage(): ReactElement {
   const loadContent = (selectedTab: ArtistTabs) => {
     switch (selectedTab) {
       case ArtistTabs.ALBUM:
-        setContent(artist.catalogs.filter((c) => c.type == TypeCatalog.ALBUM));
+        setContent(artist.catalogs.filter((c) => c.type === TypeCatalog.ALBUM));
         break;
       case ArtistTabs.MUSIC:
         setContent(artist.musics);
         break;
       case ArtistTabs.EP:
-        setContent(artist.catalogs.filter((c) => c.type == TypeCatalog.EP));
+        setContent(artist.catalogs.filter((c) => c.type === TypeCatalog.EP));
         break;
       case ArtistTabs.SINGLE:
-        setContent(artist.catalogs.filter((c) => c.type == TypeCatalog.SINGLE));
+        setContent(artist.catalogs.filter((c) => c.type === TypeCatalog.SINGLE));
         break;
     }
   };
@@ -196,7 +196,7 @@ export default function ArtistPage(): ReactElement {
                     <Card
                       key={catalog.id}
                       title={catalog.title}
-                      description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
+                      description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
                       thumbnail={catalog.thumbnail}
                       link={routesConfig.catalog.getParameter(catalog.id)}
                       defaultLiked={

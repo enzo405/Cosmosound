@@ -1,3 +1,5 @@
+import BadRequestException from "@/errors/BadRequestException";
+import UnsupportedMediaTypeException from "@/errors/UnsupportedMediaTypeException";
 import { Request } from "express";
 import multer, { FileFilterCallback } from "multer";
 
@@ -6,16 +8,16 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallb
     if (file.mimetype.startsWith("image/")) {
       cb(null, true);
     } else {
-      cb(new Error("Only image files are allowed for 'thumbnail' field"));
+      cb(new UnsupportedMediaTypeException("Only image files are allowed for 'thumbnail' field"));
     }
   } else if (file.fieldname === "musics") {
     if (file.mimetype.startsWith("audio/")) {
       cb(null, true);
     } else {
-      cb(new Error("Only audio files are allowed for 'musics' field"));
+      cb(new UnsupportedMediaTypeException("Only audio files are allowed for 'musics' field"));
     }
   } else {
-    cb(new Error("Unexpected field"));
+    cb(new BadRequestException("Unexpected field"));
   }
 };
 

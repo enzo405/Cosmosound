@@ -1,6 +1,6 @@
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
-import { ReactElement } from "react";
-import { useParams } from "react-router-dom";
+import { ReactElement, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import CatalogService from "services/catalogService";
 import { formatDurationWithLabel, formatTime } from "utils/date";
 import PageLayout from "components/PageLayout";
@@ -9,15 +9,34 @@ import MusicItemDelete from "components/music/MusicItemDelete";
 import { Music } from "models/Music";
 import MusicService from "services/musicService";
 import { useConfirmDialog } from "hooks/useConfirm";
-import { TypeCatalog } from "models/Catalog";
+import { CatalogWithMusic } from "models/Catalog";
+import { enqueueSnackbar } from "notistack";
 
 interface CatalogEditPageProps {}
 
 export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement {
+  const navigate = useNavigate();
   const { idCatalog } = useParams();
   const { openDialog } = useConfirmDialog();
+  const [catalog, setCatalog] = useState<CatalogWithMusic | undefined>();
 
-  const catalog = CatalogService.getCatalogById(idCatalog);
+  useEffect(() => {
+    const fetchCatalog = async () => {
+      await CatalogService.getCatalogById(idCatalog)
+        .then((catalog) => {
+          setCatalog(catalog);
+        })
+        .catch((err) => {
+          enqueueSnackbar({
+            message: err.message,
+            variant: "error",
+          });
+        });
+    };
+
+    fetchCatalog();
+  }, [idCatalog]);
+
   if (catalog == undefined) {
     return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
   }
@@ -25,7 +44,7 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
   const handleClickDelete = (music: Music) => {
     openDialog({
       title: `Are you sure ?`,
-      description: `Do you want to delete '${music.title}' from this ${TypeCatalog[catalog.type]}?`,
+      description: `Do you want to delete '${music.title}' from ${catalog.title}?`,
       onConfirm: () => MusicService.deleteMusic(music),
     });
   };
@@ -33,8 +52,24 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
   const handleDeleteCatalog = () => {
     openDialog({
       title: `Are you sure ?`,
-      description: `Do really you want to delete this ${TypeCatalog[catalog.type]}?`,
-      onConfirm: () => CatalogService.deleteCatalog(catalog),
+      description: `Do really you want to delete this?`,
+      onConfirm: async () => {
+        return await CatalogService.deleteCatalog(catalog)
+          .then(() => {
+            enqueueSnackbar({
+              message: `${catalog.type.valueOf()} '${catalog.title}' successfully deleted.`,
+              variant: "success",
+            });
+            navigate("/");
+          })
+          .catch((err) => {
+            enqueueSnackbar({
+              message: `An error occured while trying to remove ${catalog.title}.`,
+              variant: "error",
+            });
+            console.log("err", err);
+          });
+      },
     });
   };
 

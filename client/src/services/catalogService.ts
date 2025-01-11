@@ -9,26 +9,20 @@ function getAllCatalog(): CatalogWithMusic[] {
   return catalogData;
 }
 
-function getCatalogById(id?: string): CatalogWithMusic | undefined {
-  if (!id) return undefined;
-  return catalogData.find((music) => music.id == id);
+async function getCatalogById(id?: string): Promise<CatalogWithMusic | undefined> {
+  return await apiClient.get(`/api/catalogs/${id}`).then((res) => res.data);
 }
 
-function searchCatalogByTitle(value: string): Catalog[] {
+async function searchCatalogByTitle(value: string): Promise<Catalog[]> {
   if (value == "") {
     return [];
   }
-
-  const searchTerm = value.toLowerCase().trim();
-
-  const catalogsTitleMatch = catalogData
-    .filter((catalog) => catalog.title.toLowerCase().includes(searchTerm))
-    .slice(0, 10);
-
-  return [...new Set(catalogsTitleMatch)];
+  return await apiClient
+    .get(`/api/catalogs?search=${value.toLowerCase().trim()}`)
+    .then((res) => res.data);
 }
 
-function deleteCatalog(catalog: Catalog): void {
+async function deleteCatalog(catalog: Catalog): Promise<void> {
   console.log("catalog delete", catalog);
 }
 
@@ -53,7 +47,7 @@ async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<
     formData.append(`durations`, JSON.stringify(durations));
   }
 
-  return await apiClient.post("/api/catalog", formData).then((res) => res.data);
+  return await apiClient.post("/api/catalogs", formData).then((res) => res.data);
 }
 
 const CatalogService = {

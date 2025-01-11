@@ -25,7 +25,8 @@ type MusicInPlaylist {
 model Catalogs {
   id        String      @id @default(auto()) @map("_id") @db.ObjectId
   title     String
-  owner     String      @db.ObjectId
+  ownerId   String      @db.ObjectId
+  owner     Users       @relation(fields: [ownerId], references: [id])
   thumbnail String
   type      TypeCatalog
   musics    Music[]
@@ -68,6 +69,7 @@ model Users {
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   refreshToken   String?
+  Catalogs       Catalogs[]
 }
 
 enum UserRole {

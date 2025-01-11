@@ -1,6 +1,7 @@
 import userRepository from "@/repository/user.repository";
 import { Prisma, Users } from "@prisma/client";
 import bcrypt from "bcrypt";
+import ServerException from "@/errors/ServerException";
 
 const getUserById = async (id: string): Promise<Users | null> => {
   return await userRepository.getUserById(id);
@@ -19,7 +20,14 @@ const getUserByEmail = async (email: string): Promise<Users | null> => {
 };
 
 const encryptPassword = async (password: string): Promise<string> => {
-  return await bcrypt.hash(password, 10);
+  try {
+    return await bcrypt.hash(password, 10);
+  } catch (err) {
+    throw new ServerException(
+      "An error occurred while trying to encrypt the password",
+      err as Error
+    );
+  }
 };
 
 export default { getUserById, createUser, getUserByEmail, updateUser, encryptPassword };

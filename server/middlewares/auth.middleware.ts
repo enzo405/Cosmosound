@@ -1,3 +1,4 @@
+import UnauthorizedException from "@/errors/UnauthorizedException";
 import { Response, Request, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 require("dotenv").config();
@@ -8,21 +9,17 @@ export interface UserRequest extends Request {
 }
 
 const auth = (req: UserRequest, res: Response, next: NextFunction) => {
-  try {
-    const token = req.cookies.token;
-    if (!token) throw "Unauthorized access.";
+  const token = req.cookies.token;
+  if (!token) throw new UnauthorizedException("Unauthorized access.");
 
-    const payload = jwt.verify(token, process.env.JWT_SECRET!);
+  const payload = jwt.verify(token, process.env.JWT_SECRET!);
 
-    if (!payload) throw "Unauthorized access.";
+  if (!payload) throw new UnauthorizedException("Unauthorized access.");
 
-    req.user = payload;
-    req.userId = payload.sub as string;
+  req.user = payload;
+  req.userId = payload.sub as string;
 
-    next();
-  } catch (error) {
-    res.status(401).json("Unauthorized access.");
-  }
+  next();
 };
 
 export default auth;

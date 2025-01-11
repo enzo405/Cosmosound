@@ -92,16 +92,16 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
   const loadContent = (selectedTab: GenreTabs) => {
     switch (selectedTab) {
       case GenreTabs.ALBUM:
-        setContent(genreContent.catalogs.filter((c) => c.type == TypeCatalog.ALBUM));
+        setContent(genreContent.catalogs.filter((c) => c.type === TypeCatalog.ALBUM));
         break;
       case GenreTabs.MUSIC:
         setContent(genreContent.musics);
         break;
       case GenreTabs.EP:
-        setContent(genreContent.catalogs.filter((c) => c.type == TypeCatalog.EP));
+        setContent(genreContent.catalogs.filter((c) => c.type === TypeCatalog.EP));
         break;
       case GenreTabs.SINGLE:
-        setContent(genreContent.catalogs.filter((c) => c.type == TypeCatalog.SINGLE));
+        setContent(genreContent.catalogs.filter((c) => c.type === TypeCatalog.SINGLE));
         break;
       case GenreTabs.PLAYLIST:
         setContent(genreContent.playlists);

@@ -1,9 +1,9 @@
 # Must have:
 
 1. Catalog
+- Frontend => Format date from database
 - Frontend => Add section with your own catalog in Artist panel
-- Backend => Get Catalog
-- Backend => Edit/Delete Music from Catalog & Delete Catalog
+- Frontend => Edit/Delete Music from Catalog & Delete Catalog
 - Make user from Provider UserPartial type to be able to add info of artist inside (own catalog, own playlist etc...)
 
 2. Playlist

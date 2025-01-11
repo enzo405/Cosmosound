@@ -1,4 +1,4 @@
-import express from "express";
+import express, { ErrorRequestHandler } from "express";
 import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
 import morgan from "morgan";
@@ -8,6 +8,7 @@ import userRouter from "./routes/user.route";
 import catalogRouter from "./routes/catalog.route";
 import cors from "cors";
 import cookieParser from "./middlewares/cookie-parser.middleware";
+import { errorHandler } from "./errors/errorhandler";
 
 dotenv.config();
 
@@ -28,10 +29,13 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser);
 app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
+
 app.use("/auth", authRouter);
 app.use("/api", fileRouter);
 app.use("/api", userRouter);
 app.use("/api", catalogRouter);
+
+app.use(errorHandler);
 
 async function connectDatabase() {
   try {
