@@ -75,7 +75,7 @@ export default function MusicItemDelete({
             </div>
           </div>
           <div className="hidden xl:flex items-center max-w-36 min-w-36 justify-center font-light text-sm">
-            {formatTime(music.dateCreation)}
+            {formatTime(music.createdAt)}
           </div>
           <div className="hidden lg:flex items-center w-10 justify-center font-light text-sm">
             {formatDuration(music.duration)}

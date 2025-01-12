@@ -9,15 +9,16 @@ import NewMusic from "./components/NewMusic";
 import CatalogService from "services/catalogService";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { displayPictureProfile } from "utils/user";
-import { PartialArtist } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import Loading from "components/icons/Loading";
 import CatalogCard from "./components/CatalogCard";
+import { useNavigate } from "react-router-dom";
+import { routesConfig } from "config/app-config";
 
 export interface CreateCatalogFormData {
   titleCatalog: string;
   thumbnailCatalog: File | string;
-  musics: Array<CreateMusicFormData>;
+  musics: CreateMusicFormData[];
 }
 
 export interface CreateMusicFormData {
@@ -27,11 +28,11 @@ export interface CreateMusicFormData {
 }
 
 export default function CreateCatalogPage(): ReactElement {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const { openDialog } = useConfirmDialog();
+  const navigate = useNavigate();
 
-  const artist = useMemo(() => user as PartialArtist, [user]);
-  if (artist == undefined) return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
+  if (user?.role !== "ARTISTS") return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
 
   const availableGenres = useMemo(() => GenresService.getAllGenres(), []);
 
@@ -44,13 +45,13 @@ export default function CreateCatalogPage(): ReactElement {
     formState: { isDirty, errors },
   } = useForm<CreateCatalogFormData>({
     defaultValues: {
-      titleCatalog: `${artist.artistName}`,
-      thumbnailCatalog: displayPictureProfile(artist.pictureProfile),
+      titleCatalog: "",
+      thumbnailCatalog: displayPictureProfile(user.pictureProfile),
       musics: [],
     },
   });
 
-  const [preview, setPreview] = useState(displayPictureProfile(artist.pictureProfile));
+  const [preview, setPreview] = useState(displayPictureProfile(user.pictureProfile));
   const [isDragging, setIsDragging] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -62,14 +63,16 @@ export default function CreateCatalogPage(): ReactElement {
       onConfirm: async () => {
         setLoading(true);
         await CatalogService.createCatalog(data)
-          .then((data) => {
-            setLoading(false);
-            reset();
-            setPreview(displayPictureProfile(artist.pictureProfile));
+          .then((catalog) => {
             enqueueSnackbar({
-              message: `${data.type} successfully created with ${data.musics.length} songs.`,
+              message: `${catalog.type} successfully created with ${catalog.musics.length} songs.`,
               variant: "success",
             });
+            setUser((prev) => {
+              if (!prev) return prev;
+              return { ...prev, catalogs: [...(prev.catalogs || []), catalog] };
+            });
+            navigate(routesConfig.catalog.getParameter(catalog.id));
           })
           .catch((e) => {
             setLoading(false);
@@ -230,7 +233,7 @@ export default function CreateCatalogPage(): ReactElement {
               <button
                 onClick={() => {
                   reset();
-                  setPreview(displayPictureProfile(artist.pictureProfile));
+                  setPreview(displayPictureProfile(user.pictureProfile));
                 }}
                 disabled={loading}
                 type="button"

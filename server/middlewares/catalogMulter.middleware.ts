@@ -3,8 +3,8 @@ import UnsupportedMediaTypeException from "@/errors/UnsupportedMediaTypeExceptio
 import { Request } from "express";
 import multer, { FileFilterCallback } from "multer";
 
-const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
-  if (file.fieldname === "thumbnail") {
+const fileFilter = async (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
+  if (file.fieldname === "thumbnailFile") {
     if (file.mimetype.startsWith("image/")) {
       cb(null, true);
     } else {
@@ -17,7 +17,7 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallb
       cb(new UnsupportedMediaTypeException("Only audio files are allowed for 'musics' field"));
     }
   } else {
-    cb(new BadRequestException("Unexpected field"));
+    cb(new BadRequestException("Invalid fieldname"));
   }
 };
 
@@ -27,6 +27,6 @@ const upload = multer({
 });
 
 export const multerCatalogMiddleware = upload.fields([
-  { name: "thumbnail", maxCount: 1 },
+  { name: "thumbnailFile", maxCount: 1 },
   { name: "musics", maxCount: 20 },
 ]);

@@ -4,9 +4,9 @@ import { Artist } from "./User";
 export interface Music {
   id: string;
   title: string;
-  dateCreation: string; // Date in UTC of the creation of the music
+  createdAt: string; // Date in UTC of the creation of the music
   duration: number;
-  genres: Array<Genre>;
+  genres: Genre[];
 }
 
 export interface MusicWithCatalog extends Music {

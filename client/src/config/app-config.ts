@@ -7,7 +7,7 @@ type RoutesConfig = Record<
   string,
   {
     path: string;
-    getParameter: (...parameters: Array<string>) => string;
+    getParameter: (...parameters: string[]) => string;
     title: string;
   }
 >;

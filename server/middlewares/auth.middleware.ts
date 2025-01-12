@@ -8,7 +8,7 @@ export interface UserRequest extends Request {
   userId?: string;
 }
 
-const auth = (req: UserRequest, res: Response, next: NextFunction) => {
+const auth = async (req: UserRequest, res: Response, next: NextFunction) => {
   const token = req.cookies.token;
   if (!token) throw new UnauthorizedException("Unauthorized access.");
 

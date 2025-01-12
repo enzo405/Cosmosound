@@ -82,7 +82,7 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
           <span className="flex flex-row gap-1">
             By <ArtistInfo artist={catalog.owner} />
           </span>
-          <span>Made on {formatTime(catalog.dateCreation)}</span>
+          <span>Made on {formatTime(catalog.createdAt)}</span>
           <span>
             {catalog.musics.length} songs (
             {formatDurationWithLabel(

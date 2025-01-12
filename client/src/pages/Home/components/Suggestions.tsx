@@ -7,7 +7,7 @@ import { ReactElement } from "react";
 import UserService from "services/userService";
 
 interface SuggestionsProps {
-  catalogs: Array<Catalog>;
+  catalogs: Catalog[];
 }
 
 export default function Suggestions({ catalogs }: SuggestionsProps): ReactElement {

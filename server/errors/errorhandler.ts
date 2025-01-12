@@ -10,14 +10,17 @@ export const errorHandler: ErrorRequestHandler = async (
   res: Response,
   next: NextFunction
 ) => {
-  const isDebug = process.env.NODE_DEBUG === "true";
+  const isDev = process.env.NODE_ENV !== "production";
 
   if (err instanceof WebError) {
-    if (isDebug) {
+    if (isDev) {
       console.error(`${err.statusCode} - ${err.statusMessage}`);
     }
     res.status(err.statusCode).json({ error: err.statusMessage });
   } else {
+    if (isDev) {
+      console.error(`${err.cause} - ${err.message}`, err.stack);
+    }
     // Use a generic error message for security reasons
     res.status(500).json({ error: "Internal Server Error" });
   }

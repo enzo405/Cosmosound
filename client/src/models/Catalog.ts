@@ -11,11 +11,11 @@ export interface Catalog {
   id: string;
   title: string;
   owner: Artist;
-  dateCreation: string; // Date in UTC of the creation of the account
+  createdAt: string;
   thumbnail: string;
   type: TypeCatalog;
 }
 
 export interface CatalogWithMusic extends Catalog {
-  musics: Array<MusicDetails> | Array<Music>;
+  musics: MusicDetails[] | Music[];
 }

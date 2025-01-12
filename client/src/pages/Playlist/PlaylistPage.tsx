@@ -25,11 +25,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   if (playlist == undefined) {
     return <NotFoundErrorPage message="PLAYLIST NOT FOUND" />;
   }
-  const musicDetails: MusicDetails = {
-    ...playlist.musics[0],
-    artist: playlist.musics[0].artist,
-    catalog: playlist.musics[0].catalog,
-  };
+  const musicDetails: MusicDetails = playlist.musics[0];
 
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const { openDialog } = useConfirmDialog();

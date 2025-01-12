@@ -2,7 +2,7 @@ import Container from "components/box/Container";
 import SpotifyIcon from "components/icons/media/SpotifyIcon";
 import { useUser } from "hooks/useUser";
 import { Genre } from "models/Music";
-import { PartialArtist, Media } from "models/User";
+import { Media } from "models/User";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import GenresService from "services/genresService";
@@ -34,7 +34,6 @@ export default function ArtistPanelPage(): ReactElement {
   const { user, setUser } = useUser();
 
   const { openDialog } = useConfirmDialog();
-  const artist = useMemo(() => user as PartialArtist, [user]);
 
   const {
     handleSubmit,
@@ -44,25 +43,25 @@ export default function ArtistPanelPage(): ReactElement {
     formState: { isDirty, errors, dirtyFields },
   } = useForm<ArtistPanelFormData>({
     defaultValues: {
-      artistName: artist.artistName ?? "",
-      spotifyLink: artist.socialMedia?.find((m) => m.media == Media.SPOTIFY)?.link,
-      youtubeLink: artist.socialMedia?.find((m) => m.media == Media.YTB_MUSIC)?.link,
-      appleMusicLink: artist.socialMedia?.find((m) => m.media == Media.APPLE_MUSIC)?.link,
-      xLink: artist.socialMedia?.find((m) => m.media == Media.X)?.link,
-      instagramLink: artist.socialMedia?.find((m) => m.media == Media.INSTAGRAM)?.link,
-      genre: artist.genre,
+      artistName: user?.artistName ?? "",
+      spotifyLink: user?.socialMedia?.find((m) => m.media == Media.SPOTIFY)?.link,
+      youtubeLink: user?.socialMedia?.find((m) => m.media == Media.YTB_MUSIC)?.link,
+      appleMusicLink: user?.socialMedia?.find((m) => m.media == Media.APPLE_MUSIC)?.link,
+      xLink: user?.socialMedia?.find((m) => m.media == Media.X)?.link,
+      instagramLink: user?.socialMedia?.find((m) => m.media == Media.INSTAGRAM)?.link,
+      genre: user?.genre,
     },
   });
 
   const selectedGenre = watch("genre");
 
   const sortGenres = (genres: Genre[]): Genre[] => {
-    if (!selectedGenre && !artist?.genre) {
+    if (!selectedGenre) {
       return genres;
     }
 
-    const genre = selectedGenre ?? artist?.genre;
-    const result = genres.filter((g) => genre!.name !== g.name);
+    const genre = selectedGenre ?? user?.genre;
+    const result = genres.filter((g) => genre.name !== g.name);
     return [genre!, ...result]; // to have selected genre in first
   };
 
@@ -73,17 +72,17 @@ export default function ArtistPanelPage(): ReactElement {
 
   useEffect(() => {
     setDisplayGenres(sortGenres(availableGenres));
-  }, [artist?.genre, availableGenres]);
+  }, [user?.genre, availableGenres]);
 
   useEffect(() => {
     reset({
-      artistName: artist.artistName ?? "",
-      spotifyLink: artist.socialMedia?.find((m) => m.media == Media.SPOTIFY)?.link,
-      youtubeLink: artist.socialMedia?.find((m) => m.media == Media.YTB_MUSIC)?.link,
-      appleMusicLink: artist.socialMedia?.find((m) => m.media == Media.APPLE_MUSIC)?.link,
-      xLink: artist.socialMedia?.find((m) => m.media == Media.X)?.link,
-      instagramLink: artist.socialMedia?.find((m) => m.media == Media.INSTAGRAM)?.link,
-      genre: artist.genre,
+      artistName: user?.artistName ?? "",
+      spotifyLink: user?.socialMedia?.find((m) => m.media == Media.SPOTIFY)?.link,
+      youtubeLink: user?.socialMedia?.find((m) => m.media == Media.YTB_MUSIC)?.link,
+      appleMusicLink: user?.socialMedia?.find((m) => m.media == Media.APPLE_MUSIC)?.link,
+      xLink: user?.socialMedia?.find((m) => m.media == Media.X)?.link,
+      instagramLink: user?.socialMedia?.find((m) => m.media == Media.INSTAGRAM)?.link,
+      genre: user?.genre,
     });
   }, [user]);
 
@@ -132,7 +131,7 @@ export default function ArtistPanelPage(): ReactElement {
       onConfirm: async () =>
         await UserService.updateArtist(dirtyFieldsValue)
           .then((user) => {
-            if (artist.role === "USER") {
+            if (user.role === "USER") {
               enqueueSnackbar("Artist account created", { variant: "success" });
             } else {
               enqueueSnackbar("Artist info updated", { variant: "success" });
@@ -179,7 +178,7 @@ export default function ArtistPanelPage(): ReactElement {
                     name="artistName"
                     control={control}
                     rules={{
-                      required: artist?.artistName === null ? "Artist name is required" : false,
+                      required: user?.artistName === null ? "Artist name is required" : false,
                     }}
                     render={({ field }) => (
                       <>
