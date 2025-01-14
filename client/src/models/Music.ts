@@ -1,4 +1,4 @@
-import { Catalog, CatalogWithMusic } from "./Catalog";
+import { Catalog, DetailedCatalog } from "./Catalog";
 import { Artist } from "./User";
 
 export interface Music {
@@ -10,12 +10,12 @@ export interface Music {
 }
 
 export interface MusicWithCatalog extends Music {
-  catalog: Catalog | CatalogWithMusic;
+  catalog: Catalog | DetailedCatalog;
 }
 
 export interface MusicDetails extends Music {
   artist: Artist;
-  catalog: Catalog | CatalogWithMusic;
+  catalog: Catalog | DetailedCatalog;
 }
 
 export interface Genre {

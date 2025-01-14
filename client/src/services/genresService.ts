@@ -5,7 +5,7 @@ import dataCatalog from "assets/json/catalogs.json";
 import dataPlaylist from "assets/json/playlists.json";
 import dataArtist from "assets/json/artists.json";
 import { Playlist } from "models/Playlist";
-import { Catalog } from "models/Catalog";
+import { Catalog, DetailedCatalog } from "models/Catalog";
 import { Artist, UserDetails } from "models/User";
 
 function getAllGenres(): Genre[] {
@@ -18,7 +18,7 @@ function getMyFavouriteGenres(user: UserDetails): Genre[] {
 
 interface GenreContent {
   musics: MusicDetails[];
-  catalogs: Catalog[];
+  catalogs: DetailedCatalog[];
   playlists: Playlist[];
   artists: Artist[];
 }

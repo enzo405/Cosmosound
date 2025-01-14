@@ -1,5 +1,5 @@
 import { useSearch } from "hooks/useSearch";
-import { Catalog, TypeCatalog } from "models/Catalog";
+import { Catalog, DetailedCatalog, TypeCatalog } from "models/Catalog";
 import { Genre, MusicDetails } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { Artist } from "models/User";
@@ -39,30 +39,30 @@ function ExplorePage(): ReactElement {
   const [musics, setMusics] = useState<MusicDetails[]>([]);
   const [artists, setArtists] = useState<Artist[]>([]);
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const [albums, setAlbums] = useState<Catalog[]>([]);
-  const [eps, setEps] = useState<Catalog[]>([]);
-  const [singles, setSingles] = useState<Catalog[]>([]);
+  const [albums, setAlbums] = useState<DetailedCatalog[]>([]);
+  const [eps, setEps] = useState<DetailedCatalog[]>([]);
+  const [singles, setSingles] = useState<DetailedCatalog[]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // TODO do better
-        const [fetchedMusics, fetchedArtists, fetchedPlaylists, _, fetchedGenres] =
-          await Promise.all([
-            MusicService.searchMusicByTitle(search),
-            ArtistService.searchArtistByName(search),
-            PlaylistService.searchPlaylistByTitle(search),
-            CatalogService.searchCatalogByTitle(search).then((data) => {
-              setAlbums(data.filter((c) => c.type === TypeCatalog.ALBUM));
-              setEps(data.filter((c) => c.type === TypeCatalog.EP));
-              setSingles(data.filter((c) => c.type === TypeCatalog.SINGLE));
-            }),
-            GenresService.getGenreByName(search),
-          ]);
+        const [fetchedMusics, , fetchedPlaylists, _, fetchedGenres] = await Promise.all([
+          MusicService.searchMusicByTitle(search),
+          ArtistService.searchArtistByName(search).then((data) => {
+            setArtists(data);
+          }),
+          PlaylistService.searchPlaylistByTitle(search),
+          CatalogService.searchCatalogByTitle(search).then((data) => {
+            setAlbums(data.filter((c) => c.type === TypeCatalog.ALBUM));
+            setEps(data.filter((c) => c.type === TypeCatalog.EP));
+            setSingles(data.filter((c) => c.type === TypeCatalog.SINGLE));
+          }),
+          GenresService.getGenreByName(search),
+        ]);
 
         setMusics(fetchedMusics);
-        setArtists(fetchedArtists);
         setPlaylists(fetchedPlaylists);
         setGenres(fetchedGenres.slice(0, 20));
       } catch (error) {

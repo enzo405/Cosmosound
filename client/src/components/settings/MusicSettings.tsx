@@ -108,7 +108,7 @@ export default function MusicSettings({
           </SettingsOptions>
         </>
       )}
-      {music.catalog.owner.id === user?.id && (
+      {music.catalog.ownerId === user?.id && (
         <>
           <Divider />
           <SettingsOptions onClick={onDeleteSong}>

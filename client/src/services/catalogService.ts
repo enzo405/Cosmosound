@@ -1,16 +1,16 @@
-import { Catalog, CatalogWithMusic } from "models/Catalog";
+import { Catalog, DetailedCatalog } from "models/Catalog";
 import { CreateCatalogFormData } from "pages/CreateCatalog/CreateCatalogPage";
 import { apiClient } from "./axiosService";
 
-async function getArtistCatalogs(artistId: string): Promise<CatalogWithMusic[]> {
+async function getArtistCatalogs(artistId: string): Promise<DetailedCatalog[]> {
   return await apiClient.get(`/api/catalogs/artist/${artistId}`).then((res) => res.data);
 }
 
-async function getCatalogById(id?: string): Promise<CatalogWithMusic | undefined> {
+async function getCatalogById(id?: string): Promise<DetailedCatalog | undefined> {
   return await apiClient.get(`/api/catalogs/${id}`).then((res) => res.data);
 }
 
-async function searchCatalogByTitle(value: string): Promise<CatalogWithMusic[]> {
+async function searchCatalogByTitle(value: string): Promise<DetailedCatalog[]> {
   if (value == "") {
     return [];
   }
@@ -23,7 +23,7 @@ async function deleteCatalog(catalog: Catalog): Promise<void> {
   return await apiClient.delete(`/api/catalogs/${catalog.id}`).then((res) => res.data.message);
 }
 
-async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<CatalogWithMusic> {
+async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<DetailedCatalog> {
   const formData = new FormData();
 
   dataForm.titleCatalog && formData.append("title", dataForm.titleCatalog);

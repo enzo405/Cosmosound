@@ -2,10 +2,10 @@ import { useEffect, useState, type ReactElement } from "react";
 import Suggestions from "./components/Suggestions";
 import CatalogService from "services/catalogService";
 import RecentMusic from "./components/RecentMusic";
-import { CatalogWithMusic } from "models/Catalog";
+import { DetailedCatalog } from "models/Catalog";
 
 function HomePage(): ReactElement {
-  const [catalogs, setCatalogs] = useState<CatalogWithMusic[]>([]);
+  const [catalogs, setCatalogs] = useState<DetailedCatalog[]>([]);
 
   useEffect(() => {
     const fetchCatalogs = async () => {

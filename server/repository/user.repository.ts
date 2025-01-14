@@ -84,6 +84,53 @@ const deleteRefreshToken = async (userId: string) => {
   }
 };
 
+const getFavourites = async (userId: string): Promise<Users[] | null> => {
+  try {
+    const user = await prisma.users.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        likedArtists: true,
+      },
+    });
+
+    if (!user) {
+      return [];
+    }
+
+    return await prisma.users.findMany({
+      where: {
+        id: { in: user.likedArtists },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+const searchArtist = async (value: string): Promise<Users[]> => {
+  try {
+    return await prisma.users.findMany({
+      where: {
+        OR: [
+          { name: { contains: value, mode: "insensitive" } },
+          { artistName: { contains: value, mode: "insensitive" } },
+        ],
+      },
+      include: {
+        catalogs: true,
+      },
+      distinct: ["id"],
+      take: 10,
+    });
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
 export default {
   createUser,
   getUserByEmail,
@@ -91,4 +138,6 @@ export default {
   saveRefreshToken,
   deleteRefreshToken,
   updateUser,
+  getFavourites,
+  searchArtist,
 };

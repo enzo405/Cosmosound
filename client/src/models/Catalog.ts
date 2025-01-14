@@ -10,12 +10,13 @@ export enum TypeCatalog {
 export interface Catalog {
   id: string;
   title: string;
-  owner: Artist;
+  ownerId: string;
   createdAt: string;
   thumbnail: string;
   type: TypeCatalog;
 }
 
-export interface CatalogWithMusic extends Catalog {
+export interface DetailedCatalog extends Catalog {
+  owner: Artist;
   musics: MusicDetails[] | Music[];
 }

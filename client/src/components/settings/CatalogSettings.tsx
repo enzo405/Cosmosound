@@ -3,17 +3,20 @@ import TextSetting from "components/settings/TextSetting";
 import { routesConfig } from "config/app-config";
 import { useUser } from "hooks/useUser";
 import { Catalog } from "models/Catalog";
+import { Artist } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface CatalogSettingsProps {
   catalog: Catalog;
+  owner: Artist;
   onCloseSetting: () => void;
 }
 
 export default function CatalogSettings({
   catalog,
+  owner,
   onCloseSetting,
 }: CatalogSettingsProps): ReactElement {
   const { user } = useUser();
@@ -59,7 +62,7 @@ export default function CatalogSettings({
       <SettingsOptions onClick={handleCopyLink}>
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>
-      {user?.id === catalog.owner.id && (
+      {user?.id === owner.id && (
         <SettingsOptions onClick={handleNavigate}>
           <TextSetting iconName="playlistadd" text="Edit Songs" />
         </SettingsOptions>

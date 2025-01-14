@@ -77,7 +77,41 @@ const updateArtist = async (req: UserRequest, res: Response) => {
   res.status(200).json(user);
 };
 
+const getFavourites = async (req: UserRequest, res: Response) => {
+  const artists = await userService.getFavourites(req?.userId!);
+  res.status(200).json(artists);
+};
+
+const searchArtist = async (req: UserRequest, res: Response) => {
+  const { search } = req.query;
+  if (!search) {
+    throw new BadRequestException("A query must be provided");
+  }
+
+  if (typeof search != "string") {
+    throw new BadRequestException("Search value must be a string");
+  }
+
+  const artists = await userService.searchArtist(search);
+
+  res.status(200).json(artists);
+};
+
+const getArtistById = async (req: UserRequest, res: Response) => {
+  const { id } = req.params;
+  if (!id) {
+    throw new BadRequestException("An id must be provided");
+  }
+
+  const artist = await userService.getUserById(id);
+
+  res.status(200).json(artist);
+};
+
 export default {
   updateUser,
   updateArtist,
+  getArtistById,
+  getFavourites,
+  searchArtist,
 };

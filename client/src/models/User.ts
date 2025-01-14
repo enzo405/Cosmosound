@@ -1,8 +1,8 @@
-import { Catalog } from "./Catalog";
-import { Genre, MusicWithCatalog } from "./Music";
+import { Catalog, DetailedCatalog } from "./Catalog";
+import { Genre } from "./Music";
 
 export interface User {
-  id: number;
+  id: string;
   name: string; // name of the user
   email: string; // email of the user
   pictureProfile: string;
@@ -28,12 +28,11 @@ export interface Artist extends UserDetails {
 }
 
 export interface DetailedArtistInfo extends Artist {
-  musics: MusicWithCatalog[];
-  catalogs: Catalog[];
+  catalogs: DetailedCatalog[];
 }
 
 export interface PartialArtist {
-  id: number;
+  id: string;
   name: string; // name of the user
   email: string; // email of the user
   pictureProfile: string;
