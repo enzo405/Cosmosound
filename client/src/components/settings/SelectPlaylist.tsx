@@ -38,7 +38,7 @@ export default function SelectPlaylist({
         description: (
           <>
             <span>Name: {searchTerm}</span>
-            <span>No music yet.</span>
+            <span>No songs yet.</span>
           </>
         ),
         onConfirm: () => PlaylistService.createPlaylist(searchTerm),

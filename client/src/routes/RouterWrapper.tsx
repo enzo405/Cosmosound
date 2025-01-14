@@ -5,12 +5,13 @@ import Root from "components/template/Root";
 import UnauthenticatedRoot from "components/template/UnauthenticatedRoot";
 import ErrorPage from "pages/errors/ErrorPage";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import LoadingPage from "pages/errors/LoadingPage";
 
 function RouterWrapper() {
   const { user, loading } = useUser();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   const routes: RouteObject[] = [

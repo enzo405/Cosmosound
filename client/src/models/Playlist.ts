@@ -7,16 +7,16 @@ export interface Playlist {
   title: string; // title of the playlist
   createdAt: string; // Date in UTC of the creation of the account
   owner: User; // User that created the playlist
-  musics: Array<PlaylistMusic>;
+  musics: PlaylistMusic[];
   playlistThumbnail: string;
 }
 
 export interface PlaylistMusic {
   id: string;
   title: string;
-  dateCreation: string;
+  createdAt: string;
   duration: number;
-  genres: Array<Genre>;
+  genres: Genre[];
   artist: Artist;
   catalog: Catalog;
 }

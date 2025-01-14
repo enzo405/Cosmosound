@@ -3,7 +3,7 @@ import MusicItem from "components/music/MusicItem";
 import { useMusic } from "hooks/useMusic";
 import { enqueueSnackbar } from "notistack";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
-import { ReactElement, useMemo, useState } from "react";
+import { ReactElement, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import CatalogService from "services/catalogService";
 import CatalogSettings from "components/settings/CatalogSettings";
@@ -14,25 +14,47 @@ import ArtistInfo from "components/music/ArtistInfo";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
+import { CatalogWithMusic } from "models/Catalog";
 
 interface CatalogPageProps {}
 
 export default function CatalogPage({}: CatalogPageProps): ReactElement {
   const { idCatalog } = useParams();
-  const catalog = CatalogService.getCatalogById(idCatalog);
+  const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
+  const { user } = useUser();
+  const [catalog, setCatalog] = useState<CatalogWithMusic | undefined>();
+  const [displaySettings, setDisplaySettings] = useState(false);
+  const [isCatalogLiked, setIsCatalogLiked] = useState<boolean>(
+    user?.likedCatalogs.find((id) => id == catalog?.id) !== undefined,
+  );
+
+  const isPlayingSongCurrentPage = useMemo(
+    () => catalog?.musics.find((m) => m.id == playingMusic.id) != undefined,
+    [playingMusic],
+  );
+
+  useEffect(() => {
+    const fetchCatalog = async () => {
+      await CatalogService.getCatalogById(idCatalog)
+        .then((catalog) => {
+          setCatalog(catalog);
+        })
+        .catch((err) => {
+          enqueueSnackbar({
+            message: err.message,
+            variant: "error",
+          });
+        });
+    };
+
+    fetchCatalog();
+  }, [idCatalog]);
 
   if (catalog == undefined) {
     return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
   }
+
   const musicDetails: MusicDetails = { ...catalog.musics[0], artist: catalog.owner, catalog };
-
-  const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
-  const { user } = useUser();
-
-  const [isCatalogLiked, setIsCatalogLiked] = useState<boolean>(
-    user?.likedCatalogs.find((id) => id == catalog.id) !== undefined,
-  );
-  const [displaySettings, setDisplaySettings] = useState(false);
 
   const handlePlaying = () => {
     if (!isPlayingSongCurrentPage && catalog != undefined) {
@@ -56,11 +78,6 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
     setIsCatalogLiked(!isCatalogLiked);
   };
 
-  const isPlayingSongCurrentPage = useMemo(
-    () => catalog.musics.find((m) => m.id == playingMusic.id) != undefined,
-    [playingMusic],
-  );
-
   return (
     <PageLayout
       thumbnail={catalog.thumbnail}
@@ -73,7 +90,7 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
           <span className="flex flex-row gap-1">
             By <ArtistInfo artist={catalog.owner} />
           </span>
-          <span>Made on {formatTime(catalog.dateCreation)}</span>
+          <span>Made on {formatTime(catalog.createdAt)}</span>
           <span>
             {catalog.musics.length} songs (
             {formatDurationWithLabel(

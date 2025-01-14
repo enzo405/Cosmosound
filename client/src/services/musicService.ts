@@ -1,5 +1,7 @@
 import { Music, MusicDetails } from "models/Music";
 import data from "assets/json/musics.json";
+import { apiClient } from "./axiosService";
+import { Catalog, CatalogWithMusic } from "models/Catalog";
 
 const musicData: MusicDetails[] = data as MusicDetails[];
 
@@ -30,8 +32,10 @@ function searchMusicByTitle(value: string): MusicDetails[] {
   return [...new Set(result)];
 }
 
-function deleteMusic(music: Music): void {
-  console.log("music", music);
+async function deleteMusic(idCatalog: string, music: Music): Promise<CatalogWithMusic> {
+  return await apiClient
+    .delete(`/api/catalogs/${idCatalog}/music/${music.id}`)
+    .then((res) => res.data);
 }
 
 function getMusicHistory(): MusicDetails[] {

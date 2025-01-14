@@ -13,8 +13,8 @@ model Playlists {
   owner             String            @db.ObjectId
   playlistThumbnail String
   musics            MusicInPlaylist[]
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  createdAt         DateTime          @default(now()) @db.Timestamp()
+  updatedAt         DateTime          @updatedAt @db.Timestamp()
 }
 
 type MusicInPlaylist {
@@ -23,15 +23,15 @@ type MusicInPlaylist {
 }
 
 model Catalogs {
-  id           String      @id @default(auto()) @map("_id") @db.ObjectId
-  title        String
-  owner        String      @db.ObjectId
-  dateCreation DateTime    @default(now())
-  thumbnail    String
-  type         TypeCatalog
-  musics       Music[]
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  ownerId   String      @db.ObjectId
+  owner     Users       @relation(fields: [ownerId], references: [id])
+  thumbnail String
+  type      TypeCatalog
+  musics    Music[]
+  createdAt DateTime    @default(now()) @db.Timestamp()
+  updatedAt DateTime    @updatedAt @db.Timestamp()
 }
 
 enum TypeCatalog {
@@ -41,11 +41,12 @@ enum TypeCatalog {
 }
 
 type Music {
-  id           String   @db.ObjectId
-  title        String
-  dateCreation DateTime
-  duration     Int
-  genres       String[]
+  id        String   @db.ObjectId
+  title     String
+  createdAt DateTime @default(now()) @db.Timestamp()
+  url       String
+  duration  Int
+  genres    String[]
 }
 
 model Users {
@@ -65,9 +66,10 @@ model Users {
   socialMedia    SocialMedia[]
   artistName     String?
   genre          Genre?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  createdAt      DateTime      @default(now()) @db.Timestamp()
+  updatedAt      DateTime      @updatedAt @db.Timestamp()
   refreshToken   String?
+  catalogs       Catalogs[]
 }
 
 enum UserRole {

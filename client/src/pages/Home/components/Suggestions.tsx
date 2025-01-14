@@ -1,13 +1,13 @@
 import ScrollableBox from "components/box/ScrollableBox";
 import Card from "components/cards/Card";
 import { useUser } from "hooks/useUser";
-import { Catalog, TypeCatalog } from "models/Catalog";
+import { Catalog } from "models/Catalog";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement } from "react";
 import UserService from "services/userService";
 
 interface SuggestionsProps {
-  catalogs: Array<Catalog>;
+  catalogs: Catalog[];
 }
 
 export default function Suggestions({ catalogs }: SuggestionsProps): ReactElement {
@@ -34,7 +34,7 @@ export default function Suggestions({ catalogs }: SuggestionsProps): ReactElemen
           <Card
             key={catalog.id}
             title={catalog.title}
-            description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
+            description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
             link={`/catalog/${catalog.id}`}
             thumbnail={catalog.thumbnail}
             defaultLiked={

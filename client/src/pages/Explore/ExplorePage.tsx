@@ -48,12 +48,16 @@ function ExplorePage(): ReactElement {
     const fetchData = async () => {
       try {
         // TODO do better
-        const [fetchedMusics, fetchedArtists, fetchedPlaylists, fetchedCatalogs, fetchedGenres] =
+        const [fetchedMusics, fetchedArtists, fetchedPlaylists, _, fetchedGenres] =
           await Promise.all([
             MusicService.searchMusicByTitle(search),
             ArtistService.searchArtistByName(search),
             PlaylistService.searchPlaylistByTitle(search),
-            CatalogService.searchCatalogByTitle(search),
+            CatalogService.searchCatalogByTitle(search).then((data) => {
+              setAlbums(data.filter((c) => c.type === TypeCatalog.ALBUM));
+              setEps(data.filter((c) => c.type === TypeCatalog.EP));
+              setSingles(data.filter((c) => c.type === TypeCatalog.SINGLE));
+            }),
             GenresService.getGenreByName(search),
           ]);
 
@@ -61,10 +65,6 @@ function ExplorePage(): ReactElement {
         setArtists(fetchedArtists);
         setPlaylists(fetchedPlaylists);
         setGenres(fetchedGenres.slice(0, 20));
-
-        setAlbums(fetchedCatalogs.filter((c) => c.type === TypeCatalog.ALBUM));
-        setEps(fetchedCatalogs.filter((c) => c.type === TypeCatalog.EP));
-        setSingles(fetchedCatalogs.filter((c) => c.type === TypeCatalog.SINGLE));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -171,7 +171,7 @@ function ExplorePage(): ReactElement {
                     <Card
                       key={catalog.id}
                       title={catalog.title}
-                      description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
+                      description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
                       link={`/catalog/${catalog.id}`}
                       thumbnail={catalog.thumbnail}
                       defaultLiked={
@@ -194,7 +194,7 @@ function ExplorePage(): ReactElement {
                   <Card
                     key={catalog.id}
                     title={catalog.title}
-                    description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
+                    description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
                     link={`/catalog/${catalog.id}`}
                     thumbnail={catalog.thumbnail}
                     defaultLiked={user?.likedCatalogs.find((id) => id == catalog.id) !== undefined}

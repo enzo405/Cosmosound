@@ -1,5 +1,5 @@
 import { Genre } from "models/Music";
-import { ReactElement, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { CreateMusicFormData } from "../CreateCatalogPage";
 import { Icon } from "components/icons/Icon";
 import { BiXCircle } from "react-icons/bi";
@@ -41,6 +41,26 @@ export default function NewMusic({
     handleGenreChange(index, updatedGenres);
   };
 
+  useEffect(() => {
+    const handleClickAway = (event: MouseEvent) => {
+      let id = `dropdown-genre`;
+      const settings = document.getElementById(id);
+      const target = event.target as Node;
+
+      if (settings && !settings.contains(target)) {
+        setOpenGenreDropdown(false);
+      }
+    };
+
+    if (openGenreDropdown) {
+      window.addEventListener("click", handleClickAway);
+      document.body.classList.add("overflow-hidden");
+    } else {
+      window.removeEventListener("click", handleClickAway);
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [openGenreDropdown]);
+
   const isGenreEmpty = musicData.genres.length == 0;
 
   return (
@@ -53,8 +73,8 @@ export default function NewMusic({
         <div className="flex flex-col w-full min-w-0">
           <span className="font-medium text-sm inline-flex text-dark-custom truncate overflow-hidden whitespace-nowrap">
             <span
-              className={`${musicData.title.length > 10 ? "lg:animate-scroll-text" : ""} inline-block whitespace-nowrap`}>
-              {musicData.title}
+              className={`${musicData.file.name.length > 10 ? "lg:animate-scroll-text" : ""} inline-block whitespace-nowrap`}>
+              {musicData.file.name}
             </span>
           </span>
         </div>
@@ -75,6 +95,7 @@ export default function NewMusic({
               <div className="p-1">
                 <input
                   type="text"
+                  autoFocus
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search genres..."
@@ -104,7 +125,10 @@ export default function NewMusic({
         </div>
         <BiXCircle
           className="mm-size-6 fill-dark-custom cursor-pointer"
-          onClick={handleRemoveMusic}
+          onClick={() => {
+            setOpenGenreDropdown(false);
+            handleRemoveMusic();
+          }}
         />
       </div>
     </div>

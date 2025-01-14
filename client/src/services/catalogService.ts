@@ -1,42 +1,54 @@
-import data from "assets/json/catalogs.json";
 import { Catalog, CatalogWithMusic } from "models/Catalog";
 import { CreateCatalogFormData } from "pages/CreateCatalog/CreateCatalogPage";
+import { apiClient } from "./axiosService";
 
-const catalogData = data as CatalogWithMusic[];
-
-function getAllCatalog(): CatalogWithMusic[] {
-  return catalogData;
+async function getArtistCatalogs(artistId: string): Promise<CatalogWithMusic[]> {
+  return await apiClient.get(`/api/catalogs/artist/${artistId}`).then((res) => res.data);
 }
 
-function getCatalogById(id?: string): CatalogWithMusic | undefined {
-  if (!id) return undefined;
-  return catalogData.find((music) => music.id == id);
+async function getCatalogById(id?: string): Promise<CatalogWithMusic | undefined> {
+  return await apiClient.get(`/api/catalogs/${id}`).then((res) => res.data);
 }
 
-function searchCatalogByTitle(value: string): Catalog[] {
+async function searchCatalogByTitle(value: string): Promise<CatalogWithMusic[]> {
   if (value == "") {
     return [];
   }
-
-  const searchTerm = value.toLowerCase().trim();
-
-  const catalogsTitleMatch = catalogData
-    .filter((catalog) => catalog.title.toLowerCase().includes(searchTerm))
-    .slice(0, 10);
-
-  return [...new Set(catalogsTitleMatch)];
+  return await apiClient
+    .get(`/api/catalogs?search=${value.toLowerCase().trim()}`)
+    .then((res) => res.data);
 }
 
-function deleteCatalog(catalog: Catalog): void {
-  console.log("catalog delete", catalog);
+async function deleteCatalog(catalog: Catalog): Promise<void> {
+  return await apiClient.delete(`/api/catalogs/${catalog.id}`).then((res) => res.data.message);
 }
 
-function createCatalog(catalog: CreateCatalogFormData): void {
-  console.log("catalog create", catalog);
+async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<CatalogWithMusic> {
+  const formData = new FormData();
+
+  dataForm.titleCatalog && formData.append("title", dataForm.titleCatalog);
+  dataForm.thumbnailCatalog instanceof File &&
+    formData.append("thumbnailFile", dataForm.thumbnailCatalog);
+  typeof dataForm.thumbnailCatalog === "string" &&
+    formData.append("defaultThumbnail", dataForm.thumbnailCatalog);
+
+  if (dataForm.musics) {
+    const genres: string[][] = [];
+    const durations: number[] = [];
+    dataForm.musics.forEach((music) => {
+      formData.append("musics", music.file);
+      genres.push(music.genres);
+      durations.push(music.duration);
+    });
+    formData.append(`genres`, JSON.stringify(genres));
+    formData.append(`durations`, JSON.stringify(durations));
+  }
+
+  return await apiClient.post("/api/catalogs", formData).then((res) => res.data);
 }
 
 const CatalogService = {
-  getAllCatalog,
+  getArtistCatalogs,
   getCatalogById,
   searchCatalogByTitle,
   deleteCatalog,

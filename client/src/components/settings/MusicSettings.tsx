@@ -8,6 +8,7 @@ import TextSetting from "./TextSetting";
 import { enqueueSnackbar } from "notistack";
 import SelectPlaylist from "./SelectPlaylist";
 import PlaylistService from "services/playlistService";
+import { useUser } from "hooks/useUser";
 
 interface MusicSettingsProps {
   dropdownPosition: "top" | "bottom";
@@ -28,6 +29,7 @@ export default function MusicSettings({
   onAddToFav,
   onDeleteFromPlaylist,
 }: MusicSettingsProps): ReactElement {
+  const { user } = useUser();
   const [displayPlaylistSelect, setDisplayPlaylistSelect] = useState(false);
 
   useEffect(() => {
@@ -97,17 +99,31 @@ export default function MusicSettings({
       <SettingsOptions onClick={toggleDisplayPlaylistDropdown}>
         <TextSetting text="Add to Playlist" iconName="plus" />
       </SettingsOptions>
-      <Divider />
+
       {isPlaylistPageView && (
-        <SettingsOptions onClick={handleDeleteMusicFromPlaylist}>
-          <TextSetting iconName="minus" text="Remove From Playlist" />
-        </SettingsOptions>
+        <>
+          <Divider />
+          <SettingsOptions onClick={handleDeleteMusicFromPlaylist}>
+            <TextSetting iconName="minus" text="Remove From Playlist" />
+          </SettingsOptions>
+        </>
       )}
-      <SettingsOptions onClick={onDeleteSong}>
-        <TextSetting iconName="trash" text="Delete Song" />
-      </SettingsOptions>
+      {music.catalog.owner.id === user?.id && (
+        <>
+          <Divider />
+          <SettingsOptions onClick={onDeleteSong}>
+            <TextSetting iconName="trash" text="Delete Song" />
+          </SettingsOptions>
+        </>
+      )}
       {displayPlaylistSelect && (
-        <SelectPlaylist handleAddToPlaylist={handleAddToPlaylist} closeSettings={onCloseSetting} />
+        <>
+          <Divider />
+          <SelectPlaylist
+            handleAddToPlaylist={handleAddToPlaylist}
+            closeSettings={onCloseSetting}
+          />
+        </>
       )}
     </div>
   );

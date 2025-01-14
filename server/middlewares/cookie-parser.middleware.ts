@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 
-const cookieParser = (req: Request, res: Response, next: NextFunction) => {
+const cookieParser = async (req: Request, res: Response, next: NextFunction) => {
   const cookieHeader = req.headers.cookie;
 
   req.cookies = {};

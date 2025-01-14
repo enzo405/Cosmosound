@@ -1,11 +1,5 @@
 import { Icon } from "components/icons/Icon";
-import AppleMusicIcon from "components/icons/media/AppleMusicIcon";
-import InstagramIcon from "components/icons/media/InstagramIcon";
-import SpotifyIcon from "components/icons/media/SpotifyIcon";
-import XIcon from "components/icons/media/XIcon";
-import YoutubeMusicIcon from "components/icons/media/YoutubeMusicIcon";
 import { useMusic } from "hooks/useMusic";
-import { Media } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
 import { ReactElement, useEffect, useState } from "react";
@@ -24,6 +18,7 @@ import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
 import { displayPictureProfile } from "utils/user";
+import MediaIcon from "components/icons/media/MediaIcon";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -48,21 +43,6 @@ export default function ArtistPage(): ReactElement {
   const [displaySettings, setDisplaySettings] = useState(false);
   const [content, setContent] = useState<Catalog[] | Music[]>([]);
   const [activeTab, setActiveTab] = useState(ArtistTabs.MUSIC);
-
-  const getMediaIcon = (media: Media): ReactElement => {
-    switch (media) {
-      case Media.YTB_MUSIC:
-        return <YoutubeMusicIcon />;
-      case Media.X:
-        return <XIcon />;
-      case Media.APPLE_MUSIC:
-        return <AppleMusicIcon />;
-      case Media.SPOTIFY:
-        return <SpotifyIcon />;
-      case Media.INSTAGRAM:
-        return <InstagramIcon />;
-    }
-  };
 
   const handlePlaying = () => {
     setActiveTab(ArtistTabs.MUSIC);
@@ -101,16 +81,16 @@ export default function ArtistPage(): ReactElement {
   const loadContent = (selectedTab: ArtistTabs) => {
     switch (selectedTab) {
       case ArtistTabs.ALBUM:
-        setContent(artist.catalogs.filter((c) => c.type == TypeCatalog.ALBUM));
+        setContent(artist.catalogs.filter((c) => c.type === TypeCatalog.ALBUM));
         break;
       case ArtistTabs.MUSIC:
         setContent(artist.musics);
         break;
       case ArtistTabs.EP:
-        setContent(artist.catalogs.filter((c) => c.type == TypeCatalog.EP));
+        setContent(artist.catalogs.filter((c) => c.type === TypeCatalog.EP));
         break;
       case ArtistTabs.SINGLE:
-        setContent(artist.catalogs.filter((c) => c.type == TypeCatalog.SINGLE));
+        setContent(artist.catalogs.filter((c) => c.type === TypeCatalog.SINGLE));
         break;
     }
   };
@@ -149,7 +129,7 @@ export default function ArtistPage(): ReactElement {
                 href={link}
                 target="_blank"
                 className="lg:mm-size-8 mm-size-7 items-center h-full flex">
-                {getMediaIcon(media)}
+                {<MediaIcon media={media} />}
               </a>
             ))}
           </span>
@@ -196,7 +176,7 @@ export default function ArtistPage(): ReactElement {
                     <Card
                       key={catalog.id}
                       title={catalog.title}
-                      description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
+                      description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
                       thumbnail={catalog.thumbnail}
                       link={routesConfig.catalog.getParameter(catalog.id)}
                       defaultLiked={

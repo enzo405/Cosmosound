@@ -1,6 +1,7 @@
 import SettingsOptions from "components/settings/SettingsOptions";
 import TextSetting from "components/settings/TextSetting";
 import { routesConfig } from "config/app-config";
+import { useUser } from "hooks/useUser";
 import { Catalog } from "models/Catalog";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
@@ -15,6 +16,7 @@ export default function CatalogSettings({
   catalog,
   onCloseSetting,
 }: CatalogSettingsProps): ReactElement {
+  const { user } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,9 +59,11 @@ export default function CatalogSettings({
       <SettingsOptions onClick={handleCopyLink}>
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>
-      <SettingsOptions onClick={handleNavigate}>
-        <TextSetting iconName="playlistadd" text="Edit Songs" />
-      </SettingsOptions>
+      {user?.id === catalog.owner.id && (
+        <SettingsOptions onClick={handleNavigate}>
+          <TextSetting iconName="playlistadd" text="Edit Songs" />
+        </SettingsOptions>
+      )}
     </div>
   );
 }

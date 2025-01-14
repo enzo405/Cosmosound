@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { GenreTabs } from "../GenresPage";
-import { Catalog, TypeCatalog } from "models/Catalog";
+import { Catalog } from "models/Catalog";
 import Card from "components/cards/Card";
 import ArtistCard from "components/cards/ArtistCard";
 import { Artist } from "models/User";
@@ -93,7 +93,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
             <Card
               key={catalog.id}
               title={catalog.title}
-              description={`${TypeCatalog[catalog.type]} - ${catalog.owner.artistName}`}
+              description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
               link={`/catalog/${catalog.id}`}
               thumbnail={catalog.thumbnail}
               defaultLiked={user?.likedCatalogs.find((id) => id == catalog.id) !== undefined}
