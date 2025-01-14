@@ -2,6 +2,7 @@ import SettingsOptions from "components/settings/SettingsOptions";
 import TextSetting from "components/settings/TextSetting";
 import { routesConfig } from "config/app-config";
 import { useConfirmDialog } from "hooks/useConfirm";
+import { useUser } from "hooks/useUser";
 import { Playlist } from "models/Playlist";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
@@ -16,6 +17,8 @@ export default function PlaylistSettings({
   playlist,
   onCloseSetting,
 }: PlaylistSettingsProps): ReactElement {
+  const { user } = useUser();
+
   const { openDialog } = useConfirmDialog();
 
   useEffect(() => {
@@ -62,9 +65,11 @@ export default function PlaylistSettings({
       <SettingsOptions onClick={handleCopyLink}>
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>
-      <SettingsOptions onClick={handleDeletePlaylist}>
-        <TextSetting iconName="trash-red" text="Delete Playlist" />
-      </SettingsOptions>
+      {playlist.owner.id === user?.id && (
+        <SettingsOptions onClick={handleDeletePlaylist}>
+          <TextSetting iconName="trash-red" text="Delete Playlist" />
+        </SettingsOptions>
+      )}
     </div>
   );
 }

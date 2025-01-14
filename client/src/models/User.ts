@@ -50,7 +50,6 @@ export interface PartialArtist {
   socialMedia?: SocialMediaLink[];
   genre?: Genre;
   artistName?: string;
-  musics?: MusicWithCatalog[];
   catalogs?: Catalog[];
 }
 

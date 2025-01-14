@@ -11,11 +11,15 @@ import MusicService from "services/musicService";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { CatalogWithMusic } from "models/Catalog";
 import { enqueueSnackbar } from "notistack";
+import { useUser } from "hooks/useUser";
+import ForbiddenErrorPage from "pages/errors/ForbiddenErrorPage";
+import { routesConfig } from "config/app-config";
 
 interface CatalogEditPageProps {}
 
 export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement {
   const navigate = useNavigate();
+  const { user } = useUser();
   const { idCatalog } = useParams();
   const { openDialog } = useConfirmDialog();
   const [catalog, setCatalog] = useState<CatalogWithMusic | undefined>();
@@ -40,12 +44,29 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
   if (catalog == undefined) {
     return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
   }
+  if (catalog.owner.id !== user?.id) {
+    return <ForbiddenErrorPage />;
+  }
 
   const handleClickDelete = (music: Music) => {
     openDialog({
       title: `Are you sure ?`,
       description: `Do you want to delete '${music.title}' from ${catalog.title}?`,
-      onConfirm: () => MusicService.deleteMusic(music),
+      onConfirm: () =>
+        MusicService.deleteMusic(catalog.id, music)
+          .then((catalog) => {
+            setCatalog(catalog);
+            enqueueSnackbar({
+              message: `${music.title} successfully deleted.`,
+              variant: "success",
+            });
+          })
+          .catch(() => {
+            enqueueSnackbar({
+              message: `An error occured while trying to remove ${music.title}.`,
+              variant: "error",
+            });
+          }),
     });
   };
 
@@ -60,14 +81,13 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
               message: `${catalog.type.valueOf()} '${catalog.title}' successfully deleted.`,
               variant: "success",
             });
-            navigate("/");
+            navigate(routesConfig.home.path);
           })
-          .catch((err) => {
+          .catch(() => {
             enqueueSnackbar({
               message: `An error occured while trying to remove ${catalog.title}.`,
               variant: "error",
             });
-            console.log("err", err);
           });
       },
     });

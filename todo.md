@@ -1,8 +1,8 @@
 # Must have:
 
-1. Catalog
-- Frontend => Add section with your own catalog in Artist panel
-- Frontend => Edit/Delete Music from Catalog & Delete Catalog
+1. Artist
+- Backend => Get artist
+- Frontend => Fetch artist on page load
 
 2. Playlist
 - Backend => Create playlist

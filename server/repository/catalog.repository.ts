@@ -94,6 +94,9 @@ const deleteMusic = async (catalog: Catalogs, idMusic: string): Promise<Catalogs
       data: {
         musics: { set: newMusics },
       },
+      include: {
+        owner: true,
+      },
     });
   } catch (e) {
     throw new DatabaseException("Error deleting music", e);

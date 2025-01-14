@@ -1,19 +1,16 @@
-import data from "assets/json/catalogs.json";
 import { Catalog, CatalogWithMusic } from "models/Catalog";
 import { CreateCatalogFormData } from "pages/CreateCatalog/CreateCatalogPage";
 import { apiClient } from "./axiosService";
 
-const catalogData = data as CatalogWithMusic[];
-
-function getAllCatalog(): CatalogWithMusic[] {
-  return catalogData;
+async function getArtistCatalogs(artistId: string): Promise<CatalogWithMusic[]> {
+  return await apiClient.get(`/api/catalogs/artist/${artistId}`).then((res) => res.data);
 }
 
 async function getCatalogById(id?: string): Promise<CatalogWithMusic | undefined> {
   return await apiClient.get(`/api/catalogs/${id}`).then((res) => res.data);
 }
 
-async function searchCatalogByTitle(value: string): Promise<Catalog[]> {
+async function searchCatalogByTitle(value: string): Promise<CatalogWithMusic[]> {
   if (value == "") {
     return [];
   }
@@ -23,7 +20,7 @@ async function searchCatalogByTitle(value: string): Promise<Catalog[]> {
 }
 
 async function deleteCatalog(catalog: Catalog): Promise<void> {
-  console.log("catalog delete", catalog);
+  return await apiClient.delete(`/api/catalogs/${catalog.id}`).then((res) => res.data.message);
 }
 
 async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<CatalogWithMusic> {
@@ -51,7 +48,7 @@ async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<
 }
 
 const CatalogService = {
-  getAllCatalog,
+  getArtistCatalogs,
   getCatalogById,
   searchCatalogByTitle,
   deleteCatalog,

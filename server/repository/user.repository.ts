@@ -31,6 +31,9 @@ const getUserById = async (id: string): Promise<Users | null> => {
       where: {
         id: id,
       },
+      include: {
+        catalogs: true,
+      },
     });
   } catch (err) {
     console.error(err);

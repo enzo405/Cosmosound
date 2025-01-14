@@ -69,7 +69,7 @@ model Users {
   createdAt      DateTime      @default(now()) @db.Timestamp()
   updatedAt      DateTime      @updatedAt @db.Timestamp()
   refreshToken   String?
-  Catalogs       Catalogs[]
+  catalogs       Catalogs[]
 }
 
 enum UserRole {
