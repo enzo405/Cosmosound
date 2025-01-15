@@ -19,6 +19,7 @@ import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
 import { displayPictureProfile } from "utils/user";
 import MediaIcon from "components/icons/media/MediaIcon";
+import { DetailedArtistInfo } from "models/User";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -31,28 +32,62 @@ export default function ArtistPage(): ReactElement {
   const { idArtist } = useParams();
   const { user } = useUser();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
-  const artist = ArtistService.getArtistById(Number(idArtist));
+
+  const [displaySettings, setDisplaySettings] = useState(false);
+  const [content, setContent] = useState<Catalog[] | Music[]>([]);
+  const [activeTab, setActiveTab] = useState(ArtistTabs.MUSIC);
+  const [artist, setArtist] = useState<DetailedArtistInfo | undefined>(undefined);
+  const [isArtistLiked, setIsArtistLiked] = useState<boolean>(
+    user?.likedArtists.find((id) => id == artist?.id) !== undefined,
+  );
+
+  const loadContent = (selectedTab: ArtistTabs) => {
+    switch (selectedTab) {
+      case ArtistTabs.ALBUM:
+        setContent(artist?.catalogs.filter((c) => c.type === TypeCatalog.ALBUM) || []);
+        break;
+      case ArtistTabs.MUSIC:
+        setContent(getMusic(artist) || []);
+        break;
+      case ArtistTabs.EP:
+        setContent(artist?.catalogs.filter((c) => c.type === TypeCatalog.EP) || []);
+        break;
+      case ArtistTabs.SINGLE:
+        setContent(artist?.catalogs.filter((c) => c.type === TypeCatalog.SINGLE) || []);
+        break;
+    }
+  };
+
+  const getMusic = (artist: DetailedArtistInfo | undefined) => {
+    return artist === undefined ? [] : artist.catalogs.map((c) => c.musics).flat();
+  };
+
+  useEffect(() => {
+    const fetchArtist = async () => {
+      await ArtistService.getArtistById(idArtist)
+        .then((artist) => {
+          setArtist(artist);
+        })
+        .catch((err) => {
+          enqueueSnackbar({
+            message: err.message,
+            variant: "error",
+          });
+        });
+    };
+    fetchArtist();
+  }, []);
+
+  useEffect(() => {
+    if (artist != undefined) {
+      loadContent(ArtistTabs.MUSIC);
+      setActiveTab(ArtistTabs.MUSIC);
+    }
+  }, [artist]);
 
   if (artist == undefined) {
     return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
   }
-
-  const [isArtistLiked, setIsArtistLiked] = useState<boolean>(
-    user?.likedArtists.find((id) => id == artist.id.toString()) !== undefined,
-  );
-  const [displaySettings, setDisplaySettings] = useState(false);
-  const [content, setContent] = useState<Catalog[] | Music[]>([]);
-  const [activeTab, setActiveTab] = useState(ArtistTabs.MUSIC);
-
-  const handlePlaying = () => {
-    setActiveTab(ArtistTabs.MUSIC);
-    loadContent(ArtistTabs.MUSIC);
-    if (!isPlayingSongCurrentPage && artist != undefined) {
-      const firstMusicCatalog = artist.musics.find((m) => m.id == artist.musics[0].id)?.catalog;
-      setPlayingMusic({ ...artist.musics[0], artist, catalog: firstMusicCatalog! });
-    }
-    setIsPlaying(!isPlaying);
-  };
 
   const handleClickHeart = () => {
     if (isArtistLiked) {
@@ -69,33 +104,27 @@ export default function ArtistPage(): ReactElement {
     setIsArtistLiked(!isArtistLiked);
   };
 
-  useEffect(() => {
-    loadContent(activeTab);
-  }, []);
-
   const handleTabChange = (selectedTab: ArtistTabs) => {
     loadContent(selectedTab);
     setActiveTab(selectedTab);
   };
 
-  const loadContent = (selectedTab: ArtistTabs) => {
-    switch (selectedTab) {
-      case ArtistTabs.ALBUM:
-        setContent(artist.catalogs.filter((c) => c.type === TypeCatalog.ALBUM));
-        break;
-      case ArtistTabs.MUSIC:
-        setContent(artist.musics);
-        break;
-      case ArtistTabs.EP:
-        setContent(artist.catalogs.filter((c) => c.type === TypeCatalog.EP));
-        break;
-      case ArtistTabs.SINGLE:
-        setContent(artist.catalogs.filter((c) => c.type === TypeCatalog.SINGLE));
-        break;
-    }
-  };
+  const isPlayingSongCurrentPage =
+    getMusic(artist).find((m) => m.id == playingMusic.id) != undefined;
 
-  const isPlayingSongCurrentPage = artist?.musics.find((m) => m.id == playingMusic.id) != undefined;
+  const handlePlaying = () => {
+    loadContent(ArtistTabs.MUSIC);
+    setActiveTab(ArtistTabs.MUSIC);
+    if (!isPlayingSongCurrentPage && artist != undefined) {
+      const firstCatalog = artist.catalogs[0];
+      setPlayingMusic({
+        ...firstCatalog.musics[0],
+        catalog: firstCatalog,
+        artist: artist,
+      });
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   const onLikeCatalog = (like: boolean, catalog: Catalog) => {
     if (like) {
@@ -163,7 +192,7 @@ export default function ArtistPage(): ReactElement {
                     <MusicItem
                       key={item.id}
                       music={item as Music}
-                      catalog={artist.musics.find((m) => m.id == item.id)?.catalog!}
+                      catalog={artist.catalogs.find((c) => c.musics.find((m) => m.id === item.id))!}
                       artist={artist}
                       showArtist={false}
                     />
@@ -176,7 +205,7 @@ export default function ArtistPage(): ReactElement {
                     <Card
                       key={catalog.id}
                       title={catalog.title}
-                      description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
+                      description={`${catalog.type.valueOf()} - ${artist.artistName}`}
                       thumbnail={catalog.thumbnail}
                       link={routesConfig.catalog.getParameter(catalog.id)}
                       defaultLiked={

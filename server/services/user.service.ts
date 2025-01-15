@@ -30,4 +30,20 @@ const encryptPassword = async (password: string): Promise<string> => {
   }
 };
 
-export default { getUserById, createUser, getUserByEmail, updateUser, encryptPassword };
+const getFavourites = async (userId: string): Promise<Users[]> => {
+  return await userRepository.getFavourites(userId);
+};
+
+const searchArtist = async (search: string): Promise<Users[]> => {
+  return await userRepository.searchArtist(search);
+};
+
+export default {
+  getUserById,
+  createUser,
+  getUserByEmail,
+  updateUser,
+  encryptPassword,
+  getFavourites,
+  searchArtist,
+};

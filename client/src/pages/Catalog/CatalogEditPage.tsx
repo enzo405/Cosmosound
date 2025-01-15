@@ -9,7 +9,7 @@ import MusicItemDelete from "components/music/MusicItemDelete";
 import { Music } from "models/Music";
 import MusicService from "services/musicService";
 import { useConfirmDialog } from "hooks/useConfirm";
-import { CatalogWithMusic } from "models/Catalog";
+import { DetailedCatalog } from "models/Catalog";
 import { enqueueSnackbar } from "notistack";
 import { useUser } from "hooks/useUser";
 import ForbiddenErrorPage from "pages/errors/ForbiddenErrorPage";
@@ -22,7 +22,7 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
   const { user } = useUser();
   const { idCatalog } = useParams();
   const { openDialog } = useConfirmDialog();
-  const [catalog, setCatalog] = useState<CatalogWithMusic | undefined>();
+  const [catalog, setCatalog] = useState<DetailedCatalog | undefined>();
 
   useEffect(() => {
     const fetchCatalog = async () => {
@@ -44,7 +44,7 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
   if (catalog == undefined) {
     return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
   }
-  if (catalog.owner.id !== user?.id) {
+  if (catalog.ownerId !== user?.id) {
     return <ForbiddenErrorPage />;
   }
 

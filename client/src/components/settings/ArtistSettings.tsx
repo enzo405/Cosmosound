@@ -1,6 +1,7 @@
 import SettingsOptions from "components/settings/SettingsOptions";
 import TextSetting from "components/settings/TextSetting";
 import { routesConfig } from "config/app-config";
+import { useUser } from "hooks/useUser";
 import { Artist } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
@@ -16,6 +17,7 @@ export default function ArtistSettings({
   onCloseSetting,
 }: ArtistSettingsProps): ReactElement {
   const navigate = useNavigate();
+  const { user } = useUser();
 
   useEffect(() => {
     const handleClickAway = (event: MouseEvent) => {
@@ -40,7 +42,7 @@ export default function ArtistSettings({
   }, []);
 
   const handleCopyLink = () => {
-    const path = routesConfig.artist.getParameter(artist.id.toString());
+    const path = routesConfig.artist.getParameter(artist.id);
     const host = window.location.host;
     navigator.clipboard.writeText(`${host}${path}`);
     enqueueSnackbar(`Link copied to clipboard`, {
@@ -57,9 +59,11 @@ export default function ArtistSettings({
       <SettingsOptions onClick={handleCopyLink}>
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>
-      <SettingsOptions onClick={handleNavigate}>
-        <TextSetting iconName="artistPanel" text="Artist Panel" />
-      </SettingsOptions>
+      {artist.id === user?.id && (
+        <SettingsOptions onClick={handleNavigate}>
+          <TextSetting iconName="artistPanel" text="Artist Panel" />
+        </SettingsOptions>
+      )}
     </div>
   );
 }

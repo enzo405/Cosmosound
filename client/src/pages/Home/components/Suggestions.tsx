@@ -1,13 +1,13 @@
 import ScrollableBox from "components/box/ScrollableBox";
 import Card from "components/cards/Card";
 import { useUser } from "hooks/useUser";
-import { Catalog } from "models/Catalog";
+import { Catalog, DetailedCatalog } from "models/Catalog";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement } from "react";
 import UserService from "services/userService";
 
 interface SuggestionsProps {
-  catalogs: Catalog[];
+  catalogs: DetailedCatalog[];
 }
 
 export default function Suggestions({ catalogs }: SuggestionsProps): ReactElement {

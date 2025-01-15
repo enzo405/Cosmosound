@@ -2,16 +2,28 @@ import Container from "components/box/Container";
 import Divider from "components/Divider";
 import { Icon } from "components/icons/Icon";
 import MediaIcon from "components/icons/media/MediaIcon";
+import { routesConfig } from "config/app-config";
 import { PartialArtist } from "models/User";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ArtistInfoCardProps {
   artist: PartialArtist;
 }
 
 const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
-  const { pictureProfile, name, artistName, followers, isVerified, genre, socialMedia, catalogs } =
-    artist;
+  const navigate = useNavigate();
+  const {
+    id,
+    pictureProfile,
+    name,
+    artistName,
+    followers,
+    isVerified,
+    genre,
+    socialMedia,
+    catalogs,
+  } = artist;
 
   return (
     <Container className="w-full flex flex-col items-start p-4 lg:pt-6">
@@ -24,7 +36,11 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
           />
           <div className="w-full flex-1 min-w-8">
             <span className="block w-full text-xl whitespace-nowrap font-bold text-nowrap">
-              {artistName || name}{" "}
+              <a
+                className="hover:underline text-dark-custom hover:text-primary-orange cursor-pointer"
+                onClick={() => navigate(routesConfig.artist.getParameter(id.toString()))}>
+                {artistName || name}
+              </a>{" "}
               {isVerified && (
                 <span
                   className="text-blue-500 font-semibold ml-1 inline-flex items-center"

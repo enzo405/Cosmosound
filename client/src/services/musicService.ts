@@ -1,7 +1,7 @@
 import { Music, MusicDetails } from "models/Music";
 import data from "assets/json/musics.json";
 import { apiClient } from "./axiosService";
-import { Catalog, CatalogWithMusic } from "models/Catalog";
+import { Catalog, DetailedCatalog } from "models/Catalog";
 
 const musicData: MusicDetails[] = data as MusicDetails[];
 
@@ -32,7 +32,7 @@ function searchMusicByTitle(value: string): MusicDetails[] {
   return [...new Set(result)];
 }
 
-async function deleteMusic(idCatalog: string, music: Music): Promise<CatalogWithMusic> {
+async function deleteMusic(idCatalog: string, music: Music): Promise<DetailedCatalog> {
   return await apiClient
     .delete(`/api/catalogs/${idCatalog}/music/${music.id}`)
     .then((res) => res.data);

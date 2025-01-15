@@ -7,8 +7,9 @@ import { routesConfig } from "config/app-config";
 import { useUser } from "hooks/useUser";
 import { Genre } from "models/Music";
 import { Playlist } from "models/Playlist";
+import { DetailedArtistInfo } from "models/User";
 import { enqueueSnackbar } from "notistack";
-import { type ReactElement } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import ArtistService from "services/artistService";
 import GenresService from "services/genresService";
 import PlaylistService from "services/playlistService";
@@ -16,6 +17,25 @@ import UserService from "services/userService";
 
 function LibraryPage(): ReactElement {
   const { user } = useUser();
+  const [myArtists, setMyArtists] = useState<DetailedArtistInfo[]>([]);
+
+  useEffect(() => {
+    const fetchMyArtists = async () => {
+      await ArtistService.getMyFavouriteArtist()
+        .then((artists) => {
+          setMyArtists(artists);
+        })
+        .catch((error) => {
+          console.error(error);
+          enqueueSnackbar("Failed to fetch your favourite artists", {
+            variant: "error",
+          });
+        });
+    };
+
+    fetchMyArtists();
+  }, []);
+
   const onLikeGenre = (like: boolean, genre: Genre) => {
     if (like) {
       UserService.removeLike(genre);
@@ -50,7 +70,7 @@ function LibraryPage(): ReactElement {
   return (
     <div className="flex flex-col gap-10">
       <ScrollableBox title="Favourite Artists">
-        {ArtistService.getMyFavouriteArtist().map((artist) => {
+        {myArtists.map((artist) => {
           return <ArtistCard key={artist.id} artist={artist} />;
         })}
       </ScrollableBox>

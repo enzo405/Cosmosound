@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { GenreTabs } from "../GenresPage";
-import { Catalog } from "models/Catalog";
+import { Catalog, DetailedCatalog } from "models/Catalog";
 import Card from "components/cards/Card";
 import ArtistCard from "components/cards/ArtistCard";
 import { Artist } from "models/User";
@@ -13,7 +13,7 @@ import { enqueueSnackbar } from "notistack";
 import { useUser } from "hooks/useUser";
 
 interface GenreContentProps {
-  content: Catalog[] | MusicDetails[] | Playlist[] | Artist[];
+  content: DetailedCatalog[] | MusicDetails[] | Playlist[] | Artist[];
   activeTab: GenreTabs;
 }
 

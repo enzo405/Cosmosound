@@ -1,6 +1,6 @@
 import { Icon } from "components/icons/Icon";
 import { useMusic } from "hooks/useMusic";
-import { Catalog, TypeCatalog } from "models/Catalog";
+import { DetailedCatalog, TypeCatalog } from "models/Catalog";
 import { MusicDetails } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { Artist } from "models/User";
@@ -42,7 +42,9 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
   const [isGenreLiked, setIsGenreLiked] = useState<boolean>(
     user?.likedGenres.find((name) => name === nameGenre) !== undefined,
   );
-  const [content, setContent] = useState<Catalog[] | MusicDetails[] | Playlist[] | Artist[]>([]);
+  const [content, setContent] = useState<
+    DetailedCatalog[] | MusicDetails[] | Playlist[] | Artist[]
+  >([]);
   const [activeTab, setActiveTab] = useState(GenreTabs.ARTISTS);
 
   const handlePlaying = () => {

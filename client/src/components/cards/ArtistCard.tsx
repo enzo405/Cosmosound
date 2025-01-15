@@ -18,7 +18,7 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
   const { user } = useUser();
   const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(
-    user?.likedArtists.find((id) => id == artist.id.toString()) !== undefined,
+    user?.likedArtists.find((id) => id == artist.id) !== undefined,
   );
 
   const handleOnClick = (event: MouseEvent) => {
@@ -26,7 +26,7 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
     const target = event.target as Node;
 
     if (!likeBtn?.contains(target)) {
-      navigate(routesConfig.artist.getParameter(artist.id.toString()));
+      navigate(routesConfig.artist.getParameter(artist.id));
     }
   };
 

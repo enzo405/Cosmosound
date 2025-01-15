@@ -14,7 +14,7 @@ import ArtistInfo from "components/music/ArtistInfo";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
-import { CatalogWithMusic } from "models/Catalog";
+import { DetailedCatalog } from "models/Catalog";
 
 interface CatalogPageProps {}
 
@@ -22,7 +22,7 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   const { idCatalog } = useParams();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const { user } = useUser();
-  const [catalog, setCatalog] = useState<CatalogWithMusic | undefined>();
+  const [catalog, setCatalog] = useState<DetailedCatalog | undefined>();
   const [displaySettings, setDisplaySettings] = useState(false);
   const [isCatalogLiked, setIsCatalogLiked] = useState<boolean>(
     user?.likedCatalogs.find((id) => id == catalog?.id) !== undefined,

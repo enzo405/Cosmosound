@@ -15,7 +15,7 @@ export default function ArtistInfo({ artist, className }: ArtistInfoProps): Reac
   return (
     <span
       className={`${className} cursor-pointer hover:underline flex flex-row gap-1 min-w-0 truncate`}
-      onClick={() => navigate(routesConfig.artist.getParameter(artist.id.toString()))}>
+      onClick={() => navigate(routesConfig.artist.getParameter(artist.id))}>
       <img
         src={displayPictureProfile(artist.pictureProfile)}
         className="mm-size-5 rounded-full flex-shrink-0"
