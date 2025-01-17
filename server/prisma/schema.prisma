@@ -10,7 +10,8 @@ datasource db {
 model Playlists {
   id                String            @id @default(auto()) @map("_id") @db.ObjectId
   title             String
-  owner             String            @db.ObjectId
+  ownerId           String            @db.ObjectId
+  owner             Users             @relation(fields: [ownerId], references: [id])
   playlistThumbnail String
   musics            MusicInPlaylist[]
   createdAt         DateTime          @default(now()) @db.Timestamp()
@@ -70,6 +71,7 @@ model Users {
   updatedAt      DateTime      @updatedAt @db.Timestamp()
   refreshToken   String?
   catalogs       Catalogs[]
+  playlists      Playlists[]
 }
 
 enum UserRole {

@@ -6,6 +6,7 @@ import authRouter from "./routes/auth.route";
 import fileRouter from "./routes/file.route";
 import userRouter from "./routes/user.route";
 import catalogRouter from "./routes/catalog.route";
+import playlistRouter from "./routes/playlist.route";
 import cors from "cors";
 import cookieParser from "./middlewares/cookie-parser.middleware";
 import { errorHandler } from "./errors/errorhandler";
@@ -34,6 +35,7 @@ app.use("/auth", authRouter);
 app.use("/api", fileRouter);
 app.use("/api", userRouter);
 app.use("/api", catalogRouter);
+app.use("/api", playlistRouter);
 
 app.use(errorHandler);
 

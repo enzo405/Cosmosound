@@ -1,7 +1,5 @@
 import BadRequestException from "@/errors/BadRequestException";
-import { WebError } from "@/errors/Error";
 import NotFoundException from "@/errors/NotFoundException";
-import ServerException from "@/errors/ServerException";
 import { UserRequest } from "@/middlewares/auth.middleware";
 import catalogService from "@/services/catalog.service";
 import nextcloudService from "@/services/nextcloud.service";
@@ -154,10 +152,10 @@ const deleteCatalog = async (req: UserRequest, res: Response) => {
   const catalog = await catalogService.getCatalogById(id);
 
   if (!catalog) {
-    throw new NotFoundException(`Catalog with id ${id} doesn't exist.`);
+    throw new NotFoundException(`Catalog with id ${id} not found.`);
   }
 
-  await catalogService.deleteCatalog(id);
+  await catalogService.deleteCatalog(id, req.userId!);
   res.status(200).json({ message: `Catalog ${catalog.title} successfully deleted.` });
 };
 
@@ -167,7 +165,7 @@ const deleteMusic = async (req: UserRequest, res: Response) => {
   const music = await catalogService.getMusicById(id, idMusic);
 
   if (!music) {
-    throw new NotFoundException(`The music with id ${idMusic} doesn't exist.`);
+    throw new NotFoundException(`The music with id ${idMusic} not found.`);
   }
 
   const catalog = await catalogService.deleteMusic(req.userId, id, music?.id);

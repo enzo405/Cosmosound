@@ -15,8 +15,18 @@ const searchCatalog = async (value: string): Promise<Catalogs[]> => {
   return await catalogRepository.searchCatalog(value);
 };
 
-const deleteCatalog = async (id: string): Promise<void> => {
-  return await catalogRepository.deleteCatalog(id);
+const deleteCatalog = async (idCatalog: string, userId: string): Promise<void> => {
+  const catalog = await catalogRepository.getCatalogById(idCatalog);
+
+  if (!catalog) {
+    throw new NotFoundException(`Catalog with id ${idCatalog} not found`);
+  }
+
+  if (!userId || catalog.ownerId != userId) {
+    throw new ForbiddenException("You are not allowed to delete a catalog you don't own");
+  }
+
+  return await catalogRepository.deleteCatalog(idCatalog);
 };
 
 const getMusicById = async (idCatalog: string, idMusic: string): Promise<Music | null> => {
@@ -27,11 +37,13 @@ const deleteMusic = async (userId: string | undefined, idCatalog: string, idMusi
   const catalog = await catalogRepository.getCatalogById(idCatalog);
 
   if (!catalog) {
-    throw new NotFoundException(`Catalog with id ${idCatalog} doesn't exist`);
+    throw new NotFoundException(`Catalog with id ${idCatalog} not found`);
   }
 
   if (!userId || catalog.ownerId != userId) {
-    throw new ForbiddenException("You are not allowed to delete a catalog you don't own");
+    throw new ForbiddenException(
+      "You are not allowed to delete a music from a catalog you don't own"
+    );
   }
 
   return await catalogRepository.deleteMusic(catalog, idMusic);
