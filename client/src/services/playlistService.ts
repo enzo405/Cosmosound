@@ -1,6 +1,6 @@
-import { Playlist, Playlist } from "models/Playlist";
 import { Music, MusicWithCatalog } from "models/Music";
 import { apiClient } from "./axiosService";
+import { Playlist } from "models/Playlist";
 
 async function searchPlaylistByTitle(value: string): Promise<Playlist[]> {
   if (value == "") {

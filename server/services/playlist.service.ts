@@ -2,10 +2,9 @@ import { Playlists, Prisma } from "@prisma/client";
 import playlistRepository from "@/repository/playlist.repository";
 import NotFoundException from "@/errors/NotFoundException";
 import ForbiddenException from "@/errors/ForbiddenException";
-import catalogRepository from "@/repository/catalog.repository";
 
 const getPlaylistById = async (id: string): Promise<Playlists | null> => {
-  return await playlistRepository.getPlaylistById(id);
+  return await playlistRepository.getPlaylistById(id, true);
 };
 
 const searchPlaylist = async (value: string): Promise<Playlists[]> => {
@@ -20,9 +19,9 @@ const AddMusic = async (
   userId: string,
   playlidId: string,
   idCatalog: string,
-  idMusic: string
+  idMusic: string,
 ): Promise<Playlists> => {
-  const playlist = await playlistRepository.getPlaylistById(playlidId);
+  const playlist = await playlistRepository.getPlaylistById(playlidId, false);
 
   if (!playlist) {
     throw new NotFoundException(`Playlist with id ${playlidId} not found`);
@@ -35,8 +34,8 @@ const AddMusic = async (
   return await playlistRepository.AddMusic(playlist.id, idCatalog, idMusic);
 };
 
-const deletePlaylist = async (idPlaylist: string, userId: string): Promise<void> => {
-  const playlist = await playlistRepository.getPlaylistById(idPlaylist);
+const deletePlaylist = async (userId: string, idPlaylist: string): Promise<void> => {
+  const playlist = await playlistRepository.getPlaylistById(idPlaylist, false);
 
   if (!playlist) {
     throw new NotFoundException(`Playlist with id ${idPlaylist} not found`);
@@ -49,11 +48,11 @@ const deletePlaylist = async (idPlaylist: string, userId: string): Promise<void>
 };
 
 const deleteMusic = async (
+  userId: string,
   idPlaylist: string,
   idMusic: string,
-  userId: string
 ): Promise<Playlists> => {
-  const playlist = await playlistRepository.getPlaylistById(idPlaylist);
+  const playlist = await playlistRepository.getPlaylistById(idPlaylist, false);
 
   if (!playlist) {
     throw new NotFoundException(`Playlist with id ${idPlaylist} not found`);

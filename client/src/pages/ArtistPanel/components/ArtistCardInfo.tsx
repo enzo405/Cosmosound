@@ -31,7 +31,7 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
       <div className="flex flex-col lg:flex-row w-full gap-4">
         <div className="flex items-center w-full max-w-full space-x-4">
           <img
-            src={pictureProfile}
+            src={displayPictureProfile(pictureProfile)}
             alt={`${name}'s profile`}
             className="block mm-size-16 rounded-full object-cover"
           />

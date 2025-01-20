@@ -3,7 +3,7 @@ import SettingsOptions from "components/settings/SettingsOptions";
 import { routesConfig } from "config/app-config";
 import { Music, MusicWithCatalog } from "models/Music";
 import { Playlist } from "models/Playlist";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useMemo, useState } from "react";
 import TextSetting from "./TextSetting";
 import { enqueueSnackbar } from "notistack";
 import SelectPlaylist from "./SelectPlaylist";
@@ -85,9 +85,9 @@ export default function MusicSettings({
     if (onDeleteFromPlaylist) onDeleteFromPlaylist(music);
   };
 
-  const isPlaylistPageView = window.location.pathname.startsWith(
-    routesConfig.playlist.path.split(":")[0],
-  );
+  const isPlaylistPageView = useMemo(() => {
+    return window.location.pathname.startsWith(routesConfig.playlist.path.split(":")[0]);
+  }, [window.location.pathname]);
 
   return (
     <div
@@ -125,7 +125,6 @@ export default function MusicSettings({
       )}
       {displayPlaylistSelect && (
         <>
-          <Divider />
           <SelectPlaylist
             handleAddToPlaylist={handleAddToPlaylist}
             closeSettings={onCloseSetting}

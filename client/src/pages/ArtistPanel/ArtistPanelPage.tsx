@@ -171,12 +171,14 @@ export default function ArtistPanelPage(): ReactElement {
     <div className="flex flex-col items-center sm:items-start mt-4 w-full h-full">
       <span className="flex flex-row items-center gap-2 text-4xl font-bs font-bold text-dark-custom ml-2">
         Artist Panel
-        <span className="cursor-pointer" onClick={handleEditProfile}>
-          <Icon className="mm-size-6 fill-dark-custom hover:fill-dark-glassy" iconName="pencil" />
-        </span>
+        {user?.role === "ARTISTS" && (
+          <span className="cursor-pointer" onClick={handleEditProfile}>
+            <Icon className="mm-size-6 fill-dark-custom hover:fill-dark-glassy" iconName="pencil" />
+          </span>
+        )}
       </span>
       <div className="lg:h-[35rem] w-full md:w-min flex flex-col-reverse lg:flex-row lg:items-stretch gap-2">
-        {editProfile ? (
+        {editProfile || user?.role !== "ARTISTS" ? (
           <Container className="w-full p-4 md:p-6 lg:p-8">
             <form
               onSubmit={handleSubmit(onSubmitForm)}

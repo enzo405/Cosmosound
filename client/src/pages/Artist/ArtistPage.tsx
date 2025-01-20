@@ -85,7 +85,7 @@ export default function ArtistPage(): ReactElement {
     }
   }, [artist]);
 
-  if (artist == undefined) {
+  if (artist?.role !== "ARTISTS") {
     return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
   }
 

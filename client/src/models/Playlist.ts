@@ -1,5 +1,6 @@
+import { Catalog } from "./Catalog";
 import { Genre } from "./Music";
-import { User } from "./User";
+import { Artist, User } from "./User";
 
 export interface Playlist {
   id: string;
@@ -18,5 +19,7 @@ export interface PlaylistMusic {
   title: string;
   createdAt: string;
   duration: number;
+  artist: Artist;
+  catalog: Catalog;
   genres: Genre[];
 }

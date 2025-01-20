@@ -18,7 +18,7 @@ export default function PlaylistSettings({
   playlist,
   onCloseSetting,
 }: PlaylistSettingsProps): ReactElement {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const navigate = useNavigate();
 
   const { openDialog } = useConfirmDialog();
@@ -64,6 +64,13 @@ export default function PlaylistSettings({
             enqueueSnackbar(`Playlist deleted`, {
               variant: "success",
             });
+            if (user) {
+              const newPlaylists: Playlist[] | undefined = user.playlists?.filter(
+                (p) => p.id !== playlist.id,
+              );
+              setUser({ ...user, playlists: newPlaylists });
+            }
+
             navigate(routesConfig.account.path);
           })
           .catch(() => {
@@ -79,7 +86,7 @@ export default function PlaylistSettings({
       <SettingsOptions onClick={handleCopyLink}>
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>
-      {playlist.owner.id === user?.id && (
+      {playlist.ownerId === user?.id && (
         <SettingsOptions onClick={handleDeletePlaylist}>
           <TextSetting iconName="trash-red" text="Delete Playlist" />
         </SettingsOptions>

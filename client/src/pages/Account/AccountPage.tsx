@@ -348,7 +348,7 @@ function AccountPage(): ReactElement {
             <div className="max-w-md mx-auto p-2 sm:p-4 bg-gray-100 rounded-lg shadow-md">
               <div className="flex flex-col sm:flex-row items-center mb-4">
                 <img
-                  src={user?.pictureProfile}
+                  src={displayPictureProfile(user?.pictureProfile)}
                   alt={`${user?.name}'s profile`}
                   className="w-16 h-16 rounded-full border-2 border-blue-500"
                 />

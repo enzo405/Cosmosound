@@ -80,7 +80,22 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
     openDialog({
       title: `Do you really want to delete ${music.title} from the playlist ?`,
       description: "",
-      onConfirm: () => PlaylistService.deleteMusic(playlist, music),
+      onConfirm: async () =>
+        await PlaylistService.deleteMusic(playlist, music)
+          .then(() => {
+            enqueueSnackbar(`Song deleted from playlist`, {
+              variant: "success",
+            });
+            setPlaylist({
+              ...playlist,
+              musics: playlist.musics.filter((m) => m.id != music.id),
+            });
+          })
+          .catch(() => {
+            enqueueSnackbar(`Failed to delete song from playlist`, {
+              variant: "error",
+            });
+          }),
     });
   };
 

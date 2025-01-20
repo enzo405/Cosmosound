@@ -1,10 +1,13 @@
 import { prisma } from "@/app";
 import DatabaseException from "@/errors/DatabaseException";
 import NotFoundException from "@/errors/NotFoundException";
+import { PlaylistDetails } from "@/models/PlaylistDetails";
 import { Playlists, Prisma } from "@prisma/client";
-import { cpSync } from "fs";
 
-const getPlaylistById = async (id: string): Promise<Playlists | null> => {
+const getPlaylistById = async (
+  id: string,
+  expand: boolean,
+): Promise<PlaylistDetails | Playlists | null> => {
   try {
     const playlist = await prisma.playlists.findUnique({
       where: { id: id },
@@ -13,7 +16,28 @@ const getPlaylistById = async (id: string): Promise<Playlists | null> => {
       },
     });
 
-    return playlist ? playlist : null;
+    if (!playlist) {
+      return null;
+    }
+
+    if (!expand) {
+      return playlist;
+    }
+
+    const musics = playlist.musics;
+    const detailedMusic = await Promise.all(
+      musics.map(async (music) => {
+        const artist = await prisma.users.findUnique({ where: { id: music.idArtist } });
+        const catalog = await prisma.catalogs.findUnique({ where: { id: music.idCatalog } });
+        return {
+          ...music,
+          artist,
+          catalog,
+        };
+      }),
+    );
+
+    return { ...playlist, musics: detailedMusic };
   } catch (err) {
     throw new DatabaseException(`There was an error while fetching playlist with id ${id}`, err);
   }
@@ -35,7 +59,7 @@ const searchPlaylist = async (name: string): Promise<Playlists[]> => {
   } catch (err) {
     throw new DatabaseException(
       `There was an error while searching for playlist with value ${name}`,
-      err
+      err,
     );
   }
 };
@@ -53,7 +77,7 @@ const createPlaylist = async (data: Prisma.PlaylistsCreateInput): Promise<Playli
 const AddMusic = async (
   playlistId: string,
   catalogId: string,
-  musicId: string
+  musicId: string,
 ): Promise<Playlists> => {
   try {
     const catalog = await prisma.catalogs.findUnique({
@@ -81,9 +105,10 @@ const AddMusic = async (
           push: {
             duration: music.duration,
             id: music.id,
+            idArtist: catalog.ownerId,
+            idCatalog: catalog.id,
             title: music.title,
             url: music.url,
-            idCatalog: catalogId,
             createdAt: music.createdAt,
             genres: music.genres,
           },
@@ -133,6 +158,23 @@ const deleteMusic = async (playlist: Playlists, musicId: string): Promise<Playli
   }
 };
 
+const deleteDenormalizedMusic = async (idCatalog: string, idMusic: string): Promise<void> => {
+  const playlists = await prisma.playlists.findMany({
+    where: {
+      musics: {
+        some: {
+          id: idMusic,
+          idCatalog: idCatalog,
+        },
+      },
+    },
+  });
+
+  playlists.forEach((playlist) => {
+    deleteMusic(playlist, idMusic);
+  });
+};
+
 export default {
   getPlaylistById,
   searchPlaylist,
@@ -140,4 +182,5 @@ export default {
   AddMusic,
   deletePlaylist,
   deleteMusic,
+  deleteDenormalizedMusic,
 };

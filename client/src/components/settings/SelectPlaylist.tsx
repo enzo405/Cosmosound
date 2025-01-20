@@ -1,10 +1,12 @@
 import Divider from "components/Divider";
 import { Icon } from "components/icons/Icon";
+import { routesConfig } from "config/app-config";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { useUser } from "hooks/useUser";
 import { Playlist } from "models/Playlist";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useMemo, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import PlaylistService from "services/playlistService";
 
 interface SelectPlaylistProps {
@@ -19,6 +21,7 @@ export default function SelectPlaylist({
   const { user, setUser } = useUser();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const { openDialog } = useConfirmDialog();
+  const { idParams } = useParams();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
@@ -54,10 +57,19 @@ export default function SelectPlaylist({
     }
   };
 
+  const isPlaylistPageView = useMemo(() => {
+    return window.location.pathname.startsWith(routesConfig.playlist.path.split(":")[0]);
+  }, [window.location.pathname]);
+
   const filteredPlaylists = useMemo(() => {
-    return user?.playlists?.filter((playlist) =>
+    const playlists = user?.playlists?.filter((playlist) =>
       playlist.title.toLowerCase().includes(searchTerm.toLowerCase()),
     );
+    if (isPlaylistPageView) {
+      return playlists?.filter((p) => p.id !== idParams);
+    } else {
+      return playlists;
+    }
   }, [user]);
 
   return (
