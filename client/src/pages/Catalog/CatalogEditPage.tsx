@@ -14,12 +14,13 @@ import { enqueueSnackbar } from "notistack";
 import { useUser } from "hooks/useUser";
 import ForbiddenErrorPage from "pages/errors/ForbiddenErrorPage";
 import { routesConfig } from "config/app-config";
+import { displayPictureProfile } from "utils/user";
 
 interface CatalogEditPageProps {}
 
 export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement {
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const { idCatalog } = useParams();
   const { openDialog } = useConfirmDialog();
   const [catalog, setCatalog] = useState<DetailedCatalog | undefined>();
@@ -60,6 +61,10 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
               message: `${music.title} successfully deleted.`,
               variant: "success",
             });
+            if (user) {
+              const catalogs = user.catalogs?.map((c) => (c.id === catalog.id ? catalog : c)) ?? [];
+              setUser({ ...user, catalogs });
+            }
           })
           .catch(() => {
             enqueueSnackbar({
@@ -95,7 +100,7 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
 
   return (
     <PageLayout
-      thumbnail={catalog.thumbnail}
+      thumbnail={displayPictureProfile(catalog.thumbnail)}
       title={catalog.title}
       subtitle={
         <div className="flex flex-col gap-1">

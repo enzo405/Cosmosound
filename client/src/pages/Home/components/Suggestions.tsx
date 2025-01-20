@@ -5,6 +5,7 @@ import { Catalog, DetailedCatalog } from "models/Catalog";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement } from "react";
 import UserService from "services/userService";
+import { displayPictureProfile } from "utils/user";
 
 interface SuggestionsProps {
   catalogs: DetailedCatalog[];
@@ -36,7 +37,7 @@ export default function Suggestions({ catalogs }: SuggestionsProps): ReactElemen
             title={catalog.title}
             description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
             link={`/catalog/${catalog.id}`}
-            thumbnail={catalog.thumbnail}
+            thumbnail={displayPictureProfile(catalog.thumbnail)}
             defaultLiked={
               user?.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined
             }

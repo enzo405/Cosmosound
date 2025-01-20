@@ -6,6 +6,7 @@ import { useUser } from "hooks/useUser";
 import { Playlist } from "models/Playlist";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PlaylistService from "services/playlistService";
 
 interface PlaylistSettingsProps {
@@ -17,7 +18,8 @@ export default function PlaylistSettings({
   playlist,
   onCloseSetting,
 }: PlaylistSettingsProps): ReactElement {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
+  const navigate = useNavigate();
 
   const { openDialog } = useConfirmDialog();
 
@@ -56,7 +58,26 @@ export default function PlaylistSettings({
     openDialog({
       title: `Are you sure you want to delete this playlist ?`,
       description: "",
-      onConfirm: () => PlaylistService.deletePlaylist(playlist),
+      onConfirm: async () =>
+        await PlaylistService.deletePlaylist(playlist)
+          .then(() => {
+            enqueueSnackbar(`Playlist deleted`, {
+              variant: "success",
+            });
+            if (user) {
+              const newPlaylists: Playlist[] | undefined = user.playlists?.filter(
+                (p) => p.id !== playlist.id,
+              );
+              setUser({ ...user, playlists: newPlaylists });
+            }
+
+            navigate(routesConfig.account.path);
+          })
+          .catch(() => {
+            enqueueSnackbar(`Failed to delete playlist`, {
+              variant: "error",
+            });
+          }),
     });
   };
 
@@ -65,7 +86,7 @@ export default function PlaylistSettings({
       <SettingsOptions onClick={handleCopyLink}>
         <TextSetting text="Copy Link" iconName="copylink" />
       </SettingsOptions>
-      {playlist.owner.id === user?.id && (
+      {playlist.ownerId === user?.id && (
         <SettingsOptions onClick={handleDeletePlaylist}>
           <TextSetting iconName="trash-red" text="Delete Playlist" />
         </SettingsOptions>

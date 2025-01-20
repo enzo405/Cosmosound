@@ -1,5 +1,6 @@
 import { Catalog, DetailedCatalog } from "./Catalog";
 import { Genre } from "./Music";
+import { Playlist } from "./Playlist";
 
 export interface User {
   id: string;
@@ -50,6 +51,7 @@ export interface PartialArtist {
   genre?: Genre;
   artistName?: string;
   catalogs?: Catalog[];
+  playlists?: Playlist[];
 }
 
 export interface SocialMediaLink {

@@ -6,6 +6,7 @@ import { routesConfig } from "config/app-config";
 import { PartialArtist } from "models/User";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { displayPictureProfile } from "utils/user";
 
 interface ArtistInfoCardProps {
   artist: PartialArtist;
@@ -30,7 +31,7 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
       <div className="flex flex-col lg:flex-row w-full gap-4">
         <div className="flex items-center w-full max-w-full space-x-4">
           <img
-            src={pictureProfile}
+            src={displayPictureProfile(pictureProfile)}
             alt={`${name}'s profile`}
             className="block mm-size-16 rounded-full object-cover"
           />
@@ -88,7 +89,7 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
                   <a href={`/catalog/${catalog.id}`}>
                     <a className="flex items-center">
                       <img
-                        src={catalog.thumbnail}
+                        src={displayPictureProfile(catalog.thumbnail)}
                         alt={catalog.title}
                         className="mm-size-8 object-cover rounded mr-2"
                       />

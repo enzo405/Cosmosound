@@ -85,7 +85,7 @@ export default function ArtistPage(): ReactElement {
     }
   }, [artist]);
 
-  if (artist == undefined) {
+  if (artist?.role !== "ARTISTS") {
     return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
   }
 
@@ -206,7 +206,7 @@ export default function ArtistPage(): ReactElement {
                       key={catalog.id}
                       title={catalog.title}
                       description={`${catalog.type.valueOf()} - ${artist.artistName}`}
-                      thumbnail={catalog.thumbnail}
+                      thumbnail={displayPictureProfile(catalog.thumbnail)}
                       link={routesConfig.catalog.getParameter(catalog.id)}
                       defaultLiked={
                         user?.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined

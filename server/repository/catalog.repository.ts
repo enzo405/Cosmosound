@@ -1,6 +1,7 @@
 import { prisma } from "@/app";
 import DatabaseException from "@/errors/DatabaseException";
 import { Catalogs, Music, Prisma } from "@prisma/client";
+import playlistRepository from "./playlist.repository";
 
 const getCatalogById = async (id: string): Promise<Catalogs | null> => {
   try {
@@ -52,6 +53,16 @@ const searchCatalog = async (value: string): Promise<Catalogs[]> => {
 
 const deleteCatalog = async (id: string): Promise<void> => {
   try {
+    const catalog = await prisma.catalogs.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    catalog?.musics.forEach((music) => {
+      playlistRepository.deleteDenormalizedMusic(catalog.id, music.id);
+    });
+
     await prisma.catalogs.delete({
       where: {
         id: id,
@@ -87,6 +98,7 @@ const deleteMusic = async (catalog: Catalogs, idMusic: string): Promise<Catalogs
   const newMusics = catalog.musics.filter((m) => m.id !== idMusic);
 
   try {
+    playlistRepository.deleteDenormalizedMusic(catalog.id, idMusic);
     return await prisma.catalogs.update({
       where: {
         id: catalog.id,

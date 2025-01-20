@@ -1,52 +1,47 @@
-import { Playlist } from "models/Playlist";
-import data from "assets/json/playlists.json";
-import { Music } from "models/Music";
-import { UserDetails } from "models/User";
+import { Music, MusicWithCatalog } from "models/Music";
+import { apiClient } from "./axiosService";
+import { Playlist, PlaylistWithMusic } from "models/Playlist";
 
-const playlistsData = data as Playlist[];
-
-function getMyPlaylist(user: UserDetails): Playlist[] {
-  return playlistsData.filter((playlist) => user.likedPlaylists.find((id) => id == playlist.id));
-}
-
-function searchPlaylistByTitle(value: string): Playlist[] {
+async function searchPlaylistByTitle(value: string): Promise<Playlist[]> {
   if (value == "") {
     return [];
   }
 
-  const searchTerm = value.toLowerCase().trim();
-
-  const playlistsTitleMatch = playlistsData
-    .filter((playlist) => playlist.title.toLowerCase().includes(searchTerm))
-    .slice(0, 10);
-
-  return [...new Set(playlistsTitleMatch)];
+  return await apiClient
+    .get(`/api/playlists?search=${value.toLowerCase().trim()}`)
+    .then((res) => res.data);
 }
 
-function getPlaylistById(id?: string): Playlist | undefined {
+async function getPlaylistById(id?: string): Promise<PlaylistWithMusic | undefined> {
   if (id == undefined) return undefined;
 
-  return playlistsData.find((playlist) => playlist.id == id);
+  return await apiClient.get(`/api/playlists/${id}`).then((res) => res.data);
 }
 
-function deletePlaylist(playlist: Playlist): void {
-  console.log("playlist", playlist);
+async function deletePlaylist(playlist: Playlist): Promise<void> {
+  return await apiClient.delete(`/api/playlists/${playlist.id}`);
 }
 
-function deleteMusic(playlist: Playlist, music: Music) {
-  console.log("playlist, music", playlist, music);
+async function deleteMusic(playlist: Playlist, music: Music): Promise<Playlist> {
+  return await apiClient
+    .delete(`/api/playlists/${playlist.id}/musics/${music.id}`)
+    .then((res) => res.data);
 }
 
-function addMusic(playlist: Playlist, music: Music) {
-  console.log("playlist, music", playlist, music);
+async function addMusic(playlist: Playlist, music: MusicWithCatalog): Promise<Playlist> {
+  return await apiClient
+    .post(`/api/playlists/${playlist.id}/musics`, {
+      idMusic: music.id,
+      idCatalog: music.catalog.id,
+    })
+    .then((res) => res.data);
 }
 
-function createPlaylist(title: string): void {
-  console.log("playlist create ", title);
+async function createPlaylist(title: string): Promise<Playlist> {
+  return await apiClient.post(`/api/playlists`, { title }).then((res) => res.data);
 }
 
 const PlaylistService = {
-  getMyPlaylist,
   searchPlaylistByTitle,
   getPlaylistById,
   deletePlaylist,

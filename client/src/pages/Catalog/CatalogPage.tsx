@@ -15,6 +15,7 @@ import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
 import { DetailedCatalog } from "models/Catalog";
+import { displayPictureProfile } from "utils/user";
 
 interface CatalogPageProps {}
 
@@ -80,9 +81,13 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
 
   return (
     <PageLayout
-      thumbnail={catalog.thumbnail}
+      thumbnail={displayPictureProfile(catalog.thumbnail)}
       settingsComponent={
-        <CatalogSettings catalog={catalog} onCloseSetting={() => setDisplaySettings(false)} />
+        <CatalogSettings
+          catalog={catalog}
+          onCloseSetting={() => setDisplaySettings(false)}
+          owner={catalog.owner}
+        />
       }
       title={catalog.title}
       subtitle={

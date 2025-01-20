@@ -11,6 +11,7 @@ import { Playlist } from "models/Playlist";
 import UserService from "services/userService";
 import { enqueueSnackbar } from "notistack";
 import { useUser } from "hooks/useUser";
+import { displayPictureProfile } from "utils/user";
 
 interface GenreContentProps {
   content: DetailedCatalog[] | MusicDetails[] | Playlist[] | Artist[];
@@ -95,7 +96,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
               title={catalog.title}
               description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
               link={`/catalog/${catalog.id}`}
-              thumbnail={catalog.thumbnail}
+              thumbnail={displayPictureProfile(catalog.thumbnail)}
               defaultLiked={user?.likedCatalogs.find((id) => id == catalog.id) !== undefined}
               onLike={(like) => onLikeCatalog(like, catalog)}
             />

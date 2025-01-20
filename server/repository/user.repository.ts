@@ -33,6 +33,11 @@ const getUserById = async (id: string): Promise<Users | null> => {
       },
       include: {
         catalogs: true,
+        playlists: {
+          include: {
+            owner: true,
+          },
+        },
       },
     });
   } catch (err) {
@@ -84,7 +89,7 @@ const deleteRefreshToken = async (userId: string) => {
   }
 };
 
-const getFavourites = async (userId: string): Promise<Users[] | null> => {
+const getFavourites = async (userId: string): Promise<Users[]> => {
   try {
     const user = await prisma.users.findUnique({
       where: {
@@ -105,8 +110,7 @@ const getFavourites = async (userId: string): Promise<Users[] | null> => {
       },
     });
   } catch (err) {
-    console.error(err);
-    return null;
+    throw new DatabaseException("Error fetching liked artists", err as Error);
   }
 };
 

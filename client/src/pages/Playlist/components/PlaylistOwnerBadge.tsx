@@ -3,10 +3,14 @@ import { ReactElement } from "react";
 import { displayPictureProfile } from "utils/user";
 
 interface PlaylistOwnerBadgeProps {
-  owner: User;
+  owner: User | undefined;
 }
 
 export default function PlaylistOwnerBadge({ owner }: PlaylistOwnerBadgeProps): ReactElement {
+  if (owner == undefined) {
+    return <span>Unknown</span>;
+  }
+
   return (
     <span className={`cursor-pointer flex flex-row gap-1`}>
       <img

@@ -10,7 +10,8 @@ datasource db {
 model Playlists {
   id                String            @id @default(auto()) @map("_id") @db.ObjectId
   title             String
-  owner             String            @db.ObjectId
+  ownerId           String            @db.ObjectId
+  owner             Users             @relation(fields: [ownerId], references: [id])
   playlistThumbnail String
   musics            MusicInPlaylist[]
   createdAt         DateTime          @default(now()) @db.Timestamp()
@@ -18,8 +19,14 @@ model Playlists {
 }
 
 type MusicInPlaylist {
-  musicId   String @db.ObjectId
-  catalogId String @db.ObjectId
+  id        String   @db.ObjectId
+  idCatalog String   @db.ObjectId
+  idArtist  String   @db.ObjectId
+  title     String
+  createdAt DateTime @default(now()) @db.Timestamp()
+  url       String
+  duration  Int
+  genres    String[]
 }
 
 model Catalogs {
@@ -70,6 +77,7 @@ model Users {
   updatedAt      DateTime      @updatedAt @db.Timestamp()
   refreshToken   String?
   catalogs       Catalogs[]
+  playlists      Playlists[]
 }
 
 enum UserRole {

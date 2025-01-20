@@ -1,7 +1,7 @@
 import { Music, MusicDetails } from "models/Music";
 import data from "assets/json/musics.json";
 import { apiClient } from "./axiosService";
-import { Catalog, DetailedCatalog } from "models/Catalog";
+import { DetailedCatalog } from "models/Catalog";
 
 const musicData: MusicDetails[] = data as MusicDetails[];
 

@@ -12,6 +12,7 @@ import { AxiosError } from "axios";
 import SettingsOptions from "components/settings/SettingsOptions";
 import { routesConfig } from "config/app-config";
 import { getDirtyFieldsValue } from "utils/form";
+import PlaylistLink from "./components/PlaylistLink";
 
 export interface AccountFormData {
   username: string;
@@ -347,7 +348,7 @@ function AccountPage(): ReactElement {
             <div className="max-w-md mx-auto p-2 sm:p-4 bg-gray-100 rounded-lg shadow-md">
               <div className="flex flex-col sm:flex-row items-center mb-4">
                 <img
-                  src={user?.pictureProfile}
+                  src={displayPictureProfile(user?.pictureProfile)}
                   alt={`${user?.name}'s profile`}
                   className="w-16 h-16 rounded-full border-2 border-blue-500"
                 />
@@ -382,6 +383,20 @@ function AccountPage(): ReactElement {
           )}
         </Container>
       </div>
+      {user?.playlists && user.playlists?.length > 0 && (
+        <div className="flex flex-col items-center sm:items-start mt-4 w-full">
+          <span className="items-center gap-2 text-4xl font-bs font-bold text-dark-custom ml-2">
+            Your Playlists
+          </span>
+          <Container className="h-full w-5/6 sm:w-min sm:min-w-96 p-6 md:p-8">
+            <div className="w-full flex flex-col gap-4">
+              {user?.playlists.map((playlist) => (
+                <PlaylistLink key={playlist.id} playlist={playlist} />
+              ))}
+            </div>
+          </Container>
+        </div>
+      )}
     </div>
   );
 }

@@ -20,6 +20,7 @@ import { routesConfig } from "config/app-config";
 import UserService from "services/userService";
 import { enqueueSnackbar } from "notistack";
 import { useUser } from "hooks/useUser";
+import { displayPictureProfile } from "utils/user";
 
 export enum Filters {
   ALL = "All",
@@ -48,12 +49,14 @@ function ExplorePage(): ReactElement {
     const fetchData = async () => {
       try {
         // TODO do better
-        const [fetchedMusics, , fetchedPlaylists, _, fetchedGenres] = await Promise.all([
+        const [fetchedMusics, , , , fetchedGenres] = await Promise.all([
           MusicService.searchMusicByTitle(search),
           ArtistService.searchArtistByName(search).then((data) => {
             setArtists(data);
           }),
-          PlaylistService.searchPlaylistByTitle(search),
+          PlaylistService.searchPlaylistByTitle(search).then((data) => {
+            setPlaylists(data);
+          }),
           CatalogService.searchCatalogByTitle(search).then((data) => {
             setAlbums(data.filter((c) => c.type === TypeCatalog.ALBUM));
             setEps(data.filter((c) => c.type === TypeCatalog.EP));
@@ -63,7 +66,6 @@ function ExplorePage(): ReactElement {
         ]);
 
         setMusics(fetchedMusics);
-        setPlaylists(fetchedPlaylists);
         setGenres(fetchedGenres.slice(0, 20));
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -173,7 +175,7 @@ function ExplorePage(): ReactElement {
                       title={catalog.title}
                       description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
                       link={`/catalog/${catalog.id}`}
-                      thumbnail={catalog.thumbnail}
+                      thumbnail={displayPictureProfile(catalog.thumbnail)}
                       defaultLiked={
                         user?.likedCatalogs.find((id) => id == catalog.id) !== undefined
                       }
@@ -196,7 +198,7 @@ function ExplorePage(): ReactElement {
                     title={catalog.title}
                     description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
                     link={`/catalog/${catalog.id}`}
-                    thumbnail={catalog.thumbnail}
+                    thumbnail={displayPictureProfile(catalog.thumbnail)}
                     defaultLiked={user?.likedCatalogs.find((id) => id == catalog.id) !== undefined}
                     onLike={(like) => onLikeCatalog(like, catalog)}
                   />
@@ -215,7 +217,7 @@ function ExplorePage(): ReactElement {
                     <Card
                       key={playlist.id}
                       title={playlist.title}
-                      description={`${playlist.title} - ${playlist.owner.name}`}
+                      description={`${playlist.title} - ${playlist?.owner?.name}`}
                       link={`/playlist/${playlist.id}`}
                       thumbnail={playlist.playlistThumbnail}
                       defaultLiked={

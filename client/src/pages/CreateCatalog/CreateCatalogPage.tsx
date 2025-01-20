@@ -46,7 +46,7 @@ export default function CreateCatalogPage(): ReactElement {
   } = useForm<CreateCatalogFormData>({
     defaultValues: {
       titleCatalog: "",
-      thumbnailCatalog: displayPictureProfile(user.pictureProfile),
+      thumbnailCatalog: user.pictureProfile,
       musics: [],
     },
   });
