@@ -21,9 +21,7 @@ const corsOptions = {
   credentials: true,
 };
 
-export const prisma = new PrismaClient({
-  log: ["query"],
-});
+export const prisma = new PrismaClient();
 
 const app = express();
 app.use(express.json());

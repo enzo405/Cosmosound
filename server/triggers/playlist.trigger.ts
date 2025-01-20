@@ -67,15 +67,11 @@ const createPlaylist = async (req: UserRequest, res: Response) => {
 const AddMusic = async (req: UserRequest, res: Response) => {
   const { id } = req.params;
   const { idMusic, idCatalog } = req.body;
-  if (!id || !idMusic) {
-    throw new BadRequestException("Missing ids in the params");
+  if (!id || !idMusic || !idCatalog) {
+    throw new BadRequestException("Missing ids in the params or body");
   }
 
-  const musicToAdd: Prisma.MusicInPlaylistCreateInput = {
-    catalogId: idCatalog,
-    musicId: idMusic,
-  };
-  const playlist = await playlistService.AddMusic(req.userId!, id, musicToAdd);
+  const playlist = await playlistService.AddMusic(req.userId!, id, idCatalog, idMusic);
 
   res.status(200).json(playlist);
 };

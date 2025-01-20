@@ -1,17 +1,19 @@
 import { prisma } from "@/app";
 import DatabaseException from "@/errors/DatabaseException";
-import { Catalogs, Music, Playlists, Prisma } from "@prisma/client";
+import NotFoundException from "@/errors/NotFoundException";
+import { Playlists, Prisma } from "@prisma/client";
+import { cpSync } from "fs";
 
 const getPlaylistById = async (id: string): Promise<Playlists | null> => {
   try {
-    return await prisma.playlists.findUnique({
-      where: {
-        id,
-      },
+    const playlist = await prisma.playlists.findUnique({
+      where: { id: id },
       include: {
         owner: true,
       },
     });
+
+    return playlist ? playlist : null;
   } catch (err) {
     throw new DatabaseException(`There was an error while fetching playlist with id ${id}`, err);
   }
@@ -25,6 +27,9 @@ const searchPlaylist = async (name: string): Promise<Playlists[]> => {
           { title: { contains: name, mode: "insensitive" } },
           { owner: { artistName: { contains: name, mode: "insensitive" } } },
         ],
+      },
+      include: {
+        owner: true,
       },
     });
   } catch (err) {
@@ -51,6 +56,22 @@ const AddMusic = async (
   musicId: string
 ): Promise<Playlists> => {
   try {
+    const catalog = await prisma.catalogs.findUnique({
+      where: {
+        id: catalogId,
+      },
+    });
+
+    if (!catalog) {
+      throw new NotFoundException("Catalog not found");
+    }
+
+    const music = catalog.musics.find((music) => music.id === musicId);
+
+    if (!music) {
+      throw new NotFoundException("Music not found in catalog");
+    }
+
     return await prisma.playlists.update({
       where: {
         id: playlistId,
@@ -58,8 +79,13 @@ const AddMusic = async (
       data: {
         musics: {
           push: {
-            musicId: musicId,
-            catalogId: catalogId,
+            duration: music.duration,
+            id: music.id,
+            title: music.title,
+            url: music.url,
+            idCatalog: catalogId,
+            createdAt: music.createdAt,
+            genres: music.genres,
           },
         },
       },
@@ -88,7 +114,7 @@ const deletePlaylist = async (id: string): Promise<void> => {
 };
 
 const deleteMusic = async (playlist: Playlists, musicId: string): Promise<Playlists> => {
-  const newSetMusics = playlist.musics.filter((music) => music.musicId !== musicId);
+  const newSetMusics = playlist.musics.filter((music) => music.id !== musicId);
 
   try {
     return await prisma.playlists.update({

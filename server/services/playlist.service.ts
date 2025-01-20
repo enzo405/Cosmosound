@@ -2,6 +2,7 @@ import { Playlists, Prisma } from "@prisma/client";
 import playlistRepository from "@/repository/playlist.repository";
 import NotFoundException from "@/errors/NotFoundException";
 import ForbiddenException from "@/errors/ForbiddenException";
+import catalogRepository from "@/repository/catalog.repository";
 
 const getPlaylistById = async (id: string): Promise<Playlists | null> => {
   return await playlistRepository.getPlaylistById(id);
@@ -18,7 +19,8 @@ const createPlaylist = async (data: Prisma.PlaylistsCreateInput): Promise<Playli
 const AddMusic = async (
   userId: string,
   playlidId: string,
-  music: Prisma.MusicInPlaylistCreateInput
+  idCatalog: string,
+  idMusic: string
 ): Promise<Playlists> => {
   const playlist = await playlistRepository.getPlaylistById(playlidId);
 
@@ -30,7 +32,7 @@ const AddMusic = async (
     throw new ForbiddenException("You are not allowed to add music to a playlist you don't own");
   }
 
-  return await playlistRepository.AddMusic(playlist.id, music.catalogId, music.musicId);
+  return await playlistRepository.AddMusic(playlist.id, idCatalog, idMusic);
 };
 
 const deletePlaylist = async (idPlaylist: string, userId: string): Promise<void> => {

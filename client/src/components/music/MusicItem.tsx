@@ -13,6 +13,7 @@ import { Catalog } from "models/Catalog";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
+import { displayPictureProfile } from "utils/user";
 
 interface MusicItemProps {
   music: Music;
@@ -115,7 +116,7 @@ export default function MusicItem({
               {showCatalogThumbnail ? (
                 <img
                   className="rounded-xl object-cover h-full"
-                  src={catalog.thumbnail}
+                  src={displayPictureProfile(catalog.thumbnail)}
                   alt={`${music.title} ${catalog.title} ${artist.artistName}`}
                 />
               ) : (

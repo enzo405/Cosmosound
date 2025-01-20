@@ -3,6 +3,7 @@ import { Icon } from "components/icons/Icon";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { useUser } from "hooks/useUser";
 import { Playlist } from "models/Playlist";
+import { enqueueSnackbar } from "notistack";
 import { ReactElement, useMemo, useRef, useState } from "react";
 import PlaylistService from "services/playlistService";
 
@@ -15,7 +16,7 @@ export default function SelectPlaylist({
   handleAddToPlaylist,
   closeSettings,
 }: SelectPlaylistProps): ReactElement {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const { openDialog } = useConfirmDialog();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -41,19 +42,23 @@ export default function SelectPlaylist({
             <span>No songs yet.</span>
           </>
         ),
-        onConfirm: () => PlaylistService.createPlaylist(searchTerm),
+        onConfirm: async () =>
+          await PlaylistService.createPlaylist(searchTerm).then((newPlaylist) => {
+            setUser({
+              ...user!,
+              playlists: [...(user?.playlists ?? []), newPlaylist],
+            });
+            enqueueSnackbar(`Playlist ${searchTerm} created successfully`, { variant: "success" });
+          }),
       });
     }
   };
 
-  const playlists = useMemo(() => {
-    if (!user) return [];
-    return PlaylistService.getMyPlaylist(user);
-  }, []);
-
-  const filteredPlaylists = playlists.filter((playlist) =>
-    playlist.title.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const filteredPlaylists = useMemo(() => {
+    return user?.playlists?.filter((playlist) =>
+      playlist.title.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+  }, [user]);
 
   return (
     <div className="absolute p-1 min-w-52 gap-1 flex flex-col bg-white rounded-lg right-full -top-0 mr-1">
@@ -88,7 +93,7 @@ export default function SelectPlaylist({
           <span className="truncate">Create Playlist</span>
         </span>
         <Divider className="mb-1" />
-        {filteredPlaylists.map((p) => (
+        {filteredPlaylists?.map((p) => (
           <span
             key={p.id}
             onClick={() => handleClickPlaylist(p)}
@@ -101,7 +106,7 @@ export default function SelectPlaylist({
             <span className="truncate">{p.title}</span>
           </span>
         ))}
-        {filteredPlaylists.length === 0 && (
+        {filteredPlaylists && filteredPlaylists.length === 0 && (
           <span className="text-gray-500 p-1 text-sm">No playlists found</span>
         )}
       </div>

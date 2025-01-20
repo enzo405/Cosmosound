@@ -33,7 +33,11 @@ const getUserById = async (id: string): Promise<Users | null> => {
       },
       include: {
         catalogs: true,
-        playlists: true,
+        playlists: {
+          include: {
+            owner: true,
+          },
+        },
       },
     });
   } catch (err) {

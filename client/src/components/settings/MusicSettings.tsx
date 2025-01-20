@@ -67,11 +67,18 @@ export default function MusicSettings({
     setDisplayPlaylistSelect(!displayPlaylistSelect);
   };
 
-  const handleAddToPlaylist = (playlist: Playlist) => {
-    enqueueSnackbar(`Added to ${playlist.title}`, {
-      variant: "success",
-    });
-    PlaylistService.addMusic(playlist, music);
+  const handleAddToPlaylist = async (playlist: Playlist) => {
+    await PlaylistService.addMusic(playlist, music)
+      .then(() => {
+        enqueueSnackbar(`Added to ${playlist.title}`, {
+          variant: "success",
+        });
+      })
+      .catch(() => {
+        enqueueSnackbar(`Failed to add to ${playlist.title}`, {
+          variant: "error",
+        });
+      });
   };
 
   const handleDeleteMusicFromPlaylist = () => {

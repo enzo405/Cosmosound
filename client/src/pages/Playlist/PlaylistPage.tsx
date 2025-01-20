@@ -4,7 +4,7 @@ import { useMusic } from "hooks/useMusic";
 import { Music, MusicDetails } from "models/Music";
 import { enqueueSnackbar } from "notistack";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PlaylistService from "services/playlistService";
 import { formatDurationWithLabel, formatTime } from "utils/date";
@@ -15,26 +15,44 @@ import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { useUser } from "hooks/useUser";
+import { Playlist } from "models/Playlist";
 
 interface PlaylistPageProps {}
 
 export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   const { idPlaylist } = useParams();
-  const playlist = PlaylistService.getPlaylistById(idPlaylist);
-
-  if (playlist == undefined) {
-    return <NotFoundErrorPage message="PLAYLIST NOT FOUND" />;
-  }
-  const musicDetails: MusicDetails = playlist.musics[0];
-
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const { openDialog } = useConfirmDialog();
   const { user } = useUser();
 
+  const [playlist, setPlaylist] = useState<Playlist | undefined>();
   const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(
-    user?.likedPlaylists.find((id) => id == playlist.id) !== undefined,
+    user?.likedPlaylists.find((id) => id == playlist?.id) !== undefined,
   );
   const [displaySettings, setDisplaySettings] = useState(false);
+
+  useEffect(() => {
+    const fetchPlaylist = async () => {
+      await PlaylistService.getPlaylistById(idPlaylist)
+        .then((data) => {
+          setPlaylist(data);
+        })
+        .catch((err) => {
+          enqueueSnackbar({
+            message: err.message,
+            variant: "error",
+          });
+        });
+    };
+
+    fetchPlaylist();
+  }, [idPlaylist]);
+
+  if (playlist == undefined) {
+    return <NotFoundErrorPage message="PLAYLIST NOT FOUND" />;
+  }
+
+  const musicDetails: MusicDetails = playlist.musics[0];
 
   const handlePlaying = () => {
     if (!isPlayingSongCurrentPage && playlist != undefined) {

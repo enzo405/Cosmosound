@@ -19,8 +19,14 @@ model Playlists {
 }
 
 type MusicInPlaylist {
-  musicId   String @db.ObjectId
-  catalogId String @db.ObjectId
+  id        String   @db.ObjectId
+  idCatalog String   @db.ObjectId
+  idArtist  String   @db.ObjectId
+  title     String
+  createdAt DateTime @default(now()) @db.Timestamp()
+  url       String
+  duration  Int
+  genres    String[]
 }
 
 model Catalogs {

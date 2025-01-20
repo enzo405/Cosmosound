@@ -9,10 +9,9 @@ import { Genre } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { DetailedArtistInfo } from "models/User";
 import { enqueueSnackbar } from "notistack";
-import { useEffect, useState, type ReactElement } from "react";
+import { useEffect, useMemo, useState, type ReactElement } from "react";
 import ArtistService from "services/artistService";
 import GenresService from "services/genresService";
-import PlaylistService from "services/playlistService";
 import UserService from "services/userService";
 
 function LibraryPage(): ReactElement {
@@ -64,7 +63,9 @@ function LibraryPage(): ReactElement {
     }
   };
 
-  const myPlaylists = user ? PlaylistService.getMyPlaylist(user) : [];
+  const myPlaylists = useMemo(() => {
+    return user?.playlists ?? []; // TODO get user favourite playlists instead of user's playlists
+  }, [user]);
   const myGenres = user ? GenresService.getMyFavouriteGenres(user) : [];
 
   return (
