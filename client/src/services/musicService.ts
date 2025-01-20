@@ -5,31 +5,18 @@ import { DetailedCatalog } from "models/Catalog";
 
 const musicData: MusicDetails[] = data as MusicDetails[];
 
-function getAllMusic(): MusicDetails[] {
-  return musicData;
-}
-
 function getMusicById(id: string): MusicDetails | undefined {
   return musicData.find((music) => music.id == id);
 }
 
-function searchMusicByTitle(value: string): MusicDetails[] {
+async function searchMusicByTitle(value: string): Promise<MusicDetails[]> {
   if (value == "") {
     return [];
   }
 
-  const searchTerm = value.toLowerCase().trim();
-
-  const musicNameMatch = musicData
-    .filter((music) => music.title.toLowerCase().includes(searchTerm))
-    .slice(0, 7);
-
-  const musicArtistMatch = musicData
-    .filter((music) => music.artist.artistName.toLowerCase().includes(searchTerm))
-    .slice(0, 3);
-
-  const result = [...musicNameMatch, ...musicArtistMatch];
-  return [...new Set(result)];
+  return await apiClient
+    .get(`/api/musics?search=${value.toLowerCase().trim()}`)
+    .then((res) => res.data);
 }
 
 async function deleteMusic(idCatalog: string, music: Music): Promise<DetailedCatalog> {
@@ -57,7 +44,6 @@ function getMusicHistory(): MusicDetails[] {
 }
 
 const MusicService = {
-  getAllMusic,
   getMusicById,
   getMusicHistory,
   searchMusicByTitle,

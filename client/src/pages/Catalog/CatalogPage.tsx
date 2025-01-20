@@ -16,6 +16,7 @@ import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
 import { DetailedCatalog } from "models/Catalog";
 import { displayPictureProfile } from "utils/user";
+import Loading from "components/Loading";
 
 interface CatalogPageProps {}
 
@@ -24,6 +25,7 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const { user } = useUser();
   const [catalog, setCatalog] = useState<DetailedCatalog | undefined>();
+  const [loading, setLoading] = useState(true);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [isCatalogLiked, setIsCatalogLiked] = useState<boolean>(
     user?.likedCatalogs.find((id) => id == catalog?.id) !== undefined,
@@ -45,11 +47,16 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
             message: err.message,
             variant: "error",
           });
-        });
+        })
+        .finally(() => setLoading(false));
     };
 
     fetchCatalog();
   }, [idCatalog]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (catalog == undefined) {
     return <NotFoundErrorPage message="CATALOG NOT FOUND" />;

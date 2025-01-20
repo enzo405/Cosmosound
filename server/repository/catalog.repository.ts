@@ -2,6 +2,7 @@ import { prisma } from "@/app";
 import DatabaseException from "@/errors/DatabaseException";
 import { Catalogs, Music, Prisma } from "@prisma/client";
 import playlistRepository from "./playlist.repository";
+import { MusicDetails } from "@/models/MusicDetails";
 
 const getCatalogById = async (id: string): Promise<Catalogs | null> => {
   try {
@@ -115,6 +116,42 @@ const deleteMusic = async (catalog: Catalogs, idMusic: string): Promise<Catalogs
   }
 };
 
+const searchMusic = async (value: string): Promise<MusicDetails[]> => {
+  try {
+    const catalogs = await prisma.catalogs.findMany({
+      where: {
+        OR: [{ musics: { some: { title: { contains: value, mode: "insensitive" } } } }],
+      },
+      take: 10,
+      include: {
+        owner: true,
+      },
+    });
+
+    const musics: MusicDetails[] = [];
+    catalogs.forEach((catalog) => {
+      catalog.musics.forEach((music) => {
+        if (music.title.toLowerCase().includes(value.toLowerCase())) {
+          musics.push({
+            id: music.id,
+            title: music.title,
+            url: music.url,
+            genres: music.genres,
+            duration: music.duration,
+            createdAt: music.createdAt,
+            catalog: catalog,
+            artist: catalog.owner,
+          });
+        }
+      });
+    });
+
+    return musics;
+  } catch (e) {
+    throw new DatabaseException("Error searching music", e);
+  }
+};
+
 export default {
   getCatalogById,
   createCatalog,
@@ -122,4 +159,5 @@ export default {
   getMusicById,
   deleteMusic,
   searchCatalog,
+  searchMusic,
 };

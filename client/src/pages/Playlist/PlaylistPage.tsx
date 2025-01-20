@@ -16,6 +16,7 @@ import HeartIcon from "components/icons/HeartIcon";
 import { useConfirmDialog } from "hooks/useConfirm";
 import { useUser } from "hooks/useUser";
 import { PlaylistWithMusic } from "models/Playlist";
+import Loading from "components/Loading";
 
 interface PlaylistPageProps {}
 
@@ -26,6 +27,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   const { user } = useUser();
 
   const [playlist, setPlaylist] = useState<PlaylistWithMusic | undefined>();
+  const [loading, setLoading] = useState<boolean>(true);
   const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(
     user?.likedPlaylists.find((id) => id == playlist?.id) !== undefined,
   );
@@ -42,11 +44,16 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
             message: err.message,
             variant: "error",
           });
-        });
+        })
+        .finally(() => setLoading(false));
     };
 
     fetchPlaylist();
   }, [idPlaylist]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (playlist == undefined) {
     return <NotFoundErrorPage message="PLAYLIST NOT FOUND" />;

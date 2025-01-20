@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get("/catalogs/:id", ...wrapRoute([auth, trigger.getCatalogById]));
 router.get("/catalogs", ...wrapRoute([auth, trigger.searchCatalog]));
+router.get("/musics", ...wrapRoute([auth, trigger.searchMusic]));
 router.post("/catalogs", ...wrapRoute([auth, multerCatalogMiddleware, trigger.createCatalog]));
 router.delete("/catalogs/:id", ...wrapRoute([auth, trigger.deleteCatalog]));
 router.delete("/catalogs/:id/music/:idMusic", ...wrapRoute([auth, trigger.deleteMusic]));
