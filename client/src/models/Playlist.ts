@@ -9,17 +9,27 @@ export interface Playlist {
   ownerId: string;
   owner?: User; // User that created the playlist
   playlistThumbnail: string;
-  musics: PlaylistMusic[];
+  musics: {
+    id: string;
+    idCatalog: string;
+    idArtist: string;
+    title: string;
+    createdAt: string;
+    duration: number;
+    genres: Genre[];
+  }[];
 }
 
-export interface PlaylistMusic {
-  id: string;
-  idCatalog: string;
-  idArtist: string;
-  title: string;
-  createdAt: string;
-  duration: number;
-  artist: Artist;
-  catalog: Catalog;
-  genres: Genre[];
+export interface PlaylistWithMusic extends Playlist {
+  musics: {
+    id: string;
+    idCatalog: string;
+    idArtist: string;
+    title: string;
+    createdAt: string;
+    duration: number;
+    artist: Artist;
+    catalog: Catalog;
+    genres: Genre[];
+  }[];
 }

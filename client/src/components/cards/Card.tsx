@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 interface CardProps {
   thumbnail: string;
   title: string;
-  description: string;
+  description?: string;
   link: string;
   defaultLiked: boolean;
   className?: string;
@@ -54,7 +54,7 @@ export default function Card({
       </div>
       <div className="h-2/6 flex flex-col cursor-pointer w-full px-1">
         <div className="text-sm font-medium truncate">{title}</div>
-        <div className="text-xs text-gray-500 truncate">{description}</div>
+        {description && <div className="text-xs text-gray-500 truncate">{description}</div>}
       </div>
       {displayLikeBtn && (
         <div id="likeBtn" className="z-10 absolute bottom-1 right-1">

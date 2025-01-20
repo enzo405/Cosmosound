@@ -177,7 +177,7 @@ export default function ArtistPanelPage(): ReactElement {
           </span>
         )}
       </span>
-      <div className="lg:h-[35rem] w-full md:w-min flex flex-col-reverse lg:flex-row lg:items-stretch gap-2">
+      <div className="lg:h-[35rem] w-full md:w-fit flex flex-col-reverse lg:flex-row lg:items-stretch gap-2">
         {editProfile || user?.role !== "ARTISTS" ? (
           <Container className="w-full p-4 md:p-6 lg:p-8">
             <form
@@ -334,7 +334,7 @@ export default function ArtistPanelPage(): ReactElement {
           user && <ArtistInfoCard artist={user} />
         )}
         {user?.role === "ARTISTS" && (
-          <Container className="w-full items-start p-2 md:p-4 lg:pt-6">
+          <Container className="w-fit items-start p-2 md:p-4 lg:pt-6">
             <button
               className="flex flex-row items-center justify-center gap-1 pl-3 pr-4 py-1 text-tertio-orange border-tertio-orange border-2 rounded-xl font-medium hover:bg-orange-50"
               type="button"

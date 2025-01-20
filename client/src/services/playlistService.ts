@@ -1,6 +1,6 @@
 import { Music, MusicWithCatalog } from "models/Music";
 import { apiClient } from "./axiosService";
-import { Playlist } from "models/Playlist";
+import { Playlist, PlaylistWithMusic } from "models/Playlist";
 
 async function searchPlaylistByTitle(value: string): Promise<Playlist[]> {
   if (value == "") {
@@ -12,7 +12,7 @@ async function searchPlaylistByTitle(value: string): Promise<Playlist[]> {
     .then((res) => res.data);
 }
 
-async function getPlaylistById(id?: string): Promise<Playlist | undefined> {
+async function getPlaylistById(id?: string): Promise<PlaylistWithMusic | undefined> {
   if (id == undefined) return undefined;
 
   return await apiClient.get(`/api/playlists/${id}`).then((res) => res.data);

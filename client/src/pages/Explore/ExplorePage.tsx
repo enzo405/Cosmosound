@@ -217,7 +217,7 @@ function ExplorePage(): ReactElement {
                     <Card
                       key={playlist.id}
                       title={playlist.title}
-                      description={`${playlist.title} - ${playlist.owner.name}`}
+                      description={`${playlist.title} - ${playlist?.owner?.name}`}
                       link={`/playlist/${playlist.id}`}
                       thumbnail={playlist.playlistThumbnail}
                       defaultLiked={

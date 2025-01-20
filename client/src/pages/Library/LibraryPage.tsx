@@ -80,7 +80,7 @@ function LibraryPage(): ReactElement {
           return (
             <Card
               key={playlist.id}
-              description={playlist.owner.name}
+              description={playlist?.owner?.name}
               thumbnail={playlist.playlistThumbnail}
               title={playlist.title}
               link={routesConfig.playlist.getParameter(playlist.id)}
