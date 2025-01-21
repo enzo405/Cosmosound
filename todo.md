@@ -11,7 +11,6 @@
 - Backend => Music Listening history
 
 3. A bunch of random stuff xD
-- Frontend => Artist card & toggle edition like Account page
 - Frontend => Loading icon and check server response if alive every 5sec
 - Frontend => Add assets for explore page empty, 500 page & error page
 - Frontend => About-us page : Copy of the Landing page without the register button.
