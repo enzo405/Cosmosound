@@ -4,7 +4,7 @@ import { IconName } from "constants/iconName";
 
 interface PageLayoutProps {
   title: string;
-  subtitle: ReactNode;
+  subtitle?: ReactNode;
   headerActions: ReactNode;
   thumbnail?: string;
   actionIconName?: IconName;
@@ -38,11 +38,11 @@ export default function PageLayout({
         <div
           className={`w-full ${thumbnail ? "sm:w-4/5 flex-col gap-2" : "flex-row gap-6 items-center"} flex text-dark-custom`}>
           <h1
-            className={`${thumbnail ? "lg:text-5xl md:text-3xl text-2xl" : "sm:text-6xl text-4xl"} font-bs font-semibold`}>
+            className={`${thumbnail ? "lg:text-5xl md:text-3xl text-2xl mr-9" : "sm:text-6xl text-4xl w-auto"} font-bs font-semibold whitespace-nowrap text-wrap break-everywhere`}>
             {title}
           </h1>
-          <span className="font-light">{subtitle}</span>
-          <span className="flex flex-row-reverse sm:flex-row gap-4 mt-2 md:mt-auto w-full justify-start">
+          {subtitle && <span className="font-light">{subtitle}</span>}
+          <span className="flex flex-row-reverse sm:flex-row gap-4 mt-2 md:mt-auto ml-auto w-auto justify-start">
             {headerActions}
           </span>
         </div>
@@ -57,7 +57,7 @@ export default function PageLayout({
         )}
         {displaySettings && settingsComponent}
       </div>
-      <div className="flex flex-col gap-3">{content}</div>
+      <div className="flex flex-col gap-3 whitespace-nowrap text-wrap break-words">{content}</div>
     </div>
   );
 }

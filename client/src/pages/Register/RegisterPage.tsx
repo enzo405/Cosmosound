@@ -4,7 +4,6 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import genresService from "services/genresService";
 import UserService from "services/userService";
-import { Genre } from "models/Music";
 import { AxiosError } from "axios";
 import Divider from "components/Divider";
 import { enqueueSnackbar } from "notistack";
@@ -25,7 +24,7 @@ function RegisterPage(): ReactElement {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [error, setError] = useState<string | null>(null);
-  const [displayedGenres, setDisplayedGenres] = useState<Genre[]>([]);
+  const [displayedGenres, setDisplayedGenres] = useState<string[]>([]);
   const [search, setSearch] = useState("");
   const [isLoading, setLoading] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -61,7 +60,7 @@ function RegisterPage(): ReactElement {
   }, [currentStep]);
 
   const filteredGenres = displayedGenres.filter((g) =>
-    g.name.toLowerCase().includes(search.toLowerCase()),
+    g.toLowerCase().includes(search.toLowerCase()),
   );
 
   const handleNextStep = async () => {
@@ -128,14 +127,14 @@ function RegisterPage(): ReactElement {
     }
   };
 
-  const handleClickGenreList = (genre: Genre) => {
-    if (genres.find((g) => g === genre.name)) {
-      const newGenres = genres.filter((name) => genre.name !== name);
+  const handleClickGenreList = (genre: string) => {
+    if (genres.find((g) => g === genre)) {
+      const newGenres = genres.filter((name) => genre !== name);
       setValue("genres", newGenres);
       return;
     }
     if (genres.length < 5) {
-      const newList = [...genres, genre.name];
+      const newList = [...genres, genre];
       setValue("genres", newList);
     }
   };
@@ -375,12 +374,12 @@ function RegisterPage(): ReactElement {
                   <ul className="border border-gray-300 rounded-md max-h-40 overflow-y-scroll">
                     {filteredGenres.map((g) => (
                       <li
-                        key={g.name}
+                        key={g}
                         onClick={() => handleClickGenreList(g)}
                         className={`p-2 hover:bg-gray-200 cursor-pointer ${
-                          genres.find((name) => name === g.name) ? "bg-gray-300 font-bold" : ""
+                          genres.find((name) => name === g) ? "bg-gray-300 font-bold" : ""
                         }`}>
-                        {g.name}
+                        {g}
                       </li>
                     ))}
                   </ul>

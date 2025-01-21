@@ -5,7 +5,6 @@ import Card from "components/cards/Card";
 import SmallCard from "components/cards/SmallCard";
 import { routesConfig } from "config/app-config";
 import { useUser } from "hooks/useUser";
-import { Genre } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { DetailedArtistInfo } from "models/User";
 import { enqueueSnackbar } from "notistack";
@@ -35,15 +34,15 @@ function LibraryPage(): ReactElement {
     fetchMyArtists();
   }, []);
 
-  const onLikeGenre = (like: boolean, genre: Genre) => {
+  const onLikeGenre = (like: boolean, genre: string) => {
     if (like) {
       UserService.removeLike(genre);
-      enqueueSnackbar(`${genre.name} removed from your favourite genres`, {
+      enqueueSnackbar(`${genre} removed from your favourite genres`, {
         variant: "success",
       });
     } else {
       UserService.like(genre);
-      enqueueSnackbar(`${genre.name} added to your favourite genres`, {
+      enqueueSnackbar(`${genre} added to your favourite genres`, {
         variant: "success",
       });
     }
@@ -94,10 +93,10 @@ function LibraryPage(): ReactElement {
         {myGenres.map((genre) => {
           return (
             <SmallCard
-              key={genre.name}
-              title={genre.name}
-              link={routesConfig.genres.getParameter(genre.name)}
-              defaultLiked={user?.likedGenres.find((id) => id == genre.name) != undefined}
+              key={genre}
+              title={genre}
+              link={routesConfig.genres.getParameter(genre)}
+              defaultLiked={user?.likedGenres.find((id) => id == genre) != undefined}
               onLike={(like) => onLikeGenre(like, genre)}
             />
           );

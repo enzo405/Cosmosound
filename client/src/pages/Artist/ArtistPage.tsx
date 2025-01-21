@@ -20,6 +20,7 @@ import { useUser } from "hooks/useUser";
 import { displayPictureProfile } from "utils/user";
 import MediaIcon from "components/icons/media/MediaIcon";
 import { DetailedArtistInfo } from "models/User";
+import Loading from "components/Loading";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -34,6 +35,7 @@ export default function ArtistPage(): ReactElement {
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
 
   const [displaySettings, setDisplaySettings] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [content, setContent] = useState<Catalog[] | Music[]>([]);
   const [activeTab, setActiveTab] = useState(ArtistTabs.MUSIC);
   const [artist, setArtist] = useState<DetailedArtistInfo | undefined>(undefined);
@@ -64,6 +66,7 @@ export default function ArtistPage(): ReactElement {
 
   useEffect(() => {
     const fetchArtist = async () => {
+      setLoading(true);
       await ArtistService.getArtistById(idArtist)
         .then((artist) => {
           setArtist(artist);
@@ -73,7 +76,8 @@ export default function ArtistPage(): ReactElement {
             message: err.message,
             variant: "error",
           });
-        });
+        })
+        .finally(() => setLoading(false));
     };
     fetchArtist();
   }, []);
@@ -84,6 +88,10 @@ export default function ArtistPage(): ReactElement {
       setActiveTab(ArtistTabs.MUSIC);
     }
   }, [artist]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (artist?.role !== "ARTISTS") {
     return <NotFoundErrorPage message="ARTIST NOT FOUND" />;

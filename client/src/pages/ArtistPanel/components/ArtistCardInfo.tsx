@@ -27,7 +27,7 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
   } = artist;
 
   return (
-    <Container className="w-full flex flex-col items-start p-4 lg:pt-6">
+    <Container className="w-full md:max-w-[50%] flex flex-col items-start p-4 lg:pt-6">
       <div className="flex flex-col lg:flex-row w-full gap-4">
         <div className="flex items-center w-full max-w-full space-x-4">
           <img
@@ -36,7 +36,7 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
             className="block mm-size-16 rounded-full object-cover"
           />
           <div className="w-full flex-1 min-w-8">
-            <span className="block w-full text-xl whitespace-nowrap font-bold text-nowrap">
+            <span className="block w-full text-xl font-bold text-nowrap truncate">
               <a
                 className="hover:underline text-dark-custom hover:text-primary-orange cursor-pointer"
                 onClick={() => navigate(routesConfig.artist.getParameter(id.toString()))}>
@@ -50,7 +50,7 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
                 </span>
               )}
             </span>
-            <p className="text-gray-600 text-sm truncate">{genre?.name || "Unknown Genre"}</p>
+            <p className="text-gray-600 text-sm truncate">{genre || "Unknown Genre"}</p>
           </div>
         </div>
       </div>

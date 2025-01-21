@@ -1,23 +1,19 @@
 # Must have:
 
-1. Genres
-- Backend => create Genres entity?
-- Denormalisation artist name dans catalog
-
-2. Like stuff
+1. Like stuff
 - Backend => Like music, like genre, like catalog, like playlist
 - Frontend => Add genres liked section in account
 - Frontend => Add Liked Catalog section in Library page
 - Frontend => Register tell user they can like genre after
 
-3. Listening
+2. Listening
 - Frontend & Backend & Stream => Listening to Music
 - Backend => Music Listening history
 
-4. User Preference
+3. User Preference
 - Backend => Suggestion algorithm
 
-5. A bunch of random stuff xD
+4. A bunch of random stuff xD
 - Frontend => Artist card & toggle edition like Account page
 - Frontend => Clickable genre in account cards
 - Frontend => Settings display options depending on the role of the user

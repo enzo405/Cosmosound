@@ -1,5 +1,5 @@
 import { Catalog } from "models/Catalog";
-import { Genre, Music } from "models/Music";
+import { Music } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { Artist, PartialArtist } from "models/User";
 import { AccountFormData } from "pages/Account/AccountPage";
@@ -64,11 +64,11 @@ async function logout() {
   return apiClient.post("/auth/logout");
 }
 
-function like(item: Artist | Genre | Playlist | Catalog | Music): void {
+function like(item: Artist | string | Playlist | Catalog | Music): void {
   console.log("like item", item);
 }
 
-function removeLike(item: Artist | Genre | Playlist | Catalog | Music): void {
+function removeLike(item: Artist | string | Playlist | Catalog | Music): void {
   console.log("removeLike item", item);
 }
 

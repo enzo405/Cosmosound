@@ -1,5 +1,4 @@
 import { Catalog, DetailedCatalog } from "./Catalog";
-import { Genre } from "./Music";
 import { Playlist } from "./Playlist";
 
 export interface User {
@@ -24,7 +23,7 @@ export interface UserDetails extends User {
 export interface Artist extends UserDetails {
   isVerified: boolean;
   socialMedia: SocialMediaLink[];
-  genre: Genre;
+  genre: string;
   artistName: string;
 }
 
@@ -48,7 +47,7 @@ export interface PartialArtist {
   likedPlaylists: string[];
   isVerified?: boolean;
   socialMedia?: SocialMediaLink[];
-  genre?: Genre;
+  genre?: string;
   artistName?: string;
   catalogs?: Catalog[];
   playlists?: Playlist[];

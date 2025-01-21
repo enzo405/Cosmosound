@@ -7,17 +7,16 @@ import { Artist } from "models/User";
 import { enqueueSnackbar } from "notistack";
 import CategoryTabs from "components/CategoryTabs";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
-import { ReactElement, useEffect, useMemo } from "react";
+import { ReactElement, useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import GenresService from "services/genresService";
+import GenresService, { IGenreContent } from "services/genresService";
 import GenreContent from "./components/GenreContent";
 import PageLayout from "components/PageLayout";
 import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
-
-interface GenresPageProps {}
+import Loading from "components/Loading";
 
 export enum GenreTabs {
   ARTISTS = "Artists",
@@ -28,13 +27,35 @@ export enum GenreTabs {
   PLAYLIST = "Playlists",
 }
 
-export default function GenresPage({}: GenresPageProps): ReactElement {
+export default function GenresPage(): ReactElement {
   const { nameGenre } = useParams();
   if (nameGenre == undefined) {
     return <NotFoundErrorPage message="GENRE NOT FOUND" />;
   }
 
-  const genreContent = useMemo(() => GenresService.getGenreContent(nameGenre), []);
+  const [genreContent, setGenreContent] = useState<IGenreContent>({
+    artists: [],
+    catalogs: [],
+    playlists: [],
+    musics: [],
+  });
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchGenreContent = async () => {
+      setLoading(true);
+      await GenresService.getGenreContent(nameGenre).then((genreContent) => {
+        setGenreContent(genreContent);
+        setLoading(false);
+      });
+    };
+
+    fetchGenreContent();
+  }, []);
+
+  useEffect(() => {
+    loadContent(activeTab);
+  }, [genreContent]);
 
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const { user } = useUser();
@@ -69,22 +90,18 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
 
   const handleClickHeart = () => {
     if (isGenreLiked) {
-      UserService.removeLike({ name: nameGenre });
+      UserService.removeLike(nameGenre);
       enqueueSnackbar(`${nameGenre} removed from your favourite genres`, {
         variant: "success",
       });
     } else {
-      UserService.like({ name: nameGenre });
+      UserService.like(nameGenre);
       enqueueSnackbar(`${nameGenre} added to your favourite genres`, {
         variant: "success",
       });
     }
     setIsGenreLiked(!isGenreLiked);
   };
-
-  useEffect(() => {
-    loadContent(activeTab);
-  }, []);
 
   const handleTabChange = (selectedTab: GenreTabs) => {
     loadContent(selectedTab);
@@ -117,6 +134,10 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
   const isPlayingSongCurrentPage =
     genreContent?.musics.find((m) => m.id == playingMusic.id) != undefined;
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <PageLayout
@@ -126,7 +147,6 @@ export default function GenresPage({}: GenresPageProps): ReactElement {
             <GenreContent content={content} activeTab={activeTab} />
           </>
         }
-        subtitle={<></>}
         title={nameGenre}
         headerActions={
           <>

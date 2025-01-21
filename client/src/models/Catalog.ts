@@ -16,6 +16,10 @@ export interface Catalog {
   type: TypeCatalog;
 }
 
+export interface CatalogWithOwner extends Catalog {
+  owner: Artist;
+}
+
 export interface DetailedCatalog extends Catalog {
   owner: Artist;
   musics: MusicDetails[] | Music[];

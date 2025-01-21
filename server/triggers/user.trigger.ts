@@ -52,7 +52,9 @@ const updateArtist = async (req: UserRequest, res: Response) => {
   const data: Prisma.UsersUpdateInput = {};
 
   if (artistName !== undefined) data.artistName = artistName;
-  if (genre !== undefined) data.genre = genre;
+  if (genre !== undefined && typeof genre === "string") {
+    data.genre = genre;
+  }
 
   const socialMediaLinks: Prisma.SocialMediaCreateInput[] = [];
   if (spotifyLink) socialMediaLinks.push({ media: "SPOTIFY", link: spotifyLink });

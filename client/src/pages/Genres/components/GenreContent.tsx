@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { GenreTabs } from "../GenresPage";
-import { Catalog, DetailedCatalog } from "models/Catalog";
+import { Catalog, CatalogWithOwner, DetailedCatalog } from "models/Catalog";
 import Card from "components/cards/Card";
 import ArtistCard from "components/cards/ArtistCard";
 import { Artist } from "models/User";
@@ -77,7 +77,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
               title={playlist.title}
               link={routesConfig.playlist.getParameter(playlist.id)}
               thumbnail={playlist.playlistThumbnail}
-              description={`${playlist.title} - ${playlist.owner.name}`}
+              description={`${playlist.title} - ${playlist?.owner?.name}`}
               defaultLiked={user?.likedPlaylists.find((id) => id == playlist.id) !== undefined}
               onLike={(like) => onLikePlaylist(like, playlist)}
             />
@@ -89,7 +89,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
       case GenreTabs.EP:
       case GenreTabs.SINGLE:
         return content.map((item) => {
-          const catalog = item as Catalog;
+          const catalog = item as CatalogWithOwner;
           return (
             <Card
               key={catalog.id}

@@ -1,6 +1,6 @@
 import { useSearch } from "hooks/useSearch";
 import { Catalog, DetailedCatalog, TypeCatalog } from "models/Catalog";
-import { Genre, MusicDetails } from "models/Music";
+import { MusicDetails } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { Artist } from "models/User";
 import { useEffect, useState, type ReactElement } from "react";
@@ -45,7 +45,7 @@ function ExplorePage(): ReactElement {
   const [albums, setAlbums] = useState<DetailedCatalog[]>([]);
   const [eps, setEps] = useState<DetailedCatalog[]>([]);
   const [singles, setSingles] = useState<DetailedCatalog[]>([]);
-  const [genres, setGenres] = useState<Genre[]>([]);
+  const [genres, setGenres] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,15 +80,15 @@ function ExplorePage(): ReactElement {
     fetchData();
   }, [debouncedValue]);
 
-  const onLikeGenre = (like: boolean, genre: Genre) => {
+  const onLikeGenre = (like: boolean, genre: string) => {
     if (like) {
       UserService.removeLike(genre);
-      enqueueSnackbar(`${genre.name} removed from your favourite genres`, {
+      enqueueSnackbar(`${genre} removed from your favourite genres`, {
         variant: "success",
       });
     } else {
       UserService.like(genre);
-      enqueueSnackbar(`${genre.name} added to your favourite genres`, {
+      enqueueSnackbar(`${genre} added to your favourite genres`, {
         variant: "success",
       });
     }
@@ -250,12 +250,12 @@ function ExplorePage(): ReactElement {
                     {genres.map((genre) => {
                       return (
                         <SmallCard
-                          key={genre.name}
-                          title={genre.name}
+                          key={genre}
+                          title={genre}
                           defaultLiked={
-                            user?.likedGenres.find((name) => name == genre.name) !== undefined
+                            user?.likedGenres.find((name) => name == genre) !== undefined
                           }
-                          link={routesConfig.genres.getParameter(genre.name)}
+                          link={routesConfig.genres.getParameter(genre)}
                           onLike={(like) => onLikeGenre(like, genre)}
                         />
                       );

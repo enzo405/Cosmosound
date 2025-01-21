@@ -72,7 +72,7 @@ model Users {
   isVerified     Boolean       @default(false)
   socialMedia    SocialMedia[]
   artistName     String?
-  genre          Genre?
+  genre          String?
   createdAt      DateTime      @default(now()) @db.Timestamp()
   updatedAt      DateTime      @updatedAt @db.Timestamp()
   refreshToken   String?
@@ -96,8 +96,4 @@ enum Media {
 type SocialMedia {
   media Media
   link  String?
-}
-
-type Genre {
-  name String
 }
