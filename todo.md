@@ -10,13 +10,8 @@
 - Frontend & Backend & Stream => Listening to Music
 - Backend => Music Listening history
 
-3. User Preference
-- Backend => Suggestion algorithm
-
-4. A bunch of random stuff xD
+3. A bunch of random stuff xD
 - Frontend => Artist card & toggle edition like Account page
-- Frontend => Clickable genre in account cards
-- Frontend => Settings display options depending on the role of the user
 - Frontend => Loading icon and check server response if alive every 5sec
 - Frontend => Add assets for explore page empty, 500 page & error page
 - Frontend => About-us page : Copy of the Landing page without the register button.
@@ -34,6 +29,7 @@
 - Artist page make top part sticky
 - <a> tag for links (accessibility) instead of onClick
 - Add expand/resize button on sidebar
+- Api client interceptor in axios client => get err message 
 
 # Bugs:
 - Upload picture can have more than 1 share link

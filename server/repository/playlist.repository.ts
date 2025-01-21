@@ -1,4 +1,5 @@
 import { prisma } from "@/app";
+import BadRequestException from "@/errors/BadRequestException";
 import DatabaseException from "@/errors/DatabaseException";
 import NotFoundException from "@/errors/NotFoundException";
 import { PlaylistDetails } from "@/models/PlaylistDetails";
@@ -6,7 +7,7 @@ import { Playlists, Prisma } from "@prisma/client";
 
 const getPlaylistById = async (
   id: string,
-  expand: boolean,
+  expand: boolean
 ): Promise<PlaylistDetails | Playlists | null> => {
   try {
     const playlist = await prisma.playlists.findUnique({
@@ -34,7 +35,7 @@ const getPlaylistById = async (
           artist,
           catalog,
         };
-      }),
+      })
     );
 
     return { ...playlist, musics: detailedMusic };
@@ -59,7 +60,7 @@ const searchPlaylist = async (name: string): Promise<Playlists[]> => {
   } catch (err) {
     throw new DatabaseException(
       `There was an error while searching for playlist with value ${name}`,
-      err,
+      err
     );
   }
 };
@@ -77,25 +78,31 @@ const createPlaylist = async (data: Prisma.PlaylistsCreateInput): Promise<Playli
 const AddMusic = async (
   playlistId: string,
   catalogId: string,
-  musicId: string,
+  musicId: string
 ): Promise<Playlists> => {
+  const playlistPromise = prisma.playlists.findUnique({ where: { id: playlistId } });
+  const catalog = await prisma.catalogs.findUnique({
+    where: {
+      id: catalogId,
+    },
+  });
+
+  if (!catalog) {
+    throw new NotFoundException("Catalog not found");
+  }
+
+  const music = catalog.musics.find((music) => music.id === musicId);
+
+  if (!music) {
+    throw new NotFoundException("Music not found in catalog");
+  }
+
+  const playlist = await playlistPromise;
+  if (playlist?.musics.find((music) => music.id === musicId)) {
+    throw new BadRequestException("Music already added to playlist");
+  }
+
   try {
-    const catalog = await prisma.catalogs.findUnique({
-      where: {
-        id: catalogId,
-      },
-    });
-
-    if (!catalog) {
-      throw new NotFoundException("Catalog not found");
-    }
-
-    const music = catalog.musics.find((music) => music.id === musicId);
-
-    if (!music) {
-      throw new NotFoundException("Music not found in catalog");
-    }
-
     return await prisma.playlists.update({
       where: {
         id: playlistId,

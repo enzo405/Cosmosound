@@ -23,8 +23,7 @@ function LibraryPage(): ReactElement {
         .then((artists) => {
           setMyArtists(artists);
         })
-        .catch((error) => {
-          console.error(error);
+        .catch(() => {
           enqueueSnackbar("Failed to fetch your favourite artists", {
             variant: "error",
           });

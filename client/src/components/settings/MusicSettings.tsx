@@ -74,10 +74,16 @@ export default function MusicSettings({
           variant: "success",
         });
       })
-      .catch(() => {
-        enqueueSnackbar(`Failed to add to ${playlist.title}`, {
-          variant: "error",
-        });
+      .catch((err) => {
+        if (err.response.status === 400) {
+          enqueueSnackbar(err.response.data.error, {
+            variant: "error",
+          });
+        } else {
+          enqueueSnackbar(`Failed to add to ${playlist.title}`, {
+            variant: "error",
+          });
+        }
       });
   };
 

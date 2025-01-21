@@ -8,7 +8,7 @@ const createUser = async (userData: Prisma.UsersCreateInput): Promise<Users> => 
       data: userData,
     });
   } catch (err) {
-    throw new DatabaseException("Error creating user", err as Error);
+    throw new DatabaseException("Error creating user", err);
   }
 };
 
@@ -20,8 +20,7 @@ const getUserByEmail = async (emailParam: string): Promise<Users | null> => {
       },
     });
   } catch (err) {
-    console.error(err);
-    return null;
+    throw new DatabaseException("Error getting user by email", err);
   }
 };
 
@@ -41,8 +40,7 @@ const getUserById = async (id: string): Promise<Users | null> => {
       },
     });
   } catch (err) {
-    console.error(err);
-    return null;
+    throw new DatabaseException("Error getting user by id", err);
   }
 };
 
@@ -57,7 +55,7 @@ const saveRefreshToken = async (refreshToken: string, id: string) => {
       },
     });
   } catch (err) {
-    throw new DatabaseException("Error saving refresh token", err as Error);
+    throw new DatabaseException("Error saving refresh token", err);
   }
 };
 
@@ -68,9 +66,13 @@ const updateUser = async (userData: Prisma.UsersUpdateInput, userId: string): Pr
         id: userId,
       },
       data: userData,
+      include: {
+        catalogs: true,
+        playlists: true,
+      },
     });
   } catch (err) {
-    throw new DatabaseException("Error updating user", err as Error);
+    throw new DatabaseException("Error updating user", err);
   }
 };
 
@@ -85,7 +87,7 @@ const deleteRefreshToken = async (userId: string) => {
       },
     });
   } catch (err) {
-    throw new DatabaseException("Error deleting refresh token from user", err as Error);
+    throw new DatabaseException("Error deleting refresh token from user", err);
   }
 };
 
@@ -110,7 +112,7 @@ const getFavourites = async (userId: string): Promise<Users[]> => {
       },
     });
   } catch (err) {
-    throw new DatabaseException("Error fetching liked artists", err as Error);
+    throw new DatabaseException("Error fetching liked artists", err);
   }
 };
 
@@ -130,8 +132,7 @@ const searchArtist = async (value: string): Promise<Users[]> => {
       take: 10,
     });
   } catch (err) {
-    console.error(err);
-    return [];
+    throw new DatabaseException("Error searching artist", err);
   }
 };
 

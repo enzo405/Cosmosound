@@ -176,7 +176,7 @@ export default function ArtistPanelPage(): ReactElement {
           </span>
         )}
       </span>
-      <div className="lg:h-[35rem] w-full md:w-fit flex flex-col-reverse lg:flex-row lg:items-stretch gap-2">
+      <div className="lg:h-[35rem] w-full flex flex-col-reverse lg:flex-row lg:items-stretch gap-2">
         {editProfile || user?.role !== "ARTISTS" ? (
           <Container className="w-full p-4 md:p-6 lg:p-8">
             <form

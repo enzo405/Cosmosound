@@ -47,10 +47,12 @@ export default function SelectPlaylist({
         ),
         onConfirm: async () =>
           await PlaylistService.createPlaylist(searchTerm).then((newPlaylist) => {
-            setUser({
-              ...user!,
-              playlists: [...(user?.playlists ?? []), newPlaylist],
-            });
+            if (user) {
+              setUser({
+                ...user,
+                playlists: [...(user?.playlists ?? []), newPlaylist],
+              });
+            }
             enqueueSnackbar(`Playlist ${searchTerm} created successfully`, { variant: "success" });
           }),
       });

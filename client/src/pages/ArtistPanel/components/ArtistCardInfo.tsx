@@ -5,7 +5,8 @@ import MediaIcon from "components/icons/media/MediaIcon";
 import { routesConfig } from "config/app-config";
 import { PartialArtist } from "models/User";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { formatTime } from "utils/date";
 import { displayPictureProfile } from "utils/user";
 
 interface ArtistInfoCardProps {
@@ -46,11 +47,15 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
                 <span
                   className="text-blue-500 font-semibold ml-1 inline-flex items-center"
                   title="Verified Artist">
-                  <Icon iconName="verified-label" className="mm-size-4" />
+                  <Icon iconName="verified-label" className="mm-size-4 stroke-black" />
                 </span>
               )}
             </span>
-            <p className="text-gray-600 text-sm truncate">{genre || "Unknown Genre"}</p>
+            <Link
+              className="px-3 py-1 hover:bg-blue-400 bg-blue-500 text-white text-sm rounded-full truncate"
+              to={routesConfig.genres.getParameter(genre || "")}>
+              {genre}
+            </Link>
           </div>
         </div>
       </div>
@@ -81,24 +86,26 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
       {catalogs && catalogs.length > 0 && (
         <>
           <Divider />
-          <div className="mt-4">
+          <div className="mt-4 w-full">
             <h3 className="text-gray-700 font-semibold">Catalogs:</h3>
-            <ul>
+            <div className="min-w-1/2 flex flex-col gap-1">
               {catalogs.map((catalog) => (
-                <li key={catalog.id} className="mb-2 flex items-center">
-                  <a href={`/catalog/${catalog.id}`}>
-                    <a className="flex items-center">
-                      <img
-                        src={displayPictureProfile(catalog.thumbnail)}
-                        alt={catalog.title}
-                        className="mm-size-8 object-cover rounded mr-2"
-                      />
-                      <span className="text-blue-500 hover:underline">{catalog.title}</span>
-                    </a>
-                  </a>
-                </li>
+                <Link
+                  key={catalog.id}
+                  to={routesConfig.catalog.getParameter(catalog.id)}
+                  className="flex flex-row items-center hover:bg-slate-300 rounded-md p-2 w-full gap-1">
+                  <img
+                    src={displayPictureProfile(catalog.thumbnail)}
+                    alt={catalog.title}
+                    className="mm-size-8 object-cover rounded"
+                  />
+                  <span className="text-blue-500 hover:underline">{catalog.title}</span>
+                  <span className="font-extralight text-sm text-gray-500 ml-auto">
+                    {formatTime(catalog.createdAt)}
+                  </span>
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
         </>
       )}

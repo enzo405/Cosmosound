@@ -14,6 +14,7 @@ import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
 import { displayPictureProfile } from "utils/user";
+import VerifiedIcon from "components/icons/VerifiedIcon";
 
 interface MusicItemProps {
   music: Music;
@@ -115,7 +116,7 @@ export default function MusicItem({
               className={`relative ml-1 p-0.5 ${showCatalogThumbnail ? "mm-size-14" : "mm-size-10"}`}>
               {showCatalogThumbnail ? (
                 <img
-                  className="rounded-xl object-cover h-full"
+                  className="rounded-xl aspect-square object-cover h-full"
                   src={displayPictureProfile(catalog.thumbnail)}
                   alt={`${music.title} ${catalog.title} ${artist.artistName}`}
                 />
@@ -148,13 +149,7 @@ export default function MusicItem({
                 <span className="font-semibold text-sm xsm:font-normal xsm:text-base truncate">
                   {music.title}
                 </span>
-                {artist.isVerified && (
-                  <span
-                    className="flex-shrink-0 flex justify-center items-center rounded-lg size-[14px] xsm:size-[18px] bg-label-music-verif"
-                    title="Official Music">
-                    <Icon iconName="verified-label" className="mm-size-3" />
-                  </span>
-                )}
+                {artist.isVerified && <VerifiedIcon className="size-[14px] xsm:size-[18px]" />}
               </span>
               <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
                 {showArtist && <ArtistInfo artist={artist} className="min-w-fit" />}

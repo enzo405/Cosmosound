@@ -154,7 +154,14 @@ export default function ArtistPage(): ReactElement {
       settingsComponent={
         <ArtistSettings artist={artist} onCloseSetting={() => setDisplaySettings(false)} />
       }
-      title={artist.artistName}
+      title={
+        <>
+          {artist.artistName}
+          {artist.isVerified && (
+            <Icon iconName="verified-label" className="mm-size-8 stroke-dark-custom" />
+          )}
+        </>
+      }
       subtitle={
         <div className="flex flex-col gap-1">
           <span className="font-light">Member since {formatTime(artist.createdAt)}</span>

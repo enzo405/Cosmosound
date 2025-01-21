@@ -1,4 +1,5 @@
 import HeartIcon from "components/icons/HeartIcon";
+import VerifiedIcon from "components/icons/VerifiedIcon";
 import { routesConfig } from "config/app-config";
 import { useUser } from "hooks/useUser";
 import { Artist } from "models/User";
@@ -53,14 +54,15 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
       className={`relative flex flex-col items-center group cursor-pointer min-w-[8.5rem] max-w-[8.5rem] border border-dark-glassy rounded-2xl p-2 md:pt-2 md:pb-5 gap-2 mx-0.5 ${className}`}>
       <div className="w-full flex flex-row justify-center">
         <img
-          className="h-24 w-24 md:h-28 md:w-28 rounded-full object-cover pt-1"
+          className="h-24 w-24 md:h-28 md:w-28 rounded-full object-cover aspect-square pt-1"
           src={displayPictureProfile(artist.pictureProfile)}
           alt={artist.artistName}
         />
       </div>
       <div className="flex flex-col cursor-pointer w-full items-center">
-        <div className="group-hover:underline underline-offset-2 text-sm font-medium truncate pb-6">
+        <div className="flex flex-row gap-0.5 justify-center group-hover:underline underline-offset-2 text-sm font-medium truncate pb-6">
           {artist.artistName}
+          {artist.isVerified && <VerifiedIcon className="size-[16px]" />}
         </div>
       </div>
       {displayLikeBtn && (

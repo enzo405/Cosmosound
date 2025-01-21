@@ -3,7 +3,7 @@ import { Icon } from "components/icons/Icon";
 import { IconName } from "constants/iconName";
 
 interface PageLayoutProps {
-  title: string;
+  title: ReactNode | string;
   subtitle?: ReactNode;
   headerActions: ReactNode;
   thumbnail?: string;
@@ -32,17 +32,17 @@ export default function PageLayout({
           <img
             className="rounded-full lg:mm-size-64 md:mm-size-52 mm-size-40 shadow-2xl"
             src={thumbnail}
-            alt={title}
+            alt={typeof title === "string" ? title : "thumbnail"}
           />
         )}
         <div
           className={`w-full ${thumbnail ? "sm:w-4/5 flex-col gap-2" : "flex-row gap-6 items-center"} flex text-dark-custom`}>
           <h1
-            className={`${thumbnail ? "lg:text-5xl md:text-3xl text-2xl mr-9" : "sm:text-6xl text-4xl w-auto"} font-bs font-semibold whitespace-nowrap text-wrap break-everywhere`}>
+            className={`${thumbnail ? "lg:text-5xl md:text-3xl text-2xl mr-9" : "sm:text-6xl text-4xl w-auto"} flex flex-row items-center gap-1 font-bs font-semibold whitespace-nowrap text-wrap break-everywhere`}>
             {title}
           </h1>
           {subtitle && <span className="font-light">{subtitle}</span>}
-          <span className="flex flex-row-reverse sm:flex-row gap-4 mt-2 md:mt-auto ml-auto w-auto justify-start">
+          <span className="flex flex-row-reverse sm:flex-row gap-4 mt-2 md:mt-auto mr-auto w-auto justify-start">
             {headerActions}
           </span>
         </div>
