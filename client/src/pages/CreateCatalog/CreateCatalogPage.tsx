@@ -74,10 +74,10 @@ export default function CreateCatalogPage(): ReactElement {
             });
             navigate(routesConfig.catalog.getParameter(catalog.id));
           })
-          .catch((e) => {
+          .catch((err) => {
             setLoading(false);
             enqueueSnackbar({
-              message: e.response.data.message,
+              message: err.response.data.error,
               variant: "error",
             });
           });

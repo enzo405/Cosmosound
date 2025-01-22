@@ -73,7 +73,7 @@ export default function ArtistPage(): ReactElement {
         })
         .catch((err) => {
           enqueueSnackbar({
-            message: err.message,
+            message: err.response.data.error,
             variant: "error",
           });
         })

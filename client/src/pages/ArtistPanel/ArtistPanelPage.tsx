@@ -143,7 +143,7 @@ export default function ArtistPanelPage(): ReactElement {
           .catch((err) => {
             const defaultErrMessage = "An error occured";
             if (err instanceof AxiosError) {
-              setError(err.response?.data?.message || defaultErrMessage);
+              setError(err.response?.data.error || defaultErrMessage);
             } else {
               setError(defaultErrMessage);
             }

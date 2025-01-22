@@ -102,7 +102,7 @@ function AccountPage(): ReactElement {
           .catch((err) => {
             const defaultErrMessage = "An error occured while trying to update your account";
             if (err instanceof AxiosError) {
-              setError(err.response?.data?.message || defaultErrMessage);
+              setError(err.response?.data.error || defaultErrMessage);
             } else {
               setError(defaultErrMessage);
             }
