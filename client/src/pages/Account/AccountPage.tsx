@@ -370,14 +370,21 @@ function AccountPage(): ReactElement {
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Liked Genres</h3>
                 <div className="flex flex-wrap gap-2">
-                  {user?.likedGenres.map((genre) => (
+                  {user?.likedGenres.slice(0, 6).map((genre) => (
                     <Link
                       key={genre}
-                      className="px-3 py-1 bg-blue-500 text-white text-sm rounded-full"
+                      className="px-3 py-1 hover:bg-blue-400 bg-blue-500 text-white text-sm rounded-full"
                       to={routesConfig.genres.getParameter(genre)}>
                       {genre}
                     </Link>
                   ))}
+                  {user?.likedGenres && user.likedGenres.length > 6 && (
+                    <Link
+                      className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full"
+                      to={routesConfig.library.path}>
+                      +{user.likedGenres.length - 6}
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
