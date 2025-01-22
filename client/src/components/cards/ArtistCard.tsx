@@ -66,8 +66,8 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
           alt={artist.artistName}
         />
       </div>
-      <div className="flex flex-col cursor-pointer w-full items-center">
-        <div className="flex flex-row gap-0.5 justify-center group-hover:underline underline-offset-2 text-sm font-medium truncate pb-6">
+      <div className="flex flex-col cursor-pointer justify-start w-full items-center overflow-hidden">
+        <div className="flex flex-row gap-0.5 group-hover:underline underline-offset-2 text-sm font-medium truncate mx-auto pb-6">
           {artist.artistName}
           {artist.isVerified && <VerifiedIcon className="size-[16px]" />}
         </div>
