@@ -1,6 +1,6 @@
 import { prisma } from "@/app";
 import DatabaseException from "@/errors/DatabaseException";
-import { Catalogs, Music, Prisma } from "@prisma/client";
+import { Catalogs, Music, Prisma, Users } from "@prisma/client";
 import playlistRepository from "./playlist.repository";
 import { MusicDetails } from "@/models/MusicDetails";
 
@@ -151,6 +151,21 @@ const searchMusic = async (value: string): Promise<MusicDetails[]> => {
   }
 };
 
+const getFavouritesCatalogs = async (user: Users): Promise<Catalogs[]> => {
+  try {
+    return await prisma.catalogs.findMany({
+      where: {
+        id: { in: user.likedCatalogs },
+      },
+      include: {
+        owner: true,
+      },
+    });
+  } catch (err) {
+    throw new DatabaseException("Error fetching liked catalogs", err);
+  }
+};
+
 export default {
   getCatalogById,
   createCatalog,
@@ -159,4 +174,5 @@ export default {
   deleteMusic,
   searchCatalog,
   searchMusic,
+  getFavouritesCatalogs,
 };

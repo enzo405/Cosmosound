@@ -3,6 +3,10 @@ import { Prisma, Users } from "@prisma/client";
 import bcrypt from "bcrypt";
 import ServerException from "@/errors/ServerException";
 import BadRequestException from "@/errors/BadRequestException";
+import { Favourites } from "@/models/Favourites";
+import NotFoundException from "@/errors/NotFoundException";
+import playlistRepository from "@/repository/playlist.repository";
+import catalogRepository from "@/repository/catalog.repository";
 
 const getUserById = async (id: string): Promise<Users | null> => {
   return await userRepository.getUserById(id);
@@ -31,8 +35,21 @@ const encryptPassword = async (password: string): Promise<string> => {
   }
 };
 
-const getFavourites = async (userId: string): Promise<Users[]> => {
-  return await userRepository.getFavourites(userId);
+const getFavourites = async (userId: string): Promise<Favourites> => {
+  const user = await userRepository.getUserById(userId);
+  if (!user) {
+    throw new NotFoundException("User not found");
+  }
+
+  const favArtistsPromise = userRepository.getFavouritesArtists(user);
+  const favPlaylistsPromise = playlistRepository.getFavouritesPlaylists(user);
+  const favCatalogsPromise = catalogRepository.getFavouritesCatalogs(user);
+
+  return {
+    likedArtists: await favArtistsPromise,
+    likedCatalogs: await favCatalogsPromise,
+    likedPlaylists: await favPlaylistsPromise,
+  };
 };
 
 const searchArtist = async (search: string): Promise<Users[]> => {

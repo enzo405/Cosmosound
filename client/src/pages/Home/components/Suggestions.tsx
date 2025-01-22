@@ -1,5 +1,6 @@
 import ScrollableBox from "components/box/ScrollableBox";
 import Card from "components/cards/Card";
+import { routesConfig } from "config/app-config";
 import { useUser } from "hooks/useUser";
 import { Catalog, DetailedCatalog } from "models/Catalog";
 import { enqueueSnackbar } from "notistack";
@@ -45,7 +46,7 @@ export default function Suggestions({ catalogs }: SuggestionsProps): ReactElemen
             key={catalog.id}
             title={catalog.title}
             description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
-            link={`/catalog/${catalog.id}`}
+            link={routesConfig.catalog.getParameter(catalog.id)}
             thumbnail={displayPictureProfile(catalog.thumbnail)}
             defaultLiked={
               user?.likedCatalogs.find((id) => id == catalog.id.toString()) !== undefined

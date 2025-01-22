@@ -91,21 +91,8 @@ const deleteRefreshToken = async (userId: string) => {
   }
 };
 
-const getFavourites = async (userId: string): Promise<Users[]> => {
+const getFavouritesArtists = async (user: Users): Promise<Users[]> => {
   try {
-    const user = await prisma.users.findUnique({
-      where: {
-        id: userId,
-      },
-      select: {
-        likedArtists: true,
-      },
-    });
-
-    if (!user) {
-      return [];
-    }
-
     return await prisma.users.findMany({
       where: {
         id: { in: user.likedArtists },
@@ -143,6 +130,6 @@ export default {
   saveRefreshToken,
   deleteRefreshToken,
   updateUser,
-  getFavourites,
+  getFavouritesArtists,
   searchArtist,
 };

@@ -1,10 +1,6 @@
 import { Artist, DetailedArtistInfo } from "models/User";
 import { apiClient } from "./axiosService";
 
-async function getMyFavouriteArtist(): Promise<DetailedArtistInfo[]> {
-  return await apiClient.get("/api/me/preferred").then((res) => res.data);
-}
-
 async function getArtistById(id: string | undefined): Promise<DetailedArtistInfo | undefined> {
   if (id == undefined) return undefined;
 
@@ -22,7 +18,6 @@ async function searchArtistByName(value: string): Promise<Artist[]> {
 }
 
 const ArtistService = {
-  getMyFavouriteArtist,
   searchArtistByName,
   getArtistById,
 };

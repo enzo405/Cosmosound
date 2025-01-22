@@ -78,8 +78,8 @@ const updateArtist = async (req: UserRequest, res: Response) => {
 };
 
 const getFavourites = async (req: UserRequest, res: Response) => {
-  const artists = await userService.getFavourites(req?.userId!);
-  res.status(200).json(artists);
+  const favContent = await userService.getFavourites(req?.userId!);
+  res.status(200).json(favContent);
 };
 
 const searchArtist = async (req: UserRequest, res: Response) => {

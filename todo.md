@@ -1,18 +1,14 @@
 # Must have:
 
-1. Like stuff
-- Frontend => Add genres liked section in library page
-- Frontend => Add Liked Catalog section in Library page
-
-2. Listening
+1. Listening
 - Frontend & Backend & Stream => Listening to Music
 - Backend => Music Listening history
 
-3. Liked Playlist
+2. Liked Playlist
 - Backend => On user creation, add playlist liked songs
 - Backend => on music like add to Liked Songs playlist
 
-4. A bunch of random stuff xD
+3. A bunch of random stuff xD
 - Frontend => Register tell user they can like genre after
 - Frontend => Loading icon and check server response if alive every 5sec
 - Frontend => Add assets for explore page empty, 500 page & error page

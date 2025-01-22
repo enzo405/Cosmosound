@@ -1,4 +1,4 @@
-import { PartialArtist } from "models/User";
+import { Favourites, PartialArtist } from "models/User";
 import { AccountFormData } from "pages/Account/AccountPage";
 import { apiClient } from "./axiosService";
 import { AxiosResponse } from "axios";
@@ -87,6 +87,10 @@ async function updateArtist(dataForm: Partial<ArtistPanelFormData>): Promise<Par
   return await apiClient.patch("/api/me/artist", dataForm).then((res) => res.data);
 }
 
+async function getPrefered(): Promise<Favourites> {
+  return await apiClient.get("/api/me/preferred").then((res) => res.data);
+}
+
 const UserService = {
   getMe,
   refreshToken,
@@ -96,6 +100,7 @@ const UserService = {
   toggleLike,
   updateAccount,
   updateArtist,
+  getPrefered,
 };
 
 export default UserService;

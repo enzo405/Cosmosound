@@ -1,4 +1,4 @@
-import { Catalog, DetailedCatalog } from "./Catalog";
+import { Catalog, CatalogWithOwner, DetailedCatalog } from "./Catalog";
 import { Playlist } from "./Playlist";
 
 export interface User {
@@ -64,4 +64,10 @@ export enum Media {
   APPLE_MUSIC = "APPLE_MUSIC",
   YTB_MUSIC = "YTB_MUSIC",
   INSTAGRAM = "INSTAGRAM",
+}
+
+export interface Favourites {
+  likedArtists: Artist[];
+  likedCatalogs: CatalogWithOwner[];
+  likedPlaylists: Playlist[];
 }
