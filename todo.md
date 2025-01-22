@@ -9,6 +9,7 @@
 - Backend => on music like add to Liked Songs playlist
 
 3. A bunch of random stuff xD
+- Load next music when listening music
 - Frontend => Register tell user they can like genre after
 - Frontend => Loading icon and check server response if alive every 5sec
 - Frontend => Add assets for explore page empty, 500 page & error page

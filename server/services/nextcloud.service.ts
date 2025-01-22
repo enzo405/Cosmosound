@@ -18,7 +18,7 @@ const client = new Client(server);
 const uploadPicture = async (
   file: Express.Multer.File,
   type: "CT" | "PFP",
-  id: string
+  id: string,
 ): Promise<string> => {
   if (file.size > MAX_FILE_SIZE) {
     throw new BadRequestException("File size exceeds the 10MB limit");
@@ -63,7 +63,7 @@ const uploadMusics = async (data: UploadMusics): Promise<Record<string, string>>
   data.files.forEach((obj) => {
     if (!allowedMimeTypes.includes(obj.music.mimetype)) {
       throw new UnsupportedMediaTypeException(
-        "Unsupported file format. Only m4a and mp4 are supported."
+        "Unsupported file format. Only m4a and mp4 are supported.",
       );
     }
   });
@@ -90,7 +90,7 @@ const uploadMusics = async (data: UploadMusics): Promise<Record<string, string>>
       } catch (e) {
         console.error("An error occurred while uploading the music:", e);
       }
-    })
+    }),
   );
 
   return urls;

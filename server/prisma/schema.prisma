@@ -78,6 +78,7 @@ model Users {
   refreshToken   String?
   catalogs       Catalogs[]
   playlists      Playlists[]
+  history        Music[]
 }
 
 enum UserRole {
