@@ -24,12 +24,12 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   const { idPlaylist } = useParams();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const { openDialog } = useConfirmDialog();
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
 
   const [playlist, setPlaylist] = useState<PlaylistWithMusic | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
   const [isPlaylistLiked, setIsPlaylistLiked] = useState<boolean>(
-    user?.likedPlaylists.find((id) => id == playlist?.id) !== undefined,
+    user?.likedPlaylists.find((id) => id === idPlaylist) !== undefined,
   );
   const [displaySettings, setDisplaySettings] = useState(false);
 
@@ -68,19 +68,26 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
     setIsPlaying(!isPlaying);
   };
 
-  const handleClickHeart = () => {
-    if (isPlaylistLiked) {
-      UserService.removeLike(playlist);
-      enqueueSnackbar(`${playlist.title} removed from your favourite playlist`, {
-        variant: "success",
+  const handleClickHeart = async () => {
+    await UserService.toggleLike(playlist.id, "playlist")
+      .then(() => {
+        toggleLike(playlist.id, "playlist");
+        if (isPlaylistLiked) {
+          enqueueSnackbar(`${playlist.title} removed from your favourite playlist`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${playlist.title} added to your favourite playlist `, {
+            variant: "success",
+          });
+        }
+        setIsPlaylistLiked(!isPlaylistLiked);
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
       });
-    } else {
-      UserService.like(playlist);
-      enqueueSnackbar(`${playlist.title} added to your favourite playlist `, {
-        variant: "success",
-      });
-    }
-    setIsPlaylistLiked(!isPlaylistLiked);
   };
 
   const handleDeleteFromPlaylist = (music: Music) => {

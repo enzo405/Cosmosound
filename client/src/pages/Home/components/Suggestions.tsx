@@ -12,20 +12,29 @@ interface SuggestionsProps {
 }
 
 export default function Suggestions({ catalogs }: SuggestionsProps): ReactElement {
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
 
-  const onLikeCatalog = (like: boolean, catalog: Catalog) => {
-    if (like) {
-      UserService.removeLike(catalog);
-      enqueueSnackbar(`${catalog.title} removed from your favourite`, {
-        variant: "success",
+  const onLikeCatalog = async (like: boolean, catalog: Catalog): Promise<boolean> => {
+    return await UserService.toggleLike(catalog.id, "album")
+      .then(() => {
+        toggleLike(catalog.id, "album");
+        if (like) {
+          enqueueSnackbar(`${catalog.title} removed from your favourite`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${catalog.title} added to your favourite `, {
+            variant: "success",
+          });
+        }
+        return true;
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
+        return false;
       });
-    } else {
-      UserService.like(catalog);
-      enqueueSnackbar(`${catalog.title} added to your favourite `, {
-        variant: "success",
-      });
-    }
   };
 
   return (

@@ -31,11 +31,9 @@ const updateUser = async (req: UserRequest, res: Response) => {
   if (username) {
     data.name = username;
   }
-
   if (email) {
     data.email = email;
   }
-
   if (Object.entries(data).length === 0) {
     throw new BadRequestException("Nothing to update");
   }
@@ -110,10 +108,40 @@ const getArtistById = async (req: UserRequest, res: Response) => {
   res.status(200).json(artist);
 };
 
+const like = async (req: UserRequest, res: Response) => {
+  const { id, type } = req.body;
+  if (!id) {
+    throw new BadRequestException("An id must be provided");
+  }
+
+  switch (type) {
+    case "artist":
+      await userService.likeArtist(id, req.userId!);
+      break;
+    case "song":
+      await userService.likeSong(id, req.userId!);
+      break;
+    case "album":
+      await userService.likeCatalog(id, req.userId!);
+      break;
+    case "playlist":
+      await userService.likePlaylist(id, req.userId!);
+      break;
+    case "genre":
+      await userService.likeGenre(id, req.userId!);
+      break;
+    default:
+      throw new BadRequestException("Invalid type");
+  }
+
+  res.status(200).json({ message: "You liked this" });
+};
+
 export default {
   updateUser,
   updateArtist,
   getArtistById,
   getFavourites,
   searchArtist,
+  like,
 };

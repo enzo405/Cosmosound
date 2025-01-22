@@ -16,7 +16,7 @@ interface ArtistCardProps {
 
 export default function ArtistCard({ artist, className = "" }: ArtistCardProps): ReactElement {
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
   const [displayLikeBtn, setDisplayLikeBtn] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(
     user?.likedArtists.find((id) => id == artist.id) !== undefined,
@@ -31,19 +31,26 @@ export default function ArtistCard({ artist, className = "" }: ArtistCardProps):
     }
   };
 
-  const handleClickHeart = () => {
-    if (isLiked) {
-      UserService.removeLike(artist);
-      enqueueSnackbar(`Artist removed from your favourite artist`, {
-        variant: "success",
+  const handleClickHeart = async () => {
+    await UserService.toggleLike(artist.id, "artist")
+      .then(() => {
+        toggleLike(artist.id, "artist");
+        if (isLiked) {
+          enqueueSnackbar(`Artist removed from your favourite artist`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`Artist added to your favourite artists`, {
+            variant: "success",
+          });
+        }
+        setIsLiked(!isLiked);
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
       });
-    } else {
-      UserService.like(artist);
-      enqueueSnackbar(`Artist added to your favourite artists`, {
-        variant: "success",
-      });
-    }
-    setIsLiked(!isLiked);
   };
 
   return (

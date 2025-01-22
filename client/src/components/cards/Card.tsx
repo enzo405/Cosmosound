@@ -9,7 +9,7 @@ interface CardProps {
   link: string;
   defaultLiked: boolean;
   className?: string;
-  onLike: (like: boolean) => void;
+  onLike: (like: boolean) => Promise<boolean>;
 }
 
 export default function Card({
@@ -34,9 +34,10 @@ export default function Card({
     }
   };
 
-  const handleClickHeart = () => {
-    onLike(isLiked);
-    setIsLiked(!isLiked);
+  const handleClickHeart = async () => {
+    if (await onLike(isLiked)) {
+      setIsLiked(!isLiked);
+    }
   };
 
   return (

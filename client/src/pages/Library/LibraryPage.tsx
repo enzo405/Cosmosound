@@ -14,7 +14,7 @@ import GenresService from "services/genresService";
 import UserService from "services/userService";
 
 function LibraryPage(): ReactElement {
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
   const [myArtists, setMyArtists] = useState<DetailedArtistInfo[]>([]);
 
   useEffect(() => {
@@ -33,32 +33,50 @@ function LibraryPage(): ReactElement {
     fetchMyArtists();
   }, []);
 
-  const onLikeGenre = (like: boolean, genre: string) => {
-    if (like) {
-      UserService.removeLike(genre);
-      enqueueSnackbar(`${genre} removed from your favourite genres`, {
-        variant: "success",
+  const onLikeGenre = async (like: boolean, genre: string): Promise<boolean> => {
+    return await UserService.toggleLike(genre, "genre")
+      .then(() => {
+        toggleLike(genre, "genre");
+        if (like) {
+          enqueueSnackbar(`${genre} removed from your favourite genres`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${genre} added to your favourite genres`, {
+            variant: "success",
+          });
+        }
+        return true;
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
+        return false;
       });
-    } else {
-      UserService.like(genre);
-      enqueueSnackbar(`${genre} added to your favourite genres`, {
-        variant: "success",
-      });
-    }
   };
 
-  const onLikePlaylist = (like: boolean, playlist: Playlist) => {
-    if (like) {
-      UserService.removeLike(playlist);
-      enqueueSnackbar(`${playlist.title} removed from your favourite playlist`, {
-        variant: "success",
+  const onLikePlaylist = async (like: boolean, playlist: Playlist): Promise<boolean> => {
+    return await UserService.toggleLike(playlist.id, "playlist")
+      .then(() => {
+        toggleLike(playlist.id, "playlist");
+        if (like) {
+          enqueueSnackbar(`${playlist.title} removed from your favourite playlist`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${playlist.title} added to your favourite playlist `, {
+            variant: "success",
+          });
+        }
+        return true;
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
+        return false;
       });
-    } else {
-      UserService.like(playlist);
-      enqueueSnackbar(`${playlist.title} added to your favourite playlist `, {
-        variant: "success",
-      });
-    }
   };
 
   const myPlaylists = useMemo(() => {

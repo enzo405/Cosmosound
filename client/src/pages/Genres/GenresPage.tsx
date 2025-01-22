@@ -58,7 +58,7 @@ export default function GenresPage(): ReactElement {
   }, [genreContent]);
 
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
 
   const [isGenreLiked, setIsGenreLiked] = useState<boolean>(
     user?.likedGenres.find((name) => name === nameGenre) !== undefined,
@@ -88,19 +88,26 @@ export default function GenresPage(): ReactElement {
     }
   };
 
-  const handleClickHeart = () => {
-    if (isGenreLiked) {
-      UserService.removeLike(nameGenre);
-      enqueueSnackbar(`${nameGenre} removed from your favourite genres`, {
-        variant: "success",
+  const handleClickHeart = async () => {
+    await UserService.toggleLike(nameGenre, "genre")
+      .then(() => {
+        toggleLike(nameGenre, "genre");
+        if (isGenreLiked) {
+          enqueueSnackbar(`${nameGenre} removed from your favourite genres`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${nameGenre} added to your favourite genres`, {
+            variant: "success",
+          });
+        }
+        setIsGenreLiked(!isGenreLiked);
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.message, {
+          variant: "error",
+        });
       });
-    } else {
-      UserService.like(nameGenre);
-      enqueueSnackbar(`${nameGenre} added to your favourite genres`, {
-        variant: "success",
-      });
-    }
-    setIsGenreLiked(!isGenreLiked);
   };
 
   const handleTabChange = (selectedTab: GenreTabs) => {

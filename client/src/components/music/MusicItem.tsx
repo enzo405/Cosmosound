@@ -37,12 +37,12 @@ export default function MusicItem({
   index,
   handleDeleteFromPlaylist,
 }: MusicItemProps): ReactElement {
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const [displaySettings, setDisplaySettings] = useState<boolean>(false);
   const [displayPlay, setDisplayPlay] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(
-    user?.likedMusics.find((id) => id == music.id.toString()) !== undefined,
+    user?.likedMusics.find((id) => id == music.id) !== undefined,
   );
   const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
@@ -51,19 +51,26 @@ export default function MusicItem({
   const dropdownSettingPosition =
     musicItemRef?.current?.getBoundingClientRect()?.bottom! > window.innerHeight / 2; // Divided by 2 since the header + music player takes a lot of space
 
-  const handleClickHeart = () => {
-    if (isLiked) {
-      UserService.removeLike(music);
-      enqueueSnackbar(`Song removed to your favourite songs`, {
-        variant: "success",
+  const handleClickHeart = async () => {
+    await UserService.toggleLike(music.id, "song")
+      .then(() => {
+        toggleLike(music.id, "song");
+        if (isLiked) {
+          enqueueSnackbar(`Song removed from your favourite songs`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`Song added to your favourite songs`, {
+            variant: "success",
+          });
+        }
+        setIsLiked(!isLiked);
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
       });
-    } else {
-      UserService.like(music);
-      enqueueSnackbar(`Song added to your favourite songs`, {
-        variant: "success",
-      });
-    }
-    setIsLiked(!isLiked);
   };
 
   const handleClickSettings = () => {
