@@ -13,6 +13,7 @@ export interface Playlist {
     idCatalog: string;
     idArtist: string;
     title: string;
+    url: string;
     createdAt: string;
     duration: number;
     genres: string[];
@@ -27,6 +28,7 @@ export interface PlaylistWithMusic extends Playlist {
     title: string;
     createdAt: string;
     duration: number;
+    url: string;
     artist: Artist;
     catalog: Catalog;
     genres: string[];

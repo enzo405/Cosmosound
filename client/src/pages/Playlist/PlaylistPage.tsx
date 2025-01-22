@@ -59,7 +59,16 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
     return <NotFoundErrorPage message="PLAYLIST NOT FOUND" />;
   }
 
-  const musicDetails: MusicDetails = playlist.musics[0];
+  const musicDetails: MusicDetails = {
+    id: playlist.musics[0].id,
+    title: playlist.musics[0].title,
+    artist: playlist.musics[0].artist,
+    duration: playlist.musics[0].duration,
+    catalog: playlist.musics[0].catalog,
+    url: playlist.musics[0].url,
+    genres: playlist.musics[0].genres,
+    createdAt: playlist.musics[0].createdAt,
+  };
 
   const handlePlaying = () => {
     if (!isPlayingSongCurrentPage && playlist != undefined) {
@@ -114,7 +123,7 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   };
 
   const isPlayingSongCurrentPage =
-    playlist.musics.find((m) => m.id == playingMusic.id) != undefined;
+    playlist.musics.find((m) => m.id === playingMusic?.id) != undefined;
 
   return (
     <PageLayout

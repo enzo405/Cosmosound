@@ -9,18 +9,18 @@
 - Backend => on music like add to Liked Songs playlist
 
 3. A bunch of random stuff xD
-- Load next music when listening music
 - Frontend => Register tell user they can like genre after
 - Frontend => Loading icon and check server response if alive every 5sec
 - Frontend => Add assets for explore page empty, 500 page & error page
 - Frontend => About-us page : Copy of the Landing page without the register button.
 - Frontend => Legal page: ask gpt
 - Frontend => Home Page *when not logged in*: Landing page with great looking image and nice & short description, with a button that leads to the register page. At the bottom, there'll be all necessary informations about the site (name details, creation date, goal of the app, who am i etc...).
-- Backend & Frontend => Add previous password if the user want to change password
-- Backend & Frontend => Add forgot password feature
 
 
 # Good to have:
+- Backend & Frontend => Add previous password if the user want to change password
+- Backend & Frontend => Add forgot password feature
+- Load next music when listening music
 - Make a page to create playlist and add music more easier
 - Add ref on MusicItem to track it size and adjust the item depending on its size instead of the media query
 - Add ref on Body content to track it size and adjust the rest depending on its size instead of the media query

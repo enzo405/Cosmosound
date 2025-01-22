@@ -5,7 +5,9 @@ import catalogService from "@/services/catalog.service";
 import nextcloudService from "@/services/nextcloud.service";
 import { guessCatalogType } from "@/utils/catalog";
 import { Catalogs, Prisma } from "@prisma/client";
+import axios from "axios";
 import { Response } from "express";
+import fs from "fs";
 import { ObjectId } from "mongodb";
 import path from "path";
 
@@ -41,7 +43,7 @@ const createCatalog = async (req: MulterRequest, res: Response) => {
   }
   if (genres.length !== durations.length) {
     throw new BadRequestException(
-      "An error occured while trying to retrieve the duration in the request.",
+      "An error occured while trying to retrieve the duration in the request."
     );
   }
 
@@ -187,6 +189,31 @@ const searchMusic = async (req: UserRequest, res: Response) => {
   res.status(200).json(musics);
 };
 
+const listenMusic = async (req: UserRequest, res: Response) => {
+  const { idCatalog, idMusic } = req.params;
+
+  const music = await catalogService.getMusicById(idCatalog, idMusic);
+  if (!music) {
+    throw new NotFoundException(`The music with id ${idMusic} not found.`);
+  }
+
+  try {
+    const response = await axios.get(music.url, {
+      responseType: "stream",
+      auth: {
+        username: process.env.NEXTCLOUD_USERNAME!,
+        password: process.env.NEXTCLOUD_PASSWORD!,
+      },
+    });
+    res.setHeader("Content-Length", response.headers["content-length"]);
+    res.setHeader("Content-Type", "audio/mpeg");
+    response.data.pipe(res);
+  } catch (err) {
+    console.log("err", err);
+    throw new BadRequestException("An error occured while trying to read the file.");
+  }
+};
+
 export default {
   createCatalog,
   getCatalogById,
@@ -194,4 +221,5 @@ export default {
   deleteMusic,
   searchCatalog,
   searchMusic,
+  listenMusic,
 };

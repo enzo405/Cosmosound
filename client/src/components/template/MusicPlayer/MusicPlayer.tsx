@@ -1,23 +1,67 @@
 import { Icon } from "components/icons/Icon";
 import { useMusic } from "hooks/useMusic";
-import { ReactElement, HTMLAttributes } from "react";
+import { ReactElement, HTMLAttributes, useRef, useEffect, useState } from "react";
 import MusicInfo from "../../music/MusicInfo";
 import TimeMusicSlider from "./TimeMusicSlider";
 import SoundSlider from "./SoundSlider";
 import { IconName } from "constants/iconName";
 import { useScreenSize } from "hooks/useScreenSize";
+import MusicService from "services/musicService";
+import { enqueueSnackbar } from "notistack";
 
 export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactElement {
   const { playingMusic, isPlaying, soundValue, time, setIsPlaying, setSoundValue, setTime } =
     useMusic();
   const isMobile = useScreenSize();
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [blobUrl, setBlobUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.play().catch((err) => console.error("Error playing audio:", err));
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = soundValue / 100;
+    }
+  }, [soundValue]);
+
+  useEffect(() => {
+    const fetchAudio = async () => {
+      if (!playingMusic) return;
+      await MusicService.audioStream(playingMusic.catalog.id, playingMusic.id)
+        .then(async (blob) => {
+          const url = URL.createObjectURL(blob);
+          setBlobUrl(url);
+        })
+        .catch(() => {
+          enqueueSnackbar("Error fetching audio", { variant: "error" });
+        });
+    };
+
+    fetchAudio();
+  }, [playingMusic?.id]);
 
   const handleIsPlaying = () => setIsPlaying(!isPlaying);
-  const handleNextMusic = () => {};
-  const handlePreviousMusic = () => {};
 
-  const getSoundIcon = (): IconName => {
-    return soundValue > 0 ? (soundValue > 50 ? "volume-high" : "volume-low") : "volume-muted";
+  const handleNextMusic = () => {
+    console.log("Next music");
+  };
+
+  const handlePreviousMusic = () => {
+    console.log("Previous music");
+  };
+
+  const onTimeUpdate = () => {
+    if (audioRef.current) {
+      setTime(audioRef.current.currentTime);
+    }
   };
 
   const onWheel = (event: React.WheelEvent<HTMLInputElement>) => {
@@ -26,10 +70,23 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     setSoundValue(Math.max(0, Math.min(100, soundValue + step)));
   };
 
+  const getSoundIcon = (): IconName => {
+    return soundValue > 0 ? (soundValue > 50 ? "volume-high" : "volume-low") : "volume-muted";
+  };
+
+  if (!playingMusic) return <></>;
+
   return (
     <>
+      <audio
+        ref={audioRef}
+        src={blobUrl || ""}
+        onTimeUpdate={onTimeUpdate}
+        onEnded={handleNextMusic}
+        controls={false}
+      />
       {isMobile ? (
-        <div className={`justify-around flex flex-col-reverse w-full gap-4 py-4 h-28`}>
+        <div className="justify-around flex flex-col-reverse w-full gap-4 py-4 h-28">
           <div className="flex flex-row items-center w-full p-1 xsm:px-3">
             <div className="flex items-center flex-shrink-0 w-2/3 min-w-2/3 max-w-2/3">
               <MusicInfo music={playingMusic} />

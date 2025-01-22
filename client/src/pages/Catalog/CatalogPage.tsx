@@ -32,7 +32,7 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   );
 
   const isPlayingSongCurrentPage = useMemo(
-    () => catalog?.musics.find((m) => m.id == playingMusic.id) != undefined,
+    () => catalog?.musics.find((m) => m.id === playingMusic?.id) != undefined,
     [playingMusic],
   );
 

@@ -125,7 +125,7 @@ export default function ArtistPage(): ReactElement {
   };
 
   const isPlayingSongCurrentPage =
-    getMusic(artist).find((m) => m.id == playingMusic.id) != undefined;
+    getMusic(artist).find((m) => m.id === playingMusic?.id) != undefined;
 
   const handlePlaying = () => {
     loadContent(ArtistTabs.MUSIC);

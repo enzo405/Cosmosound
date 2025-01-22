@@ -107,7 +107,7 @@ export default function MusicItem({
     handlePlayMusic(music);
   };
 
-  const isCurrentMusicPlaying = music.id == playingMusic.id;
+  const isCurrentMusicPlaying = music.id == playingMusic?.id;
 
   return (
     <div className="relative w-full" ref={musicItemRef}>

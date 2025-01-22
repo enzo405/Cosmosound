@@ -139,7 +139,7 @@ export default function GenresPage(): ReactElement {
   };
 
   const isPlayingSongCurrentPage =
-    genreContent?.musics.find((m) => m.id == playingMusic.id) != undefined;
+    genreContent?.musics.find((m) => m.id === playingMusic?.id) != undefined;
 
   if (loading) {
     return <Loading />;
