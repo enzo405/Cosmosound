@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { GenreTabs } from "../GenresPage";
-import { Catalog, DetailedCatalog } from "models/Catalog";
+import { Catalog, CatalogWithOwner, DetailedCatalog } from "models/Catalog";
 import Card from "components/cards/Card";
 import ArtistCard from "components/cards/ArtistCard";
 import { Artist } from "models/User";
@@ -19,38 +19,56 @@ interface GenreContentProps {
 }
 
 export default function GenreContent({ content, activeTab }: GenreContentProps): ReactElement {
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
 
   if (!content.length) {
     return <span className="text-dark-custom">This genre seems empty</span>;
   }
 
-  const onLikeCatalog = (like: boolean, catalog: Catalog) => {
-    if (like) {
-      UserService.removeLike(catalog);
-      enqueueSnackbar(`${catalog.title} removed from your favourite`, {
-        variant: "success",
+  const onLikeCatalog = async (like: boolean, catalog: Catalog): Promise<boolean> => {
+    return await UserService.toggleLike(catalog.id, "album")
+      .then(() => {
+        toggleLike(catalog.id, "album");
+        if (like) {
+          enqueueSnackbar(`${catalog.title} removed from your favourite`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${catalog.title} added to your favourite`, {
+            variant: "success",
+          });
+        }
+        return true;
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
+        return false;
       });
-    } else {
-      UserService.like(catalog);
-      enqueueSnackbar(`${catalog.title} added to your favourite`, {
-        variant: "success",
-      });
-    }
   };
 
-  const onLikePlaylist = (like: boolean, playlist: Playlist) => {
-    if (like) {
-      UserService.removeLike(playlist);
-      enqueueSnackbar(`${playlist.title} removed from your favourite playlist`, {
-        variant: "success",
+  const onLikePlaylist = async (like: boolean, playlist: Playlist): Promise<boolean> => {
+    return await UserService.toggleLike(playlist.id, "playlist")
+      .then(() => {
+        toggleLike(playlist.id, "playlist");
+        if (like) {
+          enqueueSnackbar(`${playlist.title} removed from your favourite playlist`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${playlist.title} added to your favourite playlist `, {
+            variant: "success",
+          });
+        }
+        return true;
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
+        return false;
       });
-    } else {
-      UserService.like(playlist);
-      enqueueSnackbar(`${playlist.title} added to your favourite playlist `, {
-        variant: "success",
-      });
-    }
   };
 
   const renderContent = () => {
@@ -77,7 +95,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
               title={playlist.title}
               link={routesConfig.playlist.getParameter(playlist.id)}
               thumbnail={playlist.playlistThumbnail}
-              description={`${playlist.title} - ${playlist.owner.name}`}
+              description={`${playlist.title} - ${playlist?.owner?.name}`}
               defaultLiked={user?.likedPlaylists.find((id) => id == playlist.id) !== undefined}
               onLike={(like) => onLikePlaylist(like, playlist)}
             />
@@ -89,7 +107,7 @@ export default function GenreContent({ content, activeTab }: GenreContentProps):
       case GenreTabs.EP:
       case GenreTabs.SINGLE:
         return content.map((item) => {
-          const catalog = item as Catalog;
+          const catalog = item as CatalogWithOwner;
           return (
             <Card
               key={catalog.id}

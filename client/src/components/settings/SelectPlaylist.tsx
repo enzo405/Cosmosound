@@ -19,9 +19,9 @@ export default function SelectPlaylist({
   closeSettings,
 }: SelectPlaylistProps): ReactElement {
   const { user, setUser } = useUser();
-  const [searchTerm, setSearchTerm] = useState<string>("");
   const { openDialog } = useConfirmDialog();
   const { idParams } = useParams();
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
@@ -47,10 +47,12 @@ export default function SelectPlaylist({
         ),
         onConfirm: async () =>
           await PlaylistService.createPlaylist(searchTerm).then((newPlaylist) => {
-            setUser({
-              ...user!,
-              playlists: [...(user?.playlists ?? []), newPlaylist],
-            });
+            if (user) {
+              setUser({
+                ...user,
+                playlists: [...(user?.playlists ?? []), newPlaylist],
+              });
+            }
             enqueueSnackbar(`Playlist ${searchTerm} created successfully`, { variant: "success" });
           }),
       });
@@ -73,7 +75,8 @@ export default function SelectPlaylist({
   }, [user]);
 
   return (
-    <div className="absolute p-1 min-w-52 gap-1 flex flex-col bg-white rounded-lg right-full -top-0 mr-1">
+    <div
+      className={`absolute p-1 min-w-52 gap-1 flex flex-col bg-white rounded-lg right-full -top-0 mr-1`}>
       <div className="relative" onClick={handleClick}>
         <div className="absolute inset-y-0 start-0 flex items-center ps-2 pointer-events-none">
           <Icon iconName="magnifyingglass" className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />

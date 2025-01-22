@@ -16,17 +16,19 @@ import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
 import { DetailedCatalog } from "models/Catalog";
 import { displayPictureProfile } from "utils/user";
+import Loading from "components/Loading";
 
 interface CatalogPageProps {}
 
 export default function CatalogPage({}: CatalogPageProps): ReactElement {
   const { idCatalog } = useParams();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
   const [catalog, setCatalog] = useState<DetailedCatalog | undefined>();
+  const [loading, setLoading] = useState(true);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [isCatalogLiked, setIsCatalogLiked] = useState<boolean>(
-    user?.likedCatalogs.find((id) => id == catalog?.id) !== undefined,
+    user?.likedCatalogs.find((id) => id === idCatalog) !== undefined,
   );
 
   const isPlayingSongCurrentPage = useMemo(
@@ -42,14 +44,19 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
         })
         .catch((err) => {
           enqueueSnackbar({
-            message: err.message,
+            message: err.response.data.error,
             variant: "error",
           });
-        });
+        })
+        .finally(() => setLoading(false));
     };
 
     fetchCatalog();
   }, [idCatalog]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (catalog == undefined) {
     return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
@@ -64,19 +71,26 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
     setIsPlaying(!isPlaying);
   };
 
-  const handleClickHeart = () => {
-    if (isCatalogLiked) {
-      UserService.removeLike(catalog);
-      enqueueSnackbar(`${catalog.title} removed from your favourite`, {
-        variant: "success",
+  const handleClickHeart = async () => {
+    await UserService.toggleLike(catalog.id, "album")
+      .then(() => {
+        toggleLike(catalog.id, "album");
+        if (isCatalogLiked) {
+          enqueueSnackbar(`${catalog.title} removed from your favourite`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${catalog.title} added to your favourite`, {
+            variant: "success",
+          });
+        }
+        setIsCatalogLiked(!isCatalogLiked);
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
       });
-    } else {
-      UserService.like(catalog);
-      enqueueSnackbar(`${catalog.title} added to your favourite`, {
-        variant: "success",
-      });
-    }
-    setIsCatalogLiked(!isCatalogLiked);
   };
 
   return (

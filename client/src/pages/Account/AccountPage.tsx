@@ -7,7 +7,7 @@ import { useConfirmDialog } from "hooks/useConfirm";
 import { useUser } from "hooks/useUser";
 import { displayPictureProfile } from "utils/user";
 import { enqueueSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import SettingsOptions from "components/settings/SettingsOptions";
 import { routesConfig } from "config/app-config";
@@ -102,7 +102,7 @@ function AccountPage(): ReactElement {
           .catch((err) => {
             const defaultErrMessage = "An error occured while trying to update your account";
             if (err instanceof AxiosError) {
-              setError(err.response?.data?.message || defaultErrMessage);
+              setError(err.response?.data.error || defaultErrMessage);
             } else {
               setError(defaultErrMessage);
             }
@@ -345,7 +345,7 @@ function AccountPage(): ReactElement {
               </div>
             </form>
           ) : (
-            <div className="max-w-md mx-auto p-2 sm:p-4 bg-gray-100 rounded-lg shadow-md">
+            <div className="w-fit max-w-md p-2 sm:p-4 bg-gray-100 rounded-lg shadow-md">
               <div className="flex flex-col sm:flex-row items-center mb-4">
                 <img
                   src={displayPictureProfile(user?.pictureProfile)}
@@ -370,13 +370,21 @@ function AccountPage(): ReactElement {
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Liked Genres</h3>
                 <div className="flex flex-wrap gap-2">
-                  {user?.likedGenres.map((genre) => (
-                    <span
+                  {user?.likedGenres.slice(0, 6).map((genre) => (
+                    <Link
                       key={genre}
-                      className="px-3 py-1 bg-blue-500 text-white text-sm rounded-full">
+                      className="px-3 py-1 hover:bg-blue-400 bg-blue-500 text-white text-sm rounded-full"
+                      to={routesConfig.genres.getParameter(genre)}>
                       {genre}
-                    </span>
+                    </Link>
                   ))}
+                  {user?.likedGenres && user.likedGenres.length > 6 && (
+                    <Link
+                      className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full"
+                      to={routesConfig.library.path}>
+                      +{user.likedGenres.length - 6}
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

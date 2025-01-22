@@ -1,11 +1,10 @@
-import { Genre } from "models/Music";
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { CreateMusicFormData } from "../CreateCatalogPage";
 import { Icon } from "components/icons/Icon";
 import { BiXCircle } from "react-icons/bi";
 
 interface NewMusicProps {
-  genres: Genre[];
+  genres: string[];
   musicData: CreateMusicFormData;
   index: number;
   error?: string;
@@ -28,7 +27,7 @@ export default function NewMusic({
     musicFieldRef?.current?.getBoundingClientRect()?.bottom! > window.innerHeight / 2;
 
   const filteredGenres = genres.filter((genre) =>
-    genre.name.toLowerCase().includes(searchQuery.toLowerCase()),
+    genre.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const handleSelectGenre = (genreName: string) => {
@@ -106,15 +105,15 @@ export default function NewMusic({
               {filteredGenres.length > 0 ? (
                 filteredGenres.map((genre) => (
                   <label
-                    key={genre.name}
+                    key={genre}
                     className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer">
                     <input
                       type="checkbox"
-                      checked={musicData.genres.includes(genre.name)}
-                      onChange={() => handleSelectGenre(genre.name)}
+                      checked={musicData.genres.includes(genre)}
+                      onChange={() => handleSelectGenre(genre)}
                       className="rounded text-primary-orange"
                     />
-                    <span className="capitalize text-dark-custom">{genre.name}</span>
+                    <span className="capitalize text-dark-custom">{genre}</span>
                   </label>
                 ))
               ) : (

@@ -15,6 +15,7 @@ import { useUser } from "hooks/useUser";
 import ForbiddenErrorPage from "pages/errors/ForbiddenErrorPage";
 import { routesConfig } from "config/app-config";
 import { displayPictureProfile } from "utils/user";
+import Loading from "components/Loading";
 
 interface CatalogEditPageProps {}
 
@@ -24,6 +25,7 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
   const { idCatalog } = useParams();
   const { openDialog } = useConfirmDialog();
   const [catalog, setCatalog] = useState<DetailedCatalog | undefined>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCatalog = async () => {
@@ -33,14 +35,19 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
         })
         .catch((err) => {
           enqueueSnackbar({
-            message: err.message,
+            message: err.response.data.error,
             variant: "error",
           });
-        });
+        })
+        .finally(() => setLoading(false));
     };
 
     fetchCatalog();
   }, [idCatalog]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (catalog == undefined) {
     return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
@@ -53,8 +60,8 @@ export default function CatalogEditPage({}: CatalogEditPageProps): ReactElement 
     openDialog({
       title: `Are you sure ?`,
       description: `Do you want to delete '${music.title}' from ${catalog.title}?`,
-      onConfirm: () =>
-        MusicService.deleteMusic(catalog.id, music)
+      onConfirm: async () =>
+        await MusicService.deleteMusic(catalog.id, music)
           .then((catalog) => {
             setCatalog(catalog);
             enqueueSnackbar({

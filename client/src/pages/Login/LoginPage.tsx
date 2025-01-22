@@ -28,12 +28,12 @@ function LoginPage(): ReactElement {
     },
   });
 
-  const onSubmit = (data: LoginDataForm) => {
+  const onSubmit = async (data: LoginDataForm) => {
     const { email, password } = data;
 
-    UserService.login(email, password)
-      .then(() => {
-        UserService.getMe()
+    await UserService.login(email, password)
+      .then(async () => {
+        await UserService.getMe()
           .then((user) => {
             setUser(user);
             navigate(routesConfig.home.path);

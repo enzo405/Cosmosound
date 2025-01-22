@@ -65,7 +65,7 @@ export default function MusicItemDelete({
                   <span
                     className="flex-shrink-0 flex justify-center items-center rounded-lg mm-size-3.5 xsm:mm-size-4 bg-label-music-verif"
                     title="Official Music">
-                    <Icon iconName="verified-label" className="mm-size-3" />
+                    <Icon iconName="verified-label" className="mm-size-3 stroke-black" />
                   </span>
                 )}
               </span>

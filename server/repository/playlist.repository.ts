@@ -1,8 +1,9 @@
 import { prisma } from "@/app";
+import BadRequestException from "@/errors/BadRequestException";
 import DatabaseException from "@/errors/DatabaseException";
 import NotFoundException from "@/errors/NotFoundException";
 import { PlaylistDetails } from "@/models/PlaylistDetails";
-import { Playlists, Prisma } from "@prisma/client";
+import { Playlists, Prisma, Users } from "@prisma/client";
 
 const getPlaylistById = async (
   id: string,
@@ -79,23 +80,29 @@ const AddMusic = async (
   catalogId: string,
   musicId: string,
 ): Promise<Playlists> => {
+  const playlistPromise = prisma.playlists.findUnique({ where: { id: playlistId } });
+  const catalog = await prisma.catalogs.findUnique({
+    where: {
+      id: catalogId,
+    },
+  });
+
+  if (!catalog) {
+    throw new NotFoundException("Catalog not found");
+  }
+
+  const music = catalog.musics.find((music) => music.id === musicId);
+
+  if (!music) {
+    throw new NotFoundException("Music not found in catalog");
+  }
+
+  const playlist = await playlistPromise;
+  if (playlist?.musics.find((music) => music.id === musicId)) {
+    throw new BadRequestException("Music already added to playlist");
+  }
+
   try {
-    const catalog = await prisma.catalogs.findUnique({
-      where: {
-        id: catalogId,
-      },
-    });
-
-    if (!catalog) {
-      throw new NotFoundException("Catalog not found");
-    }
-
-    const music = catalog.musics.find((music) => music.id === musicId);
-
-    if (!music) {
-      throw new NotFoundException("Music not found in catalog");
-    }
-
     return await prisma.playlists.update({
       where: {
         id: playlistId,
@@ -175,6 +182,21 @@ const deleteDenormalizedMusic = async (idCatalog: string, idMusic: string): Prom
   });
 };
 
+const getFavouritesPlaylists = async (user: Users): Promise<Playlists[]> => {
+  try {
+    return await prisma.playlists.findMany({
+      where: {
+        id: { in: user.likedPlaylists },
+      },
+      include: {
+        owner: true,
+      },
+    });
+  } catch (err) {
+    throw new DatabaseException("Error fetching liked playlists", err);
+  }
+};
+
 export default {
   getPlaylistById,
   searchPlaylist,
@@ -183,4 +205,5 @@ export default {
   deletePlaylist,
   deleteMusic,
   deleteDenormalizedMusic,
+  getFavouritesPlaylists,
 };

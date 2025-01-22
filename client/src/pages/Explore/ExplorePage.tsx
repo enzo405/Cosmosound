@@ -1,6 +1,6 @@
 import { useSearch } from "hooks/useSearch";
 import { Catalog, DetailedCatalog, TypeCatalog } from "models/Catalog";
-import { Genre, MusicDetails } from "models/Music";
+import { MusicDetails } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { Artist } from "models/User";
 import { useEffect, useState, type ReactElement } from "react";
@@ -21,6 +21,7 @@ import UserService from "services/userService";
 import { enqueueSnackbar } from "notistack";
 import { useUser } from "hooks/useUser";
 import { displayPictureProfile } from "utils/user";
+import Loading from "components/Loading";
 
 export enum Filters {
   ALL = "All",
@@ -34,8 +35,9 @@ export enum Filters {
 
 function ExplorePage(): ReactElement {
   const { search, debouncedValue } = useSearch();
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
 
+  const [loading, setLoading] = useState<boolean>(true);
   const [activeFilter, setActiveFilter] = useState<Filters>(Filters.ALL);
   const [musics, setMusics] = useState<MusicDetails[]>([]);
   const [artists, setArtists] = useState<Artist[]>([]);
@@ -43,14 +45,17 @@ function ExplorePage(): ReactElement {
   const [albums, setAlbums] = useState<DetailedCatalog[]>([]);
   const [eps, setEps] = useState<DetailedCatalog[]>([]);
   const [singles, setSingles] = useState<DetailedCatalog[]>([]);
-  const [genres, setGenres] = useState<Genre[]>([]);
+  const [genres, setGenres] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // TODO do better
-        const [fetchedMusics, , , , fetchedGenres] = await Promise.all([
-          MusicService.searchMusicByTitle(search),
+        setLoading(true);
+        const [, , , , fetchedGenres] = await Promise.all([
+          MusicService.searchMusicByTitle(search).then((data) => {
+            setMusics(data);
+          }),
           ArtistService.searchArtistByName(search).then((data) => {
             setArtists(data);
           }),
@@ -64,8 +69,8 @@ function ExplorePage(): ReactElement {
           }),
           GenresService.getGenreByName(search),
         ]);
+        setLoading(false);
 
-        setMusics(fetchedMusics);
         setGenres(fetchedGenres.slice(0, 20));
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -75,46 +80,73 @@ function ExplorePage(): ReactElement {
     fetchData();
   }, [debouncedValue]);
 
-  const onLikeGenre = (like: boolean, genre: Genre) => {
-    if (like) {
-      UserService.removeLike(genre);
-      enqueueSnackbar(`${genre.name} removed from your favourite genres`, {
-        variant: "success",
+  const onLikeGenre = async (like: boolean, genre: string): Promise<boolean> => {
+    return await UserService.toggleLike(genre, "genre")
+      .then(() => {
+        toggleLike(genre, "genre");
+        if (like) {
+          enqueueSnackbar(`${genre} removed from your favourite genres`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${genre} added to your favourite genres`, {
+            variant: "success",
+          });
+        }
+        return true;
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
+        return false;
       });
-    } else {
-      UserService.like(genre);
-      enqueueSnackbar(`${genre.name} added to your favourite genres`, {
-        variant: "success",
-      });
-    }
   };
 
-  const onLikeCatalog = (like: boolean, catalog: Catalog) => {
-    if (like) {
-      UserService.removeLike(catalog);
-      enqueueSnackbar(`${catalog.title} removed from your favourite`, {
-        variant: "success",
+  const onLikeCatalog = async (like: boolean, catalog: Catalog): Promise<boolean> => {
+    return await UserService.toggleLike(catalog.id, "album")
+      .then(() => {
+        toggleLike(catalog.id, "album");
+        if (like) {
+          enqueueSnackbar(`${catalog.title} removed from your favourite`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${catalog.title} added to your favourite`, {
+            variant: "success",
+          });
+        }
+        return true;
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
+        return false;
       });
-    } else {
-      UserService.like(catalog);
-      enqueueSnackbar(`${catalog.title} added to your favourite`, {
-        variant: "success",
-      });
-    }
   };
 
-  const onLikePlaylist = (like: boolean, playlist: Playlist) => {
-    if (like) {
-      UserService.removeLike(playlist);
-      enqueueSnackbar(`${playlist.title} removed from your favourite playlists`, {
-        variant: "success",
+  const onLikePlaylist = async (like: boolean, playlist: Playlist): Promise<boolean> => {
+    return await UserService.toggleLike(playlist.id, "playlist")
+      .then(() => {
+        toggleLike(playlist.id, "playlist");
+        if (like) {
+          enqueueSnackbar(`${playlist.title} removed from your favourite playlists`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${playlist.title} added to your favourite playlists`, {
+            variant: "success",
+          });
+        }
+        return true;
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
+        return false;
       });
-    } else {
-      UserService.like(playlist);
-      enqueueSnackbar(`${playlist.title} added to your favourite playlists`, {
-        variant: "success",
-      });
-    }
   };
 
   const displayFilter = (f: Filters): boolean => {
@@ -146,117 +178,126 @@ function ExplorePage(): ReactElement {
         onFilterClick={(f) => setActiveFilter(f)}
         activeFilter={activeFilter}
       />
-      {(activeFilter === Filters.ALL || activeFilter === Filters.ARTISTS) &&
-        artists.length != 0 && (
-          <ScrollableBox title="Artists">
-            {artists.map((artist) => {
-              return <ArtistCard key={artist.id} artist={artist} />;
-            })}
-          </ScrollableBox>
-        )}
-      {(activeFilter === Filters.ALL || activeFilter === Filters.MUSICS) && musics.length != 0 && (
-        <Box
-          title="Songs"
-          className="flex-col"
-          children={musics.map((m) => {
-            return <MusicItem music={m} artist={m.artist} catalog={m.catalog} key={m.id} />;
-          })}
-        />
-      )}
-      <div className="flex flex-wrap w-full">
-        {(activeFilter === Filters.ALL || activeFilter === Filters.ALBUMS) &&
-          albums.length != 0 && (
-            <div className="w-1/2 p-3">
-              <ScrollableBox
-                children={albums.map((catalog) => {
-                  return (
-                    <Card
-                      key={catalog.id}
-                      title={catalog.title}
-                      description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
-                      link={`/catalog/${catalog.id}`}
-                      thumbnail={displayPictureProfile(catalog.thumbnail)}
-                      defaultLiked={
-                        user?.likedCatalogs.find((id) => id == catalog.id) !== undefined
-                      }
-                      onLike={(like) => onLikeCatalog(like, catalog)}
-                    />
-                  );
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {(activeFilter === Filters.ALL || activeFilter === Filters.ARTISTS) &&
+            artists.length != 0 && (
+              <ScrollableBox title="Artists">
+                {artists.map((artist) => {
+                  return <ArtistCard key={artist.id} artist={artist} />;
                 })}
-                title="Albums"
+              </ScrollableBox>
+            )}
+          {(activeFilter === Filters.ALL || activeFilter === Filters.MUSICS) &&
+            musics.length != 0 && (
+              <Box
+                title="Songs"
+                className="flex-col"
+                children={musics.map((m) => {
+                  return <MusicItem music={m} artist={m.artist} catalog={m.catalog} key={m.id} />;
+                })}
               />
-            </div>
-          )}
-        {((activeFilter === Filters.ALL || activeFilter === Filters.EPS_SINGLES) &&
-          [...singles, ...eps].length) != 0 && (
-          <div className="w-1/2 p-3">
-            <ScrollableBox
-              children={[...singles, ...eps].map((catalog) => {
-                return (
-                  <Card
-                    key={catalog.id}
-                    title={catalog.title}
-                    description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
-                    link={`/catalog/${catalog.id}`}
-                    thumbnail={displayPictureProfile(catalog.thumbnail)}
-                    defaultLiked={user?.likedCatalogs.find((id) => id == catalog.id) !== undefined}
-                    onLike={(like) => onLikeCatalog(like, catalog)}
+            )}
+          <div className="flex flex-wrap w-full">
+            {(activeFilter === Filters.ALL || activeFilter === Filters.ALBUMS) &&
+              albums.length != 0 && (
+                <div className="w-1/2 p-3">
+                  <ScrollableBox
+                    children={albums.map((catalog) => {
+                      return (
+                        <Card
+                          key={catalog.id}
+                          title={catalog.title}
+                          description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
+                          link={`/catalog/${catalog.id}`}
+                          thumbnail={displayPictureProfile(catalog.thumbnail)}
+                          defaultLiked={
+                            user?.likedCatalogs.find((id) => id == catalog.id) !== undefined
+                          }
+                          onLike={(like) => onLikeCatalog(like, catalog)}
+                        />
+                      );
+                    })}
+                    title="Albums"
                   />
-                );
-              })}
-              title="EP/Single"
-            />
+                </div>
+              )}
+            {((activeFilter === Filters.ALL || activeFilter === Filters.EPS_SINGLES) &&
+              [...singles, ...eps].length) != 0 && (
+              <div className="w-1/2 p-3">
+                <ScrollableBox
+                  children={[...singles, ...eps].map((catalog) => {
+                    return (
+                      <Card
+                        key={catalog.id}
+                        title={catalog.title}
+                        description={`${catalog.type.valueOf()} - ${catalog.owner.artistName}`}
+                        link={`/catalog/${catalog.id}`}
+                        thumbnail={displayPictureProfile(catalog.thumbnail)}
+                        defaultLiked={
+                          user?.likedCatalogs.find((id) => id == catalog.id) !== undefined
+                        }
+                        onLike={(like) => onLikeCatalog(like, catalog)}
+                      />
+                    );
+                  })}
+                  title="EP/Single"
+                />
+              </div>
+            )}
+            {(activeFilter === Filters.ALL || activeFilter === Filters.PLAYLISTS) &&
+              playlists.length != 0 && (
+                <div className="w-1/2 p-3">
+                  <ScrollableBox
+                    children={playlists.map((playlist) => {
+                      return (
+                        <Card
+                          key={playlist.id}
+                          title={playlist.title}
+                          description={`${playlist.title} - ${playlist?.owner?.name}`}
+                          link={`/playlist/${playlist.id}`}
+                          thumbnail={playlist.playlistThumbnail}
+                          defaultLiked={
+                            user?.likedPlaylists.find((id) => id == playlist.id) !== undefined
+                          }
+                          onLike={(like) => onLikePlaylist(like, playlist)}
+                        />
+                      );
+                    })}
+                    title="Playlists"
+                  />
+                </div>
+              )}
+            {(activeFilter === Filters.ALL || activeFilter === Filters.GENRES) &&
+              genres.length != 0 && (
+                <div className="w-1/2 p-3">
+                  <Box title="Genres" className="flex-wrap">
+                    {genres.map((genre) => {
+                      return (
+                        <SmallCard
+                          key={genre}
+                          title={genre}
+                          defaultLiked={
+                            user?.likedGenres.find((name) => name == genre) !== undefined
+                          }
+                          link={routesConfig.genres.getParameter(genre)}
+                          onLike={(like) => onLikeGenre(like, genre)}
+                        />
+                      );
+                    })}
+                  </Box>
+                </div>
+              )}
+            {isPageEmpty && (
+              <>
+                <h1>There's nothing here</h1>
+              </>
+            )}
           </div>
-        )}
-        {(activeFilter === Filters.ALL || activeFilter === Filters.PLAYLISTS) &&
-          playlists.length != 0 && (
-            <div className="w-1/2 p-3">
-              <ScrollableBox
-                children={playlists.map((playlist) => {
-                  return (
-                    <Card
-                      key={playlist.id}
-                      title={playlist.title}
-                      description={`${playlist.title} - ${playlist?.owner?.name}`}
-                      link={`/playlist/${playlist.id}`}
-                      thumbnail={playlist.playlistThumbnail}
-                      defaultLiked={
-                        user?.likedPlaylists.find((id) => id == playlist.id) !== undefined
-                      }
-                      onLike={(like) => onLikePlaylist(like, playlist)}
-                    />
-                  );
-                })}
-                title="Playlists"
-              />
-            </div>
-          )}
-        {(activeFilter === Filters.ALL || activeFilter === Filters.GENRES) &&
-          genres.length != 0 && (
-            <div className="w-1/2 p-3">
-              <Box title="Genres" className="flex-wrap">
-                {genres.map((genre) => {
-                  return (
-                    <SmallCard
-                      key={genre.name}
-                      title={genre.name}
-                      defaultLiked={
-                        user?.likedGenres.find((name) => name == genre.name) !== undefined
-                      }
-                      link={routesConfig.genres.getParameter(genre.name)}
-                      onLike={(like) => onLikeGenre(like, genre)}
-                    />
-                  );
-                })}
-              </Box>
-            </div>
-          )}
-        {isPageEmpty && (
-          <>
-            <h1>There's nothing here</h1>
-          </>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }

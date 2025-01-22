@@ -14,6 +14,7 @@ import UserService from "services/userService";
 import HeartIcon from "components/icons/HeartIcon";
 import { useUser } from "hooks/useUser";
 import { displayPictureProfile } from "utils/user";
+import VerifiedIcon from "components/icons/VerifiedIcon";
 
 interface MusicItemProps {
   music: Music;
@@ -36,12 +37,12 @@ export default function MusicItem({
   index,
   handleDeleteFromPlaylist,
 }: MusicItemProps): ReactElement {
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
   const [displaySettings, setDisplaySettings] = useState<boolean>(false);
   const [displayPlay, setDisplayPlay] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(
-    user?.likedMusics.find((id) => id == music.id.toString()) !== undefined,
+    user?.likedMusics.find((id) => id == music.id) !== undefined,
   );
   const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
@@ -50,19 +51,26 @@ export default function MusicItem({
   const dropdownSettingPosition =
     musicItemRef?.current?.getBoundingClientRect()?.bottom! > window.innerHeight / 2; // Divided by 2 since the header + music player takes a lot of space
 
-  const handleClickHeart = () => {
-    if (isLiked) {
-      UserService.removeLike(music);
-      enqueueSnackbar(`Song removed to your favourite songs`, {
-        variant: "success",
+  const handleClickHeart = async () => {
+    await UserService.toggleLike(music.id, "song")
+      .then(() => {
+        toggleLike(music.id, "song");
+        if (isLiked) {
+          enqueueSnackbar(`Song removed from your favourite songs`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`Song added to your favourite songs`, {
+            variant: "success",
+          });
+        }
+        setIsLiked(!isLiked);
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
       });
-    } else {
-      UserService.like(music);
-      enqueueSnackbar(`Song added to your favourite songs`, {
-        variant: "success",
-      });
-    }
-    setIsLiked(!isLiked);
   };
 
   const handleClickSettings = () => {
@@ -115,7 +123,7 @@ export default function MusicItem({
               className={`relative ml-1 p-0.5 ${showCatalogThumbnail ? "mm-size-14" : "mm-size-10"}`}>
               {showCatalogThumbnail ? (
                 <img
-                  className="rounded-xl object-cover h-full"
+                  className="rounded-xl aspect-square object-cover h-full"
                   src={displayPictureProfile(catalog.thumbnail)}
                   alt={`${music.title} ${catalog.title} ${artist.artistName}`}
                 />
@@ -148,13 +156,7 @@ export default function MusicItem({
                 <span className="font-semibold text-sm xsm:font-normal xsm:text-base truncate">
                   {music.title}
                 </span>
-                {artist.isVerified && (
-                  <span
-                    className="flex-shrink-0 flex justify-center items-center rounded-lg size-[14px] xsm:size-[18px] bg-label-music-verif"
-                    title="Official Music">
-                    <Icon iconName="verified-label" className="mm-size-3" />
-                  </span>
-                )}
+                {artist.isVerified && <VerifiedIcon className="size-[14px] xsm:size-[18px]" />}
               </span>
               <span className="w-full text-sm text-dark-grey font-semibold flex flex-row gap-1">
                 {showArtist && <ArtistInfo artist={artist} className="min-w-fit" />}

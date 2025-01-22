@@ -1,7 +1,4 @@
-import { Catalog } from "models/Catalog";
-import { Genre, Music } from "models/Music";
-import { Playlist } from "models/Playlist";
-import { Artist, PartialArtist } from "models/User";
+import { Favourites, PartialArtist } from "models/User";
 import { AccountFormData } from "pages/Account/AccountPage";
 import { apiClient } from "./axiosService";
 import { AxiosResponse } from "axios";
@@ -64,12 +61,15 @@ async function logout() {
   return apiClient.post("/auth/logout");
 }
 
-function like(item: Artist | Genre | Playlist | Catalog | Music): void {
-  console.log("like item", item);
-}
+export type LikeType = "artist" | "song" | "album" | "playlist" | "genre";
 
-function removeLike(item: Artist | Genre | Playlist | Catalog | Music): void {
-  console.log("removeLike item", item);
+async function toggleLike(id: string, type: LikeType): Promise<void> {
+  return await apiClient
+    .post(`/api/me/like`, {
+      id,
+      type,
+    })
+    .then((res) => res.data);
 }
 
 async function updateAccount(dataForm: Partial<AccountFormData>): Promise<PartialArtist> {
@@ -87,16 +87,20 @@ async function updateArtist(dataForm: Partial<ArtistPanelFormData>): Promise<Par
   return await apiClient.patch("/api/me/artist", dataForm).then((res) => res.data);
 }
 
+async function getPrefered(): Promise<Favourites> {
+  return await apiClient.get("/api/me/preferred").then((res) => res.data);
+}
+
 const UserService = {
   getMe,
   refreshToken,
   login,
   register,
   logout,
-  like,
-  removeLike,
+  toggleLike,
   updateAccount,
   updateArtist,
+  getPrefered,
 };
 
 export default UserService;

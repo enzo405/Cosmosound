@@ -20,6 +20,7 @@ import { useUser } from "hooks/useUser";
 import { displayPictureProfile } from "utils/user";
 import MediaIcon from "components/icons/media/MediaIcon";
 import { DetailedArtistInfo } from "models/User";
+import Loading from "components/Loading";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -30,15 +31,16 @@ export enum ArtistTabs {
 
 export default function ArtistPage(): ReactElement {
   const { idArtist } = useParams();
-  const { user } = useUser();
+  const { user, toggleLike } = useUser();
   const { playingMusic, isPlaying, setIsPlaying, setPlayingMusic } = useMusic();
 
   const [displaySettings, setDisplaySettings] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [content, setContent] = useState<Catalog[] | Music[]>([]);
   const [activeTab, setActiveTab] = useState(ArtistTabs.MUSIC);
   const [artist, setArtist] = useState<DetailedArtistInfo | undefined>(undefined);
   const [isArtistLiked, setIsArtistLiked] = useState<boolean>(
-    user?.likedArtists.find((id) => id == artist?.id) !== undefined,
+    user?.likedArtists.find((id) => id == idArtist) !== undefined,
   );
 
   const loadContent = (selectedTab: ArtistTabs) => {
@@ -64,16 +66,18 @@ export default function ArtistPage(): ReactElement {
 
   useEffect(() => {
     const fetchArtist = async () => {
+      setLoading(true);
       await ArtistService.getArtistById(idArtist)
         .then((artist) => {
           setArtist(artist);
         })
         .catch((err) => {
           enqueueSnackbar({
-            message: err.message,
+            message: err.response.data.error,
             variant: "error",
           });
-        });
+        })
+        .finally(() => setLoading(false));
     };
     fetchArtist();
   }, []);
@@ -85,23 +89,34 @@ export default function ArtistPage(): ReactElement {
     }
   }, [artist]);
 
+  if (loading) {
+    return <Loading />;
+  }
+
   if (artist?.role !== "ARTISTS") {
     return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
   }
 
-  const handleClickHeart = () => {
-    if (isArtistLiked) {
-      UserService.removeLike(artist);
-      enqueueSnackbar(`Artist removed from your favourite artist`, {
-        variant: "success",
+  const handleClickHeart = async () => {
+    await UserService.toggleLike(artist.id, "artist")
+      .then(() => {
+        toggleLike(artist.id, "artist");
+        if (isArtistLiked) {
+          enqueueSnackbar(`Artist removed from your favourite artist`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`Artist added to your favourite artists`, {
+            variant: "success",
+          });
+        }
+        setIsArtistLiked(!isArtistLiked);
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
       });
-    } else {
-      UserService.like(artist);
-      enqueueSnackbar(`Artist added to your favourite artists`, {
-        variant: "success",
-      });
-    }
-    setIsArtistLiked(!isArtistLiked);
   };
 
   const handleTabChange = (selectedTab: ArtistTabs) => {
@@ -126,18 +141,27 @@ export default function ArtistPage(): ReactElement {
     setIsPlaying(!isPlaying);
   };
 
-  const onLikeCatalog = (like: boolean, catalog: Catalog) => {
-    if (like) {
-      UserService.removeLike(catalog);
-      enqueueSnackbar(`${catalog.title} removed from your favourite`, {
-        variant: "success",
+  const onLikeCatalog = async (like: boolean, catalog: Catalog): Promise<boolean> => {
+    return await UserService.toggleLike(catalog.id, "album")
+      .then(() => {
+        toggleLike(catalog.id, "album");
+        if (like) {
+          enqueueSnackbar(`${catalog.title} removed from your favourite`, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(`${catalog.title} added to your favourite`, {
+            variant: "success",
+          });
+        }
+        return true;
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.error, {
+          variant: "error",
+        });
+        return false;
       });
-    } else {
-      UserService.like(catalog);
-      enqueueSnackbar(`${catalog.title} added to your favourite`, {
-        variant: "success",
-      });
-    }
   };
 
   return (
@@ -146,7 +170,14 @@ export default function ArtistPage(): ReactElement {
       settingsComponent={
         <ArtistSettings artist={artist} onCloseSetting={() => setDisplaySettings(false)} />
       }
-      title={artist.artistName}
+      title={
+        <>
+          {artist.artistName}
+          {artist.isVerified && (
+            <Icon iconName="verified-label" className="mm-size-8 stroke-dark-custom" />
+          )}
+        </>
+      }
       subtitle={
         <div className="flex flex-col gap-1">
           <span className="font-light">Member since {formatTime(artist.createdAt)}</span>

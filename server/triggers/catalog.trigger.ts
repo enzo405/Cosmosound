@@ -41,7 +41,7 @@ const createCatalog = async (req: MulterRequest, res: Response) => {
   }
   if (genres.length !== durations.length) {
     throw new BadRequestException(
-      "An error occured while trying to retrieve the duration in the request."
+      "An error occured while trying to retrieve the duration in the request.",
     );
   }
 
@@ -172,4 +172,26 @@ const deleteMusic = async (req: UserRequest, res: Response) => {
   res.status(200).json(catalog);
 };
 
-export default { createCatalog, getCatalogById, deleteCatalog, deleteMusic, searchCatalog };
+const searchMusic = async (req: UserRequest, res: Response) => {
+  const { search } = req.query;
+  if (!search) {
+    throw new BadRequestException("A query must be provided");
+  }
+
+  if (typeof search != "string") {
+    throw new BadRequestException("Search value must be a string");
+  }
+
+  const musics = await catalogService.searchMusic(search);
+
+  res.status(200).json(musics);
+};
+
+export default {
+  createCatalog,
+  getCatalogById,
+  deleteCatalog,
+  deleteMusic,
+  searchCatalog,
+  searchMusic,
+};

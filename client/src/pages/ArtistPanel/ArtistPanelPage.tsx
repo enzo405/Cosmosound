@@ -1,7 +1,6 @@
 import Container from "components/box/Container";
 import SpotifyIcon from "components/icons/media/SpotifyIcon";
 import { useUser } from "hooks/useUser";
-import { Genre } from "models/Music";
 import { Media } from "models/User";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -28,7 +27,7 @@ export interface ArtistPanelFormData {
   appleMusicLink?: string;
   xLink?: string;
   instagramLink?: string;
-  genre?: Genre;
+  genre?: string;
 }
 
 export default function ArtistPanelPage(): ReactElement {
@@ -56,18 +55,18 @@ export default function ArtistPanelPage(): ReactElement {
 
   const selectedGenre = watch("genre");
 
-  const sortGenres = (genres: Genre[]): Genre[] => {
+  const sortGenres = (genres: string[]): string[] => {
     if (!selectedGenre) {
       return genres;
     }
 
     const genre = selectedGenre ?? user?.genre;
-    const result = genres.filter((g) => genre.name !== g.name);
+    const result = genres.filter((g) => genre !== g);
     return [genre!, ...result]; // to have selected genre in first
   };
 
   const availableGenres = useMemo(() => GenresService.getAllGenres(), []);
-  const [displayGenres, setDisplayGenres] = useState<Genre[]>([]);
+  const [displayGenres, setDisplayGenres] = useState<string[]>([]);
   const [error, setError] = useState<string | undefined>();
   const [editProfile, setEditProfile] = useState(false);
   const navigate = useNavigate();
@@ -95,7 +94,7 @@ export default function ArtistPanelPage(): ReactElement {
     const description = (
       <div className="flex flex-col gap-1">
         <p>Artist Name: {dirtyFieldsValue.artistName}</p>
-        <p>Genre: {dirtyFieldsValue.genre?.name}</p>
+        <p>Genre: {dirtyFieldsValue.genre}</p>
 
         <span className="flex flex-row gap-1 items-center">
           <p>Updated links:</p>
@@ -144,7 +143,7 @@ export default function ArtistPanelPage(): ReactElement {
           .catch((err) => {
             const defaultErrMessage = "An error occured";
             if (err instanceof AxiosError) {
-              setError(err.response?.data?.message || defaultErrMessage);
+              setError(err.response?.data.error || defaultErrMessage);
             } else {
               setError(defaultErrMessage);
             }
@@ -156,7 +155,7 @@ export default function ArtistPanelPage(): ReactElement {
   };
 
   const handleOnChangeGenreInput = (e: string) => {
-    const filteredGenres = sortGenres(availableGenres).filter((genre) => genre.name.includes(e));
+    const filteredGenres = sortGenres(availableGenres).filter((genre) => genre.includes(e));
     let uniqueGenres = [selectedGenre!, ...filteredGenres].filter(
       (genre, index, self) => self.indexOf(genre) === index,
     );
@@ -168,7 +167,7 @@ export default function ArtistPanelPage(): ReactElement {
   };
 
   return (
-    <div className="flex flex-col items-center sm:items-start mt-4 w-full h-full">
+    <div className="flex flex-col items-center sm:items-start gap-1 mt-4 w-full h-full">
       <span className="flex flex-row items-center gap-2 text-4xl font-bs font-bold text-dark-custom ml-2">
         Artist Panel
         {user?.role === "ARTISTS" && (
@@ -177,7 +176,7 @@ export default function ArtistPanelPage(): ReactElement {
           </span>
         )}
       </span>
-      <div className="lg:h-[35rem] w-full md:w-fit flex flex-col-reverse lg:flex-row lg:items-stretch gap-2">
+      <div className="lg:h-[35rem] w-full flex flex-col-reverse lg:flex-row lg:items-stretch gap-2">
         {editProfile || user?.role !== "ARTISTS" ? (
           <Container className="w-full p-4 md:p-6 lg:p-8">
             <form
@@ -279,21 +278,21 @@ export default function ArtistPanelPage(): ReactElement {
                       render={({ field }) => (
                         <div className="flex flex-col max-h-[25rem] h-full mt-2 scrollbar-thin overflow-y-auto p-2">
                           {displayGenres.map((genre) => {
-                            const isChecked = field.value?.name === genre.name;
+                            const isChecked = field.value === genre;
                             return (
-                              <div key={genre.name} className="flex items-center gap-4">
+                              <div key={genre} className="flex items-center gap-4">
                                 <input
                                   type="radio"
                                   className="accent-primary-orange cursor-pointer"
-                                  value={genre.name}
+                                  value={genre}
                                   checked={isChecked}
-                                  onChange={() => field.onChange({ name: genre.name })}
-                                  id={`genre-${genre.name}`}
+                                  onChange={() => field.onChange(genre)}
+                                  id={`genre-${genre}`}
                                 />
                                 <label
                                   className={`${isChecked ? "text-dark-custom" : "text-dark-glassy"} capitalize cursor-pointer`}
-                                  htmlFor={`genre-${genre.name}`}>
-                                  {genre.name}
+                                  htmlFor={`genre-${genre}`}>
+                                  {genre}
                                 </label>
                               </div>
                             );
@@ -334,7 +333,7 @@ export default function ArtistPanelPage(): ReactElement {
           user && <ArtistInfoCard artist={user} />
         )}
         {user?.role === "ARTISTS" && (
-          <Container className="w-fit items-start p-2 md:p-4 lg:pt-6">
+          <Container className="w-full md:w-fit items-start p-4 lg:pt-6">
             <button
               className="flex flex-row items-center justify-center gap-1 pl-3 pr-4 py-1 text-tertio-orange border-tertio-orange border-2 rounded-xl font-medium hover:bg-orange-50"
               type="button"

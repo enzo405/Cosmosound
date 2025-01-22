@@ -1,5 +1,4 @@
 import { Catalog } from "./Catalog";
-import { Genre } from "./Music";
 import { Artist, User } from "./User";
 
 export interface Playlist {
@@ -16,7 +15,7 @@ export interface Playlist {
     title: string;
     createdAt: string;
     duration: number;
-    genres: Genre[];
+    genres: string[];
   }[];
 }
 
@@ -30,6 +29,6 @@ export interface PlaylistWithMusic extends Playlist {
     duration: number;
     artist: Artist;
     catalog: Catalog;
-    genres: Genre[];
+    genres: string[];
   }[];
 }
