@@ -88,7 +88,7 @@ const getMusicById = async (idCatalog: string, idMusic: string): Promise<Music |
     });
     if (!catalog) return null;
 
-    return catalog.musics[0] ?? null;
+    return catalog.musics.find((music) => music.id === idMusic) ?? null;
   } catch (err) {
     throw new DatabaseException("Error getting music", err);
   }

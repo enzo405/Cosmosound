@@ -43,7 +43,7 @@ const createCatalog = async (req: MulterRequest, res: Response) => {
   }
   if (genres.length !== durations.length) {
     throw new BadRequestException(
-      "An error occured while trying to retrieve the duration in the request."
+      "An error occured while trying to retrieve the duration in the request.",
     );
   }
 
@@ -214,10 +214,13 @@ const listenMusic = async (req: UserRequest, res: Response) => {
       },
     });
 
+    const filename = music.url.split("/").pop();
+
     res.status(206);
-    res.setHeader("Content-Range", response.headers["content-range"]);
+    res.setHeader("Content-Range", response.headers["content-range"] ?? "");
+    res.setHeader("Content-Length", response.headers["content-length"] ?? "3400000");
+    res.setHeader("Content-Disposition", `inline; filename="${filename}"`);
     res.setHeader("Accept-Ranges", "bytes");
-    res.setHeader("Content-Length", response.headers["content-length"]);
     res.setHeader("Content-Type", "audio/mpeg");
 
     response.data.pipe(res);
