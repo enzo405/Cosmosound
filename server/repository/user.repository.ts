@@ -1,6 +1,7 @@
 import { prisma } from "@/app";
 import DatabaseException from "@/errors/DatabaseException";
-import { Prisma, Users } from "@prisma/client"; // Import the User model type
+import { MusicDetails } from "@/models/MusicDetails";
+import { HistoryRecord, Music, Prisma, Users } from "@prisma/client"; // Import the User model type
 
 const createUser = async (userData: Prisma.UsersCreateInput): Promise<Users> => {
   try {
@@ -123,6 +124,68 @@ const searchArtist = async (value: string): Promise<Users[]> => {
   }
 };
 
+const addMusicToHistory = async (userId: string, idCatalog: string, idMusic: string) => {
+  try {
+    await prisma.users.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        history: {
+          push: {
+            idCatalog,
+            idMusic,
+          },
+        },
+      },
+    });
+  } catch (err) {
+    throw new DatabaseException("Error adding music to history", err);
+  }
+};
+
+const getMusicHistory = async (
+  historyRecord: HistoryRecord[],
+  limit: number,
+): Promise<MusicDetails[]> => {
+  const historyWithLimit = historyRecord.slice(0, limit);
+
+  const catalogs = await Promise.all(
+    historyWithLimit.map(async (i) => {
+      return await prisma.catalogs.findUnique({
+        where: {
+          id: i.idCatalog,
+        },
+        include: {
+          owner: true,
+        },
+      });
+    }),
+  );
+
+  const musics: MusicDetails[] = [];
+  historyWithLimit.forEach((i) => {
+    const catalog = catalogs.find((c) => c?.id === i.idCatalog);
+    if (!catalog) return;
+
+    const music = catalog?.musics.find((m) => m.id === i.idMusic);
+    if (!music) return;
+
+    musics.push({
+      id: music.id,
+      title: music.title,
+      url: music.url,
+      genres: music.genres,
+      duration: music.duration,
+      createdAt: music.createdAt,
+      catalog: catalog,
+      artist: catalog.owner,
+    });
+  });
+
+  return musics;
+};
+
 export default {
   createUser,
   getUserByEmail,
@@ -132,4 +195,6 @@ export default {
   updateUser,
   getFavouritesArtists,
   searchArtist,
+  addMusicToHistory,
+  getMusicHistory,
 };

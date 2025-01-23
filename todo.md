@@ -2,7 +2,6 @@
 
 1. Listening
 - Frontend & Backend & Stream => Listening to Music
-- Backend => Music Listening history
 
 2. Liked Playlist
 - Backend => On user creation, add playlist liked songs

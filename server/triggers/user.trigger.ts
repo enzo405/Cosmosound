@@ -137,6 +137,14 @@ const like = async (req: UserRequest, res: Response) => {
   res.status(200).json({ message: "You liked this" });
 };
 
+const getHistory = async (req: UserRequest, res: Response) => {
+  const { limit } = req.query;
+
+  const limitValue = limit ? parseInt(limit as string) : 10;
+  const history = await userService.getHistory(req.userId!, limitValue);
+  res.status(200).json(history);
+};
+
 export default {
   updateUser,
   updateArtist,
@@ -144,4 +152,5 @@ export default {
   getFavourites,
   searchArtist,
   like,
+  getHistory,
 };

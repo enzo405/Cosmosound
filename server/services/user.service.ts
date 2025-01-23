@@ -1,5 +1,5 @@
 import userRepository from "@/repository/user.repository";
-import { Prisma, Users } from "@prisma/client";
+import { Music, Prisma, Users } from "@prisma/client";
 import bcrypt from "bcrypt";
 import ServerException from "@/errors/ServerException";
 import BadRequestException from "@/errors/BadRequestException";
@@ -7,6 +7,8 @@ import { Favourites } from "@/models/Favourites";
 import NotFoundException from "@/errors/NotFoundException";
 import playlistRepository from "@/repository/playlist.repository";
 import catalogRepository from "@/repository/catalog.repository";
+import catalogService from "./catalog.service";
+import { MusicDetails } from "@/models/MusicDetails";
 
 const getUserById = async (id: string): Promise<Users | null> => {
   return await userRepository.getUserById(id);
@@ -147,6 +149,29 @@ const toggleFollowArtist = async (id: string, value: number): Promise<void> => {
   await userRepository.updateUser({ followers: user.followers + value }, id);
 };
 
+const addMusicToHistory = async (userId: string, idCatalog: string, idMusic: string) => {
+  const user = await userRepository.getUserById(userId);
+  if (!user) {
+    throw new NotFoundException("User not found");
+  }
+
+  const lastMusicId = user.history[user.history.length - 1];
+  if (lastMusicId && lastMusicId.idMusic === idMusic) {
+    return;
+  }
+
+  return await userRepository.addMusicToHistory(userId, idCatalog, idMusic);
+};
+
+const getHistory = async (userId: string, limit: number): Promise<MusicDetails[]> => {
+  const user = await userRepository.getUserById(userId);
+  if (!user) {
+    throw new NotFoundException("User not found");
+  }
+
+  return await userRepository.getMusicHistory(user.history, limit);
+};
+
 export default {
   getUserById,
   createUser,
@@ -160,4 +185,6 @@ export default {
   likeCatalog,
   likePlaylist,
   likeGenre,
+  addMusicToHistory,
+  getHistory,
 };

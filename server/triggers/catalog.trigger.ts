@@ -1,8 +1,10 @@
 import BadRequestException from "@/errors/BadRequestException";
 import NotFoundException from "@/errors/NotFoundException";
 import { UserRequest } from "@/middlewares/auth.middleware";
+import userRepository from "@/repository/user.repository";
 import catalogService from "@/services/catalog.service";
 import nextcloudService from "@/services/nextcloud.service";
+import userService from "@/services/user.service";
 import { guessCatalogType } from "@/utils/catalog";
 import { Catalogs, Prisma } from "@prisma/client";
 import axios from "axios";
@@ -222,6 +224,8 @@ const listenMusic = async (req: UserRequest, res: Response) => {
     res.setHeader("Content-Disposition", `inline; filename="${filename}"`);
     res.setHeader("Accept-Ranges", "bytes");
     res.setHeader("Content-Type", "audio/mpeg");
+
+    userService.addMusicToHistory(req.userId!, idCatalog, idMusic);
 
     response.data.pipe(res);
   } catch (err) {
