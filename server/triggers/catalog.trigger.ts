@@ -191,6 +191,11 @@ const searchMusic = async (req: UserRequest, res: Response) => {
 
 const listenMusic = async (req: UserRequest, res: Response) => {
   const { idCatalog, idMusic } = req.params;
+  const range = req.headers.range;
+
+  if (!range) {
+    return res.status(416).send("Requires Range header");
+  }
 
   const music = await catalogService.getMusicById(idCatalog, idMusic);
   if (!music) {
@@ -200,17 +205,25 @@ const listenMusic = async (req: UserRequest, res: Response) => {
   try {
     const response = await axios.get(music.url, {
       responseType: "stream",
+      headers: {
+        Range: range,
+      },
       auth: {
         username: process.env.NEXTCLOUD_USERNAME!,
         password: process.env.NEXTCLOUD_PASSWORD!,
       },
     });
+
+    res.status(206);
+    res.setHeader("Content-Range", response.headers["content-range"]);
+    res.setHeader("Accept-Ranges", "bytes");
     res.setHeader("Content-Length", response.headers["content-length"]);
     res.setHeader("Content-Type", "audio/mpeg");
+
     response.data.pipe(res);
   } catch (err) {
     console.log("err", err);
-    throw new BadRequestException("An error occured while trying to read the file.");
+    throw new BadRequestException("An error occurred while trying to read the file.");
   }
 };
 

@@ -6,7 +6,7 @@ import { wrapRoute } from "@/utils/wrapper";
 
 const router = express.Router();
 
-router.get("/audio-stream/:idCatalog/:idMusic", ...wrapRoute([auth, trigger.listenMusic]));
+router.get("/audio-stream/:idCatalog/:idMusic", ...wrapRoute([trigger.listenMusic]));
 router.get("/catalogs/:id", ...wrapRoute([auth, trigger.getCatalogById]));
 router.get("/catalogs", ...wrapRoute([auth, trigger.searchCatalog]));
 router.get("/musics", ...wrapRoute([auth, trigger.searchMusic]));

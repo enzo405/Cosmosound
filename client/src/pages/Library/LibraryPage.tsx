@@ -180,7 +180,7 @@ function LibraryPage(): ReactElement {
         favContent?.likedArtists.length === 0 &&
         favContent?.likedCatalogs.length === 0 &&
         favGenres.length === 0 && (
-          <div className="text-center text-2xl">You have no favourite content</div>
+          <div className="text-center text-2xl">You have no favourite content yet</div>
         )}
     </div>
   );

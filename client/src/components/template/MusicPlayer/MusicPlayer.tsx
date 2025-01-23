@@ -1,12 +1,11 @@
 import { Icon } from "components/icons/Icon";
 import { useMusic } from "hooks/useMusic";
-import { ReactElement, HTMLAttributes, useRef, useEffect, useState } from "react";
+import { ReactElement, HTMLAttributes, useRef, useEffect } from "react";
 import MusicInfo from "../../music/MusicInfo";
 import TimeMusicSlider from "./TimeMusicSlider";
 import SoundSlider from "./SoundSlider";
 import { IconName } from "constants/iconName";
 import { useScreenSize } from "hooks/useScreenSize";
-import MusicService from "services/musicService";
 import { enqueueSnackbar } from "notistack";
 
 export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactElement {
@@ -14,13 +13,12 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     useMusic();
   const isMobile = useScreenSize();
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [blobUrl, setBlobUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (!audioRef.current) return;
 
     if (isPlaying) {
-      audioRef.current.play().catch((err) => console.error("Error playing audio:", err));
+      audioRef.current.play().catch((err) => enqueueSnackbar(err.message, { variant: "error" }));
     } else {
       audioRef.current.pause();
     }
@@ -31,22 +29,6 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
       audioRef.current.volume = soundValue / 100;
     }
   }, [soundValue]);
-
-  useEffect(() => {
-    const fetchAudio = async () => {
-      if (!playingMusic) return;
-      await MusicService.audioStream(playingMusic.catalog.id, playingMusic.id)
-        .then(async (blob) => {
-          const url = URL.createObjectURL(blob);
-          setBlobUrl(url);
-        })
-        .catch(() => {
-          enqueueSnackbar("Error fetching audio", { variant: "error" });
-        });
-    };
-
-    fetchAudio();
-  }, [playingMusic?.id]);
 
   const handleIsPlaying = () => setIsPlaying(!isPlaying);
 
@@ -80,7 +62,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     <>
       <audio
         ref={audioRef}
-        src={blobUrl || ""}
+        src={`http://localhost:4000/api/audio-stream/${playingMusic?.catalog.id}/${playingMusic?.id}`}
         onTimeUpdate={onTimeUpdate}
         onEnded={handleNextMusic}
         controls={false}
