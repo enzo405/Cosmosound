@@ -248,8 +248,9 @@ export default function ArtistPage(): ReactElement {
                 })
               )
             ) : (
-              <span className="text-dark-custom">
-                {artist.artistName} haven't made any {activeTab.valueOf()} yet
+              <span className="text-dark-custom w-full flex flex-row items-center gap-2">
+                <span className="rounded-lg bg-dark-glassy p-1 ">{artist.artistName}</span>
+                haven't made any {activeTab.valueOf()} yet
               </span>
             )}
           </div>

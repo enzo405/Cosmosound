@@ -3,7 +3,7 @@ import { Catalog, DetailedCatalog, TypeCatalog } from "models/Catalog";
 import { MusicDetails } from "models/Music";
 import { Playlist } from "models/Playlist";
 import { Artist } from "models/User";
-import { useEffect, useState, type ReactElement } from "react";
+import { useEffect, useMemo, useState, type ReactElement } from "react";
 import FilterBox from "./components/FilterBox";
 import MusicService from "services/musicService";
 import ArtistService from "services/artistService";
@@ -149,6 +149,12 @@ function ExplorePage(): ReactElement {
       });
   };
 
+  const isPageEmpty = useMemo(() => {
+    return (
+      [...albums, ...artists, ...musics, ...genres, ...playlists, ...eps, ...singles].length === 0
+    );
+  }, [albums, artists, musics, genres, playlists, eps, singles]);
+
   const displayFilter = (f: Filters): boolean => {
     switch (f) {
       case Filters.ALBUMS:
@@ -164,12 +170,9 @@ function ExplorePage(): ReactElement {
       case Filters.GENRES:
         return genres.length !== 0;
       default:
-        return true;
+        return !isPageEmpty;
     }
   };
-
-  const isPageEmpty =
-    [...albums, ...artists, ...musics, ...genres, ...playlists, ...eps, ...singles].length === 0;
 
   return (
     <div className="flex flex-col gap-10 w-full">
@@ -290,12 +293,19 @@ function ExplorePage(): ReactElement {
                   </Box>
                 </div>
               )}
-            {isPageEmpty && (
-              <>
-                <h1>There's nothing here</h1>
-              </>
-            )}
           </div>
+          {isPageEmpty && (
+            <div className="relative w-full h-full flex flex-col justify-center items-center select-none">
+              <h1 className="text-3xl font-bs text-dark-custom">There's nothing here !!!</h1>
+              <h2 className="text-lg font-bs text-dark-custom">Try to search for something else</h2>
+              <img
+                src="/img/noContentWithBox.webp"
+                alt="no content"
+                className="w-full md:w-3/4 max-w-[50rem]"
+                draggable="false"
+              />
+            </div>
+          )}
         </>
       )}
     </div>

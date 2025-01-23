@@ -146,32 +146,32 @@ const addMusicToHistory = async (userId: string, idCatalog: string, idMusic: str
 
 const getMusicHistory = async (
   historyRecord: HistoryRecord[],
-  limit: number,
+  limit: number
 ): Promise<MusicDetails[]> => {
   const modifiedLimit = historyRecord.length >= limit ? historyRecord.length - limit : 0;
   const limitHistory = historyRecord.slice(modifiedLimit, historyRecord.length);
 
-  const catalogs = await Promise.all(
-    limitHistory.map(async (i) => {
-      return await prisma.catalogs.findUnique({
-        where: {
-          id: i.idCatalog,
-        },
-        include: {
-          owner: true,
-        },
-      });
-    }),
-  );
+  const catalogIds = [...new Set(limitHistory.map((i) => i.idCatalog))];
+  const catalogs = await prisma.catalogs.findMany({
+    where: {
+      id: { in: catalogIds },
+    },
+    include: {
+      owner: true,
+    },
+  });
 
   const musics: MusicDetails[] = [];
-  limitHistory.forEach((i) => {
-    const catalog = catalogs.find((c) => c?.id === i.idCatalog);
-    if (!catalog) return;
+  const musicSet = new Set<string>();
 
-    const music = catalog?.musics.find((m) => m.id === i.idMusic);
-    if (!music) return;
+  for (const record of limitHistory) {
+    const catalog = catalogs.find((c) => c.id === record.idCatalog);
+    if (!catalog) continue;
 
+    const music = catalog.musics.find((m) => m.id === record.idMusic);
+    if (!music || musicSet.has(music.id)) continue;
+
+    musicSet.add(music.id);
     musics.push({
       id: music.id,
       title: music.title,
@@ -182,7 +182,7 @@ const getMusicHistory = async (
       catalog: catalog,
       artist: catalog.owner,
     });
-  });
+  }
 
   return musics;
 };

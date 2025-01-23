@@ -2,6 +2,7 @@ import { type ReactElement } from "react";
 import { useRouteError } from "react-router-dom";
 
 interface RouteError {
+  status?: number;
   statusText?: string;
   message?: string;
 }
@@ -9,17 +10,42 @@ interface RouteError {
 function ErrorPage(): ReactElement {
   const routeError = useRouteError() as RouteError | null;
 
-  const routeErrorComponent = (
-    <div>
-      <h1>Something went wrong, please check the route...</h1>
-      <p>
-        <i>{routeError?.statusText || routeError?.message}</i>
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800">
+      <h1 className="text-4xl font-bold text-red-500 mb-4">Oops! Something went wrong.</h1>
+      <p className="text-lg mb-6 text-center">
+        We're sorry for the inconvenience. Here are the details:
       </p>
+      {routeError ? (
+        <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+          {routeError.status && (
+            <p className="mb-2">
+              <span className="font-semibold">Status Code:</span> {routeError.status}
+            </p>
+          )}
+          {routeError.statusText && (
+            <p className="mb-2">
+              <span className="font-semibold">Status Text:</span> {routeError.statusText}
+            </p>
+          )}
+          {routeError.message && (
+            <p className="mb-2">
+              <span className="font-semibold">Message:</span> {routeError.message}
+            </p>
+          )}
+        </div>
+      ) : (
+        <p className="text-center text-gray-600">
+          An unknown error occurred. Please check the console for more details.
+        </p>
+      )}
+      <button
+        onClick={() => window.location.reload()}
+        className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+        Reload Page
+      </button>
     </div>
   );
-
-  if (routeError) return routeErrorComponent;
-  else return <>An error occured please check console</>;
 }
 
 export default ErrorPage;

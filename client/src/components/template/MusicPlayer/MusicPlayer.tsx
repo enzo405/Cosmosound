@@ -6,7 +6,6 @@ import TimeMusicSlider from "./TimeMusicSlider";
 import SoundSlider from "./SoundSlider";
 import { IconName } from "constants/iconName";
 import { useScreenSize } from "hooks/useScreenSize";
-import { enqueueSnackbar } from "notistack";
 
 export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactElement {
   const { playingMusic, isPlaying, soundValue, time, setIsPlaying, setSoundValue, setTime } =
@@ -30,7 +29,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     if (!audioRef.current) return;
 
     if (isPlaying) {
-      audioRef.current.play().catch((err) => enqueueSnackbar(err.message, { variant: "error" }));
+      audioRef.current.play().catch((err) => console.error(err));
     } else {
       audioRef.current.pause();
     }
@@ -40,9 +39,8 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      audioRef.current.load();
       if (isPlaying) {
-        audioRef.current.play().catch((err) => enqueueSnackbar(err.message, { variant: "error" }));
+        audioRef.current.play().catch((err) => console.error(err));
       }
     }
   }, [playingMusic]);
@@ -117,7 +115,12 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
             </div>
           </div>
           <div className="flex flex-col gap-2 items-center w-full px-10 pt-2">
-            <TimeMusicSlider time={time} setTime={setTime} duration={playingMusic.duration} />
+            <TimeMusicSlider
+              time={time}
+              audioRef={audioRef}
+              setTime={setTime}
+              duration={playingMusic.duration}
+            />
           </div>
         </div>
       ) : (
@@ -144,7 +147,12 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
               />
             </div>
             <div className="flex flex-row gap-1 items-center w-full lg:w-5/6">
-              <TimeMusicSlider time={time} setTime={setTime} duration={playingMusic.duration} />
+              <TimeMusicSlider
+                time={time}
+                setTime={setTime}
+                duration={playingMusic.duration}
+                audioRef={audioRef}
+              />
             </div>
           </div>
           <div className="flex flex-row w-1/4 lg:w-1/3 h-full justify-end">

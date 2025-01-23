@@ -47,6 +47,10 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
     };
   }, [playlist]);
 
+  const isPlayingSongCurrentPage = useMemo(() => {
+    return playlist?.musics.find((m) => m.id === playingMusic?.id) != undefined;
+  }, [playingMusic, playlist]);
+
   useEffect(() => {
     const fetchPlaylist = async () => {
       await PlaylistService.getPlaylistById(idPlaylist)
@@ -124,9 +128,6 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
           }),
     });
   };
-
-  const isPlayingSongCurrentPage =
-    playlist.musics.find((m) => m.id === playingMusic?.id) != undefined;
 
   return (
     <PageLayout
