@@ -65,10 +65,14 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   const musicDetails: MusicDetails = { ...catalog.musics[0], artist: catalog.owner, catalog };
 
   const handlePlaying = () => {
-    if (!isPlayingSongCurrentPage && catalog != undefined) {
-      setPlayingMusic(musicDetails);
+    if (isPlaying && isPlayingSongCurrentPage) {
+      setIsPlaying(false);
+    } else {
+      if (!isPlayingSongCurrentPage) {
+        setPlayingMusic(musicDetails);
+      }
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleClickHeart = async () => {

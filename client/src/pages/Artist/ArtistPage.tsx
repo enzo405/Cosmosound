@@ -130,15 +130,19 @@ export default function ArtistPage(): ReactElement {
   const handlePlaying = () => {
     loadContent(ArtistTabs.MUSIC);
     setActiveTab(ArtistTabs.MUSIC);
-    if (!isPlayingSongCurrentPage && artist != undefined) {
-      const firstCatalog = artist.catalogs[0];
-      setPlayingMusic({
-        ...firstCatalog.musics[0],
-        catalog: firstCatalog,
-        artist: artist,
-      });
+    if (isPlaying && isPlayingSongCurrentPage) {
+      setIsPlaying(false);
+    } else {
+      if (!isPlayingSongCurrentPage) {
+        const firstCatalog = artist.catalogs[0];
+        setPlayingMusic({
+          ...firstCatalog.musics[0],
+          catalog: firstCatalog,
+          artist: artist,
+        });
+      }
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const onLikeCatalog = async (like: boolean, catalog: Catalog): Promise<boolean> => {

@@ -76,15 +76,19 @@ export default function GenresPage(): ReactElement {
         variant: "warning",
       });
     } else {
-      if (!isPlayingSongCurrentPage != undefined) {
-        const firstMusicCatalog = genreContent.musics[0]?.catalog;
-        setPlayingMusic({
-          ...genreContent.musics[0],
-          artist: genreContent.musics[0].artist,
-          catalog: firstMusicCatalog!,
-        });
+      if (isPlaying && isPlayingSongCurrentPage) {
+        setIsPlaying(false);
+      } else {
+        if (!isPlayingSongCurrentPage) {
+          const firstMusicCatalog = genreContent.musics[0]?.catalog;
+          setPlayingMusic({
+            ...genreContent.musics[0],
+            artist: genreContent.musics[0].artist,
+            catalog: firstMusicCatalog!,
+          });
+        }
+        setIsPlaying(true);
       }
-      setIsPlaying(!isPlaying);
     }
   };
 

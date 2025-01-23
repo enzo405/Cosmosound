@@ -8,7 +8,6 @@
 - Backend => on music like add to Liked Songs playlist
 
 3. A bunch of random stuff xD
-- Frontend => 500 page & error page
 - Frontend => About-us page : Copy of the Landing page without the register button.
 - Frontend => Legal page: ask gpt
 - Frontend => Home Page *when not logged in*: Landing page with great looking image and nice & short description, with a button that leads to the register page. At the bottom, there'll be all necessary informations about the site (name details, creation date, goal of the app, who am i etc...).
@@ -34,4 +33,3 @@
 # Bugs:
 - Upload picture can have more than 1 share link
 - Update social media
-- Can't play music if another is already in play on Playlist, Artist, Catalog page

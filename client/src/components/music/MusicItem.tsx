@@ -81,7 +81,9 @@ export default function MusicItem({
     if (isPlaying && isCurrentMusicPlaying) {
       setIsPlaying(false);
     } else {
-      setPlayingMusic({ ...music, artist, catalog });
+      if (!isCurrentMusicPlaying) {
+        setPlayingMusic({ ...music, artist, catalog });
+      }
       setIsPlaying(true);
     }
   };

@@ -50,7 +50,6 @@ function ExplorePage(): ReactElement {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // TODO do better
         setLoading(true);
         const [, , , , fetchedGenres] = await Promise.all([
           MusicService.searchMusicByTitle(search).then((data) => {

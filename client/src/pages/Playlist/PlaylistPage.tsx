@@ -78,10 +78,14 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   }
 
   const handlePlaying = () => {
-    if (!isPlayingSongCurrentPage && playlist != undefined) {
-      setPlayingMusic(musicDetails);
+    if (isPlaying && isPlayingSongCurrentPage) {
+      setIsPlaying(false);
+    } else {
+      if (!isPlayingSongCurrentPage) {
+        setPlayingMusic(musicDetails);
+      }
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleClickHeart = async () => {

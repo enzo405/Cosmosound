@@ -26,10 +26,12 @@ export default function MusicItemDelete({
   const musicItemRef = useRef<HTMLInputElement>(null);
 
   const handlePlayMusic = (music: Music) => {
-    if (isCurrentMusicPlaying) {
+    if (isPlaying && isCurrentMusicPlaying) {
       setIsPlaying(false);
     } else {
-      setPlayingMusic({ ...music, artist, catalog });
+      if (!isCurrentMusicPlaying) {
+        setPlayingMusic({ ...music, artist, catalog });
+      }
       setIsPlaying(true);
     }
   };
