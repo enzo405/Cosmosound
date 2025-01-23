@@ -15,6 +15,18 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.code === "Space") {
+        event.preventDefault();
+        setIsPlaying(!isPlaying);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isPlaying]);
+
+  useEffect(() => {
     if (!audioRef.current) return;
 
     if (isPlaying) {
@@ -26,11 +38,24 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
 
   useEffect(() => {
     if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.load();
+      if (isPlaying) {
+        audioRef.current.play().catch((err) => enqueueSnackbar(err.message, { variant: "error" }));
+      }
+    }
+  }, [playingMusic]);
+
+  useEffect(() => {
+    if (audioRef.current) {
       audioRef.current.volume = soundValue / 100;
     }
-  }, [soundValue]);
+  }, [soundValue, playingMusic]);
 
-  const handleIsPlaying = () => setIsPlaying(!isPlaying);
+  const handleIsPlaying = () => {
+    setIsPlaying(!isPlaying);
+  };
 
   const handleNextMusic = () => {
     console.log("Next music");
@@ -62,7 +87,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     <>
       <audio
         ref={audioRef}
-        src={`http://localhost:4000/api/audio-stream/${playingMusic?.catalog.id}/${playingMusic?.id}`}
+        src={`http://localhost:4000/api/audio-stream?musicUrl=${encodeURIComponent(playingMusic?.url.split(".net/")[1])}`}
         onTimeUpdate={onTimeUpdate}
         onEnded={handleNextMusic}
         controls={false}

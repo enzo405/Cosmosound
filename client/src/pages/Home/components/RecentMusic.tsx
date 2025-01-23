@@ -1,6 +1,6 @@
 import Box from "components/box/Box";
 import MusicItem from "components/music/MusicItem";
-import { Music, MusicDetails } from "models/Music";
+import { MusicDetails } from "models/Music";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect, useState } from "react";
 import MusicService from "services/musicService";
@@ -27,8 +27,8 @@ export default function RecentMusic({}: RecentMusicProps): ReactElement {
     <Box
       title="Recently Played"
       className="flex-col"
-      children={musicHistory?.map((m) => {
-        return <MusicItem music={m} artist={m.artist} catalog={m.catalog} key={m.id} />;
+      children={musicHistory?.map((m, i) => {
+        return <MusicItem music={m} artist={m.artist} catalog={m.catalog} key={i} />;
       })}
     />
   );

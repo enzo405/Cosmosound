@@ -4,7 +4,7 @@ import { useMusic } from "hooks/useMusic";
 import { Music, MusicDetails } from "models/Music";
 import { enqueueSnackbar } from "notistack";
 import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import PlaylistService from "services/playlistService";
 import { formatDurationWithLabel, formatTime } from "utils/date";
@@ -33,6 +33,20 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   );
   const [displaySettings, setDisplaySettings] = useState(false);
 
+  const musicDetails: MusicDetails | undefined = useMemo(() => {
+    if (playlist == undefined) return;
+    return {
+      id: playlist.musics[0].id,
+      title: playlist.musics[0].title,
+      artist: playlist.musics[0].artist,
+      duration: playlist.musics[0].duration,
+      catalog: playlist.musics[0].catalog,
+      url: playlist.musics[0].url,
+      genres: playlist.musics[0].genres,
+      createdAt: playlist.musics[0].createdAt,
+    };
+  }, [playlist]);
+
   useEffect(() => {
     const fetchPlaylist = async () => {
       await PlaylistService.getPlaylistById(idPlaylist)
@@ -58,17 +72,6 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   if (playlist == undefined) {
     return <NotFoundErrorPage message="PLAYLIST NOT FOUND" />;
   }
-
-  const musicDetails: MusicDetails = {
-    id: playlist.musics[0].id,
-    title: playlist.musics[0].title,
-    artist: playlist.musics[0].artist,
-    duration: playlist.musics[0].duration,
-    catalog: playlist.musics[0].catalog,
-    url: playlist.musics[0].url,
-    genres: playlist.musics[0].genres,
-    createdAt: playlist.musics[0].createdAt,
-  };
 
   const handlePlaying = () => {
     if (!isPlayingSongCurrentPage && playlist != undefined) {

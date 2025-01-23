@@ -105,6 +105,7 @@ const createCatalog = async (req: MulterRequest, res: Response) => {
   }
 
   const catalog = await catalogService.createCatalog({
+    id: idCatalog,
     title,
     musics: musicsEntities,
     thumbnail: thumnbailUrl,
@@ -192,23 +193,31 @@ const searchMusic = async (req: UserRequest, res: Response) => {
 };
 
 const listenMusic = async (req: UserRequest, res: Response) => {
-  const { idCatalog, idMusic } = req.params;
+  const { musicUrl } = req.query;
   const range = req.headers.range;
 
   if (!range) {
     return res.status(416).send("Requires Range header");
   }
 
-  const music = await catalogService.getMusicById(idCatalog, idMusic);
-  if (!music) {
-    throw new NotFoundException(`The music with id ${idMusic} not found.`);
+  if (!musicUrl || typeof musicUrl !== "string") {
+    throw new BadRequestException("A music URL must be provided.");
   }
 
   try {
-    const response = await axios.get(music.url, {
+    const decodedUrl = decodeURIComponent(musicUrl);
+    const fullUrl = process.env.NEXTCLOUD_BASE_URL + decodedUrl;
+
+    const [unit, rangeValue] = range.split("=");
+    const [startStr, endStr] = rangeValue.split("-");
+    const start = parseInt(startStr, 10);
+    const end = endStr ? parseInt(endStr, 10) : start + 1024 * 1024; // Default chunk size is 1MB
+    const chunkSize = end - start + 1;
+
+    const response = await axios.get(fullUrl, {
       responseType: "stream",
       headers: {
-        Range: range,
+        Range: `${unit}=${start}-${end}`,
       },
       auth: {
         username: process.env.NEXTCLOUD_USERNAME!,
@@ -216,20 +225,29 @@ const listenMusic = async (req: UserRequest, res: Response) => {
       },
     });
 
-    const filename = music.url.split("/").pop();
+    const filename = decodedUrl.split("/").pop();
+    const folderName = decodedUrl.split("/")[decodedUrl.split("/").length - 2];
+    const idCatalog = folderName.split("-")[1];
+    const idMusic = filename?.split(".")[0];
+
+    if (!idMusic || !idCatalog) {
+      throw new BadRequestException("An error occurred while trying to read the file.");
+    }
 
     res.status(206);
-    res.setHeader("Content-Range", response.headers["content-range"] ?? "");
-    res.setHeader("Content-Length", response.headers["content-length"] ?? "3400000");
+    res.setHeader("Content-Range", response.headers["content-range"] ?? `bytes ${start}-${end}`);
+    res.setHeader("Content-Length", chunkSize.toString());
     res.setHeader("Content-Disposition", `inline; filename="${filename}"`);
     res.setHeader("Accept-Ranges", "bytes");
     res.setHeader("Content-Type", "audio/mpeg");
 
-    userService.addMusicToHistory(req.userId!, idCatalog, idMusic);
+    if (start === 0) {
+      userService.addMusicToHistory(req.userId!, idCatalog, idMusic);
+    }
 
     response.data.pipe(res);
   } catch (err) {
-    console.log("err", err);
+    console.error("Error streaming audio:", err);
     throw new BadRequestException("An error occurred while trying to read the file.");
   }
 };

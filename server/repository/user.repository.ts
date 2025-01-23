@@ -148,10 +148,11 @@ const getMusicHistory = async (
   historyRecord: HistoryRecord[],
   limit: number,
 ): Promise<MusicDetails[]> => {
-  const historyWithLimit = historyRecord.slice(0, limit);
+  const modifiedLimit = historyRecord.length >= limit ? historyRecord.length - limit : 0;
+  const limitHistory = historyRecord.slice(modifiedLimit, historyRecord.length);
 
   const catalogs = await Promise.all(
-    historyWithLimit.map(async (i) => {
+    limitHistory.map(async (i) => {
       return await prisma.catalogs.findUnique({
         where: {
           id: i.idCatalog,
@@ -164,7 +165,7 @@ const getMusicHistory = async (
   );
 
   const musics: MusicDetails[] = [];
-  historyWithLimit.forEach((i) => {
+  limitHistory.forEach((i) => {
     const catalog = catalogs.find((c) => c?.id === i.idCatalog);
     if (!catalog) return;
 

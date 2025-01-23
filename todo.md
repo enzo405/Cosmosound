@@ -1,15 +1,13 @@
 # Must have:
 
 1. Listening
-- Frontend & Backend & Stream => Listening to Music
+- Backend => Previous music, Next music, faster response to load music
 
 2. Liked Playlist
 - Backend => On user creation, add playlist liked songs
 - Backend => on music like add to Liked Songs playlist
 
 3. A bunch of random stuff xD
-- Frontend => Register tell user they can like genre after
-- Frontend => Loading icon and check server response if alive every 5sec
 - Frontend => Add assets for explore page empty, 500 page & error page
 - Frontend => About-us page : Copy of the Landing page without the register button.
 - Frontend => Legal page: ask gpt
@@ -17,6 +15,9 @@
 
 
 # Good to have:
+- Frontend => Load songs and cache them when user like
+- Frontend => Register tell user they can like genre after
+- Frontend => Loading icon and check server response if alive every 5sec
 - Backend & Frontend => Add previous password if the user want to change password
 - Backend & Frontend => Add forgot password feature
 - Load next music when listening music
