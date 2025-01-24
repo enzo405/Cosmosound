@@ -1,6 +1,7 @@
 import BadRequestException from "@/errors/BadRequestException";
 import { WebError } from "@/errors/Error";
 import { UserRequest } from "@/middlewares/auth.middleware";
+import catalogService from "@/services/catalog.service";
 import nextcloudService from "@/services/nextcloud.service";
 import userService from "@/services/user.service";
 import { Prisma, UserRole } from "@prisma/client";
@@ -145,6 +146,11 @@ const getHistory = async (req: UserRequest, res: Response) => {
   res.status(200).json(history);
 };
 
+const getCatalogSuggestions = async (req: UserRequest, res: Response) => {
+  const suggestions = await catalogService.getCatalogSuggestions(req.userId!);
+  res.status(200).json(suggestions);
+};
+
 export default {
   updateUser,
   updateArtist,
@@ -153,4 +159,5 @@ export default {
   searchArtist,
   like,
   getHistory,
+  getCatalogSuggestions,
 };

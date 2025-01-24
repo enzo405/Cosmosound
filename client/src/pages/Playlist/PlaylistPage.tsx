@@ -17,6 +17,7 @@ import { useConfirmDialog } from "hooks/useConfirm";
 import { useUser } from "hooks/useUser";
 import { PlaylistWithMusic } from "models/Playlist";
 import Loading from "components/Loading";
+import GenreLink from "components/GenreLink";
 
 interface PlaylistPageProps {}
 
@@ -50,6 +51,14 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
   const isPlayingSongCurrentPage = useMemo(() => {
     return playlist?.musics.find((m) => m.id === playingMusic?.id) != undefined;
   }, [playingMusic, playlist]);
+
+  const playlistGenres: Set<string> = useMemo(() => {
+    const genres = new Set<string>();
+    playlist?.musics.forEach((music) => {
+      music.genres.forEach((genre) => genres.add(genre));
+    });
+    return genres;
+  }, [playlist]);
 
   useEffect(() => {
     const fetchPlaylist = async () => {
@@ -153,6 +162,12 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
               playlist.musics.reduce((total, music) => total + music.duration, 0),
             )}
             )
+          </span>
+          <span className="flex flex-row gap-1">
+            Genres:
+            {Array.from(playlistGenres).map((genre) => (
+              <GenreLink key={genre} genre={genre} />
+            ))}
           </span>
         </div>
       }

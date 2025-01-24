@@ -47,12 +47,17 @@ async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<
   return await apiClient.post("/api/catalogs", formData).then((res) => res.data);
 }
 
+async function getSuggestions(): Promise<DetailedCatalog[]> {
+  return await apiClient.get("/api/me/suggestions").then((res) => res.data);
+}
+
 const CatalogService = {
   getArtistCatalogs,
   getCatalogById,
   searchCatalogByTitle,
   deleteCatalog,
   createCatalog,
+  getSuggestions,
 };
 
 export default CatalogService;

@@ -21,6 +21,7 @@ import { displayPictureProfile } from "utils/user";
 import MediaIcon from "components/icons/media/MediaIcon";
 import { DetailedArtistInfo } from "models/User";
 import Loading from "components/Loading";
+import GenreLink from "components/GenreLink";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -196,6 +197,10 @@ export default function ArtistPage(): ReactElement {
                 {<MediaIcon media={media} />}
               </a>
             ))}
+          </span>
+          <span className="flex flex-row gap-1 items-center">
+            Genre:
+            <GenreLink genre={artist.genre} />
           </span>
         </div>
       }

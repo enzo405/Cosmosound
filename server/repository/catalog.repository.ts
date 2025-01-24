@@ -166,6 +166,28 @@ const getFavouritesCatalogs = async (user: Users): Promise<Catalogs[]> => {
   }
 };
 
+const getCatalogSuggestions = async (user: Users): Promise<Catalogs[]> => {
+  try {
+    const searchingGenre = user.likedGenres;
+
+    return await prisma.catalogs.findMany({
+      include: {
+        owner: true,
+      },
+      where: {
+        OR: [
+          { musics: { some: { genres: { hasSome: searchingGenre } } } },
+          { owner: { genre: { in: searchingGenre } } },
+        ],
+      },
+      distinct: ["id"],
+      take: 15,
+    });
+  } catch (err) {
+    throw new DatabaseException("Error fetching catalog suggestions", err);
+  }
+};
+
 export default {
   getCatalogById,
   createCatalog,
@@ -175,4 +197,5 @@ export default {
   searchCatalog,
   searchMusic,
   getFavouritesCatalogs,
+  getCatalogSuggestions,
 };

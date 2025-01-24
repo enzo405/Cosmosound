@@ -17,6 +17,7 @@ import { useUser } from "hooks/useUser";
 import { DetailedCatalog } from "models/Catalog";
 import { displayPictureProfile } from "utils/user";
 import Loading from "components/Loading";
+import GenreLink from "components/GenreLink";
 
 interface CatalogPageProps {}
 
@@ -35,6 +36,19 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
     () => catalog?.musics.find((m) => m.id === playingMusic?.id) != undefined,
     [playingMusic],
   );
+
+  const musicDetails: MusicDetails | undefined = useMemo(() => {
+    if (!catalog) return undefined;
+    return { ...catalog.musics[0], artist: catalog.owner, catalog };
+  }, [catalog]);
+
+  const catalogGenres: Set<string> = useMemo(() => {
+    const genres = new Set<string>();
+    catalog?.musics.forEach((music) => {
+      music.genres.forEach((genre) => genres.add(genre));
+    });
+    return genres;
+  }, [catalog]);
 
   useEffect(() => {
     const fetchCatalog = async () => {
@@ -61,8 +75,6 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   if (catalog == undefined) {
     return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
   }
-
-  const musicDetails: MusicDetails = { ...catalog.musics[0], artist: catalog.owner, catalog };
 
   const handlePlaying = () => {
     if (isPlaying && isPlayingSongCurrentPage) {
@@ -120,6 +132,12 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
               catalog.musics.reduce((total, music) => total + music.duration, 0),
             )}
             )
+          </span>
+          <span className="flex flex-row gap-1">
+            Genres:
+            {Array.from(catalogGenres).map((genre) => (
+              <GenreLink key={genre} genre={genre} />
+            ))}
           </span>
         </div>
       }

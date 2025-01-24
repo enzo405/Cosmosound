@@ -9,8 +9,9 @@ function HomePage(): ReactElement {
 
   useEffect(() => {
     const fetchCatalogs = async () => {
-      const catalogs = await CatalogService.searchCatalogByTitle("FIR");
-      setCatalogs(catalogs);
+      await CatalogService.getSuggestions().then((catalogs) => {
+        setCatalogs(catalogs);
+      });
     };
 
     fetchCatalogs();

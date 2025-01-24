@@ -13,6 +13,7 @@ import SettingsOptions from "components/settings/SettingsOptions";
 import { routesConfig } from "config/app-config";
 import { getDirtyFieldsValue } from "utils/form";
 import PlaylistLink from "./components/PlaylistLink";
+import GenreLink from "components/GenreLink";
 
 export interface AccountFormData {
   username: string;
@@ -351,7 +352,7 @@ function AccountPage(): ReactElement {
                 <img
                   src={displayPictureProfile(user?.pictureProfile)}
                   alt={`${user?.name}'s profile`}
-                  className="w-16 h-16 rounded-full border-2 border-blue-500"
+                  className="w-16 h-16 rounded-full border-2 border-orange-500"
                 />
                 <div className="ml-1 sm:ml-4">
                   <h2 className="text-lg sm:text-xl font-bold text-gray-800">{user?.name}</h2>
@@ -371,17 +372,12 @@ function AccountPage(): ReactElement {
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Liked Genres</h3>
                 <div className="flex flex-wrap gap-2">
-                  {user?.likedGenres.slice(0, 6).map((genre) => (
-                    <Link
-                      key={genre}
-                      className="px-3 py-1 hover:bg-blue-400 bg-blue-500 text-white text-sm rounded-full"
-                      to={routesConfig.genres.getParameter(genre)}>
-                      {genre}
-                    </Link>
-                  ))}
+                  {user?.likedGenres
+                    .slice(0, 6)
+                    .map((genre) => <GenreLink key={genre} genre={genre} />)}
                   {user?.likedGenres && user.likedGenres.length > 6 && (
                     <Link
-                      className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full"
+                      className="px-3 py-1 bg-primary-orange hover:bg-tertio-orange text-white text-sm rounded-full"
                       to={routesConfig.library.path}>
                       +{user.likedGenres.length - 6}
                     </Link>

@@ -1,5 +1,6 @@
 import Container from "components/box/Container";
 import Divider from "components/Divider";
+import GenreLink from "components/GenreLink";
 import { Icon } from "components/icons/Icon";
 import MediaIcon from "components/icons/media/MediaIcon";
 import { routesConfig } from "config/app-config";
@@ -51,11 +52,7 @@ const ArtistInfoCard: React.FC<ArtistInfoCardProps> = ({ artist }) => {
                 </span>
               )}
             </span>
-            <Link
-              className="px-3 py-1 hover:bg-blue-400 bg-blue-500 text-white text-sm rounded-full truncate"
-              to={routesConfig.genres.getParameter(genre || "")}>
-              {genre}
-            </Link>
+            <GenreLink genre={genre || ""} />
           </div>
         </div>
       </div>

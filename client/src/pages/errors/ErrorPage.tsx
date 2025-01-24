@@ -1,5 +1,6 @@
+import { routesConfig } from "config/app-config";
 import { type ReactElement } from "react";
-import { useRouteError } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 
 interface RouteError {
   status?: number;
@@ -39,11 +40,18 @@ function ErrorPage(): ReactElement {
           An unknown error occurred. Please check the console for more details.
         </p>
       )}
-      <button
-        onClick={() => window.location.reload()}
-        className="mt-6 bg-primary-orange text-white px-4 py-2 rounded-lg hover:bg-tertio-orange transition">
-        Reload Page
-      </button>
+      <div className="flex flex-row gap-2">
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-6 bg-primary-orange text-white px-4 py-2 rounded-lg hover:bg-tertio-orange transition">
+          Reload Page
+        </button>
+        <Link
+          to={routesConfig.home.path}
+          className="mt-6 bg-primary-orange text-white px-4 py-2 rounded-lg hover:bg-tertio-orange transition">
+          Return Home
+        </Link>
+      </div>
     </div>
   );
 }

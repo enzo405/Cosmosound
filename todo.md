@@ -1,13 +1,8 @@
 # Must have:
 
-1. Listening
 - Backend => Previous music, Next music
-
-2. Liked Playlist
 - Backend => On user creation, add playlist liked songs
 - Backend => on music like add to Liked Songs playlist
-
-3. A bunch of random stuff xD
 - Suggestions algo
 - Add suggested content if the truc is empty
 
