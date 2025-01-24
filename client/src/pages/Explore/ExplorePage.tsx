@@ -174,7 +174,7 @@ function ExplorePage(): ReactElement {
   };
 
   return (
-    <div className="flex flex-col gap-10 w-full">
+    <div className={`flex flex-col ${!isPageEmpty ? "gap-10" : "gap-2"} w-full`}>
       <FilterBox
         filters={Object.entries(Filters).filter(([_, f]) => displayFilter(f))}
         onFilterClick={(f) => setActiveFilter(f)}
