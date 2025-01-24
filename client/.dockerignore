@@ -1,0 +1,14 @@
+.git
+.gitignore
+.DS_Store
+
+Dockerfile*
+docker-compose*
+.dockerignore
+
+node_modules
+mongodb_rs
+
+dist
+build
+*.log

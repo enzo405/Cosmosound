@@ -1,0 +1,114 @@
+services:
+  express:
+    build:
+      context: ./server
+      dockerfile: express.Dockerfile
+    container_name: cosmosound_backend
+    volumes:
+      - .:/app:cached
+      - node_modules:/app/node_modules
+    depends_on:
+      traefik:
+        condition: service_completed_successfully
+      mongodb-setup:
+        condition: service_completed_successfully
+    env_file:
+      - ./server/.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.entrypoints=web"
+      - "traefik.http.services.backend.loadbalancer.server.port=4000"
+    restart: unless-stopped
+    networks:
+      - backend
+
+
+  mongodb:
+    container_name: cosmosound_database
+    build: 
+      context: ./server/mongodb_rs/
+      dockerfile: mongodb.Dockerfile
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok | mongosh localhost:27017/test --quiet'
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    networks:
+     - backend
+
+
+  mongodb-setup:
+    image: mongo:8.0
+    container_name: mongodb-setup
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: "no"
+    command: >
+      mongosh --username root --password root --host mongodb --port 27017 --eval '
+        config = {
+          "_id": "rs0",
+          "members": [
+            { "_id": 0, "host": "mongodb:27017", "priority": 1 }
+          ]
+        },
+        rs.initiate(config);'
+    networks:
+     - backend
+
+  traefik:
+    image: "traefik:v3.2"
+    container_name: traefik
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=true"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8081:8080"
+    restart: unless-stopped
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - external
+      - frontend
+      - backend
+
+  react_front:
+    build:
+      context: ./client
+      dockerfile: react.Dockerfile
+    container_name: cosmosound_frontend
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+    networks:
+      - frontend
+
+
+networks:
+  external:
+    driver: bridge
+  frontend:
+    external: false
+  backend:
+    external: false
+
+volumes:
+  mongodb_data:
+    driver: local
+  node_modules:

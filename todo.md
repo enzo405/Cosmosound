@@ -3,8 +3,10 @@
 - Backend => Previous music, Next music
 - Backend => On user creation, add playlist liked songs
 - Backend => on music like add to Liked Songs playlist
-- Suggestions algo
-- Add suggested content if the truc is empty
+
+- Dockerfile => keyfile replicaset in dockercompose
+- Dockerfile => env variable put in .env file
+
 
 # Good to have:
 - Frontend => Load songs and cache them when user like
