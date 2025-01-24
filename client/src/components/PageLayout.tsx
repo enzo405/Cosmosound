@@ -30,6 +30,7 @@ export default function PageLayout({
       <div className="flex flex-col sm:flex-row w-full lg:gap-10 md:gap-6 gap-4">
         {thumbnail && (
           <img
+            loading="eager"
             className="rounded-full lg:mm-size-64 md:mm-size-52 mm-size-40 shadow-2xl"
             src={thumbnail}
             alt={typeof title === "string" ? title : "thumbnail"}

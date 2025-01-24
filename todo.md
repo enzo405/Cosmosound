@@ -8,14 +8,11 @@
 - Backend => on music like add to Liked Songs playlist
 
 3. A bunch of random stuff xD
-- Frontend => About-us page : Copy of the Landing page without the register button.
-- Frontend => Legal page: ask gpt
-- Frontend => Home Page *when not logged in*: Landing page with great looking image and nice & short description, with a button that leads to the register page. At the bottom, there'll be all necessary informations about the site (name details, creation date, goal of the app, who am i etc...).
-
+- Suggestions algo
+- Add suggested content if the truc is empty
 
 # Good to have:
 - Frontend => Load songs and cache them when user like
-- Frontend => Register tell user they can like genre after
 - Frontend => Loading icon and check server response if alive every 5sec
 - Backend & Frontend => Add previous password if the user want to change password
 - Backend & Frontend => Add forgot password feature

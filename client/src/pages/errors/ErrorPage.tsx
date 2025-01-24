@@ -41,7 +41,7 @@ function ErrorPage(): ReactElement {
       )}
       <button
         onClick={() => window.location.reload()}
-        className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+        className="mt-6 bg-primary-orange text-white px-4 py-2 rounded-lg hover:bg-tertio-orange transition">
         Reload Page
       </button>
     </div>

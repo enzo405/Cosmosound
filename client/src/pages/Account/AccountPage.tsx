@@ -307,6 +307,7 @@ function AccountPage(): ReactElement {
                           htmlFor="profileImage"
                           className="relative w-min h-min cursor-pointer hover:opacity-90 flex justify-end">
                           <img
+                            loading="eager"
                             src="/img/form/edit-background.png"
                             alt="Edit background"
                             className="absolute z-10 top-0 right-0 mm-size-20 md:mm-size-32 opacity-90"

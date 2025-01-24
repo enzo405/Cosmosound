@@ -298,6 +298,7 @@ function ExplorePage(): ReactElement {
               <h1 className="text-3xl font-bs text-dark-custom">There's nothing here !!!</h1>
               <h2 className="text-lg font-bs text-dark-custom">Try to search for something else</h2>
               <img
+                loading="eager"
                 src="/img/noContentWithBox.webp"
                 alt="no content"
                 className="w-full md:w-3/4 max-w-[50rem]"

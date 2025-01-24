@@ -72,6 +72,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
         {/* Profile Section */}
         <SettingsOptions hoverable={false}>
           <img
+            loading="eager"
             className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300 object-cover"
             src={displayPictureProfile(user?.pictureProfile)}
             alt="profile picture"

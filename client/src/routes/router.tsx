@@ -38,6 +38,7 @@ const unauthenticatedRoutes: RouteObject[] = [
   { path: routesConfig.home.path, element: <AboutUsPage isAuthenticated={false} /> },
   { path: routesConfig.register.path, element: <RegisterPage /> },
   { path: routesConfig.login.path, element: <LoginPage /> },
+  { path: routesConfig.legal.path, element: <LegalPage isAuthenticated={false} /> },
   { path: routesConfig.any.path, element: <NotFoundErrorPage /> },
 ];
 
