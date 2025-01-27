@@ -1,7 +1,6 @@
 import BadRequestException from "@/errors/BadRequestException";
 import NotFoundException from "@/errors/NotFoundException";
 import { UserRequest } from "@/middlewares/auth.middleware";
-import userRepository from "@/repository/user.repository";
 import catalogService from "@/services/catalog.service";
 import nextcloudService from "@/services/nextcloud.service";
 import userService from "@/services/user.service";
@@ -9,7 +8,6 @@ import { guessCatalogType } from "@/utils/catalog";
 import { Catalogs, Prisma } from "@prisma/client";
 import axios from "axios";
 import { Response } from "express";
-import fs from "fs";
 import { ObjectId } from "mongodb";
 import path from "path";
 
@@ -23,7 +21,7 @@ interface MulterRequest extends UserRequest {
 }
 
 const createCatalog = async (req: MulterRequest, res: Response) => {
-  const { title, defaultThumbnail } = req.body;
+  const { title, defaultThumbnail, userId } = req.body;
   const files = req.files as {
     thumbnailFile?: Express.Multer.File[];
     musics?: Express.Multer.File[];
@@ -45,7 +43,7 @@ const createCatalog = async (req: MulterRequest, res: Response) => {
   }
   if (genres.length !== durations.length) {
     throw new BadRequestException(
-      "An error occured while trying to retrieve the duration in the request.",
+      "An error occured while trying to retrieve the duration in the request."
     );
   }
 
@@ -110,7 +108,7 @@ const createCatalog = async (req: MulterRequest, res: Response) => {
     musics: musicsEntities,
     thumbnail: thumnbailUrl,
     owner: {
-      connect: { id: req.userId! },
+      connect: { id: userId },
     },
     type: guessCatalogType({
       numberOfTracks: musicsEntities.length,

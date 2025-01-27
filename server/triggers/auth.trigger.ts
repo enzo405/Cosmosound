@@ -15,8 +15,7 @@ const EXPIRED_TOKEN = "10m";
 const EXPIRED_REFRESH_TOKEN = "7d";
 
 const signUp = async (req: Request, res: Response) => {
-  const { name, email, password, likedGenres } = req.body;
-
+  const { name, email, password, likedGenres, artistName, genre, spotifyLink } = req.body;
   let parsedLikedGenres;
   const hash = await userService.encryptPassword(password);
 
@@ -36,15 +35,22 @@ const signUp = async (req: Request, res: Response) => {
     fileUrl = req.body.pictureProfile;
   }
 
-  await userService.createUser({
+  const user = await userService.createUser({
     id: userId,
     name,
     email,
     password: hash,
     pictureProfile: fileUrl,
     likedGenres: parsedLikedGenres,
+    artistName,
+    genre,
+    role: "ARTISTS",
+    socialMedia: {
+      media: "SPOTIFY",
+      link: spotifyLink,
+    },
   });
-  res.status(201).json({ message: "User created successfully" });
+  res.status(201).json(user.id);
 };
 
 const signIn = async (req: Request, res: Response) => {

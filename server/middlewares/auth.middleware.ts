@@ -9,15 +9,15 @@ export interface UserRequest extends Request {
 }
 
 const auth = async (req: UserRequest, res: Response, next: NextFunction) => {
-  const token = req.cookies.token;
-  if (!token) throw new UnauthorizedException("Unauthorized access.");
+  // const token = req.cookies.token;
+  // if (!token) throw new UnauthorizedException("Unauthorized access.");
 
-  const payload = jwt.verify(token, process.env.JWT_SECRET!);
+  // const payload = jwt.verify(token, process.env.JWT_SECRET!);
 
-  if (!payload) throw new UnauthorizedException("Unauthorized access.");
+  // if (!payload) throw new UnauthorizedException("Unauthorized access.");
 
-  req.user = payload;
-  req.userId = payload.sub as string;
+  // req.user = payload;
+  // req.userId = payload.sub as string;
 
   next();
 };
