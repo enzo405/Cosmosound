@@ -14,6 +14,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.cosmosound_internal.rule=PathPrefix(`/api`)
       - traefik.http.routers.cosmosound_internal.entrypoints=web
+      - traefik.http.routers.cosmosound_internal.rule=Host(`cosmosound.chaboisseau.net`)
       - traefik.http.services.cosmosound_internal.loadbalancer.server.port=4000
     restart: unless-stopped
     networks:
@@ -68,8 +69,8 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.cosmosound.rule=Host(`cosmosound.chaboisseau.net`)
-      - traefik.http.services.cosmosound.loadbalancer.server.port=80
+      - traefik.http.routers.web.rule=Host(`cosmosound.chaboisseau.net`)
+      - traefik.http.services.web.loadbalancer.server.port=80
       - traefik.http.routers.web.rule=PathPrefix(`/`)
       - traefik.http.routers.web.entrypoints=web
     networks:
