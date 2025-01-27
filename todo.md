@@ -27,3 +27,4 @@
 # Bugs:
 - Upload picture can have more than 1 share link
 - Update social media
+- re-auth on music endpoint or pass userid

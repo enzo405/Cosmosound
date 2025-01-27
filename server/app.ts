@@ -1,4 +1,4 @@
-import express, { ErrorRequestHandler } from "express";
+import express from "express";
 import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
 import morgan from "morgan";
@@ -14,6 +14,7 @@ import { errorHandler } from "./errors/errorhandler";
 
 dotenv.config();
 
+const HOSTNAME = process.env.HOSTNAME;
 const PORT = process.env.PORT || 4000;
 const corsOptions = {
   origin: process.env.ALLOWED_ORIGINS!.split(","),
@@ -50,7 +51,7 @@ async function connectDatabase() {
 }
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on ${HOSTNAME}:${PORT}`);
 });
 
 connectDatabase();
