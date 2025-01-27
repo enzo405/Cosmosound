@@ -8,8 +8,6 @@ services:
       - .:/app:cached
       - node_modules:/app/node_modules
     depends_on:
-      traefik:
-        condition: service_completed_successfully
       mongodb-setup:
         condition: service_completed_successfully
     labels:
