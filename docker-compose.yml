@@ -14,12 +14,12 @@ services:
         condition: service_completed_successfully
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
-      - "traefik.http.routers.backend.entrypoints=web"
-      - "traefik.http.services.backend.loadbalancer.server.port=4000"
+      - "traefik.http.routers.cosmosound_internal.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.cosmosound_internal.entrypoints=web"
+      - "traefik.http.services.cosmosound_internal.loadbalancer.server.port=4000"
     restart: unless-stopped
     networks:
-      - backend
+      - cosmosound_internal
 
 
   mongodb:
@@ -39,7 +39,7 @@ services:
       retries: 5
       start_period: 40s
     networks:
-     - backend
+     - cosmosound_internal
 
 
   mongodb-setup:
@@ -59,29 +59,8 @@ services:
         },
         rs.initiate(config);'
     networks:
-     - backend
+     - cosmosound_internal
 
-  traefik:
-    image: "traefik:v3.2"
-    container_name: traefik
-    command:
-      - "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=true"
-      - "--entryPoints.web.address=:80"
-      - "--entryPoints.websecure.address=:443"
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8081:8080"
-    restart: unless-stopped
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    networks:
-      - external
-      - frontend
-      - backend
 
   react_front:
     build:
@@ -91,17 +70,17 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
-      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+      - "traefik.http.routers.web.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.web.entrypoints=web"
+      - "traefik.http.services.web.loadbalancer.server.port=80"
     networks:
-      - frontend
+      - web
 
 
 networks:
   external:
     driver: bridge
-  frontend:
+  web:
     external: false
   backend:
     external: false
