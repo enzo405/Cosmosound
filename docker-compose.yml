@@ -12,8 +12,6 @@ services:
         condition: service_completed_successfully
       mongodb-setup:
         condition: service_completed_successfully
-    env_file:
-      - ./server/.env
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
