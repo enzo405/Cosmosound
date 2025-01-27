@@ -78,11 +78,9 @@ services:
 
 
 networks:
-  external:
-    driver: bridge
   web:
     external: false
-  backend:
+  cosmosound_internal:
     external: false
 
 volumes:
