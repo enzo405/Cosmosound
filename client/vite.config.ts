@@ -1,31 +1,29 @@
-import { UserConfig, defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path";
-import { readdirSync } from "fs";
+import { defineConfig } from "vite";
 
-const absolutePathAliases: { [key: string]: string } = {};
-// Root resources folder
-const srcPath = path.resolve("./src/");
-// Ajust the regex here to include, .js, .jsx, etc.. files from the src folder
-const srcRootContent = readdirSync(srcPath, { withFileTypes: true }).map((dirent) =>
-  dirent.name.replace(/(\.ts){1}(x?)/, ""),
-);
-
-srcRootContent.forEach((directory) => {
-  absolutePathAliases[directory] = path.join(srcPath, directory);
-});
-
-export default ({ mode }: UserConfig) => {
-  // Load app-level env vars to node-level env vars.
-  process.env = { ...process.env, ...loadEnv(mode!, process.cwd()) };
-
-  return defineConfig({
-    envDir: ".env",
-    server: {
-      port: 3000,
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        assetFileNames: "assets/[name]-[hash][extname]",
+        chunkFileNames: "js/[name]-[hash].js",
+        entryFileNames: "js/[name]-[hash].js",
+      },
     },
-    resolve: { alias: { ...absolutePathAliases } },
-
-    plugins: [react()],
-  });
-};
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+      },
+      "/uploads": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+      },
+    },
+  },
+});

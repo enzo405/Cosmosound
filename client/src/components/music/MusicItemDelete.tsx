@@ -1,11 +1,11 @@
-import { Icon } from "components/icons/Icon";
-import { useMusic } from "hooks/useMusic";
-import { Music } from "models/Music";
+import { Icon } from "./../../components/icons/Icon";
+import { useMusic } from "./../../hooks/useMusic";
+import { Music } from "./../../models/Music";
 import { ReactElement, useMemo, useRef } from "react";
-import { formatDuration, formatTime } from "utils/date";
+import { formatDuration, formatTime } from "./../../utils/date";
 import ArtistInfo from "./ArtistInfo";
-import { Artist } from "models/User";
-import { Catalog } from "models/Catalog";
+import { Artist } from "./../../models/User";
+import { Catalog } from "./../../models/Catalog";
 
 interface MusicItemDeleteProps {
   music: Music;

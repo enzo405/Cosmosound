@@ -1,6 +1,6 @@
-import BadRequestException from "@/errors/BadRequestException";
-import ServerException from "@/errors/ServerException";
-import UnsupportedMediaTypeException from "@/errors/UnsupportedMediaTypeException";
+import BadRequestException from "./errors/BadRequestException";
+import ServerException from "./errors/ServerException";
+import UnsupportedMediaTypeException from "./errors/UnsupportedMediaTypeException";
 import { Client, Server } from "nextcloud-node-client";
 import sharp from "sharp";
 

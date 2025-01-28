@@ -1,5 +1,5 @@
-import { Themes } from "constants/themes";
-import { ThemeContext } from "context/themeContext";
+import { Themes } from "./../constants/themes";
+import { ThemeContext } from "./../context/themeContext";
 import React, { PropsWithChildren, useEffect, useMemo } from "react";
 import { useState } from "react";
 

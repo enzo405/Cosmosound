@@ -1,23 +1,23 @@
-import { Icon } from "components/icons/Icon";
-import MusicItem from "components/music/MusicItem";
-import { useMusic } from "hooks/useMusic";
-import { Music, MusicDetails } from "models/Music";
+import { Icon } from "./../../components/icons/Icon";
+import MusicItem from "./../../components/music/MusicItem";
+import { useMusic } from "./../../hooks/useMusic";
+import { Music, MusicDetails } from "./../../models/Music";
 import { enqueueSnackbar } from "notistack";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import NotFoundErrorPage from "./../../pages/errors/NotFoundErrorPage";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import PlaylistService from "services/playlistService";
-import { formatDurationWithLabel, formatTime } from "utils/date";
-import PlaylistSettings from "components/settings/PlaylistSettings";
+import PlaylistService from "./../../services/playlistService";
+import { formatDurationWithLabel, formatTime } from "./../../utils/date";
+import PlaylistSettings from "./../../components/settings/PlaylistSettings";
 import PlaylistOwnerBadge from "./components/PlaylistOwnerBadge";
-import PageLayout from "components/PageLayout";
-import UserService from "services/userService";
-import HeartIcon from "components/icons/HeartIcon";
-import { useConfirmDialog } from "hooks/useConfirm";
-import { useUser } from "hooks/useUser";
-import { PlaylistWithMusic } from "models/Playlist";
-import Loading from "components/Loading";
-import GenreLink from "components/GenreLink";
+import PageLayout from "./../../components/PageLayout";
+import UserService from "./../../services/userService";
+import HeartIcon from "./../../components/icons/HeartIcon";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import { useUser } from "./../../hooks/useUser";
+import { PlaylistWithMusic } from "./../../models/Playlist";
+import Loading from "./../../components/Loading";
+import GenreLink from "./../../components/GenreLink";
 
 interface PlaylistPageProps {}
 

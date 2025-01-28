@@ -1,6 +1,6 @@
-import BadRequestException from "@/errors/BadRequestException";
-import { UserRequest } from "@/middlewares/auth.middleware";
-import genreService from "@/services/genre.service";
+import BadRequestException from "./errors/BadRequestException";
+import { UserRequest } from "./middlewares/auth.middleware";
+import genreService from "./services/genre.service";
 import { Response } from "express";
 
 const getGenreContent = async (req: UserRequest, res: Response) => {

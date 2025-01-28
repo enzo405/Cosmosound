@@ -1,4 +1,4 @@
-import { routesConfig } from "config/app-config";
+import { routesConfig } from "./../../config/app-config";
 import { useEffect, type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 

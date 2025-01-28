@@ -1,5 +1,5 @@
 import { type ReactElement } from "react";
-import HeaderAvatar from "components/template/Avatar/HeaderAvatar";
+import HeaderAvatar from "./../../../components/template/Avatar/HeaderAvatar";
 import HeaderSearchbar from "./HeaderSearchbar";
 import HeaderNavigation from "./HeaderNavigation";
 

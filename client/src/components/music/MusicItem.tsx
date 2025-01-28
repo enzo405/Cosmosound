@@ -1,20 +1,20 @@
-import { Icon } from "components/icons/Icon";
-import { routesConfig } from "config/app-config";
-import { useMusic } from "hooks/useMusic";
-import { Music } from "models/Music";
+import { Icon } from "./../../components/icons/Icon";
+import { routesConfig } from "./../../config/app-config";
+import { useMusic } from "./../../hooks/useMusic";
+import { Music } from "./../../models/Music";
 import { ReactElement, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { formatDuration, formatTime } from "utils/date";
+import { formatDuration, formatTime } from "./../../utils/date";
 import ArtistInfo from "./ArtistInfo";
-import MusicSettings from "components/settings/MusicSettings";
+import MusicSettings from "./../../components/settings/MusicSettings";
 import { enqueueSnackbar } from "notistack";
-import { Artist } from "models/User";
-import { Catalog } from "models/Catalog";
-import UserService from "services/userService";
-import HeartIcon from "components/icons/HeartIcon";
-import { useUser } from "hooks/useUser";
-import { displayPictureProfile } from "utils/user";
-import VerifiedIcon from "components/icons/VerifiedIcon";
+import { Artist } from "./../../models/User";
+import { Catalog } from "./../../models/Catalog";
+import UserService from "./../../services/userService";
+import HeartIcon from "./../../components/icons/HeartIcon";
+import { useUser } from "./../../hooks/useUser";
+import { displayPictureProfile } from "./../../utils/user";
+import VerifiedIcon from "./../../components/icons/VerifiedIcon";
 
 interface MusicItemProps {
   music: Music;

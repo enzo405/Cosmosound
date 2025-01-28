@@ -1,9 +1,9 @@
-import Box from "components/box/Box";
-import MusicItem from "components/music/MusicItem";
-import { MusicDetails } from "models/Music";
+import Box from "./../../../components/box/Box";
+import MusicItem from "./../../../components/music/MusicItem";
+import { MusicDetails } from "./../../../models/Music";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect, useState } from "react";
-import MusicService from "services/musicService";
+import MusicService from "./../../../services/musicService";
 
 interface RecentMusicProps {}
 

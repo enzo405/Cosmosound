@@ -1,27 +1,27 @@
-import { useSearch } from "hooks/useSearch";
-import { Catalog, DetailedCatalog, TypeCatalog } from "models/Catalog";
-import { MusicDetails } from "models/Music";
-import { Playlist } from "models/Playlist";
-import { Artist } from "models/User";
+import { useSearch } from "./../../hooks/useSearch";
+import { Catalog, DetailedCatalog, TypeCatalog } from "./../../models/Catalog";
+import { MusicDetails } from "./../../models/Music";
+import { Playlist } from "./../../models/Playlist";
+import { Artist } from "./../../models/User";
 import { useEffect, useMemo, useState, type ReactElement } from "react";
 import FilterBox from "./components/FilterBox";
-import MusicService from "services/musicService";
-import ArtistService from "services/artistService";
-import PlaylistService from "services/playlistService";
-import CatalogService from "services/catalogService";
-import Box from "components/box/Box";
-import MusicItem from "components/music/MusicItem";
-import ScrollableBox from "components/box/ScrollableBox";
-import Card from "components/cards/Card";
-import ArtistCard from "components/cards/ArtistCard";
-import GenresService from "services/genresService";
-import SmallCard from "components/cards/SmallCard";
-import { routesConfig } from "config/app-config";
-import UserService from "services/userService";
+import MusicService from "./../../services/musicService";
+import ArtistService from "./../../services/artistService";
+import PlaylistService from "./../../services/playlistService";
+import CatalogService from "./../../services/catalogService";
+import Box from "./../../components/box/Box";
+import MusicItem from "./../../components/music/MusicItem";
+import ScrollableBox from "./../../components/box/ScrollableBox";
+import Card from "./../../components/cards/Card";
+import ArtistCard from "./../../components/cards/ArtistCard";
+import GenresService from "./../../services/genresService";
+import SmallCard from "./../../components/cards/SmallCard";
+import { routesConfig } from "./../../config/app-config";
+import UserService from "./../../services/userService";
 import { enqueueSnackbar } from "notistack";
-import { useUser } from "hooks/useUser";
-import { displayPictureProfile } from "utils/user";
-import Loading from "components/Loading";
+import { useUser } from "./../../hooks/useUser";
+import { displayPictureProfile } from "./../../utils/user";
+import Loading from "./../../components/Loading";
 
 export enum Filters {
   ALL = "All",

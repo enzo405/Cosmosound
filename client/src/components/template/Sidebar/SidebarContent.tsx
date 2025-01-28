@@ -1,9 +1,9 @@
-import { routesSidebar } from "config/app-config";
+import { routesSidebar } from "./../../../config/app-config";
 import { type ReactElement, useEffect, useState } from "react";
 import SidebarItem from "./SidebarItem";
-import HeaderAvatar from "components/template/Avatar/HeaderAvatar";
+import HeaderAvatar from "./../../../components/template/Avatar/HeaderAvatar";
 import { useNavigate } from "react-router-dom";
-import { useScreenSize } from "hooks/useScreenSize";
+import { useScreenSize } from "./../../../hooks/useScreenSize";
 
 interface SidebarContentProps {
   showHeaderAvatar: boolean;

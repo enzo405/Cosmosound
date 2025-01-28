@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Response, Request, NextFunction } from "express";
-import ForbiddenException from "@/errors/ForbiddenException";
+import ForbiddenException from "./errors/ForbiddenException";
 require("dotenv").config();
 
 const unauthenticated = async (req: Request, res: Response, next: NextFunction) => {

@@ -1,4 +1,4 @@
-import { Artist, DetailedArtistInfo } from "models/User";
+import { Artist, DetailedArtistInfo } from "./models/User";
 import { apiClient } from "./axiosService";
 
 async function getArtistById(id: string | undefined): Promise<DetailedArtistInfo | undefined> {

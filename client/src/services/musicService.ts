@@ -1,6 +1,6 @@
-import { Music, MusicDetails } from "models/Music";
+import { Music, MusicDetails } from "./models/Music";
 import { apiClient } from "./axiosService";
-import { DetailedCatalog } from "models/Catalog";
+import { DetailedCatalog } from "./models/Catalog";
 
 async function audioStream(idCatalog: string, idMusic: string): Promise<Blob> {
   return await apiClient

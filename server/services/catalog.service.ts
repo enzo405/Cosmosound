@@ -1,9 +1,9 @@
-import ForbiddenException from "@/errors/ForbiddenException";
-import NotFoundException from "@/errors/NotFoundException";
-import { MusicDetails } from "@/models/MusicDetails";
-import catalogRepository from "@/repository/catalog.repository";
-import userRepository from "@/repository/user.repository";
-import { Catalogs, Music, Prisma } from "@prisma/client";
+import ForbiddenException from "./errors/ForbiddenException";
+import NotFoundException from "./errors/NotFoundException";
+import { MusicDetails } from "./models/MusicDetails";
+import catalogRepository from "./repository/catalog.repository";
+import userRepository from "./repository/user.repository";
+import { Catalogs, Music, Prisma } from ".prisma/client";
 
 const getCatalogById = async (id: string): Promise<Catalogs | null> => {
   return await catalogRepository.getCatalogById(id);
@@ -44,7 +44,7 @@ const deleteMusic = async (userId: string | undefined, idCatalog: string, idMusi
 
   if (!userId || catalog.ownerId != userId) {
     throw new ForbiddenException(
-      "You are not allowed to delete a music from a catalog you don't own",
+      "You are not allowed to delete a music from a catalog you don't own"
     );
   }
 

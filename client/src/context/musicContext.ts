@@ -1,4 +1,4 @@
-import { MusicDetails } from "models/Music";
+import { MusicDetails } from "./models/Music";
 import { createContext } from "react";
 
 interface MusicContextProps {

@@ -1,4 +1,4 @@
-import { OpenAvatarModalContext } from "context/openAvatarModalContext";
+import { OpenAvatarModalContext } from "./../context/openAvatarModalContext";
 import React, { PropsWithChildren, useMemo } from "react";
 import { useState } from "react";
 

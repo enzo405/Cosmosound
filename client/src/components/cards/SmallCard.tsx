@@ -1,4 +1,4 @@
-import HeartIcon from "components/icons/HeartIcon";
+import HeartIcon from "./../../components/icons/HeartIcon";
 import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

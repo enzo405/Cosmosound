@@ -1,4 +1,4 @@
-import { Catalogs, Music, Playlists, Users } from "@prisma/client";
+import { Catalogs, Music, Playlists, Users } from ".prisma/client";
 import { MusicDetails } from "./MusicDetails";
 
 export type GenreContent = {

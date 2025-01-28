@@ -1,7 +1,7 @@
-import { Playlists, Prisma } from "@prisma/client";
-import playlistRepository from "@/repository/playlist.repository";
-import NotFoundException from "@/errors/NotFoundException";
-import ForbiddenException from "@/errors/ForbiddenException";
+import { Playlists, Prisma } from ".prisma/client";
+import playlistRepository from "./repository/playlist.repository";
+import NotFoundException from "./errors/NotFoundException";
+import ForbiddenException from "./errors/ForbiddenException";
 
 const getPlaylistById = async (id: string): Promise<Playlists | null> => {
   return await playlistRepository.getPlaylistById(id, true);
@@ -19,7 +19,7 @@ const AddMusic = async (
   userId: string,
   playlidId: string,
   idCatalog: string,
-  idMusic: string,
+  idMusic: string
 ): Promise<Playlists> => {
   const playlist = await playlistRepository.getPlaylistById(playlidId, false);
 
@@ -50,7 +50,7 @@ const deletePlaylist = async (userId: string, idPlaylist: string): Promise<void>
 const deleteMusic = async (
   userId: string,
   idPlaylist: string,
-  idMusic: string,
+  idMusic: string
 ): Promise<Playlists> => {
   const playlist = await playlistRepository.getPlaylistById(idPlaylist, false);
 

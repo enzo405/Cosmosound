@@ -1,8 +1,8 @@
-import { Favourites, PartialArtist } from "models/User";
-import { AccountFormData } from "pages/Account/AccountPage";
+import { Favourites, PartialArtist } from "./models/User";
+import { AccountFormData } from "./pages/Account/AccountPage";
 import { apiClient } from "./axiosService";
 import { AxiosResponse } from "axios";
-import { ArtistPanelFormData } from "pages/ArtistPanel/ArtistPanelPage";
+import { ArtistPanelFormData } from "./pages/ArtistPanel/ArtistPanelPage";
 
 async function refreshToken(): Promise<AxiosResponse<any, any>> {
   return apiClient.post("/auth/refresh");

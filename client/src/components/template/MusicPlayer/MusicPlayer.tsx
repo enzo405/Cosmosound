@@ -1,11 +1,11 @@
-import { Icon } from "components/icons/Icon";
-import { useMusic } from "hooks/useMusic";
+import { Icon } from "./../../../components/icons/Icon";
+import { useMusic } from "./../../../hooks/useMusic";
 import { ReactElement, HTMLAttributes, useRef, useEffect } from "react";
 import MusicInfo from "../../music/MusicInfo";
 import TimeMusicSlider from "./TimeMusicSlider";
 import SoundSlider from "./SoundSlider";
-import { IconName } from "constants/iconName";
-import { useScreenSize } from "hooks/useScreenSize";
+import { IconName } from "./../../../constants/iconName";
+import { useScreenSize } from "./../../../hooks/useScreenSize";
 
 export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactElement {
   const { playingMusic, isPlaying, soundValue, time, setIsPlaying, setSoundValue, setTime } =

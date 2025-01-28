@@ -1,5 +1,5 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from ".prisma/client";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import authRouter from "./routes/auth.route";

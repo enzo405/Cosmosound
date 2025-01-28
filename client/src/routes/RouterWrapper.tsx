@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouteObject, RouterProvider } from "react-router-dom";
 import { authenticatedRoutes, unauthenticatedRoutes } from "./router";
-import { useUser } from "hooks/useUser";
-import Root from "components/template/Root";
-import UnauthenticatedRoot from "components/template/UnauthenticatedRoot";
-import ErrorPage from "pages/errors/ErrorPage";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
-import LoadingPage from "pages/errors/LoadingPage";
+import { useUser } from "./../hooks/useUser";
+import Root from "./../components/template/Root";
+import UnauthenticatedRoot from "./../components/template/UnauthenticatedRoot";
+import ErrorPage from "./../pages/errors/ErrorPage";
+import NotFoundErrorPage from "./../pages/errors/NotFoundErrorPage";
+import LoadingPage from "./../pages/errors/LoadingPage";
 
 function RouterWrapper() {
   const { user, loading } = useUser();

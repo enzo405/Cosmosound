@@ -1,23 +1,23 @@
-import { Icon } from "components/icons/Icon";
-import MusicItem from "components/music/MusicItem";
-import { useMusic } from "hooks/useMusic";
+import { Icon } from "./../../components/icons/Icon";
+import MusicItem from "./../../components/music/MusicItem";
+import { useMusic } from "./../../hooks/useMusic";
 import { enqueueSnackbar } from "notistack";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import NotFoundErrorPage from "./../../pages/errors/NotFoundErrorPage";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import CatalogService from "services/catalogService";
-import CatalogSettings from "components/settings/CatalogSettings";
-import { MusicDetails } from "models/Music";
-import { formatDurationWithLabel, formatTime } from "utils/date";
-import PageLayout from "components/PageLayout";
-import ArtistInfo from "components/music/ArtistInfo";
-import UserService from "services/userService";
-import HeartIcon from "components/icons/HeartIcon";
-import { useUser } from "hooks/useUser";
-import { DetailedCatalog } from "models/Catalog";
-import { displayPictureProfile } from "utils/user";
-import Loading from "components/Loading";
-import GenreLink from "components/GenreLink";
+import CatalogService from "./../../services/catalogService";
+import CatalogSettings from "./../../components/settings/CatalogSettings";
+import { MusicDetails } from "./../../models/Music";
+import { formatDurationWithLabel, formatTime } from "./../../utils/date";
+import PageLayout from "./../../components/PageLayout";
+import ArtistInfo from "./../../components/music/ArtistInfo";
+import UserService from "./../../services/userService";
+import HeartIcon from "./../../components/icons/HeartIcon";
+import { useUser } from "./../../hooks/useUser";
+import { DetailedCatalog } from "./../../models/Catalog";
+import { displayPictureProfile } from "./../../utils/user";
+import Loading from "./../../components/Loading";
+import GenreLink from "./../../components/GenreLink";
 
 interface CatalogPageProps {}
 

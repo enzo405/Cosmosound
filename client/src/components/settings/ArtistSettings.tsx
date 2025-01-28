@@ -1,8 +1,8 @@
-import SettingsOptions from "components/settings/SettingsOptions";
-import TextSetting from "components/settings/TextSetting";
-import { routesConfig } from "config/app-config";
-import { useUser } from "hooks/useUser";
-import { Artist } from "models/User";
+import SettingsOptions from "./../../components/settings/SettingsOptions";
+import TextSetting from "./../../components/settings/TextSetting";
+import { routesConfig } from "./../../config/app-config";
+import { useUser } from "./../../hooks/useUser";
+import { Artist } from "./../../models/User";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

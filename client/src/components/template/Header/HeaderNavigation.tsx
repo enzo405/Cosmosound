@@ -1,6 +1,6 @@
-import ArrowLeft from "components/icons/ArrowLeft";
-import ArrowRight from "components/icons/ArrowRight";
-import { useAppNavigate } from "hooks/useNavigate";
+import ArrowLeft from "./../../../components/icons/ArrowLeft";
+import ArrowRight from "./../../../components/icons/ArrowRight";
+import { useAppNavigate } from "./../../../hooks/useNavigate";
 import { ReactElement } from "react";
 
 const defaultStyleArrows = "flex justify-center items-center p-1 sm:p-4 rounded-full";

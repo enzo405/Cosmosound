@@ -1,13 +1,13 @@
-import { routesConfig } from "config/app-config";
+import { routesConfig } from "./../../config/app-config";
 import { useState, useEffect, type ReactElement, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import genresService from "services/genresService";
-import UserService from "services/userService";
+import genresService from "./../../services/genresService";
+import UserService from "./../../services/userService";
 import { AxiosError } from "axios";
-import Divider from "components/Divider";
+import Divider from "./../../components/Divider";
 import { enqueueSnackbar } from "notistack";
-import Loading from "components/icons/Loading";
+import Loading from "./../../components/icons/Loading";
 
 interface RegisterDataForm {
   name: string;

@@ -1,6 +1,6 @@
 import React from "react";
-import sprite from "assets/sprite.svg";
-import { IconName } from "constants/iconName";
+import * as sprite from "./../../assets/sprite.svg";
+import { IconName } from "./../../constants/iconName";
 
 interface IconProps {
   className?: string;

@@ -1,12 +1,12 @@
-import ScrollableBox from "components/box/ScrollableBox";
-import Card from "components/cards/Card";
-import { routesConfig } from "config/app-config";
-import { useUser } from "hooks/useUser";
-import { Catalog, DetailedCatalog } from "models/Catalog";
+import ScrollableBox from "./../../../components/box/ScrollableBox";
+import Card from "./../../../components/cards/Card";
+import { routesConfig } from "./../../../config/app-config";
+import { useUser } from "./../../../hooks/useUser";
+import { Catalog, DetailedCatalog } from "./../../../models/Catalog";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement } from "react";
-import UserService from "services/userService";
-import { displayPictureProfile } from "utils/user";
+import UserService from "./../../../services/userService";
+import { displayPictureProfile } from "./../../../utils/user";
 
 interface SuggestionsProps {
   catalogs: DetailedCatalog[];

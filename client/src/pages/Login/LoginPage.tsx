@@ -1,10 +1,10 @@
-import Divider from "components/Divider";
-import { routesConfig } from "config/app-config";
-import { useUser } from "hooks/useUser";
+import Divider from "./../../components/Divider";
+import { routesConfig } from "./../../config/app-config";
+import { useUser } from "./../../hooks/useUser";
 import { useState, type ReactElement } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UserService from "services/userService";
+import UserService from "./../../services/userService";
 
 interface LoginDataForm {
   email: string;

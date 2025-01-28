@@ -1,9 +1,9 @@
-import { MusicDetails } from "models/Music";
+import { MusicDetails } from "./../../models/Music";
 import { ReactElement } from "react";
 import ArtistInfo from "./ArtistInfo";
-import { displayPictureProfile } from "utils/user";
+import { displayPictureProfile } from "./../../utils/user";
 import { Link } from "react-router-dom";
-import { routesConfig } from "config/app-config";
+import { routesConfig } from "./../../config/app-config";
 
 interface MusicInfoProps {
   music: MusicDetails;

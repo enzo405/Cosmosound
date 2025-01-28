@@ -1,19 +1,19 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import Container from "components/box/Container";
-import { Icon } from "components/icons/Icon";
-import UserService from "services/userService";
-import { useConfirmDialog } from "hooks/useConfirm";
-import { useUser } from "hooks/useUser";
-import { displayPictureProfile } from "utils/user";
+import Container from "./../../components/box/Container";
+import { Icon } from "./../../components/icons/Icon";
+import UserService from "./../../services/userService";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import { useUser } from "./../../hooks/useUser";
+import { displayPictureProfile } from "./../../utils/user";
 import { enqueueSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import SettingsOptions from "components/settings/SettingsOptions";
-import { routesConfig } from "config/app-config";
-import { getDirtyFieldsValue } from "utils/form";
+import SettingsOptions from "./../../components/settings/SettingsOptions";
+import { routesConfig } from "./../../config/app-config";
+import { getDirtyFieldsValue } from "./../../utils/form";
 import PlaylistLink from "./components/PlaylistLink";
-import GenreLink from "components/GenreLink";
+import GenreLink from "./../../components/GenreLink";
 
 export interface AccountFormData {
   username: string;

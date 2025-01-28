@@ -1,23 +1,23 @@
-import Container from "components/box/Container";
-import SpotifyIcon from "components/icons/media/SpotifyIcon";
-import { useUser } from "hooks/useUser";
-import { Media } from "models/User";
+import Container from "./../../components/box/Container";
+import SpotifyIcon from "./../../components/icons/media/SpotifyIcon";
+import { useUser } from "./../../hooks/useUser";
+import { Media } from "./../../models/User";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import GenresService from "services/genresService";
+import GenresService from "./../../services/genresService";
 import MediaLinkInput from "./components/MediaLinkInput";
-import YoutubeMusicIcon from "components/icons/media/YoutubeMusicIcon";
-import InstagramIcon from "components/icons/media/InstagramIcon";
-import XIcon from "components/icons/media/XIcon";
-import AppleMusicIcon from "components/icons/media/AppleMusicIcon";
-import { Icon } from "components/icons/Icon";
+import YoutubeMusicIcon from "./../../components/icons/media/YoutubeMusicIcon";
+import InstagramIcon from "./../../components/icons/media/InstagramIcon";
+import XIcon from "./../../components/icons/media/XIcon";
+import AppleMusicIcon from "./../../components/icons/media/AppleMusicIcon";
+import { Icon } from "./../../components/icons/Icon";
 import { useNavigate } from "react-router-dom";
-import { routesConfig } from "config/app-config";
-import { useConfirmDialog } from "hooks/useConfirm";
-import UserService from "services/userService";
+import { routesConfig } from "./../../config/app-config";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import UserService from "./../../services/userService";
 import { enqueueSnackbar } from "notistack";
 import { AxiosError } from "axios";
-import { getDirtyFieldsValue } from "utils/form";
+import { getDirtyFieldsValue } from "./../../utils/form";
 import ArtistInfoCard from "./components/ArtistCardInfo";
 
 export interface ArtistPanelFormData {

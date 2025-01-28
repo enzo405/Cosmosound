@@ -1,6 +1,6 @@
-import { User } from "models/User";
+import { User } from "./../../../models/User";
 import { ReactElement } from "react";
-import { displayPictureProfile } from "utils/user";
+import { displayPictureProfile } from "./../../../utils/user";
 
 interface PlaylistOwnerBadgeProps {
   owner: User | undefined;
