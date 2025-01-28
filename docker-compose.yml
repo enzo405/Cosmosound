@@ -1,8 +1,6 @@
 services:
   express:
-    build:
-      context: ./server
-      dockerfile: express.Dockerfile
+    image: reg.chaboisseau.net/cosmosound_backend:v0
     container_name: cosmosound_backend
     labels:
       - traefik.enable=true
@@ -14,32 +12,12 @@ services:
       - cosmosound_internal
       - web
 
-  # traefik:
-  #   image: traefik:v3.2
-  #   container_name: traefik
-  #   command:
-  #     - "--log.level=DEBUG"
-  #     - "--api.insecure=true"
-  #     - "--providers.docker=true"
-  #     - "--providers.docker.exposedbydefault=false"
-  #     - "--entryPoints.web.address=:80"
-  #   ports:
-  #     - "80:80"
-  #     - "8081:8080"
-  #   restart: unless-stopped
-  #   volumes:
-  #     - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  #   networks:
-  #     - cosmosound_internal
-  #     - web
 
   mongodb:
     container_name: cosmosound_database
-    build: 
-      context: ./server/mongodb_rs/
-      dockerfile: mongodb.Dockerfile
+    image: reg.chaboisseau.net/cosmosound_database:v0
     ports:
-      - "27017:27017" # Exposes MongoDB locally
+      - "27017:27017"
     restart: unless-stopped
     volumes:
       - mongodb_data:/data/db
@@ -53,7 +31,7 @@ services:
       - cosmosound_internal
 
   mongodb-setup:
-    image: mongo:6.0 # Updated version
+    image: mongo:6.0
     container_name: mongodb-setup
     depends_on:
       mongodb:
@@ -72,9 +50,7 @@ services:
       - cosmosound_internal
 
   react_front:
-    build:
-      context: ./client
-      dockerfile: react.Dockerfile
+    image: reg.chaboisseau.net/cosmosound_frontend:v0
     container_name: cosmosound_frontend
     labels:
       - traefik.enable=true
