@@ -1,15 +1,13 @@
-import BadRequestException from "./errors/BadRequestException";
-import NotFoundException from "./errors/NotFoundException";
-import { UserRequest } from "./middlewares/auth.middleware";
-import userRepository from "./repository/user.repository";
-import catalogService from "./services/catalog.service";
-import nextcloudService from "./services/nextcloud.service";
-import userService from "./services/user.service";
-import { guessCatalogType } from "./utils/catalog";
-import { Catalogs, Prisma } from ".prisma/client";
+import BadRequestException from "../errors/BadRequestException";
+import NotFoundException from "../errors/NotFoundException";
+import { UserRequest } from "../middlewares/auth.middleware";
+import catalogService from "../services/catalog.service";
+import nextcloudService from "../services/nextcloud.service";
+import userService from "../services/user.service";
+import { guessCatalogType } from "../utils/catalog";
+import { Catalogs, Prisma } from "@prisma/client";
 import axios from "axios";
 import { Response } from "express";
-import fs from "fs";
 import { ObjectId } from "mongodb";
 import path from "path";
 

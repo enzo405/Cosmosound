@@ -1,17 +1,27 @@
-FROM node:23-alpine3.21
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm
 
-RUN npm install pnpm -g
+COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
 
 COPY . .
 
-RUN npx prisma generate
+RUN pnpm prisma generate
+
+RUN pnpm build
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN npm install -g pnpm
+
+COPY --from=builder /app /app
 
 EXPOSE 4000
 
-CMD ["sh", "-c", "pnpm dlx prisma db push && pnpm start"]
+CMD ["pnpm", "start"]

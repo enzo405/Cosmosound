@@ -1,5 +1,5 @@
-import BadRequestException from "./errors/BadRequestException";
-import UnsupportedMediaTypeException from "./errors/UnsupportedMediaTypeException";
+import BadRequestException from "../errors/BadRequestException";
+import UnsupportedMediaTypeException from "../errors/UnsupportedMediaTypeException";
 import { Request } from "express";
 import multer, { FileFilterCallback } from "multer";
 

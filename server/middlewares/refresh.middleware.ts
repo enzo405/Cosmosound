@@ -1,9 +1,9 @@
-import userService from "./services/user.service";
+import userService from "../services/user.service";
 import { Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserRequest } from "./auth.middleware";
-import UnauthorizedException from "./errors/UnauthorizedException";
+import UnauthorizedException from "../errors/UnauthorizedException";
 require("dotenv").config();
 
 const refreshToken = async (req: UserRequest, res: Response, next: NextFunction) => {

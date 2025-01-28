@@ -1,7 +1,7 @@
-import { Playlists, Prisma } from ".prisma/client";
-import playlistRepository from "./repository/playlist.repository";
-import NotFoundException from "./errors/NotFoundException";
-import ForbiddenException from "./errors/ForbiddenException";
+import { Playlists, Prisma } from "@prisma/client";
+import playlistRepository from "../repository/playlist.repository";
+import NotFoundException from "../errors/NotFoundException";
+import ForbiddenException from "../errors/ForbiddenException";
 
 const getPlaylistById = async (id: string): Promise<Playlists | null> => {
   return await playlistRepository.getPlaylistById(id, true);

@@ -1,9 +1,9 @@
-import { prisma } from "./app";
-import BadRequestException from "./errors/BadRequestException";
-import DatabaseException from "./errors/DatabaseException";
-import NotFoundException from "./errors/NotFoundException";
-import { PlaylistDetails } from "./models/PlaylistDetails";
-import { Playlists, Prisma, Users } from ".prisma/client";
+import { prisma } from "../app";
+import BadRequestException from "../errors/BadRequestException";
+import DatabaseException from "../errors/DatabaseException";
+import NotFoundException from "../errors/NotFoundException";
+import { PlaylistDetails } from "../models/PlaylistDetails";
+import { Playlists, Prisma, Users } from "@prisma/client";
 
 const getPlaylistById = async (
   id: string,

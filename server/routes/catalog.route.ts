@@ -1,8 +1,8 @@
 import express from "express";
-import trigger from "./triggers/catalog.trigger";
-import auth from "./middlewares/auth.middleware";
-import { multerCatalogMiddleware } from "./middlewares/catalogMulter.middleware";
-import { wrapRoute } from "./utils/wrapper";
+import trigger from "../triggers/catalog.trigger";
+import auth from "../middlewares/auth.middleware";
+import { multerCatalogMiddleware } from "../middlewares/catalogMulter.middleware";
+import { wrapRoute } from "../utils/wrapper";
 
 const router = express.Router();
 

@@ -1,10 +1,10 @@
 import express from "express";
-import trigger from "./triggers/auth.trigger";
-import auth from "./middlewares/auth.middleware";
-import refreshToken from "./middlewares/refresh.middleware";
-import unauthenticated from "./middlewares/unauthenticated.middleware";
-import { multerMiddleware } from "./middlewares/multer.middlware";
-import { wrapRoute } from "./utils/wrapper";
+import trigger from "../triggers/auth.trigger";
+import auth from "../middlewares/auth.middleware";
+import refreshToken from "../middlewares/refresh.middleware";
+import unauthenticated from "../middlewares/unauthenticated.middleware";
+import { multerMiddleware } from "../middlewares/multer.middlware";
+import { wrapRoute } from "../utils/wrapper";
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import { Catalogs, MusicInPlaylist, Playlists, Users } from ".prisma/client";
+import { Catalogs, MusicInPlaylist, Playlists, Users } from "@prisma/client";
 
 export type PlaylistDetails = Playlists & {
   musics: MusicPlaylistDetails[];

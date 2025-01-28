@@ -1,5 +1,5 @@
-import { GenreContent } from "./models/GenreContent";
-import genreRepository from "./repository/genre.repository";
+import { GenreContent } from "../models/GenreContent";
+import genreRepository from "../repository/genre.repository";
 
 const getGenreContent = async (
   genreName: string,
