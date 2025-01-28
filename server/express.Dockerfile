@@ -14,4 +14,4 @@ RUN npx prisma generate
 
 EXPOSE 4000
 
-CMD ["sh", "-c", "pnpm dlx prisma db push && pnpm run dev"]
+CMD ["sh", "-c", "pnpm dlx prisma db push && pnpm start"]
