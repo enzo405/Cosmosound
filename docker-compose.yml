@@ -4,11 +4,6 @@ services:
       context: ./server
       dockerfile: express.Dockerfile
     container_name: cosmosound_backend
-    volumes:
-      - .:/app:cached
-      - node_modules:/app/node_modules
-    ports:
-      - "4000:4000"
     labels:
       - traefik.enable=true
       - traefik.http.routers.cosmosound_internal.rule=Host(`cosmosound.chaboisseau.net`)
@@ -98,4 +93,3 @@ networks:
 volumes:
   mongodb_data:
     driver: local
-  node_modules:
