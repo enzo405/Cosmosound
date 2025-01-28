@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function HeaderSearchbar(): ReactElement {
   const [isFocused, setIsFocused] = useState(false);
-  const { search, setSearch, debouncedValue } = useSearch();
+  const { search, setSearch, debouncedValue, setIsSearchFocus } = useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -22,6 +22,10 @@ function HeaderSearchbar(): ReactElement {
       navigate(routesConfig.explore.path);
     }
   }, [debouncedValue]);
+
+  useEffect(() => {
+    setIsSearchFocus(isFocused);
+  }, [isFocused]);
 
   return (
     <div className="w-3/4 mr-1 sm:w-1/2">

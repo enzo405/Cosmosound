@@ -4,7 +4,7 @@ export const formatDuration = (duration: number): string => {
   if (Number(seconds) < 10) {
     seconds = `0${seconds}`;
   }
-  return minutes > 1 ? `${minutes}:${seconds}` : `0:${seconds}`;
+  return minutes >= 1 ? `${minutes}:${seconds}` : `0:${seconds}`;
 };
 
 export const formatDurationWithLabel = (duration: number): string => {

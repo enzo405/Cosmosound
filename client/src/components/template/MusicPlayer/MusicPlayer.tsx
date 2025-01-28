@@ -6,16 +6,19 @@ import TimeMusicSlider from "./TimeMusicSlider";
 import SoundSlider from "./SoundSlider";
 import { IconName } from "constants/iconName";
 import { useScreenSize } from "hooks/useScreenSize";
+import { useSearch } from "hooks/useSearch";
 
 export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactElement {
   const { playingMusic, isPlaying, soundValue, time, setIsPlaying, setSoundValue, setTime } =
     useMusic();
+  const { isSearchbarFocus } = useSearch();
   const isMobile = useScreenSize();
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === "Space") {
+        if (isSearchbarFocus) return;
         event.preventDefault();
         setIsPlaying(!isPlaying);
       }
