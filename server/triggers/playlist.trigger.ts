@@ -36,7 +36,7 @@ const searchPlaylist = async (req: UserRequest, res: Response) => {
 };
 
 const createPlaylist = async (req: UserRequest, res: Response) => {
-  const { title } = req.body;
+  const { title, userId } = req.body;
   if (!title) {
     throw new BadRequestException("Missing title in the body");
   }
@@ -53,7 +53,7 @@ const createPlaylist = async (req: UserRequest, res: Response) => {
 
   const playlistToCreate: Prisma.PlaylistsCreateInput = {
     owner: {
-      connect: { id: req.userId! },
+      connect: { id: userId },
     },
     title: title,
     playlistThumbnail: defaultThumbnail[randomIndex],
@@ -61,17 +61,17 @@ const createPlaylist = async (req: UserRequest, res: Response) => {
 
   const playlist = await playlistService.createPlaylist(playlistToCreate);
 
-  res.status(201).json(playlist);
+  res.status(201).json(playlist.id);
 };
 
 const AddMusic = async (req: UserRequest, res: Response) => {
   const { id } = req.params;
-  const { idMusic, idCatalog } = req.body;
+  const { idMusic, idCatalog, idUser } = req.body;
   if (!id || !idMusic || !idCatalog) {
     throw new BadRequestException("Missing ids in the params or body");
   }
 
-  const playlist = await playlistService.AddMusic(req.userId!, id, idCatalog, idMusic);
+  const playlist = await playlistService.AddMusic(idUser, id, idCatalog, idMusic);
 
   res.status(200).json(playlist);
 };
