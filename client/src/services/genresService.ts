@@ -4,7 +4,7 @@ import { DetailedCatalog } from "./../models/Catalog";
 import { Artist, UserDetails } from "./../models/User";
 import { apiClient } from "./axiosService";
 
-const dataGenre = require("./../assets/json/genres.json");
+import dataGenre from "./../assets/json/genres.json";
 
 function getAllGenres(): string[] {
   return dataGenre;
@@ -34,7 +34,7 @@ async function getGenreContent(
   take: number = 50,
 ): Promise<IGenreContent> {
   return await apiClient
-    .get(`/api/genres?value=${genreName}&skip=${skip}&take=${take}`)
+    .get(`/genres?value=${genreName}&skip=${skip}&take=${take}`)
     .then((res) => res.data);
 }
 

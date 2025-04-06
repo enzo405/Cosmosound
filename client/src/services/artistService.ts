@@ -4,7 +4,7 @@ import { apiClient } from "./axiosService";
 async function getArtistById(id: string | undefined): Promise<DetailedArtistInfo | undefined> {
   if (id == undefined) return undefined;
 
-  return await apiClient.get(`/api/artists/${id}`).then((res) => res.data);
+  return await apiClient.get(`/artists/${id}`).then((res) => res.data);
 }
 
 async function searchArtistByName(value: string): Promise<Artist[]> {
@@ -13,7 +13,7 @@ async function searchArtistByName(value: string): Promise<Artist[]> {
   }
 
   return await apiClient
-    .get(`/api/artists?search=${value.toLowerCase().trim()}`)
+    .get(`/artists?search=${value.toLowerCase().trim()}`)
     .then((res) => res.data);
 }
 

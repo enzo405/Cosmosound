@@ -4,7 +4,7 @@ import UserService from "./userService";
 axios.defaults.withCredentials = true;
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: "https://api.cosmosound.luhcaran.fr",
 });
 
 apiClient.interceptors.response.use(

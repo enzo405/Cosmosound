@@ -1,6 +1,7 @@
-const plugin = require("tailwindcss/plugin");
+import plugin from "tailwindcss/plugin";
+import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   darkMode: ["selector", '[data-mode="dark"]'],
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   theme: {
@@ -66,8 +67,8 @@ export default {
   },
   plugins: [
     require("tailwind-scrollbar"),
-    plugin(function ({ addUtilities, theme, e }) {
-      const sizes = theme("spacing");
+    plugin(({ addUtilities, theme, e }) => {
+      const sizes = theme("spacing") ?? {};
       const newUtilities = Object.entries(sizes).reduce((acc, [key, value]) => {
         acc[`.min-size-${e(key)}`] = {
           minWidth: value,
@@ -87,8 +88,9 @@ export default {
         };
         return acc;
       }, {});
-
-      addUtilities(newUtilities, ["responsive"]);
+      addUtilities(newUtilities);
     }),
   ],
 };
+
+export default config;

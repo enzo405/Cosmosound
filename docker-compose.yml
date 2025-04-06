@@ -1,21 +1,50 @@
 services:
   express:
-    image: reg.chaboisseau.net/cosmosound_backend:v0
+    image: registry.luhcaran.fr/cosmosound_backend:v0.2
     container_name: cosmosound_backend
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
     labels:
       - traefik.enable=true
-      - traefik.http.routers.cosmosound_internal.rule=Host(`cosmosound.chaboisseau.net`)
-      - traefik.http.routers.cosmosound_internal.entrypoints=web
-      - traefik.http.services.cosmosound_internal.loadbalancer.server.port=4000
-    restart: unless-stopped
+      - traefik.docker.network=web
+      - traefik.http.routers.cosmosound_api.rule=Host(`api.cosmosound.luhcaran.fr`)
+      - traefik.http.routers.cosmosound_api.entrypoints=websecure
+      - traefik.http.routers.cosmosound_api.tls=true
+      - traefik.http.routers.cosmosound_api.tls.certresolver=letsencryptresolver
+      - traefik.http.services.cosmosound_api.loadbalancer.server.port=4000
     networks:
-      - cosmosound_internal
       - web
+      - cosmosound_internal
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s -o /dev/null http://localhost:4000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
+  react_front:
+    image: registry.luhcaran.fr/cosmosound_frontend:v0.2
+    container_name: cosmosound_frontend
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=web
+      - traefik.http.routers.cosmosound_frontend.rule=Host(`cosmosound.luhcaran.fr`)
+      - traefik.http.routers.cosmosound_frontend.entrypoints=websecure
+      - traefik.http.routers.cosmosound_frontend.tls.certresolver=letsencryptresolver
+      - traefik.http.services.cosmosound_frontend.loadbalancer.server.port=80
+    networks:
+      - web
+      - cosmosound_internal
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s -o /dev/null http://localhost || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   mongodb:
     container_name: cosmosound_database
-    image: reg.chaboisseau.net/cosmosound_database:v0
+    image: registry.luhcaran.fr/cosmosound_database:v0
     ports:
       - "27017:27017"
     restart: unless-stopped
@@ -49,20 +78,9 @@ services:
     networks:
       - cosmosound_internal
 
-  react_front:
-    image: reg.chaboisseau.net/cosmosound_frontend:v0
-    container_name: cosmosound_frontend
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.cosmosound_frontend.rule=Host(`cosmosound.chaboisseau.net`)
-      - traefik.http.services.cosmosound_frontend.loadbalancer.server.port=80
-    restart: unless-stopped
-    networks:
-      - cosmosound_internal
-      - web
-
 networks:
   web:
+    external: true
   cosmosound_internal:
     driver: bridge
 

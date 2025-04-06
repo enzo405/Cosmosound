@@ -6,7 +6,7 @@ const uploadPicture = async (file: File, type: "MUSIC" | "PFP"): Promise<string>
     formData.append("file", file);
     formData.append("type", type);
 
-    const response = await apiClient.post<{ fileUrl: string }>("/api/upload/image", formData);
+    const response = await apiClient.post<{ fileUrl: string }>("/upload/image", formData);
     return response.data.fileUrl;
   } catch (error) {
     throw new Error("Failed to upload file. Please try again.");
