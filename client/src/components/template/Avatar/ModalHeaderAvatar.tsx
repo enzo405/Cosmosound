@@ -77,9 +77,9 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
             src={displayPictureProfile(user?.pictureProfile)}
             alt="profile picture"
           />
-          <span className="ml-2">
+          <span className="ml-2 flex flex-col w-0 flex-grow">
             <p>{user?.name}</p>
-            <p className="text-dark-grey text-base">{user?.email}</p>
+            <p className="text-dark-grey text-base truncate">{user?.email}</p>
           </span>
         </SettingsOptions>
         <Divider />

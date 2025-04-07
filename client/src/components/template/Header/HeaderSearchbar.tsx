@@ -1,3 +1,4 @@
+import { useMusic } from "./../../../hooks/useMusic";
 import { Icon } from "./../../../components/icons/Icon";
 import { routesConfig } from "./../../../config/app-config";
 import { useSearch } from "./../../../hooks/useSearch";
@@ -8,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 function HeaderSearchbar(): ReactElement {
   const [isFocused, setIsFocused] = useState(false);
   const { search, setSearch, debouncedValue, setIsSearchFocus } = useSearch();
+  const { setCanPauseWithSpace } = useMusic();
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -25,6 +27,7 @@ function HeaderSearchbar(): ReactElement {
 
   useEffect(() => {
     setIsSearchFocus(isFocused);
+    setCanPauseWithSpace(!isFocused);
   }, [isFocused]);
 
   return (

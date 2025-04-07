@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 import { CreateMusicFormData } from "../CreateCatalogPage";
 import { Icon } from "./../../../components/icons/Icon";
 import { BiXCircle } from "react-icons/bi";
+import { useMusic } from "./../../../hooks/useMusic";
 
 interface NewMusicProps {
   genres: string[];
@@ -20,6 +21,7 @@ export default function NewMusic({
   handleRemoveMusic,
 }: NewMusicProps): ReactElement {
   const [openGenreDropdown, setOpenGenreDropdown] = useState(false);
+  const { setCanPauseWithSpace } = useMusic();
   const [searchQuery, setSearchQuery] = useState("");
   const musicFieldRef = useRef<HTMLInputElement>(null);
 
@@ -95,6 +97,7 @@ export default function NewMusic({
                 <input
                   type="text"
                   autoFocus
+                  onFocus={() => setCanPauseWithSpace(false)}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search genres..."
@@ -109,6 +112,7 @@ export default function NewMusic({
                     className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer">
                     <input
                       type="checkbox"
+                      onFocus={() => setCanPauseWithSpace(false)}
                       checked={musicData.genres.includes(genre)}
                       onChange={() => handleSelectGenre(genre)}
                       className="rounded text-primary-orange"

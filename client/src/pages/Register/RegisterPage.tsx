@@ -123,7 +123,7 @@ function RegisterPage(): ReactElement {
           <div className="w-full flex flex-row justify-center items-center gap-1">
             <img loading="eager" className="size-10" src="/img/cosmosound.png" alt="Cosmosound" />
             <span className="flex h-full items-center pt-0.5 font-semibold text-dark-custom text-lg">
-              Welcome to CosmoSound !!
+              Welcome to CosmoSound
             </span>
           </div>
         );

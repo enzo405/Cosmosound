@@ -1,5 +1,5 @@
 import { MusicDetails } from "./../models/Music";
-import dataGenre from "assets/json/genres.json";
+import dataGenre from "./../assets/json/genres.json";
 import { Playlist } from "./../models/Playlist";
 import { DetailedCatalog } from "./../models/Catalog";
 import { Artist, UserDetails } from "./../models/User";

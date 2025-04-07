@@ -14,6 +14,7 @@ import { routesConfig } from "./../../config/app-config";
 import { getDirtyFieldsValue } from "./../../utils/form";
 import PlaylistLink from "./components/PlaylistLink";
 import GenreLink from "./../../components/GenreLink";
+import { useMusic } from "./../../hooks/useMusic";
 
 export interface AccountFormData {
   username: string;
@@ -25,6 +26,7 @@ export interface AccountFormData {
 
 function AccountPage(): ReactElement {
   const { user, setUser } = useUser();
+  const { setCanPauseWithSpace } = useMusic();
   const navigate = useNavigate();
   if (!user) navigate("/");
 
@@ -153,6 +155,7 @@ function AccountPage(): ReactElement {
                           {...field}
                           type="text"
                           id="username"
+                          onFocus={() => setCanPauseWithSpace(false)}
                           placeholder="Enter username"
                           className="mt-1 text-dark-custom px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-tertio-orange focus:outline-none"
                         />
@@ -187,6 +190,7 @@ function AccountPage(): ReactElement {
                               {...field}
                               type={showPassword ? "text" : "password"}
                               id="password"
+                              onFocus={() => setCanPauseWithSpace(false)}
                               placeholder="Enter new password"
                               className={`px-10 text-dark-custom py-3 border ${
                                 errors.password ? "border-red-500" : "border-gray-300"
@@ -242,6 +246,7 @@ function AccountPage(): ReactElement {
                                 {...field}
                                 type="password"
                                 id="confirmPassword"
+                                onFocus={() => setCanPauseWithSpace(false)}
                                 placeholder="Confirm password"
                                 className={`px-10 text-dark-custom py-3 border ${
                                   errors.confirmPassword ? "border-red-500" : "border-gray-300"
@@ -284,6 +289,7 @@ function AccountPage(): ReactElement {
                           {...field}
                           type="email"
                           id="email"
+                          onFocus={() => setCanPauseWithSpace(false)}
                           placeholder="Enter email"
                           className="mt-1 px-5 text-dark-custom py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-tertio-orange focus:outline-none"
                         />
@@ -300,6 +306,7 @@ function AccountPage(): ReactElement {
                         <input
                           type="file"
                           accept="image/*"
+                          onFocus={() => setCanPauseWithSpace(false)}
                           id="profileImage"
                           className="hidden"
                           onChange={onImageChange}

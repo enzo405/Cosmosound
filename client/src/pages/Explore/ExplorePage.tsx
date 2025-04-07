@@ -295,7 +295,7 @@ function ExplorePage(): ReactElement {
           </div>
           {isPageEmpty && (
             <div className="relative w-full h-full flex flex-col justify-center items-center select-none">
-              <h1 className="text-3xl font-bs text-dark-custom">There's nothing here !!!</h1>
+              <h1 className="text-3xl font-bs text-dark-custom">There's nothing here!</h1>
               <h2 className="text-lg font-bs text-dark-custom">Try to search for something else</h2>
               <img
                 loading="eager"
