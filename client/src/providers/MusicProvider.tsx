@@ -9,6 +9,7 @@ export const MusicProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [soundValue, setSoundValue] = useState<number>(50);
   const [time, setTime] = useState<number>(0); // seconds
+  const [canPauseWithSpace, setCanPauseWithSpace] = useState<boolean>(false);
 
   const value = useMemo(() => {
     return {
@@ -17,13 +18,15 @@ export const MusicProvider: React.FC<PropsWithChildren> = ({ children }) => {
       isPlaying,
       time,
       queue,
+      canPauseWithSpace,
       setPlayingMusic,
       setSoundValue,
       setIsPlaying,
       setTime,
       setQueue,
+      setCanPauseWithSpace,
     };
-  }, [playingMusic, soundValue, isPlaying, time]);
+  }, [playingMusic, soundValue, isPlaying, time, queue, canPauseWithSpace]);
 
   return <MusicContext.Provider value={value}>{children}</MusicContext.Provider>;
 };

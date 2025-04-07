@@ -14,6 +14,7 @@ import Loading from "./../../components/icons/Loading";
 import CatalogCard from "./components/CatalogCard";
 import { useNavigate } from "react-router-dom";
 import { routesConfig } from "./../../config/app-config";
+import { useMusic } from "./../../hooks/useMusic";
 
 export interface CreateCatalogFormData {
   titleCatalog: string;
@@ -31,6 +32,7 @@ export default function CreateCatalogPage(): ReactElement {
   const { user, setUser } = useUser();
   const { openDialog } = useConfirmDialog();
   const navigate = useNavigate();
+  const { setCanPauseWithSpace } = useMusic();
 
   if (user?.role !== "ARTISTS") return <NotFoundErrorPage message="ARTIST NOT FOUND" />;
 
@@ -180,6 +182,7 @@ export default function CreateCatalogPage(): ReactElement {
                         {...field}
                         type="text"
                         id="titleCatalog"
+                        onFocus={() => setCanPauseWithSpace(false)}
                         placeholder="Enter Title"
                         className="mt-1 text-dark-custom px-2 lg:px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-tertio-orange focus:outline-none"
                       />

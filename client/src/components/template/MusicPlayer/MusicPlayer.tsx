@@ -8,14 +8,23 @@ import { IconName } from "./../../../constants/iconName";
 import { useScreenSize } from "./../../../hooks/useScreenSize";
 
 export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactElement {
-  const { playingMusic, isPlaying, soundValue, time, setIsPlaying, setSoundValue, setTime } =
-    useMusic();
+  const {
+    playingMusic,
+    isPlaying,
+    soundValue,
+    time,
+    canPauseWithSpace,
+    setIsPlaying,
+    setSoundValue,
+    setTime,
+  } = useMusic();
   const isMobile = useScreenSize();
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === "Space") {
+        if (!canPauseWithSpace) return;
         event.preventDefault();
         setIsPlaying(!isPlaying);
       }

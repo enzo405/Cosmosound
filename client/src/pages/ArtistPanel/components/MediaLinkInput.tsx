@@ -1,3 +1,4 @@
+import { useMusic } from "./../../../hooks/useMusic";
 import React, { ReactElement } from "react";
 import { Control, Controller } from "react-hook-form";
 
@@ -16,6 +17,8 @@ export default function MediaLinkInput({
   placeholder,
   hostname,
 }: MediaLinkInputProps): ReactElement {
+  const { setCanPauseWithSpace } = useMusic();
+
   const hostnameRegex = hostname
     ? new RegExp(`^(https?://)?(www\\.)?${hostname.replace(/\./g, "\\.")}(/.*)?$`)
     : undefined;
@@ -45,6 +48,7 @@ export default function MediaLinkInput({
                 {...field}
                 type="text"
                 id={name}
+                onFocus={() => setCanPauseWithSpace(false)}
                 placeholder={placeholder}
                 className={`w-5/6 mt-1 text-dark-custom px-2 sm:px-4 py-2 border rounded-lg focus:ring-1 focus:ring-tertio-orange focus:outline-none ${
                   error ? "border-red-500" : "border-gray-300"

@@ -1,5 +1,5 @@
-import { Catalog, DetailedCatalog } from "./models/Catalog";
-import { CreateCatalogFormData } from "./pages/CreateCatalog/CreateCatalogPage";
+import { Catalog, DetailedCatalog } from "./../models/Catalog";
+import { CreateCatalogFormData } from "./../pages/CreateCatalog/CreateCatalogPage";
 import { apiClient } from "./axiosService";
 
 async function getArtistCatalogs(artistId: string): Promise<DetailedCatalog[]> {

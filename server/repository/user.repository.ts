@@ -1,7 +1,7 @@
 import { prisma } from "../app";
 import DatabaseException from "../errors/DatabaseException";
 import { MusicDetails } from "../models/MusicDetails";
-import { HistoryRecord, Music, Prisma, Users } from "@prisma/client"; // Import the User model type
+import { HistoryRecord, Music, Prisma, Users } from "@prisma/client";
 
 const createUser = async (userData: Prisma.UsersCreateInput): Promise<Users> => {
   try {

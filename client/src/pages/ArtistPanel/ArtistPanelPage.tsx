@@ -19,6 +19,7 @@ import { enqueueSnackbar } from "notistack";
 import { AxiosError } from "axios";
 import { getDirtyFieldsValue } from "./../../utils/form";
 import ArtistInfoCard from "./components/ArtistCardInfo";
+import { useMusic } from "./../../hooks/useMusic";
 
 export interface ArtistPanelFormData {
   artistName?: string;
@@ -32,6 +33,7 @@ export interface ArtistPanelFormData {
 
 export default function ArtistPanelPage(): ReactElement {
   const { user, setUser } = useUser();
+  const { setCanPauseWithSpace } = useMusic();
 
   const { openDialog } = useConfirmDialog();
 
@@ -199,6 +201,7 @@ export default function ArtistPanelPage(): ReactElement {
                           <input
                             {...field}
                             type="text"
+                            onFocus={() => setCanPauseWithSpace(false)}
                             id="artistName"
                             placeholder="Enter your artist name"
                             className={`mt-1 text-dark-custom px-2 lg:px-5 py-3 border ${
@@ -266,6 +269,7 @@ export default function ArtistPanelPage(): ReactElement {
                     <input
                       type="text"
                       onChange={(e) => handleOnChangeGenreInput(e.target.value)}
+                      onFocus={() => setCanPauseWithSpace(false)}
                       placeholder="Search genre"
                       className="mt-1 text-dark-custom px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-tertio-orange focus:outline-none"
                     />
@@ -285,6 +289,7 @@ export default function ArtistPanelPage(): ReactElement {
                                   type="radio"
                                   className="accent-primary-orange cursor-pointer"
                                   value={genre}
+                                  onFocus={() => setCanPauseWithSpace(false)}
                                   checked={isChecked}
                                   onChange={() => field.onChange(genre)}
                                   id={`genre-${genre}`}

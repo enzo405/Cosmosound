@@ -8,6 +8,7 @@ import { enqueueSnackbar } from "notistack";
 import { ReactElement, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import PlaylistService from "./../../services/playlistService";
+import { useMusic } from "./../../hooks/useMusic";
 
 interface SelectPlaylistProps {
   handleAddToPlaylist: (playlist: Playlist) => void;
@@ -21,6 +22,7 @@ export default function SelectPlaylist({
   const { user, setUser } = useUser();
   const { openDialog } = useConfirmDialog();
   const { idParams } = useParams();
+  const { setCanPauseWithSpace } = useMusic();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -88,6 +90,7 @@ export default function SelectPlaylist({
           <input
             ref={inputRef}
             autoFocus
+            onFocus={() => setCanPauseWithSpace(false)}
             type="search"
             id="searchbar"
             className="w-full bg-slate-200 p-1 ps-8 rounded-md font-normal text-dark-custom tracking-wide outline-none focus:outline-none focus:ring-2 focus:ring-blue-500"
