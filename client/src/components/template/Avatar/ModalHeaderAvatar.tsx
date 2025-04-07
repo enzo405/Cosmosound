@@ -1,16 +1,16 @@
-import Divider from "components/Divider";
-import { routesConfig } from "config/app-config";
+import Divider from "./../../../components/Divider";
+import { routesConfig } from "./../../../config/app-config";
 import { useEffect, useRef, useState, type ReactElement } from "react";
 import DarkModeSwitch from "./DarkModeSwitch";
-import { Icon } from "components/icons/Icon";
-import SettingsOptions from "components/settings/SettingsOptions";
-import { useTheme } from "hooks/useTheme";
+import { Icon } from "./../../../components/icons/Icon";
+import SettingsOptions from "./../../../components/settings/SettingsOptions";
+import { useTheme } from "./../../../hooks/useTheme";
 import { useNavigate } from "react-router-dom";
-import { useOpenAvatarModal } from "hooks/useOpenAvatarModal";
-import { useScreenSize } from "hooks/useScreenSize";
-import { useUser } from "hooks/useUser";
-import UserService from "services/userService";
-import { displayPictureProfile } from "utils/user";
+import { useOpenAvatarModal } from "./../../../hooks/useOpenAvatarModal";
+import { useScreenSize } from "./../../../hooks/useScreenSize";
+import { useUser } from "./../../../hooks/useUser";
+import UserService from "./../../../services/userService";
+import { displayPictureProfile } from "./../../../utils/user";
 
 interface DropdownHeaderAvatar {}
 
@@ -72,6 +72,7 @@ export default function DropdownHeaderAvatar({}: DropdownHeaderAvatar): ReactEle
         {/* Profile Section */}
         <SettingsOptions hoverable={false}>
           <img
+            loading="eager"
             className="w-[2.6rem] h-[2.6rem] hidden xsm:block rounded-xl ring-gray-300 object-cover"
             src={displayPictureProfile(user?.pictureProfile)}
             alt="profile picture"

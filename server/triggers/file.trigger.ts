@@ -1,7 +1,7 @@
 import { Response } from "express";
-import nextcloudService from "@/services/nextcloud.service";
-import { UserRequest } from "@/middlewares/auth.middleware";
-import BadRequestException from "@/errors/BadRequestException";
+import nextcloudService from "../services/nextcloud.service";
+import { UserRequest } from "../middlewares/auth.middleware";
+import BadRequestException from "../errors/BadRequestException";
 
 const uploadPicture = async (req: UserRequest, res: Response): Promise<void> => {
   if (!req.file) {

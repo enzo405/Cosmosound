@@ -1,26 +1,27 @@
-import { Icon } from "components/icons/Icon";
-import { useMusic } from "hooks/useMusic";
+import { Icon } from "./../../components/icons/Icon";
+import { useMusic } from "./../../hooks/useMusic";
 import { enqueueSnackbar } from "notistack";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import NotFoundErrorPage from "./../../pages/errors/NotFoundErrorPage";
 import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ArtistService from "services/artistService";
-import { formatTime } from "utils/date";
+import ArtistService from "./../../services/artistService";
+import { formatTime } from "./../../utils/date";
 import CategoryTabs from "../../components/CategoryTabs";
-import { Catalog, TypeCatalog } from "models/Catalog";
-import { Music } from "models/Music";
-import MusicItem from "components/music/MusicItem";
-import Card from "components/cards/Card";
-import { routesConfig } from "config/app-config";
-import ArtistSettings from "components/settings/ArtistSettings";
-import PageLayout from "components/PageLayout";
-import UserService from "services/userService";
-import HeartIcon from "components/icons/HeartIcon";
-import { useUser } from "hooks/useUser";
-import { displayPictureProfile } from "utils/user";
-import MediaIcon from "components/icons/media/MediaIcon";
-import { DetailedArtistInfo } from "models/User";
-import Loading from "components/Loading";
+import { Catalog, TypeCatalog } from "./../../models/Catalog";
+import { Music } from "./../../models/Music";
+import MusicItem from "./../../components/music/MusicItem";
+import Card from "./../../components/cards/Card";
+import { routesConfig } from "./../../config/app-config";
+import ArtistSettings from "./../../components/settings/ArtistSettings";
+import PageLayout from "./../../components/PageLayout";
+import UserService from "./../../services/userService";
+import HeartIcon from "./../../components/icons/HeartIcon";
+import { useUser } from "./../../hooks/useUser";
+import { displayPictureProfile } from "./../../utils/user";
+import MediaIcon from "./../../components/icons/media/MediaIcon";
+import { DetailedArtistInfo } from "./../../models/User";
+import Loading from "./../../components/Loading";
+import GenreLink from "./../../components/GenreLink";
 
 export enum ArtistTabs {
   MUSIC = "Songs",
@@ -125,20 +126,24 @@ export default function ArtistPage(): ReactElement {
   };
 
   const isPlayingSongCurrentPage =
-    getMusic(artist).find((m) => m.id == playingMusic.id) != undefined;
+    getMusic(artist).find((m) => m.id === playingMusic?.id) != undefined;
 
   const handlePlaying = () => {
     loadContent(ArtistTabs.MUSIC);
     setActiveTab(ArtistTabs.MUSIC);
-    if (!isPlayingSongCurrentPage && artist != undefined) {
-      const firstCatalog = artist.catalogs[0];
-      setPlayingMusic({
-        ...firstCatalog.musics[0],
-        catalog: firstCatalog,
-        artist: artist,
-      });
+    if (isPlaying && isPlayingSongCurrentPage) {
+      setIsPlaying(false);
+    } else {
+      if (!isPlayingSongCurrentPage) {
+        const firstCatalog = artist.catalogs[0];
+        setPlayingMusic({
+          ...firstCatalog.musics[0],
+          catalog: firstCatalog,
+          artist: artist,
+        });
+      }
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const onLikeCatalog = async (like: boolean, catalog: Catalog): Promise<boolean> => {
@@ -192,6 +197,10 @@ export default function ArtistPage(): ReactElement {
                 {<MediaIcon media={media} />}
               </a>
             ))}
+          </span>
+          <span className="flex flex-row gap-1 items-center">
+            Genre:
+            <GenreLink genre={artist.genre} />
           </span>
         </div>
       }
@@ -248,8 +257,9 @@ export default function ArtistPage(): ReactElement {
                 })
               )
             ) : (
-              <span className="text-dark-custom">
-                {artist.artistName} haven't made any {activeTab.valueOf()} yet
+              <span className="text-dark-custom w-full flex flex-row items-center gap-2">
+                <span className="rounded-lg bg-dark-glassy p-1 ">{artist.artistName}</span>
+                haven't made any {activeTab.valueOf()} yet
               </span>
             )}
           </div>

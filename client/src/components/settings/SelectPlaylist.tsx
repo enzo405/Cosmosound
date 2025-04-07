@@ -1,13 +1,13 @@
-import Divider from "components/Divider";
-import { Icon } from "components/icons/Icon";
-import { routesConfig } from "config/app-config";
-import { useConfirmDialog } from "hooks/useConfirm";
-import { useUser } from "hooks/useUser";
-import { Playlist } from "models/Playlist";
+import Divider from "./../../components/Divider";
+import { Icon } from "./../../components/icons/Icon";
+import { routesConfig } from "./../../config/app-config";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import { useUser } from "./../../hooks/useUser";
+import { Playlist } from "./../../models/Playlist";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import PlaylistService from "services/playlistService";
+import PlaylistService from "./../../services/playlistService";
 
 interface SelectPlaylistProps {
   handleAddToPlaylist: (playlist: Playlist) => void;
@@ -114,6 +114,7 @@ export default function SelectPlaylist({
             onClick={() => handleClickPlaylist(p)}
             className="flex flex-row gap-2 p-0.5 rounded-lg items-center hover:bg-gray-200 cursor-pointer">
             <img
+              loading="eager"
               className="mm-size-7 rounded-md"
               src={p.playlistThumbnail}
               alt={`${p.title} thumbnail`}

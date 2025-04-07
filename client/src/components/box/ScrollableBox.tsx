@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
-import ArrowLeft from "components/icons/ArrowLeft";
-import ArrowRight from "components/icons/ArrowRight";
+import ArrowLeft from "./../../components/icons/ArrowLeft";
+import ArrowRight from "./../../components/icons/ArrowRight";
 import { titleStyle } from "./styles";
 
 interface ScrollableBoxProps {

@@ -1,8 +1,8 @@
 import { HTMLAttributes, type ReactElement } from "react";
-import { Icon } from "components/icons/Icon";
-import { useOpenAvatarModal } from "hooks/useOpenAvatarModal";
-import { useUser } from "hooks/useUser";
-import { displayPictureProfile } from "utils/user";
+import { Icon } from "./../../../components/icons/Icon";
+import { useOpenAvatarModal } from "./../../../hooks/useOpenAvatarModal";
+import { useUser } from "./../../../hooks/useUser";
+import { displayPictureProfile } from "./../../../utils/user";
 
 function HeaderAvatar({ className = "", id }: HTMLAttributes<HTMLHRElement>): ReactElement {
   const { isModalOpen, toggleModal } = useOpenAvatarModal();
@@ -14,6 +14,7 @@ function HeaderAvatar({ className = "", id }: HTMLAttributes<HTMLHRElement>): Re
       className={`${className} group cursor-pointer flex flex-row items-center`}
       onClick={toggleModal}>
       <img
+        loading="eager"
         className="mm-size-11 p-1 rounded-xl ring-gray-300 cursor-pointer aspect-square object-cover"
         src={displayPictureProfile(user?.pictureProfile)}
         alt="profile picture"

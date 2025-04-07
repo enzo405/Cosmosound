@@ -1,6 +1,6 @@
-import { Music, MusicWithCatalog } from "models/Music";
+import { Music, MusicWithCatalog } from "./models/Music";
 import { apiClient } from "./axiosService";
-import { Playlist, PlaylistWithMusic } from "models/Playlist";
+import { Playlist, PlaylistWithMusic } from "./models/Playlist";
 
 async function searchPlaylistByTitle(value: string): Promise<Playlist[]> {
   if (value == "") {
@@ -8,29 +8,29 @@ async function searchPlaylistByTitle(value: string): Promise<Playlist[]> {
   }
 
   return await apiClient
-    .get(`/api/playlists?search=${value.toLowerCase().trim()}`)
+    .get(`/playlists?search=${value.toLowerCase().trim()}`)
     .then((res) => res.data);
 }
 
 async function getPlaylistById(id?: string): Promise<PlaylistWithMusic | undefined> {
   if (id == undefined) return undefined;
 
-  return await apiClient.get(`/api/playlists/${id}`).then((res) => res.data);
+  return await apiClient.get(`/playlists/${id}`).then((res) => res.data);
 }
 
 async function deletePlaylist(playlist: Playlist): Promise<void> {
-  return await apiClient.delete(`/api/playlists/${playlist.id}`);
+  return await apiClient.delete(`/playlists/${playlist.id}`);
 }
 
 async function deleteMusic(playlist: Playlist, music: Music): Promise<Playlist> {
   return await apiClient
-    .delete(`/api/playlists/${playlist.id}/musics/${music.id}`)
+    .delete(`/playlists/${playlist.id}/musics/${music.id}`)
     .then((res) => res.data);
 }
 
 async function addMusic(playlist: Playlist, music: MusicWithCatalog): Promise<Playlist> {
   return await apiClient
-    .post(`/api/playlists/${playlist.id}/musics`, {
+    .post(`/playlists/${playlist.id}/musics`, {
       idMusic: music.id,
       idCatalog: music.catalog.id,
     })
@@ -38,7 +38,7 @@ async function addMusic(playlist: Playlist, music: MusicWithCatalog): Promise<Pl
 }
 
 async function createPlaylist(title: string): Promise<Playlist> {
-  return await apiClient.post(`/api/playlists`, { title }).then((res) => res.data);
+  return await apiClient.post(`/playlists`, { title }).then((res) => res.data);
 }
 
 const PlaylistService = {

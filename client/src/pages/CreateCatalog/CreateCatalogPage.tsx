@@ -1,19 +1,19 @@
-import Container from "components/box/Container";
-import { Icon } from "components/icons/Icon";
-import { useUser } from "hooks/useUser";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import Container from "./../../components/box/Container";
+import { Icon } from "./../../components/icons/Icon";
+import { useUser } from "./../../hooks/useUser";
+import NotFoundErrorPage from "./../../pages/errors/NotFoundErrorPage";
 import React, { ChangeEvent, DragEvent, ReactElement, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import GenresService from "services/genresService";
+import GenresService from "./../../services/genresService";
 import NewMusic from "./components/NewMusic";
-import CatalogService from "services/catalogService";
-import { useConfirmDialog } from "hooks/useConfirm";
-import { displayPictureProfile } from "utils/user";
+import CatalogService from "./../../services/catalogService";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import { displayPictureProfile } from "./../../utils/user";
 import { enqueueSnackbar } from "notistack";
-import Loading from "components/icons/Loading";
+import Loading from "./../../components/icons/Loading";
 import CatalogCard from "./components/CatalogCard";
 import { useNavigate } from "react-router-dom";
-import { routesConfig } from "config/app-config";
+import { routesConfig } from "./../../config/app-config";
 
 export interface CreateCatalogFormData {
   titleCatalog: string;
@@ -208,6 +208,7 @@ export default function CreateCatalogPage(): ReactElement {
                           htmlFor="thumbnailCatalog"
                           className="relative w-min h-min cursor-pointer hover:opacity-90 flex justify-end">
                           <img
+                            loading="eager"
                             src="/img/form/edit-background.png"
                             alt="Edit thumbnail"
                             className="absolute z-10 top-0 right-0 mm-size-24 md:mm-size-36 opacity-90"

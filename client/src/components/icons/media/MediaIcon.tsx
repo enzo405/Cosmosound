@@ -4,7 +4,7 @@ import SpotifyIcon from "./SpotifyIcon";
 import AppleMusicIcon from "./AppleMusicIcon";
 import XIcon from "./XIcon";
 import YoutubeMusicIcon from "./YoutubeMusicIcon";
-import { Media } from "models/User";
+import { Media } from "./../../../models/User";
 
 interface MediaIconProps {
   media: Media;

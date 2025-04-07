@@ -1,4 +1,4 @@
-import { SearchContext } from "context/searchContext";
+import { SearchContext } from "./../context/searchContext";
 import React, { PropsWithChildren } from "react";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";

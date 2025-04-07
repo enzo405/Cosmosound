@@ -1,6 +1,6 @@
 import React from "react";
-import sprite from "assets/sprite.svg";
-import { IconName } from "constants/iconName";
+import * as sprite from "./../../assets/sprite.svg";
+import { IconName } from "./../../constants/iconName";
 
 interface IconProps {
   className?: string;
@@ -11,7 +11,7 @@ interface IconProps {
 export const Icon: React.FC<IconProps> = ({ className = "", onClick = () => {}, iconName }) => {
   return (
     <svg className={`${className} select-none`} onClick={onClick}>
-      <use xlinkHref={`${sprite}#icon-${iconName}`}></use>
+      <use xlinkHref={`${sprite.default}#icon-${iconName}`}></use>
     </svg>
   );
 };

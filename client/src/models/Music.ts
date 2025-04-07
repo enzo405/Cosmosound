@@ -7,6 +7,7 @@ export interface Music {
   createdAt: string;
   duration: number;
   genres: string[];
+  url: string;
 }
 
 export interface MusicWithCatalog extends Music {

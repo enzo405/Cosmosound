@@ -1,4 +1,4 @@
-import express, { ErrorRequestHandler } from "express";
+import express, { Response, Request } from "express";
 import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
 import morgan from "morgan";
@@ -14,7 +14,7 @@ import { errorHandler } from "./errors/errorhandler";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 const corsOptions = {
   origin: process.env.ALLOWED_ORIGINS!.split(","),
   methods: process.env.ALLOWED_METHODS!.split(","),
@@ -31,11 +31,14 @@ app.use(cookieParser);
 app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
 
 app.use("/auth", authRouter);
-app.use("/api", fileRouter);
-app.use("/api", userRouter);
-app.use("/api", catalogRouter);
-app.use("/api", playlistRouter);
-app.use("/api", genreRouter);
+app.use("/", fileRouter);
+app.use("/", userRouter);
+app.use("/", catalogRouter);
+app.use("/", playlistRouter);
+app.use("/", genreRouter);
+app.get("/health", (req: Request, res: Response) => {
+  res.status(200).send("OK");
+});
 
 app.use(errorHandler);
 
@@ -50,7 +53,7 @@ async function connectDatabase() {
 }
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running`);
 });
 
 connectDatabase();

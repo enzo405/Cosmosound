@@ -1,23 +1,72 @@
-import { Icon } from "components/icons/Icon";
-import { useMusic } from "hooks/useMusic";
-import { ReactElement, HTMLAttributes } from "react";
+import { Icon } from "./../../../components/icons/Icon";
+import { useMusic } from "./../../../hooks/useMusic";
+import { ReactElement, HTMLAttributes, useRef, useEffect } from "react";
 import MusicInfo from "../../music/MusicInfo";
 import TimeMusicSlider from "./TimeMusicSlider";
 import SoundSlider from "./SoundSlider";
-import { IconName } from "constants/iconName";
-import { useScreenSize } from "hooks/useScreenSize";
+import { IconName } from "./../../../constants/iconName";
+import { useScreenSize } from "./../../../hooks/useScreenSize";
 
 export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactElement {
   const { playingMusic, isPlaying, soundValue, time, setIsPlaying, setSoundValue, setTime } =
     useMusic();
   const isMobile = useScreenSize();
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const handleIsPlaying = () => setIsPlaying(!isPlaying);
-  const handleNextMusic = () => {};
-  const handlePreviousMusic = () => {};
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.code === "Space") {
+        event.preventDefault();
+        setIsPlaying(!isPlaying);
+      }
+    };
 
-  const getSoundIcon = (): IconName => {
-    return soundValue > 0 ? (soundValue > 50 ? "volume-high" : "volume-low") : "volume-muted";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.play().catch((err) => console.error(err));
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      if (isPlaying) {
+        audioRef.current.play().catch((err) => console.error(err));
+      }
+    }
+  }, [playingMusic]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = soundValue / 100;
+    }
+  }, [soundValue, playingMusic]);
+
+  const handleIsPlaying = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleNextMusic = () => {
+    console.log("Next music");
+  };
+
+  const handlePreviousMusic = () => {
+    console.log("Previous music");
+  };
+
+  const onTimeUpdate = () => {
+    if (audioRef.current) {
+      setTime(audioRef.current.currentTime);
+    }
   };
 
   const onWheel = (event: React.WheelEvent<HTMLInputElement>) => {
@@ -26,10 +75,23 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     setSoundValue(Math.max(0, Math.min(100, soundValue + step)));
   };
 
+  const getSoundIcon = (): IconName => {
+    return soundValue > 0 ? (soundValue > 50 ? "volume-high" : "volume-low") : "volume-muted";
+  };
+
+  if (!playingMusic) return <></>;
+
   return (
     <>
+      <audio
+        ref={audioRef}
+        src={`https://api.cosmosound.luhcaran.fr/audio-stream?musicUrl=${encodeURIComponent(playingMusic?.url.split(".net/")[1])}`}
+        onTimeUpdate={onTimeUpdate}
+        onEnded={handleNextMusic}
+        controls={false}
+      />
       {isMobile ? (
-        <div className={`justify-around flex flex-col-reverse w-full gap-4 py-4 h-28`}>
+        <div className="justify-around flex flex-col-reverse w-full gap-4 py-4 h-28">
           <div className="flex flex-row items-center w-full p-1 xsm:px-3">
             <div className="flex items-center flex-shrink-0 w-2/3 min-w-2/3 max-w-2/3">
               <MusicInfo music={playingMusic} />
@@ -53,7 +115,12 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
             </div>
           </div>
           <div className="flex flex-col gap-2 items-center w-full px-10 pt-2">
-            <TimeMusicSlider time={time} setTime={setTime} duration={playingMusic.duration} />
+            <TimeMusicSlider
+              time={time}
+              audioRef={audioRef}
+              setTime={setTime}
+              duration={playingMusic.duration}
+            />
           </div>
         </div>
       ) : (
@@ -80,7 +147,12 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
               />
             </div>
             <div className="flex flex-row gap-1 items-center w-full lg:w-5/6">
-              <TimeMusicSlider time={time} setTime={setTime} duration={playingMusic.duration} />
+              <TimeMusicSlider
+                time={time}
+                setTime={setTime}
+                duration={playingMusic.duration}
+                audioRef={audioRef}
+              />
             </div>
           </div>
           <div className="flex flex-row w-1/4 lg:w-1/3 h-full justify-end">

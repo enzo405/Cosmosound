@@ -1,14 +1,23 @@
+# Git stuff (✅ good)
 .git
 .gitignore
+
+# macOS noise (✅ good)
 .DS_Store
 
+# Docker files (✅ optional)
 Dockerfile*
 docker-compose*
 .dockerignore
 
+# Local dev-only stuff (✅ good)
 node_modules
+
+# Another project (✅ good)
 mongodb_rs
 
-dist
+# Build folders (⚠️ depends)
 build
+
+# Logs (✅ good)
 *.log

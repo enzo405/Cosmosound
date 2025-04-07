@@ -1,14 +1,14 @@
-import Divider from "components/Divider";
-import SettingsOptions from "components/settings/SettingsOptions";
-import { routesConfig } from "config/app-config";
-import { Music, MusicWithCatalog } from "models/Music";
-import { Playlist } from "models/Playlist";
+import Divider from "./../../components/Divider";
+import SettingsOptions from "./../../components/settings/SettingsOptions";
+import { routesConfig } from "./../../config/app-config";
+import { Music, MusicWithCatalog } from "./../../models/Music";
+import { Playlist } from "./../../models/Playlist";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 import TextSetting from "./TextSetting";
 import { enqueueSnackbar } from "notistack";
 import SelectPlaylist from "./SelectPlaylist";
-import PlaylistService from "services/playlistService";
-import { useUser } from "hooks/useUser";
+import PlaylistService from "./../../services/playlistService";
+import { useUser } from "./../../hooks/useUser";
 
 interface MusicSettingsProps {
   dropdownPosition: "top" | "bottom";

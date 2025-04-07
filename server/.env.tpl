@@ -1,11 +1,11 @@
-NODE_ENV = dev
+NODE_ENV = production
 PORT = 4000
 ALLOWED_ORIGINS = http://localhost:3000
 ALLOWED_METHODS = GET,POST,PATCH,DELETE
 
-DATABASE_URL = mongodb://root:root@mongodb:27017/cosmosound?replicaSet=rs0
-JWT_SECRET = XID9RMz03RV7MDTernWt7xDDCs7ffd3Dwp0PyEpvhhqlhLEAuEjWxFgRUAEqhej0ehCfvIokBilYffUSoIH29H8gSBEYGwDM23UR
-JWT_SECRET_REFRESH = j9vseHC9hcmqBp5JEn4FFRnss8h5PVZHdygoJIDCHhV1b7aJgZR0vO6PjyXPfnCQD6Qzebd7ipwnO9MmO7xPZYpzoIbCjsm8sBWd
+DATABASE_URL = mongodb://test:test@mongodb:27017/cosmosound?replicaSet=rs0
+JWT_SECRET = 
+JWT_SECRET_REFRESH = 
 
 NEXTCLOUD_BASE_URL = 
 NEXTCLOUD_USERNAME = 

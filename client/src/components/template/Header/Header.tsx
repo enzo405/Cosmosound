@@ -1,5 +1,5 @@
 import { type ReactElement } from "react";
-import HeaderAvatar from "components/template/Avatar/HeaderAvatar";
+import HeaderAvatar from "./../../../components/template/Avatar/HeaderAvatar";
 import HeaderSearchbar from "./HeaderSearchbar";
 import HeaderNavigation from "./HeaderNavigation";
 
@@ -11,7 +11,12 @@ function Header(): ReactElement {
         <HeaderSearchbar />
       </div>
       <HeaderAvatar className="sm:flex hidden" id="avatar-button-desktop" />
-      <img className="block sm:hidden mm-size-8 mr-2 " src="/img/cosmosound.png" alt="CosmoSound" />
+      <img
+        loading="eager"
+        className="block sm:hidden mm-size-8 mr-2 "
+        src="/img/cosmosound.png"
+        alt="CosmoSound"
+      />
     </div>
   );
 }

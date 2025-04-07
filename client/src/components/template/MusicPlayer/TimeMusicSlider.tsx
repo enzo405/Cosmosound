@@ -3,16 +3,22 @@ import React, { ReactElement } from "react";
 interface TimeMusicSliderProps {
   time: number;
   duration: number;
-  setTime: React.Dispatch<React.SetStateAction<number>>;
+  setTime: (value: number) => void;
+  audioRef: React.RefObject<HTMLAudioElement>;
 }
 
 export default function TimeMusicSlider({
   time,
   duration,
+  audioRef,
   setTime,
 }: TimeMusicSliderProps): ReactElement {
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTime(parseInt(event.target.value));
+    const newTime = parseInt(event.target.value);
+    setTime(newTime);
+    if (audioRef.current) {
+      audioRef.current.currentTime = newTime;
+    }
   };
 
   const stringifyTime = (timeInSeconds: number): string => {

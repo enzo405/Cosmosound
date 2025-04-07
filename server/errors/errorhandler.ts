@@ -2,6 +2,7 @@ import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 import { WebError } from "./Error";
 import dotenv from "dotenv";
 import DatabaseException from "./DatabaseException";
+import ServerException from "./ServerException";
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ export const errorHandler: ErrorRequestHandler = async (
   if (err instanceof WebError) {
     if (isDev) {
       console.error(`${err.statusCode} - ${err.statusMessage}`);
-      if (err instanceof DatabaseException) {
+      if (err instanceof DatabaseException || err instanceof ServerException) {
         console.error(err.cause);
       }
     }

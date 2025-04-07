@@ -1,13 +1,13 @@
-import { Catalog, DetailedCatalog } from "models/Catalog";
-import { CreateCatalogFormData } from "pages/CreateCatalog/CreateCatalogPage";
+import { Catalog, DetailedCatalog } from "./models/Catalog";
+import { CreateCatalogFormData } from "./pages/CreateCatalog/CreateCatalogPage";
 import { apiClient } from "./axiosService";
 
 async function getArtistCatalogs(artistId: string): Promise<DetailedCatalog[]> {
-  return await apiClient.get(`/api/catalogs/artist/${artistId}`).then((res) => res.data);
+  return await apiClient.get(`/catalogs/artist/${artistId}`).then((res) => res.data);
 }
 
 async function getCatalogById(id?: string): Promise<DetailedCatalog | undefined> {
-  return await apiClient.get(`/api/catalogs/${id}`).then((res) => res.data);
+  return await apiClient.get(`/catalogs/${id}`).then((res) => res.data);
 }
 
 async function searchCatalogByTitle(value: string): Promise<DetailedCatalog[]> {
@@ -15,12 +15,12 @@ async function searchCatalogByTitle(value: string): Promise<DetailedCatalog[]> {
     return [];
   }
   return await apiClient
-    .get(`/api/catalogs?search=${value.toLowerCase().trim()}`)
+    .get(`/catalogs?search=${value.toLowerCase().trim()}`)
     .then((res) => res.data);
 }
 
 async function deleteCatalog(catalog: Catalog): Promise<void> {
-  return await apiClient.delete(`/api/catalogs/${catalog.id}`).then((res) => res.data.message);
+  return await apiClient.delete(`/catalogs/${catalog.id}`).then((res) => res.data.message);
 }
 
 async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<DetailedCatalog> {
@@ -44,7 +44,11 @@ async function createCatalog(dataForm: Partial<CreateCatalogFormData>): Promise<
     formData.append(`durations`, JSON.stringify(durations));
   }
 
-  return await apiClient.post("/api/catalogs", formData).then((res) => res.data);
+  return await apiClient.post("/catalogs", formData).then((res) => res.data);
+}
+
+async function getSuggestions(): Promise<DetailedCatalog[]> {
+  return await apiClient.get("/me/suggestions").then((res) => res.data);
 }
 
 const CatalogService = {
@@ -53,6 +57,7 @@ const CatalogService = {
   searchCatalogByTitle,
   deleteCatalog,
   createCatalog,
+  getSuggestions,
 };
 
 export default CatalogService;

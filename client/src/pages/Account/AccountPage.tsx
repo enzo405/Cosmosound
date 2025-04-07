@@ -1,18 +1,19 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import Container from "components/box/Container";
-import { Icon } from "components/icons/Icon";
-import UserService from "services/userService";
-import { useConfirmDialog } from "hooks/useConfirm";
-import { useUser } from "hooks/useUser";
-import { displayPictureProfile } from "utils/user";
+import Container from "./../../components/box/Container";
+import { Icon } from "./../../components/icons/Icon";
+import UserService from "./../../services/userService";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import { useUser } from "./../../hooks/useUser";
+import { displayPictureProfile } from "./../../utils/user";
 import { enqueueSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import SettingsOptions from "components/settings/SettingsOptions";
-import { routesConfig } from "config/app-config";
-import { getDirtyFieldsValue } from "utils/form";
+import SettingsOptions from "./../../components/settings/SettingsOptions";
+import { routesConfig } from "./../../config/app-config";
+import { getDirtyFieldsValue } from "./../../utils/form";
 import PlaylistLink from "./components/PlaylistLink";
+import GenreLink from "./../../components/GenreLink";
 
 export interface AccountFormData {
   username: string;
@@ -307,6 +308,7 @@ function AccountPage(): ReactElement {
                           htmlFor="profileImage"
                           className="relative w-min h-min cursor-pointer hover:opacity-90 flex justify-end">
                           <img
+                            loading="eager"
                             src="/img/form/edit-background.png"
                             alt="Edit background"
                             className="absolute z-10 top-0 right-0 mm-size-20 md:mm-size-32 opacity-90"
@@ -350,7 +352,7 @@ function AccountPage(): ReactElement {
                 <img
                   src={displayPictureProfile(user?.pictureProfile)}
                   alt={`${user?.name}'s profile`}
-                  className="w-16 h-16 rounded-full border-2 border-blue-500"
+                  className="w-16 h-16 rounded-full border-2 border-orange-500"
                 />
                 <div className="ml-1 sm:ml-4">
                   <h2 className="text-lg sm:text-xl font-bold text-gray-800">{user?.name}</h2>
@@ -370,17 +372,12 @@ function AccountPage(): ReactElement {
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Liked Genres</h3>
                 <div className="flex flex-wrap gap-2">
-                  {user?.likedGenres.slice(0, 6).map((genre) => (
-                    <Link
-                      key={genre}
-                      className="px-3 py-1 hover:bg-blue-400 bg-blue-500 text-white text-sm rounded-full"
-                      to={routesConfig.genres.getParameter(genre)}>
-                      {genre}
-                    </Link>
-                  ))}
+                  {user?.likedGenres
+                    .slice(0, 6)
+                    .map((genre) => <GenreLink key={genre} genre={genre} />)}
                   {user?.likedGenres && user.likedGenres.length > 6 && (
                     <Link
-                      className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full"
+                      className="px-3 py-1 bg-primary-orange hover:bg-tertio-orange text-white text-sm rounded-full"
                       to={routesConfig.library.path}>
                       +{user.likedGenres.length - 6}
                     </Link>

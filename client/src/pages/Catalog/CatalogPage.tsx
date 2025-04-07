@@ -1,22 +1,23 @@
-import { Icon } from "components/icons/Icon";
-import MusicItem from "components/music/MusicItem";
-import { useMusic } from "hooks/useMusic";
+import { Icon } from "./../../components/icons/Icon";
+import MusicItem from "./../../components/music/MusicItem";
+import { useMusic } from "./../../hooks/useMusic";
 import { enqueueSnackbar } from "notistack";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import NotFoundErrorPage from "./../../pages/errors/NotFoundErrorPage";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import CatalogService from "services/catalogService";
-import CatalogSettings from "components/settings/CatalogSettings";
-import { MusicDetails } from "models/Music";
-import { formatDurationWithLabel, formatTime } from "utils/date";
-import PageLayout from "components/PageLayout";
-import ArtistInfo from "components/music/ArtistInfo";
-import UserService from "services/userService";
-import HeartIcon from "components/icons/HeartIcon";
-import { useUser } from "hooks/useUser";
-import { DetailedCatalog } from "models/Catalog";
-import { displayPictureProfile } from "utils/user";
-import Loading from "components/Loading";
+import CatalogService from "./../../services/catalogService";
+import CatalogSettings from "./../../components/settings/CatalogSettings";
+import { MusicDetails } from "./../../models/Music";
+import { formatDurationWithLabel, formatTime } from "./../../utils/date";
+import PageLayout from "./../../components/PageLayout";
+import ArtistInfo from "./../../components/music/ArtistInfo";
+import UserService from "./../../services/userService";
+import HeartIcon from "./../../components/icons/HeartIcon";
+import { useUser } from "./../../hooks/useUser";
+import { DetailedCatalog } from "./../../models/Catalog";
+import { displayPictureProfile } from "./../../utils/user";
+import Loading from "./../../components/Loading";
+import GenreLink from "./../../components/GenreLink";
 
 interface CatalogPageProps {}
 
@@ -32,9 +33,22 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
   );
 
   const isPlayingSongCurrentPage = useMemo(
-    () => catalog?.musics.find((m) => m.id == playingMusic.id) != undefined,
+    () => catalog?.musics.find((m) => m.id === playingMusic?.id) != undefined,
     [playingMusic],
   );
+
+  const musicDetails: MusicDetails | undefined = useMemo(() => {
+    if (!catalog) return undefined;
+    return { ...catalog.musics[0], artist: catalog.owner, catalog };
+  }, [catalog]);
+
+  const catalogGenres: Set<string> = useMemo(() => {
+    const genres = new Set<string>();
+    catalog?.musics.forEach((music) => {
+      music.genres.forEach((genre) => genres.add(genre));
+    });
+    return genres;
+  }, [catalog]);
 
   useEffect(() => {
     const fetchCatalog = async () => {
@@ -62,13 +76,15 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
     return <NotFoundErrorPage message="CATALOG NOT FOUND" />;
   }
 
-  const musicDetails: MusicDetails = { ...catalog.musics[0], artist: catalog.owner, catalog };
-
   const handlePlaying = () => {
-    if (!isPlayingSongCurrentPage && catalog != undefined) {
-      setPlayingMusic(musicDetails);
+    if (isPlaying && isPlayingSongCurrentPage) {
+      setIsPlaying(false);
+    } else {
+      if (!isPlayingSongCurrentPage) {
+        setPlayingMusic(musicDetails);
+      }
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleClickHeart = async () => {
@@ -116,6 +132,12 @@ export default function CatalogPage({}: CatalogPageProps): ReactElement {
               catalog.musics.reduce((total, music) => total + music.duration, 0),
             )}
             )
+          </span>
+          <span className="flex flex-row gap-1">
+            Genres:
+            {Array.from(catalogGenres).map((genre) => (
+              <GenreLink key={genre} genre={genre} />
+            ))}
           </span>
         </div>
       }

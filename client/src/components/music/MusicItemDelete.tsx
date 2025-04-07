@@ -1,11 +1,11 @@
-import { Icon } from "components/icons/Icon";
-import { useMusic } from "hooks/useMusic";
-import { Music } from "models/Music";
+import { Icon } from "./../../components/icons/Icon";
+import { useMusic } from "./../../hooks/useMusic";
+import { Music } from "./../../models/Music";
 import { ReactElement, useMemo, useRef } from "react";
-import { formatDuration, formatTime } from "utils/date";
+import { formatDuration, formatTime } from "./../../utils/date";
 import ArtistInfo from "./ArtistInfo";
-import { Artist } from "models/User";
-import { Catalog } from "models/Catalog";
+import { Artist } from "./../../models/User";
+import { Catalog } from "./../../models/Catalog";
 
 interface MusicItemDeleteProps {
   music: Music;
@@ -26,23 +26,25 @@ export default function MusicItemDelete({
   const musicItemRef = useRef<HTMLInputElement>(null);
 
   const handlePlayMusic = (music: Music) => {
-    if (isCurrentMusicPlaying) {
+    if (isPlaying && isCurrentMusicPlaying) {
       setIsPlaying(false);
     } else {
-      setPlayingMusic({ ...music, artist, catalog });
+      if (!isCurrentMusicPlaying) {
+        setPlayingMusic({ ...music, artist, catalog });
+      }
       setIsPlaying(true);
     }
   };
 
   const isCurrentMusicPlaying = useMemo(
-    () => isPlaying && music.id == playingMusic.id,
+    () => isPlaying && music.id == playingMusic?.id,
     [playingMusic],
   );
 
   return (
     <div className="relative w-full" ref={musicItemRef}>
       <div
-        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[64px] lg:h-18 ${playingMusic.id == music.id ? "bg-music-activ" : "hover:bg-music-hover"} rounded-xl`}>
+        className={`group flex flex-row w-full p-1 justify-between h-16 md:h-[64px] lg:h-18 ${playingMusic?.id === music.id ? "bg-music-activ" : "hover:bg-music-hover"} rounded-xl`}>
         <div className="flex flex-row w-full select-none flex-grow min-w-0 justify-between xsm:pr-1 sm:pr-2 md:pr-4 lg:pr-36 cursor-pointer">
           <div className="flex flex-row items-center w-full sm:max-w-80 sm:min-w-80 lg:min-w-[28rem] lg:max-w-[28rem] gap-1">
             <div className="relative p-0.5 h-5/6 xsm:h-full">

@@ -1,10 +1,10 @@
-import Divider from "components/Divider";
-import { routesConfig } from "config/app-config";
-import { useUser } from "hooks/useUser";
+import Divider from "./../../components/Divider";
+import { routesConfig } from "./../../config/app-config";
+import { useUser } from "./../../hooks/useUser";
 import { useState, type ReactElement } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UserService from "services/userService";
+import UserService from "./../../services/userService";
 
 interface LoginDataForm {
   email: string;
@@ -51,14 +51,15 @@ function LoginPage(): ReactElement {
     <div className="flex flex-row w-full h-full font-bs">
       <div className="hidden xsm:block xsm:w-2/5 sm:w-1/2 md:w-[55%] lg:w-[60%]">
         <img
+          loading="eager"
           className="object-cover h-full w-full select-none"
-          src="/img/login.jpg"
-          alt="Happy CosmoSound user"
+          src="/img/homepage.jpg"
+          alt="Cosmosound Homepage"
         />
       </div>
       <div className="w-auto min-w-0 flex flex-col flex-grow justify-center items-center gap-6 p-2">
         <div className="w-full flex flex-row justify-center items-center gap-1">
-          <img className="size-10" src="/img/cosmosound.png" alt="Cosmosound" />
+          <img loading="eager" className="size-10" src="/img/cosmosound.png" alt="Cosmosound" />
           <span className="flex h-full items-center pt-0.5 font-semibold text-dark-custom text-lg">
             CosmoSound
           </span>
@@ -121,7 +122,7 @@ function LoginPage(): ReactElement {
                     type="button"
                     onClick={() => setShowPassword((prev) => !prev)}
                     className="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-700 outline-none focus:outline-none group">
-                    <span className="group-focus:outline-2 pl-1 pr-0.5 group-focus:outline group-focus:outline-blue-500 rounded-lg">
+                    <span className="group-focus:outline-2 pl-1 pr-0.5 group-focus:outline group-focus:outline-white-orange rounded-lg">
                       {showPassword ? "Hide" : "Show"}
                     </span>
                   </button>
@@ -138,7 +139,7 @@ function LoginPage(): ReactElement {
               {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
               <button
                 type="submit"
-                className="bg-blue-500 text-white font-medium rounded-md py-2 hover:bg-blue-400 focus:outline-1">
+                className="bg-primary-orange hover:bg-tertio-orange text-white font-medium rounded-md py-2 focus:outline-1">
                 Sign In
               </button>
             </div>
@@ -147,7 +148,7 @@ function LoginPage(): ReactElement {
           <div className="flex gap-1 text-sm mt-2">
             <span className="font-light">Don't have an account ?</span>
             <span
-              className="underline text-blue-500 hover:text-blue-400 cursor-pointer"
+              className="underline text-primary-orange hover:text-tertio-orange cursor-pointer"
               onClick={() => navigate(routesConfig.register.path)}>
               Sign up now
             </span>

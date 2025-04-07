@@ -1,10 +1,12 @@
-import BadRequestException from "@/errors/BadRequestException";
-import NotFoundException from "@/errors/NotFoundException";
-import { UserRequest } from "@/middlewares/auth.middleware";
-import catalogService from "@/services/catalog.service";
-import nextcloudService from "@/services/nextcloud.service";
-import { guessCatalogType } from "@/utils/catalog";
+import BadRequestException from "../errors/BadRequestException";
+import NotFoundException from "../errors/NotFoundException";
+import { UserRequest } from "../middlewares/auth.middleware";
+import catalogService from "../services/catalog.service";
+import nextcloudService from "../services/nextcloud.service";
+import userService from "../services/user.service";
+import { guessCatalogType } from "../utils/catalog";
 import { Catalogs, Prisma } from "@prisma/client";
+import axios from "axios";
 import { Response } from "express";
 import { ObjectId } from "mongodb";
 import path from "path";
@@ -41,7 +43,7 @@ const createCatalog = async (req: MulterRequest, res: Response) => {
   }
   if (genres.length !== durations.length) {
     throw new BadRequestException(
-      "An error occured while trying to retrieve the duration in the request.",
+      "An error occured while trying to retrieve the duration in the request."
     );
   }
 
@@ -101,6 +103,7 @@ const createCatalog = async (req: MulterRequest, res: Response) => {
   }
 
   const catalog = await catalogService.createCatalog({
+    id: idCatalog,
     title,
     musics: musicsEntities,
     thumbnail: thumnbailUrl,
@@ -187,6 +190,66 @@ const searchMusic = async (req: UserRequest, res: Response) => {
   res.status(200).json(musics);
 };
 
+const listenMusic = async (req: UserRequest, res: Response) => {
+  const { musicUrl } = req.query;
+  const range = req.headers.range;
+
+  if (!range) {
+    return res.status(416).send("Requires Range header");
+  }
+
+  if (!musicUrl || typeof musicUrl !== "string") {
+    throw new BadRequestException("A music URL must be provided.");
+  }
+
+  try {
+    const decodedUrl = decodeURIComponent(musicUrl);
+    const fullUrl = process.env.NEXTCLOUD_BASE_URL + decodedUrl;
+
+    const [unit, rangeValue] = range.split("=");
+    const [startStr, endStr] = rangeValue.split("-");
+    const start = parseInt(startStr, 10);
+    const end = endStr ? parseInt(endStr, 10) : start + 1024 * 1024; // Default chunk size is 1MB
+    const chunkSize = end - start + 1;
+
+    const response = await axios.get(fullUrl, {
+      responseType: "stream",
+      headers: {
+        Range: `${unit}=${start}-${end}`,
+      },
+      auth: {
+        username: process.env.NEXTCLOUD_USERNAME!,
+        password: process.env.NEXTCLOUD_PASSWORD!,
+      },
+    });
+
+    const filename = decodedUrl.split("/").pop();
+    const folderName = decodedUrl.split("/")[decodedUrl.split("/").length - 2];
+    const idCatalog = folderName.split("-")[1];
+    const idMusic = filename?.split(".")[0];
+
+    if (!idMusic || !idCatalog) {
+      throw new BadRequestException("An error occurred while trying to read the file.");
+    }
+
+    res.status(206);
+    res.setHeader("Content-Range", response.headers["content-range"] ?? `bytes ${start}-${end}`);
+    res.setHeader("Content-Length", chunkSize.toString());
+    res.setHeader("Content-Disposition", `inline; filename="${filename}"`);
+    res.setHeader("Accept-Ranges", "bytes");
+    res.setHeader("Content-Type", "audio/mpeg");
+
+    if (start === 0) {
+      userService.addMusicToHistory(req.userId!, idCatalog, idMusic);
+    }
+
+    response.data.pipe(res);
+  } catch (err) {
+    console.error("Error streaming audio:", err);
+    throw new BadRequestException("An error occurred while trying to read the file.");
+  }
+};
+
 export default {
   createCatalog,
   getCatalogById,
@@ -194,4 +257,5 @@ export default {
   deleteMusic,
   searchCatalog,
   searchMusic,
+  listenMusic,
 };

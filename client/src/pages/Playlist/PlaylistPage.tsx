@@ -1,22 +1,23 @@
-import { Icon } from "components/icons/Icon";
-import MusicItem from "components/music/MusicItem";
-import { useMusic } from "hooks/useMusic";
-import { Music, MusicDetails } from "models/Music";
+import { Icon } from "./../../components/icons/Icon";
+import MusicItem from "./../../components/music/MusicItem";
+import { useMusic } from "./../../hooks/useMusic";
+import { Music, MusicDetails } from "./../../models/Music";
 import { enqueueSnackbar } from "notistack";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
-import { ReactElement, useEffect, useState } from "react";
+import NotFoundErrorPage from "./../../pages/errors/NotFoundErrorPage";
+import { ReactElement, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import PlaylistService from "services/playlistService";
-import { formatDurationWithLabel, formatTime } from "utils/date";
-import PlaylistSettings from "components/settings/PlaylistSettings";
+import PlaylistService from "./../../services/playlistService";
+import { formatDurationWithLabel, formatTime } from "./../../utils/date";
+import PlaylistSettings from "./../../components/settings/PlaylistSettings";
 import PlaylistOwnerBadge from "./components/PlaylistOwnerBadge";
-import PageLayout from "components/PageLayout";
-import UserService from "services/userService";
-import HeartIcon from "components/icons/HeartIcon";
-import { useConfirmDialog } from "hooks/useConfirm";
-import { useUser } from "hooks/useUser";
-import { PlaylistWithMusic } from "models/Playlist";
-import Loading from "components/Loading";
+import PageLayout from "./../../components/PageLayout";
+import UserService from "./../../services/userService";
+import HeartIcon from "./../../components/icons/HeartIcon";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import { useUser } from "./../../hooks/useUser";
+import { PlaylistWithMusic } from "./../../models/Playlist";
+import Loading from "./../../components/Loading";
+import GenreLink from "./../../components/GenreLink";
 
 interface PlaylistPageProps {}
 
@@ -32,6 +33,32 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
     user?.likedPlaylists.find((id) => id === idPlaylist) !== undefined,
   );
   const [displaySettings, setDisplaySettings] = useState(false);
+
+  const musicDetails: MusicDetails | undefined = useMemo(() => {
+    if (playlist == undefined) return;
+    return {
+      id: playlist.musics[0].id,
+      title: playlist.musics[0].title,
+      artist: playlist.musics[0].artist,
+      duration: playlist.musics[0].duration,
+      catalog: playlist.musics[0].catalog,
+      url: playlist.musics[0].url,
+      genres: playlist.musics[0].genres,
+      createdAt: playlist.musics[0].createdAt,
+    };
+  }, [playlist]);
+
+  const isPlayingSongCurrentPage = useMemo(() => {
+    return playlist?.musics.find((m) => m.id === playingMusic?.id) != undefined;
+  }, [playingMusic, playlist]);
+
+  const playlistGenres: Set<string> = useMemo(() => {
+    const genres = new Set<string>();
+    playlist?.musics.forEach((music) => {
+      music.genres.forEach((genre) => genres.add(genre));
+    });
+    return genres;
+  }, [playlist]);
 
   useEffect(() => {
     const fetchPlaylist = async () => {
@@ -59,13 +86,15 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
     return <NotFoundErrorPage message="PLAYLIST NOT FOUND" />;
   }
 
-  const musicDetails: MusicDetails = playlist.musics[0];
-
   const handlePlaying = () => {
-    if (!isPlayingSongCurrentPage && playlist != undefined) {
-      setPlayingMusic(musicDetails);
+    if (isPlaying && isPlayingSongCurrentPage) {
+      setIsPlaying(false);
+    } else {
+      if (!isPlayingSongCurrentPage) {
+        setPlayingMusic(musicDetails);
+      }
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleClickHeart = async () => {
@@ -113,9 +142,6 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
     });
   };
 
-  const isPlayingSongCurrentPage =
-    playlist.musics.find((m) => m.id == playingMusic.id) != undefined;
-
   return (
     <PageLayout
       thumbnail={playlist.playlistThumbnail}
@@ -136,6 +162,12 @@ export default function PlaylistPage({}: PlaylistPageProps): ReactElement {
               playlist.musics.reduce((total, music) => total + music.duration, 0),
             )}
             )
+          </span>
+          <span className="flex flex-row gap-1">
+            Genres:
+            {Array.from(playlistGenres).map((genre) => (
+              <GenreLink key={genre} genre={genre} />
+            ))}
           </span>
         </div>
       }

@@ -1,9 +1,10 @@
-import { MusicDetails } from "models/Music";
-import dataGenre from "assets/json/genres.json";
-import { Playlist } from "models/Playlist";
-import { DetailedCatalog } from "models/Catalog";
-import { Artist, UserDetails } from "models/User";
+import { MusicDetails } from "./../models/Music";
+import { Playlist } from "./../models/Playlist";
+import { DetailedCatalog } from "./../models/Catalog";
+import { Artist, UserDetails } from "./../models/User";
 import { apiClient } from "./axiosService";
+
+import dataGenre from "./../assets/json/genres.json";
 
 function getAllGenres(): string[] {
   return dataGenre;
@@ -33,7 +34,7 @@ async function getGenreContent(
   take: number = 50,
 ): Promise<IGenreContent> {
   return await apiClient
-    .get(`/api/genres?value=${genreName}&skip=${skip}&take=${take}`)
+    .get(`/genres?value=${genreName}&skip=${skip}&take=${take}`)
     .then((res) => res.data);
 }
 

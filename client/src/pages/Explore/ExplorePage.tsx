@@ -1,27 +1,27 @@
-import { useSearch } from "hooks/useSearch";
-import { Catalog, DetailedCatalog, TypeCatalog } from "models/Catalog";
-import { MusicDetails } from "models/Music";
-import { Playlist } from "models/Playlist";
-import { Artist } from "models/User";
-import { useEffect, useState, type ReactElement } from "react";
+import { useSearch } from "./../../hooks/useSearch";
+import { Catalog, DetailedCatalog, TypeCatalog } from "./../../models/Catalog";
+import { MusicDetails } from "./../../models/Music";
+import { Playlist } from "./../../models/Playlist";
+import { Artist } from "./../../models/User";
+import { useEffect, useMemo, useState, type ReactElement } from "react";
 import FilterBox from "./components/FilterBox";
-import MusicService from "services/musicService";
-import ArtistService from "services/artistService";
-import PlaylistService from "services/playlistService";
-import CatalogService from "services/catalogService";
-import Box from "components/box/Box";
-import MusicItem from "components/music/MusicItem";
-import ScrollableBox from "components/box/ScrollableBox";
-import Card from "components/cards/Card";
-import ArtistCard from "components/cards/ArtistCard";
-import GenresService from "services/genresService";
-import SmallCard from "components/cards/SmallCard";
-import { routesConfig } from "config/app-config";
-import UserService from "services/userService";
+import MusicService from "./../../services/musicService";
+import ArtistService from "./../../services/artistService";
+import PlaylistService from "./../../services/playlistService";
+import CatalogService from "./../../services/catalogService";
+import Box from "./../../components/box/Box";
+import MusicItem from "./../../components/music/MusicItem";
+import ScrollableBox from "./../../components/box/ScrollableBox";
+import Card from "./../../components/cards/Card";
+import ArtistCard from "./../../components/cards/ArtistCard";
+import GenresService from "./../../services/genresService";
+import SmallCard from "./../../components/cards/SmallCard";
+import { routesConfig } from "./../../config/app-config";
+import UserService from "./../../services/userService";
 import { enqueueSnackbar } from "notistack";
-import { useUser } from "hooks/useUser";
-import { displayPictureProfile } from "utils/user";
-import Loading from "components/Loading";
+import { useUser } from "./../../hooks/useUser";
+import { displayPictureProfile } from "./../../utils/user";
+import Loading from "./../../components/Loading";
 
 export enum Filters {
   ALL = "All",
@@ -50,7 +50,6 @@ function ExplorePage(): ReactElement {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // TODO do better
         setLoading(true);
         const [, , , , fetchedGenres] = await Promise.all([
           MusicService.searchMusicByTitle(search).then((data) => {
@@ -149,6 +148,12 @@ function ExplorePage(): ReactElement {
       });
   };
 
+  const isPageEmpty = useMemo(() => {
+    return (
+      [...albums, ...artists, ...musics, ...genres, ...playlists, ...eps, ...singles].length === 0
+    );
+  }, [albums, artists, musics, genres, playlists, eps, singles]);
+
   const displayFilter = (f: Filters): boolean => {
     switch (f) {
       case Filters.ALBUMS:
@@ -164,15 +169,12 @@ function ExplorePage(): ReactElement {
       case Filters.GENRES:
         return genres.length !== 0;
       default:
-        return true;
+        return !isPageEmpty;
     }
   };
 
-  const isPageEmpty =
-    [...albums, ...artists, ...musics, ...genres, ...playlists, ...eps, ...singles].length === 0;
-
   return (
-    <div className="flex flex-col gap-10 w-full">
+    <div className={`flex flex-col ${!isPageEmpty ? "gap-10" : "gap-2"} w-full`}>
       <FilterBox
         filters={Object.entries(Filters).filter(([_, f]) => displayFilter(f))}
         onFilterClick={(f) => setActiveFilter(f)}
@@ -290,12 +292,20 @@ function ExplorePage(): ReactElement {
                   </Box>
                 </div>
               )}
-            {isPageEmpty && (
-              <>
-                <h1>There's nothing here</h1>
-              </>
-            )}
           </div>
+          {isPageEmpty && (
+            <div className="relative w-full h-full flex flex-col justify-center items-center select-none">
+              <h1 className="text-3xl font-bs text-dark-custom">There's nothing here !!!</h1>
+              <h2 className="text-lg font-bs text-dark-custom">Try to search for something else</h2>
+              <img
+                loading="eager"
+                src="/img/noContentWithBox.webp"
+                alt="no content"
+                className="w-full md:w-3/4 max-w-[50rem]"
+                draggable="false"
+              />
+            </div>
+          )}
         </>
       )}
     </div>

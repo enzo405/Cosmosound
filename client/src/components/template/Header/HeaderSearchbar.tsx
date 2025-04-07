@@ -1,6 +1,6 @@
-import { Icon } from "components/icons/Icon";
-import { routesConfig } from "config/app-config";
-import { useSearch } from "hooks/useSearch";
+import { Icon } from "./../../../components/icons/Icon";
+import { routesConfig } from "./../../../config/app-config";
+import { useSearch } from "./../../../hooks/useSearch";
 import { useEffect, useRef, useState, type ReactElement } from "react";
 import { IoIosClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";

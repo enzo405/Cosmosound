@@ -1,8 +1,8 @@
-import BadRequestException from "@/errors/BadRequestException";
-import { WebError } from "@/errors/Error";
-import { UserRequest } from "@/middlewares/auth.middleware";
-import nextcloudService from "@/services/nextcloud.service";
-import userService from "@/services/user.service";
+import BadRequestException from "../errors/BadRequestException";
+import { UserRequest } from "../middlewares/auth.middleware";
+import catalogService from "../services/catalog.service";
+import nextcloudService from "../services/nextcloud.service";
+import userService from "../services/user.service";
 import { Prisma, UserRole } from "@prisma/client";
 import { Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
@@ -137,6 +137,19 @@ const like = async (req: UserRequest, res: Response) => {
   res.status(200).json({ message: "You liked this" });
 };
 
+const getHistory = async (req: UserRequest, res: Response) => {
+  const { limit } = req.query;
+
+  const limitValue = limit ? parseInt(limit as string) : 10;
+  const history = await userService.getHistory(req.userId!, limitValue);
+  res.status(200).json(history);
+};
+
+const getCatalogSuggestions = async (req: UserRequest, res: Response) => {
+  const suggestions = await catalogService.getCatalogSuggestions(req.userId!);
+  res.status(200).json(suggestions);
+};
+
 export default {
   updateUser,
   updateArtist,
@@ -144,4 +157,6 @@ export default {
   getFavourites,
   searchArtist,
   like,
+  getHistory,
+  getCatalogSuggestions,
 };

@@ -1,13 +1,13 @@
-import { routesConfig } from "config/app-config";
+import { routesConfig } from "./../../config/app-config";
 import { useState, useEffect, type ReactElement, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import genresService from "services/genresService";
-import UserService from "services/userService";
+import genresService from "./../../services/genresService";
+import UserService from "./../../services/userService";
 import { AxiosError } from "axios";
-import Divider from "components/Divider";
+import Divider from "./../../components/Divider";
 import { enqueueSnackbar } from "notistack";
-import Loading from "components/icons/Loading";
+import Loading from "./../../components/icons/Loading";
 
 interface RegisterDataForm {
   name: string;
@@ -119,7 +119,14 @@ function RegisterPage(): ReactElement {
   const title = () => {
     switch (currentStep) {
       case 1:
-        return "Welcome to CosmoSound!!";
+        return (
+          <div className="w-full flex flex-row justify-center items-center gap-1">
+            <img loading="eager" className="size-10" src="/img/cosmosound.png" alt="Cosmosound" />
+            <span className="flex h-full items-center pt-0.5 font-semibold text-dark-custom text-lg">
+              Welcome to CosmoSound !!
+            </span>
+          </div>
+        );
       case 2:
         return "Select a profile picture (optional):";
       case 3:
@@ -148,8 +155,9 @@ function RegisterPage(): ReactElement {
     <div className="flex flex-row w-full h-full font-bs">
       <div className="hidden xsm:block xsm:w-2/5 md:w-[45%] lg:w-1/2">
         <img
+          loading="eager"
           className="object-cover h-full w-full select-none"
-          src="/img/login.jpg"
+          src="/img/homepage.jpg"
           alt="Happy CosmoSound user"
         />
       </div>
@@ -269,7 +277,7 @@ function RegisterPage(): ReactElement {
                 <button
                   type="button"
                   onClick={handleNextStep}
-                  className="bg-blue-500 text-white rounded-md px-4 py-2">
+                  className="bg-primary-orange hover:bg-tertio-orange text-white rounded-md px-4 py-2">
                   Next
                 </button>
               </>
@@ -329,13 +337,13 @@ function RegisterPage(): ReactElement {
                   <button
                     type="button"
                     onClick={handlePreviousStep}
-                    className="w-1/2 bg-blue-400 text-white rounded-md px-4 py-2">
+                    className="w-1/2 bg-primary-orange hover:bg-tertio-orange text-white rounded-md px-4 py-2">
                     Previous
                   </button>
                   <button
                     type="button"
                     onClick={handleNextStep}
-                    className="w-1/2 bg-blue-500 text-white rounded-md px-4 py-2">
+                    className="w-1/2 bg-primary-orange hover:bg-tertio-orange text-white rounded-md px-4 py-2">
                     Next
                   </button>
                 </div>
@@ -349,6 +357,9 @@ function RegisterPage(): ReactElement {
                     {genres.length !== 0 && (
                       <div className="flex flex-col justify-start">
                         <span>Selected genres:</span>
+                        <span className="text-xs text-gray-500">
+                          You can change genres later in the application
+                        </span>
                         <div className="flex flex-wrap gap-1">
                           {genres.map((name) => {
                             return (
@@ -393,12 +404,12 @@ function RegisterPage(): ReactElement {
                   <button
                     type="button"
                     onClick={handlePreviousStep}
-                    className="w-1/2 bg-blue-400 text-white rounded-md px-4 py-2">
+                    className="w-1/2 bg-primary-orange hover:bg-tertio-orange text-white rounded-md px-4 py-2">
                     Previous
                   </button>
                   <button
                     type="submit"
-                    className="w-1/2 bg-blue-500 text-white rounded-md px-4 py-2">
+                    className="w-1/2 bg-primary-orange hover:bg-tertio-orange text-white rounded-md px-4 py-2">
                     {isLoading ? <Loading /> : "Submit"}
                   </button>
                 </div>
@@ -408,7 +419,7 @@ function RegisterPage(): ReactElement {
           <div className="flex gap-1 text-sm mt-2 select-none">
             <span className="font-light">Already have an account ?</span>
             <span
-              className="underline text-blue-500 hover:text-blue-400 cursor-pointer"
+              className="underline text-primary-orange hover:text-white-orange cursor-pointer"
               onClick={() => navigate(routesConfig.login.path)}>
               Sign in
             </span>

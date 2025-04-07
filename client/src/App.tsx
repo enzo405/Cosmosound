@@ -1,11 +1,11 @@
-import { MusicProvider } from "providers/MusicProvider";
-import { OpenAvatarModalProvider } from "providers/OpenAvatarModalProvider";
-import { ThemeProvider } from "providers/ThemeProvider";
-import { UserProvider } from "providers/UserProvider";
+import { MusicProvider } from "./providers/MusicProvider";
+import { OpenAvatarModalProvider } from "./providers/OpenAvatarModalProvider";
+import { ThemeProvider } from "./providers/ThemeProvider";
+import { UserProvider } from "./providers/UserProvider";
 import { SnackbarProvider } from "notistack";
-import { SearchProvider } from "providers/SearchProvider";
-import { ConfirmDialogProvider } from "providers/DialogConfirmProvider";
-import RouterWrapper from "routes/RouterWrapper";
+import { SearchProvider } from "./providers/SearchProvider";
+import { ConfirmDialogProvider } from "./providers/DialogConfirmProvider";
+import RouterWrapper from "./routes/RouterWrapper";
 
 function App() {
   return (

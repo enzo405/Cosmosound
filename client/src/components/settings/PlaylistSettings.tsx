@@ -1,13 +1,13 @@
-import SettingsOptions from "components/settings/SettingsOptions";
-import TextSetting from "components/settings/TextSetting";
-import { routesConfig } from "config/app-config";
-import { useConfirmDialog } from "hooks/useConfirm";
-import { useUser } from "hooks/useUser";
-import { Playlist } from "models/Playlist";
+import SettingsOptions from "./../../components/settings/SettingsOptions";
+import TextSetting from "./../../components/settings/TextSetting";
+import { routesConfig } from "./../../config/app-config";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import { useUser } from "./../../hooks/useUser";
+import { Playlist } from "./../../models/Playlist";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import PlaylistService from "services/playlistService";
+import PlaylistService from "./../../services/playlistService";
 
 interface PlaylistSettingsProps {
   playlist: Playlist;

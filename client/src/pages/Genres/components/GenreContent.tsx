@@ -1,17 +1,17 @@
 import { ReactElement } from "react";
 import { GenreTabs } from "../GenresPage";
-import { Catalog, CatalogWithOwner, DetailedCatalog } from "models/Catalog";
-import Card from "components/cards/Card";
-import ArtistCard from "components/cards/ArtistCard";
-import { Artist } from "models/User";
-import { routesConfig } from "config/app-config";
-import { MusicDetails } from "models/Music";
-import MusicItem from "components/music/MusicItem";
-import { Playlist } from "models/Playlist";
-import UserService from "services/userService";
+import { Catalog, CatalogWithOwner, DetailedCatalog } from "./../../../models/Catalog";
+import Card from "./../../../components/cards/Card";
+import ArtistCard from "./../../../components/cards/ArtistCard";
+import { Artist } from "./../../../models/User";
+import { routesConfig } from "./../../../config/app-config";
+import { MusicDetails } from "./../../../models/Music";
+import MusicItem from "./../../../components/music/MusicItem";
+import { Playlist } from "./../../../models/Playlist";
+import UserService from "./../../../services/userService";
 import { enqueueSnackbar } from "notistack";
-import { useUser } from "hooks/useUser";
-import { displayPictureProfile } from "utils/user";
+import { useUser } from "./../../../hooks/useUser";
+import { displayPictureProfile } from "./../../../utils/user";
 
 interface GenreContentProps {
   content: DetailedCatalog[] | MusicDetails[] | Playlist[] | Artist[];

@@ -1,6 +1,6 @@
-import { PartialArtist } from "models/User";
+import { PartialArtist } from "./models/User";
 import { createContext } from "react";
-import { LikeType } from "services/userService";
+import { LikeType } from "./services/userService";
 
 interface UserContextProps {
   loading: boolean;

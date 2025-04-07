@@ -1,4 +1,4 @@
-import HeartIcon from "components/icons/HeartIcon";
+import HeartIcon from "./../../components/icons/HeartIcon";
 import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -48,6 +48,7 @@ export default function Card({
       className={`relative flex flex-col items-center group cursor-pointer min-w-28 max-w-28 sm:min-w-32 sm:max-w-32 md:min-w-40 md:max-w-40 min-h-36 max-h-36 sm:min-h-44 sm:max-h-44 md:min-h-52 md:max-h-52 border border-dark-glassy rounded-2xl p-2 gap-2 ${className}`}>
       <div className="w-full flex flex-row justify-center">
         <img
+          loading="eager"
           className="h-full w-[95%] rounded-lg object-cover aspect-square"
           src={thumbnail}
           alt={`${title} ${description}`}
