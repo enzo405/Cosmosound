@@ -8,6 +8,10 @@
 - Dockerfile => env variable put in .env file
 
 - Frontend => add error boundary
+- Frontend => Fix space and inputs
+- Frontend => searchbar don't search if whitespace
+
+- CI/CD => Add CI/CD deployment pipelines with semantic release
 
 # Good to have:
 - Frontend => Load songs and cache them when user like
