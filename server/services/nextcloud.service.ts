@@ -9,17 +9,22 @@ const NEXTCLOUD_USERNAME = process.env.NEXTCLOUD_USERNAME!;
 const NEXTCLOUD_PASSWORD = process.env.NEXTCLOUD_PASSWORD!;
 const MAX_FILE_SIZE = 10000000;
 
-const server: Server = new Server({
-  basicAuth: { username: NEXTCLOUD_USERNAME, password: NEXTCLOUD_PASSWORD },
-  url: NEXTCLOUD_BASE_URL,
-});
-const client = new Client(server);
+let client = null;
+try {
+  const server: Server = new Server({
+    basicAuth: { username: NEXTCLOUD_USERNAME, password: NEXTCLOUD_PASSWORD },
+    url: NEXTCLOUD_BASE_URL,
+  });
+  client = new Client(server);
+} catch (e) {}
 
 const uploadPicture = async (
   file: Express.Multer.File,
   type: "CT" | "PFP",
   id: string
 ): Promise<string> => {
+  if (client === null) return "";
+
   if (file.size > MAX_FILE_SIZE) {
     throw new BadRequestException("File size exceeds the 10MB limit");
   }
@@ -58,6 +63,8 @@ interface UploadMusics {
 }
 
 const uploadMusics = async (data: UploadMusics): Promise<Record<string, string>> => {
+  if (client === null) return {};
+
   const allowedMimeTypes = ["audio/m4a", "audio/mp3", "audio/mpeg"];
 
   data.files.forEach((obj) => {
