@@ -7,6 +7,7 @@
 - Dockerfile => keyfile replicaset in dockercompose
 - Dockerfile => env variable put in .env file
 
+- Frontend => add error boundary
 
 # Good to have:
 - Frontend => Load songs and cache them when user like
