@@ -1,22 +1,22 @@
-import { Icon } from "components/icons/Icon";
-import { useMusic } from "hooks/useMusic";
-import { DetailedCatalog, TypeCatalog } from "models/Catalog";
-import { MusicDetails } from "models/Music";
-import { Playlist } from "models/Playlist";
-import { Artist } from "models/User";
+import { Icon } from "./../../components/icons/Icon";
+import { useMusic } from "./../../hooks/useMusic";
+import { DetailedCatalog, TypeCatalog } from "./../../models/Catalog";
+import { MusicDetails } from "./../../models/Music";
+import { Playlist } from "./../../models/Playlist";
+import { Artist } from "./../../models/User";
 import { enqueueSnackbar } from "notistack";
-import CategoryTabs from "components/CategoryTabs";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import CategoryTabs from "./../../components/CategoryTabs";
+import NotFoundErrorPage from "./../../pages/errors/NotFoundErrorPage";
 import { ReactElement, useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import GenresService, { IGenreContent } from "services/genresService";
+import GenresService, { IGenreContent } from "./../../services/genresService";
 import GenreContent from "./components/GenreContent";
-import PageLayout from "components/PageLayout";
-import UserService from "services/userService";
-import HeartIcon from "components/icons/HeartIcon";
-import { useUser } from "hooks/useUser";
-import Loading from "components/Loading";
+import PageLayout from "./../../components/PageLayout";
+import UserService from "./../../services/userService";
+import HeartIcon from "./../../components/icons/HeartIcon";
+import { useUser } from "./../../hooks/useUser";
+import Loading from "./../../components/Loading";
 
 export enum GenreTabs {
   ARTISTS = "Artists",

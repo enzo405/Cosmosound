@@ -1,5 +1,5 @@
-import { MusicContext } from "context/musicContext";
-import { MusicDetails } from "models/Music";
+import { MusicContext } from "./../context/musicContext";
+import { MusicDetails } from "./../models/Music";
 import React, { PropsWithChildren, useMemo } from "react";
 import { useState } from "react";
 

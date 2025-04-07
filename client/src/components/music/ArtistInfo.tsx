@@ -1,8 +1,8 @@
-import { routesConfig } from "config/app-config";
-import { Artist } from "models/User";
+import { routesConfig } from "./../../config/app-config";
+import { Artist } from "./../../models/User";
 import { ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { displayPictureProfile } from "utils/user";
+import { displayPictureProfile } from "./../../utils/user";
 
 interface ArtistInfoProps {
   artist: Artist;

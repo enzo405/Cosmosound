@@ -1,14 +1,14 @@
-import authService from "@/services/auth.service";
-import userService from "@/services/user.service";
+import authService from "../services/auth.service";
+import userService from "../services/user.service";
 import bcrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Response, Request } from "express";
-import { UserRequest } from "@/middlewares/auth.middleware";
-import nextcloudService from "@/services/nextcloud.service";
+import { UserRequest } from "../middlewares/auth.middleware";
+import nextcloudService from "../services/nextcloud.service";
 import { ObjectId } from "mongodb";
-import BadRequestException from "@/errors/BadRequestException";
-import UnauthorizedException from "@/errors/UnauthorizedException";
-import ServerException from "@/errors/ServerException";
+import BadRequestException from "../errors/BadRequestException";
+import UnauthorizedException from "../errors/UnauthorizedException";
+import ServerException from "../errors/ServerException";
 require("dotenv").config();
 
 const EXPIRED_TOKEN = "10m";
@@ -95,13 +95,25 @@ const getProfile = async (req: UserRequest, res: Response) => {
   const userId = (req.user as JwtPayload).sub;
 
   if (!userId) {
-    throw new UnauthorizedException("An error occurred while trying to retrieve the current user.");
+    throw new UnauthorizedException("You are not authorized to access this resource.");
   } else {
     const user = await userService.getUserById(userId);
 
     if (user) {
       res.status(200).json(user);
     } else {
+      // User not found but the token is still valid
+      res.clearCookie("token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+      });
+      res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+      });
+
       throw new ServerException("An error occurred while trying to retrieve the current user.");
     }
   }

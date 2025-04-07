@@ -1,4 +1,4 @@
-import { routesConfig } from "config/app-config";
+import { routesConfig } from "./../../config/app-config";
 import { type ReactElement } from "react";
 import { Link, useRouteError } from "react-router-dom";
 

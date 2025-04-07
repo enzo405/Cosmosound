@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { CreateMusicFormData } from "../CreateCatalogPage";
-import { Icon } from "components/icons/Icon";
+import { Icon } from "./../../../components/icons/Icon";
 import { BiXCircle } from "react-icons/bi";
 
 interface NewMusicProps {

@@ -1,4 +1,4 @@
-import UnauthorizedException from "@/errors/UnauthorizedException";
+import UnauthorizedException from "../errors/UnauthorizedException";
 import { Response, Request, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 require("dotenv").config();

@@ -1,27 +1,27 @@
-import { Icon } from "components/icons/Icon";
-import { useMusic } from "hooks/useMusic";
+import { Icon } from "./../../components/icons/Icon";
+import { useMusic } from "./../../hooks/useMusic";
 import { enqueueSnackbar } from "notistack";
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import NotFoundErrorPage from "./../../pages/errors/NotFoundErrorPage";
 import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ArtistService from "services/artistService";
-import { formatTime } from "utils/date";
+import ArtistService from "./../../services/artistService";
+import { formatTime } from "./../../utils/date";
 import CategoryTabs from "../../components/CategoryTabs";
-import { Catalog, TypeCatalog } from "models/Catalog";
-import { Music } from "models/Music";
-import MusicItem from "components/music/MusicItem";
-import Card from "components/cards/Card";
-import { routesConfig } from "config/app-config";
-import ArtistSettings from "components/settings/ArtistSettings";
-import PageLayout from "components/PageLayout";
-import UserService from "services/userService";
-import HeartIcon from "components/icons/HeartIcon";
-import { useUser } from "hooks/useUser";
-import { displayPictureProfile } from "utils/user";
-import MediaIcon from "components/icons/media/MediaIcon";
-import { DetailedArtistInfo } from "models/User";
-import Loading from "components/Loading";
-import GenreLink from "components/GenreLink";
+import { Catalog, TypeCatalog } from "./../../models/Catalog";
+import { Music } from "./../../models/Music";
+import MusicItem from "./../../components/music/MusicItem";
+import Card from "./../../components/cards/Card";
+import { routesConfig } from "./../../config/app-config";
+import ArtistSettings from "./../../components/settings/ArtistSettings";
+import PageLayout from "./../../components/PageLayout";
+import UserService from "./../../services/userService";
+import HeartIcon from "./../../components/icons/HeartIcon";
+import { useUser } from "./../../hooks/useUser";
+import { displayPictureProfile } from "./../../utils/user";
+import MediaIcon from "./../../components/icons/media/MediaIcon";
+import { DetailedArtistInfo } from "./../../models/User";
+import Loading from "./../../components/Loading";
+import GenreLink from "./../../components/GenreLink";
 
 export enum ArtistTabs {
   MUSIC = "Songs",

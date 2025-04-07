@@ -1,8 +1,8 @@
-import { prisma } from "@/app";
-import DatabaseException from "@/errors/DatabaseException";
+import { prisma } from "../app";
+import DatabaseException from "../errors/DatabaseException";
 import { Catalogs, Music, Prisma, Users } from "@prisma/client";
 import playlistRepository from "./playlist.repository";
-import { MusicDetails } from "@/models/MusicDetails";
+import { MusicDetails } from "../models/MusicDetails";
 
 const getCatalogById = async (id: string): Promise<Catalogs | null> => {
   try {

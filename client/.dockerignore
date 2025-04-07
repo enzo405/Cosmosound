@@ -10,5 +10,4 @@ node_modules
 mongodb_rs
 
 dist
-build
 *.log

@@ -1,13 +1,13 @@
-import userRepository from "@/repository/user.repository";
+import userRepository from "../repository/user.repository";
 import { Prisma, Users } from "@prisma/client";
 import bcrypt from "bcrypt";
-import ServerException from "@/errors/ServerException";
-import BadRequestException from "@/errors/BadRequestException";
-import { Favourites } from "@/models/Favourites";
-import NotFoundException from "@/errors/NotFoundException";
-import playlistRepository from "@/repository/playlist.repository";
-import catalogRepository from "@/repository/catalog.repository";
-import { MusicDetails } from "@/models/MusicDetails";
+import ServerException from "../errors/ServerException";
+import BadRequestException from "../errors/BadRequestException";
+import { Favourites } from "../models/Favourites";
+import NotFoundException from "../errors/NotFoundException";
+import playlistRepository from "../repository/playlist.repository";
+import catalogRepository from "../repository/catalog.repository";
+import { MusicDetails } from "../models/MusicDetails";
 
 const getUserById = async (id: string): Promise<Users | null> => {
   return await userRepository.getUserById(id);
@@ -31,7 +31,7 @@ const encryptPassword = async (password: string): Promise<string> => {
   } catch (err) {
     throw new ServerException(
       "An error occurred while trying to encrypt the password",
-      err as Error,
+      err as Error
     );
   }
 };

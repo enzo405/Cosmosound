@@ -1,5 +1,5 @@
-import Container from "components/box/Container";
-import { routesConfig } from "config/app-config";
+import Container from "./../../components/box/Container";
+import { routesConfig } from "./../../config/app-config";
 import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 

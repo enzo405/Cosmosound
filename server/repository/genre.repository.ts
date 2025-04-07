@@ -1,6 +1,6 @@
-import { prisma } from "@/app";
-import DatabaseException from "@/errors/DatabaseException";
-import { MusicDetails } from "@/models/MusicDetails";
+import { prisma } from "../app";
+import DatabaseException from "../errors/DatabaseException";
+import { MusicDetails } from "../models/MusicDetails";
 
 const getGenreContent = async (genreName: string, skip: string, take: string) => {
   try {

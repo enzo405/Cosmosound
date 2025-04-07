@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { Icon } from "components/icons/Icon";
-import { IconName } from "constants/iconName";
+import { Icon } from "./../components/icons/Icon";
+import { IconName } from "./../constants/iconName";
 
 interface PageLayoutProps {
   title: ReactNode | string;

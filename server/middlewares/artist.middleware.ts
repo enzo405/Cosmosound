@@ -2,7 +2,7 @@ import { Response, Request, NextFunction } from "express";
 import { UserRequest } from "./auth.middleware";
 import { JwtPayload } from "jsonwebtoken";
 import { UserRole } from "@prisma/client";
-import ForbiddenException from "@/errors/ForbiddenException";
+import ForbiddenException from "../errors/ForbiddenException";
 require("dotenv").config();
 
 const artist = async (req: UserRequest, res: Response, next: NextFunction) => {

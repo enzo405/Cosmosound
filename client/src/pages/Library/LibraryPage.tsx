@@ -1,19 +1,19 @@
-import Box from "components/box/Box";
-import ScrollableBox from "components/box/ScrollableBox";
-import ArtistCard from "components/cards/ArtistCard";
-import Card from "components/cards/Card";
-import SmallCard from "components/cards/SmallCard";
-import Loading from "components/Loading";
-import { routesConfig } from "config/app-config";
-import { useUser } from "hooks/useUser";
-import { Catalog } from "models/Catalog";
-import { Playlist } from "models/Playlist";
-import { Favourites } from "models/User";
+import Box from "./../../components/box/Box";
+import ScrollableBox from "./../../components/box/ScrollableBox";
+import ArtistCard from "./../../components/cards/ArtistCard";
+import Card from "./../../components/cards/Card";
+import SmallCard from "./../../components/cards/SmallCard";
+import Loading from "./../../components/Loading";
+import { routesConfig } from "./../../config/app-config";
+import { useUser } from "./../../hooks/useUser";
+import { Catalog } from "./../../models/Catalog";
+import { Playlist } from "./../../models/Playlist";
+import { Favourites } from "./../../models/User";
 import { enqueueSnackbar } from "notistack";
 import { useEffect, useState, type ReactElement } from "react";
-import GenresService from "services/genresService";
-import UserService from "services/userService";
-import { displayPictureProfile } from "utils/user";
+import GenresService from "./../../services/genresService";
+import UserService from "./../../services/userService";
+import { displayPictureProfile } from "./../../utils/user";
 
 function LibraryPage(): ReactElement {
   const { user, toggleLike } = useUser();

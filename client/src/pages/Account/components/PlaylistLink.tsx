@@ -1,5 +1,5 @@
-import { routesConfig } from "config/app-config";
-import { Playlist } from "models/Playlist";
+import { routesConfig } from "./../../../config/app-config";
+import { Playlist } from "./../../../models/Playlist";
 import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 

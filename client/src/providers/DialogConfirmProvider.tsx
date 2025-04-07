@@ -1,5 +1,5 @@
-import ConfirmDialog from "components/template/ConfirmDialog";
-import { ConfirmDialogContext, ConfirmDialogOptions } from "context/confirmDialogContext";
+import ConfirmDialog from "./../components/template/ConfirmDialog";
+import { ConfirmDialogContext, ConfirmDialogOptions } from "./../context/confirmDialogContext";
 import { ReactNode, useState } from "react";
 
 export const ConfirmDialogProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

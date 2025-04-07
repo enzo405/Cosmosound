@@ -1,7 +1,7 @@
-import BadRequestException from "@/errors/BadRequestException";
-import NotFoundException from "@/errors/NotFoundException";
-import { UserRequest } from "@/middlewares/auth.middleware";
-import playlistService from "@/services/playlist.service";
+import BadRequestException from "../errors/BadRequestException";
+import NotFoundException from "../errors/NotFoundException";
+import { UserRequest } from "../middlewares/auth.middleware";
+import playlistService from "../services/playlist.service";
 import { Prisma } from "@prisma/client";
 import { Response } from "express";
 

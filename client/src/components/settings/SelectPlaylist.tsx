@@ -1,13 +1,13 @@
-import Divider from "components/Divider";
-import { Icon } from "components/icons/Icon";
-import { routesConfig } from "config/app-config";
-import { useConfirmDialog } from "hooks/useConfirm";
-import { useUser } from "hooks/useUser";
-import { Playlist } from "models/Playlist";
+import Divider from "./../../components/Divider";
+import { Icon } from "./../../components/icons/Icon";
+import { routesConfig } from "./../../config/app-config";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import { useUser } from "./../../hooks/useUser";
+import { Playlist } from "./../../models/Playlist";
 import { enqueueSnackbar } from "notistack";
 import { ReactElement, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import PlaylistService from "services/playlistService";
+import PlaylistService from "./../../services/playlistService";
 
 interface SelectPlaylistProps {
   handleAddToPlaylist: (playlist: Playlist) => void;

@@ -1,9 +1,8 @@
-import BadRequestException from "@/errors/BadRequestException";
-import { WebError } from "@/errors/Error";
-import { UserRequest } from "@/middlewares/auth.middleware";
-import catalogService from "@/services/catalog.service";
-import nextcloudService from "@/services/nextcloud.service";
-import userService from "@/services/user.service";
+import BadRequestException from "../errors/BadRequestException";
+import { UserRequest } from "../middlewares/auth.middleware";
+import catalogService from "../services/catalog.service";
+import nextcloudService from "../services/nextcloud.service";
+import userService from "../services/user.service";
 import { Prisma, UserRole } from "@prisma/client";
 import { Response } from "express";
 import { JwtPayload } from "jsonwebtoken";

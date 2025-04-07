@@ -7,6 +7,7 @@
 - Dockerfile => keyfile replicaset in dockercompose
 - Dockerfile => env variable put in .env file
 
+- Frontend => add error boundary
 
 # Good to have:
 - Frontend => Load songs and cache them when user like
@@ -27,3 +28,4 @@
 # Bugs:
 - Upload picture can have more than 1 share link
 - Update social media
+- re-auth on music endpoint or pass userid

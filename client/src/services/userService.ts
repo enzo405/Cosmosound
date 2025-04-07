@@ -1,8 +1,8 @@
-import { Favourites, PartialArtist } from "models/User";
-import { AccountFormData } from "pages/Account/AccountPage";
+import { Favourites, PartialArtist } from "./../models/User";
+import { AccountFormData } from "./../pages/Account/AccountPage";
 import { apiClient } from "./axiosService";
 import { AxiosResponse } from "axios";
-import { ArtistPanelFormData } from "pages/ArtistPanel/ArtistPanelPage";
+import { ArtistPanelFormData } from "./../pages/ArtistPanel/ArtistPanelPage";
 
 async function refreshToken(): Promise<AxiosResponse<any, any>> {
   return apiClient.post("/auth/refresh");
@@ -65,7 +65,7 @@ export type LikeType = "artist" | "song" | "album" | "playlist" | "genre";
 
 async function toggleLike(id: string, type: LikeType): Promise<void> {
   return await apiClient
-    .post(`/api/me/like`, {
+    .post(`/me/like`, {
       id,
       type,
     })
@@ -80,15 +80,15 @@ async function updateAccount(dataForm: Partial<AccountFormData>): Promise<Partia
   dataForm.confirmPassword && formData.append("confirmPassword", dataForm.confirmPassword);
   dataForm.image && formData.append("file", dataForm.image);
 
-  return await apiClient.patch("/api/me", formData).then((res) => res.data);
+  return await apiClient.patch("/me", formData).then((res) => res.data);
 }
 
 async function updateArtist(dataForm: Partial<ArtistPanelFormData>): Promise<PartialArtist> {
-  return await apiClient.patch("/api/me/artist", dataForm).then((res) => res.data);
+  return await apiClient.patch("/me/artist", dataForm).then((res) => res.data);
 }
 
 async function getPrefered(): Promise<Favourites> {
-  return await apiClient.get("/api/me/preferred").then((res) => res.data);
+  return await apiClient.get("/me/preferred").then((res) => res.data);
 }
 
 const UserService = {

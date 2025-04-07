@@ -1,8 +1,8 @@
-import { UserContext } from "context/userContext";
-import { PartialArtist } from "models/User";
+import { UserContext } from "./../context/userContext";
+import { PartialArtist } from "./../models/User";
 import React, { PropsWithChildren, useEffect, useMemo } from "react";
 import { useState } from "react";
-import UserService, { LikeType } from "services/userService";
+import UserService, { LikeType } from "./../services/userService";
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<PartialArtist | undefined>();

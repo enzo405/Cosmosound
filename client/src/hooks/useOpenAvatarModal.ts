@@ -1,4 +1,4 @@
-import { OpenAvatarModalContext } from "context/openAvatarModalContext";
+import { OpenAvatarModalContext } from "./../context/openAvatarModalContext";
 import { useContext } from "react";
 
 export const useOpenAvatarModal = () => {

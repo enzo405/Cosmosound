@@ -1,21 +1,21 @@
-import NotFoundErrorPage from "pages/errors/NotFoundErrorPage";
+import NotFoundErrorPage from "./../../pages/errors/NotFoundErrorPage";
 import { ReactElement, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import CatalogService from "services/catalogService";
-import { formatDurationWithLabel, formatTime } from "utils/date";
-import PageLayout from "components/PageLayout";
-import ArtistInfo from "components/music/ArtistInfo";
-import MusicItemDelete from "components/music/MusicItemDelete";
-import { Music } from "models/Music";
-import MusicService from "services/musicService";
-import { useConfirmDialog } from "hooks/useConfirm";
-import { DetailedCatalog } from "models/Catalog";
+import CatalogService from "./../../services/catalogService";
+import { formatDurationWithLabel, formatTime } from "./../../utils/date";
+import PageLayout from "./../../components/PageLayout";
+import ArtistInfo from "./../../components/music/ArtistInfo";
+import MusicItemDelete from "./../../components/music/MusicItemDelete";
+import { Music } from "./../../models/Music";
+import MusicService from "./../../services/musicService";
+import { useConfirmDialog } from "./../../hooks/useConfirm";
+import { DetailedCatalog } from "./../../models/Catalog";
 import { enqueueSnackbar } from "notistack";
-import { useUser } from "hooks/useUser";
-import ForbiddenErrorPage from "pages/errors/ForbiddenErrorPage";
-import { routesConfig } from "config/app-config";
-import { displayPictureProfile } from "utils/user";
-import Loading from "components/Loading";
+import { useUser } from "./../../hooks/useUser";
+import ForbiddenErrorPage from "./../../pages/errors/ForbiddenErrorPage";
+import { routesConfig } from "./../../config/app-config";
+import { displayPictureProfile } from "./../../utils/user";
+import Loading from "./../../components/Loading";
 
 interface CatalogEditPageProps {}
 

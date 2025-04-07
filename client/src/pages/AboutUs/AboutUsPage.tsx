@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { routesConfig } from "config/app-config";
+import { routesConfig } from "./../../config/app-config";
 import { Link } from "react-router-dom";
 
 interface LandingPageProps {

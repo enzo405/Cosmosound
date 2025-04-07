@@ -1,13 +1,13 @@
-import HeartIcon from "components/icons/HeartIcon";
-import VerifiedIcon from "components/icons/VerifiedIcon";
-import { routesConfig } from "config/app-config";
-import { useUser } from "hooks/useUser";
-import { Artist } from "models/User";
+import HeartIcon from "./../../components/icons/HeartIcon";
+import VerifiedIcon from "./../../components/icons/VerifiedIcon";
+import { routesConfig } from "./../../config/app-config";
+import { useUser } from "./../../hooks/useUser";
+import { Artist } from "./../../models/User";
 import { enqueueSnackbar } from "notistack";
 import { MouseEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserService from "services/userService";
-import { displayPictureProfile } from "utils/user";
+import UserService from "./../../services/userService";
+import { displayPictureProfile } from "./../../utils/user";
 
 interface ArtistCardProps {
   artist: Artist;
