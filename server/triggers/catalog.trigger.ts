@@ -8,7 +8,6 @@ import { guessCatalogType } from "../utils/catalog";
 import { Catalogs, Prisma } from "@prisma/client";
 import axios from "axios";
 import { Response } from "express";
-import fs from "fs";
 import { ObjectId } from "mongodb";
 import path from "path";
 
