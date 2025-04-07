@@ -94,7 +94,7 @@ export default function MusicPlayer({}: HTMLAttributes<HTMLHRElement>): ReactEle
     <>
       <audio
         ref={audioRef}
-        src={`https://api.cosmosound.luhcaran.fr/audio-stream?musicUrl=${encodeURIComponent(playingMusic?.url.split(".net/")[1])}`}
+        src={`http://localhost:4000/audio-stream?musicUrl=${encodeURIComponent(playingMusic?.url.split(".net/")[1])}`}
         onTimeUpdate={onTimeUpdate}
         onEnded={handleNextMusic}
         controls={false}

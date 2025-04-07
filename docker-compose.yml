@@ -1,18 +1,11 @@
 services:
   express:
-    image: registry.luhcaran.fr/cosmosound_backend:v0.2
+    build:
+      context: ./server
     container_name: cosmosound_backend
     restart: unless-stopped
     env_file:
       - ./server/.env
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=web
-      - traefik.http.routers.cosmosound_api.rule=Host(`api.cosmosound.luhcaran.fr`)
-      - traefik.http.routers.cosmosound_api.entrypoints=websecure
-      - traefik.http.routers.cosmosound_api.tls=true
-      - traefik.http.routers.cosmosound_api.tls.certresolver=letsencryptresolver
-      - traefik.http.services.cosmosound_api.loadbalancer.server.port=4000
     networks:
       - web
       - cosmosound_internal
@@ -23,16 +16,12 @@ services:
       retries: 5
 
   react_front:
-    image: registry.luhcaran.fr/cosmosound_frontend:v0.2
+    build: 
+      context: ./client
+    ports:
+      - "80:80"
     container_name: cosmosound_frontend
     restart: unless-stopped
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=web
-      - traefik.http.routers.cosmosound_frontend.rule=Host(`cosmosound.luhcaran.fr`)
-      - traefik.http.routers.cosmosound_frontend.entrypoints=websecure
-      - traefik.http.routers.cosmosound_frontend.tls.certresolver=letsencryptresolver
-      - traefik.http.services.cosmosound_frontend.loadbalancer.server.port=80
     networks:
       - web
       - cosmosound_internal
@@ -43,8 +32,9 @@ services:
       retries: 5
 
   mongodb:
+    build: 
+      context: ./server/mongodb_rs
     container_name: cosmosound_database
-    image: registry.luhcaran.fr/cosmosound_database:v0
     ports:
       - "27017:27017"
     restart: unless-stopped
@@ -80,7 +70,6 @@ services:
 
 networks:
   web:
-    external: true
   cosmosound_internal:
     driver: bridge
 
