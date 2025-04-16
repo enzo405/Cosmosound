@@ -10,6 +10,7 @@
 - Frontend => add error boundary
 - Frontend => Fix space and inputs
 - Frontend => searchbar don't search if whitespace
+- Frontend => Login add remember me
 
 - CI/CD => Add CI/CD deployment pipelines with semantic release
 
