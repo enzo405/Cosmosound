@@ -8,13 +8,15 @@ const fileFilter = async (req: Request, file: Express.Multer.File, cb: FileFilte
     if (file.mimetype.startsWith("image/")) {
       cb(null, true);
     } else {
-      cb(new UnsupportedMediaTypeException("Only image files are allowed for 'thumbnail' field"));
+      const msg = "Only image files are allowed for 'thumbnail' field";
+      cb(new UnsupportedMediaTypeException(msg));
     }
   } else if (file.fieldname === "musics") {
     if (file.mimetype.startsWith("audio/")) {
       cb(null, true);
     } else {
-      cb(new UnsupportedMediaTypeException("Only audio files are allowed for 'musics' field"));
+      const msg = "Only audio files are allowed for 'musics' field";
+      cb(new UnsupportedMediaTypeException(msg));
     }
   } else {
     cb(new BadRequestException("Invalid fieldname"));

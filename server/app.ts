@@ -36,6 +36,8 @@ app.use("/", userRouter);
 app.use("/", catalogRouter);
 app.use("/", playlistRouter);
 app.use("/", genreRouter);
+
+// Utilisé pour vérifier la santé de l'application lors du déploiement
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).send("OK");
 });

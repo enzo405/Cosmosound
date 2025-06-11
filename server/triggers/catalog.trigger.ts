@@ -51,8 +51,12 @@ const createCatalog = async (req: MulterRequest, res: Response) => {
     throw new BadRequestException("You need to upload at least one music to an album.");
   }
 
-  const musics: { genres: string[]; duration: number; file: Express.Multer.File; id: string }[] =
-    [];
+  const musics: {
+    genres: string[];
+    duration: number;
+    file: Express.Multer.File;
+    id: string;
+  }[] = [];
 
   for (let i = 0; i < files.musics.length; i++) {
     const musicGenres: string[] = genres[i];
