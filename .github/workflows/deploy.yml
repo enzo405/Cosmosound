@@ -1,0 +1,75 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main, 'temp/*']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      FRONTEND_IMAGE_NAME: cosmosound_frontend
+      BACKEND_IMAGE_NAME: cosmosound_backend
+      REGISTRY: ${{ secrets.REGISTRY_URL }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set app version
+        run: echo "appVersion=${{ github.run_number }}-${{ github.sha }}" >> $GITHUB_ENV
+
+      - name: Detect frontend/backend changes
+        id: changes
+        run: |
+          git fetch origin main
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+          if echo "$CHANGED_FILES" | grep -q "^client/"; then
+            echo "DEPLOY_FRONTEND=true" >> $GITHUB_ENV
+          fi
+
+          if echo "$CHANGED_FILES" | grep -q "^server/"; then
+            echo "DEPLOY_BACKEND=true" >> $GITHUB_ENV
+          fi
+
+      - name: Update version in frontend package.json
+        if: env.DEPLOY_FRONTEND == 'true'
+        run: |
+          cd client
+          node -e "
+          let pkg = require('./package.json');
+          pkg.version = process.env.appVersion;
+          require('fs').writeFileSync('./package.json', JSON.stringify(pkg, null, 2));
+          "
+
+      - name: Update version in backend package.json
+        if: env.DEPLOY_BACKEND == 'true'
+        run: |
+          cd server
+          node -e "
+          let pkg = require('./package.json');
+          pkg.version = process.env.appVersion;
+          require('fs').writeFileSync('./package.json', JSON.stringify(pkg, null, 2));
+          "
+
+      - name: Log into Docker registry
+        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
+
+      - name: Build and push Frontend Docker image
+        if: env.DEPLOY_FRONTEND == 'true'
+        run: |
+          cd client
+          docker build -t ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.appVersion }} .
+          docker push ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.appVersion }}
+
+      - name: Build and push Backend Docker image
+        if: env.DEPLOY_BACKEND == 'true'
+        run: |
+          cd server
+          docker build -t ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.appVersion }} .
+          docker push ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.appVersion }}
+
+      - name: Trigger Portainer webhook
+        run: curl -X POST ${{ secrets.PORTAINER_WEBHOOK_URL }}
