@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Playlists {
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
+  title             String
+  ownerId           String            @db.ObjectId
+  owner             Users             @relation(fields: [ownerId], references: [id])
+  playlistThumbnail String
+  musics            MusicInPlaylist[]
+  createdAt         DateTime          @default(now()) @db.Timestamp()
+  updatedAt         DateTime          @updatedAt @db.Timestamp()
+}
+
+type MusicInPlaylist {
+  id        String   @db.ObjectId
+  idCatalog String   @db.ObjectId
+  idArtist  String   @db.ObjectId
+  title     String
+  createdAt DateTime @default(now()) @db.Timestamp()
+  url       String
+  duration  Int
+  genres    String[]
+}
+
+model Catalogs {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  ownerId   String      @db.ObjectId
+  owner     Users       @relation(fields: [ownerId], references: [id])
+  thumbnail String
+  type      TypeCatalog
+  musics    Music[]
+  createdAt DateTime    @default(now()) @db.Timestamp()
+  updatedAt DateTime    @updatedAt @db.Timestamp()
+}
+
+enum TypeCatalog {
+  SINGLE
+  ALBUM
+  EP
+}
+
+type Music {
+  id        String   @db.ObjectId
+  title     String
+  createdAt DateTime @default(now()) @db.Timestamp()
+  url       String
+  duration  Int
+  genres    String[]
+}
+
+model Users {
+  id             String          @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String          @unique
+  password       String
+  pictureProfile String
+  followers      Int             @default(0)
+  likedArtists   String[]        @db.ObjectId
+  likedMusics    String[]        @db.ObjectId
+  likedCatalogs  String[]        @db.ObjectId
+  likedGenres    String[]
+  likedPlaylists String[]        @db.ObjectId
+  role           UserRole        @default(USER)
+  isVerified     Boolean         @default(false)
+  socialMedia    SocialMedia[]
+  artistName     String?
+  genre          String?
+  createdAt      DateTime        @default(now()) @db.Timestamp()
+  updatedAt      DateTime        @updatedAt @db.Timestamp()
+  refreshToken   String?
+  catalogs       Catalogs[]
+  playlists      Playlists[]
+  history        HistoryRecord[]
+}
+
+type HistoryRecord {
+  idMusic   String @db.ObjectId
+  idCatalog String @db.ObjectId
+}
+
+enum UserRole {
+  USER
+  ARTISTS
+}
+
+enum Media {
+  X
+  SPOTIFY
+  APPLE_MUSIC
+  YTB_MUSIC
+  INSTAGRAM
+}
+
+type SocialMedia {
+  media Media
+  link  String?
+}
